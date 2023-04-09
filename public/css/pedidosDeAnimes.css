@@ -3,6 +3,8 @@
     font-family:"Roboto",sans-serif;
     scroll-behavior: smooth;
     box-sizing: border-box;
+    text-decoration: none;
+
 }
 
 .site-animes-pedidos-de-animes {
@@ -55,6 +57,13 @@
     justify-content: center;
 }
 
+.info-do-solicitante-pedidosanimes input {
+    background-color: rgb(19, 19, 19);
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+}
+
 
 .formulario-envio-de-pedido-pedidosanimes {
     background-color: rgb(29, 29, 31);
@@ -71,10 +80,14 @@
 }
 
 .comentario-pedidosanimes input {
-    width: 50%;
+    width: 82%;
     height: 8rem;
     border-radius: 10px;
     border: 0;
+    background-color: rgb(19, 19, 19);
+    border: 1px solid black;
+    color: white;
+
 }
 
 .comentario-pedidosanimes {
@@ -99,6 +112,12 @@
     cursor: pointer;
     margin-bottom: 2rem;
 }
+
+.botao-envio-pedidosanimes button:hover {
+    background-color: rgb(23, 9, 148);
+    border: 0;
+}
+
 .botao-envio-pedidosanimes  {
     display: flex;
     justify-content: end;

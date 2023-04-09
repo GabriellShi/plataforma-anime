@@ -15,6 +15,9 @@ const generosRoute = require('./src/routes/generosRoute');
 const episodiosAdicionadosRoute = require('./src/routes/episodiosAdicionadosRoute');
 const filmesAdicionadosRoute = require('./src/routes/filmesAdicionadosRoute');
 const contatoRoute = require('./src/routes/contatoRoute');
+const paginaDoEpisodioSelecionadoRoute = require('./src/routes/paginaDoEpisodioSelecionadoRoute');
+
+
 
 
 // Configura o methodOverride no express
@@ -55,5 +58,6 @@ app.use('/generos', generosRoute);
 app.use('/episodiosAdicionados', episodiosAdicionadosRoute);
 app.use('/filmesAdicionados', filmesAdicionadosRoute);
 app.use('/contato', contatoRoute);
+app.use('/paginaDoEpisodioSelecionado', paginaDoEpisodioSelecionadoRoute);
 
 
