@@ -1,0 +1,52 @@
+.footer-index-maior {
+    background-color: black;
+    width: 100%;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-top: 1px solid rgb(80, 80, 87);
+    padding: 1rem;
+    
+}
+
+.footer-index {
+    display: flex;
+    flex-direction:row;
+    flex-flow: wrap;
+    justify-content: center;
+    justify-content: space-around;
+    justify-content: center;
+}
+
+.logo img {
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 1rem;
+    flex-direction:row;
+    flex-flow: wrap;
+}
+
+.topicos-footer-index {
+    display: flex;
+    flex-direction:row;
+    flex-flow: wrap;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+.topicos-footer-index a {
+    text-decoration: none;
+    color: white;
+    list-style: none;
+    padding: 1rem;
+}
+
+.direitos-footer-index {
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction:row;
+    flex-flow: wrap;
+    justify-content: center;
+}

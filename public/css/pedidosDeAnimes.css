@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    font-family:"Roboto",sans-serif;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+.site-animes-pedidos-de-animes {
+    background-color: black;
+    color: white;
+    display: flex;
+}
+
+.lado-esquerdo-do-site-pagina-anime {
+    width: 100%;
+}
+
+.titulo-principal-pedidos-pedidosanimes  {
+    display: flex;
+    background-color: red;
+    padding-left: 2rem;
+    align-items: center;
+    padding: 0.3rem;
+    padding-left: 1rem;
+} 
+
+.titulo-principal-pedidos-pedidosanimes img {
+    height: 2.5rem;
+    padding-right: 0.8rem;
+    padding-left: 1rem;
+}
+
+.inf-para-comentar-pedidosanimes h4 {
+    text-align: center;
+    padding: 2rem;
+}
+
+.titulo-formulario-pedidosanimes {
+   display: flex;
+   align-items: center;
+   padding-left: 4rem;
+   padding-bottom: 2rem;
+   padding-top: 1rem;
+} 
+
+.titulo-formulario-pedidosanimes img{
+    width: 2rem;
+    margin-right: 1rem;
+}
+
+.info-do-solicitante-pedidosanimes {
+    display: flex;
+    flex-direction:row;
+    flex-flow: wrap;
+    justify-content: center;
+}
+
+
+.formulario-envio-de-pedido-pedidosanimes {
+    background-color: rgb(29, 29, 31);
+    margin-left: 3rem;
+    margin-right: 3rem;
+    border-radius: 10px;
+}
+
+.dados-pedidosanimes {
+    display:grid;
+    margin: 0.5rem;
+    width: 40%;
+    height: 3.5rem;
+}
+
+.comentario-pedidosanimes input {
+    width: 50%;
+    height: 8rem;
+    border-radius: 10px;
+    border: 0;
+}
+
+.comentario-pedidosanimes {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.info-de-mensagem-publica-pedidosanimes h5 {
+    text-align: center;
+    padding: 1rem;
+}
+
+.botao-envio-pedidosanimes button {
+    background-color: red;
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 5rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+.botao-envio-pedidosanimes  {
+    display: flex;
+    justify-content: end;
+    margin: 2rem; 
+    cursor: pointer;
+}

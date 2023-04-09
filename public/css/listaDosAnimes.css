@@ -1,0 +1,142 @@
+/*Definindo fonte padrão dos textos do site e zerando margem do site total*/
+*{
+    margin: 0;
+    font-family:"Roboto",sans-serif;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+.listadeanimes {
+    background-color: black;
+}
+
+.titulo-principal-lista-animes {
+    background-color: blue;
+    width: 100%;
+}
+
+.titulo-principal-lista-animes h2 {
+    text-align: center;
+    color: white;
+    padding: 0.2rem;
+}
+
+.lista-de-animes-por-letra ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+.lista-de-animes-por-letra li {
+    padding: 1rem;
+    width: 100%;
+    background-color: rgb(17, 17, 17);
+    color: white;
+    cursor: pointer;
+}
+
+li.all-listadeanimes  {
+    background-color: green;
+}
+
+.lista-de-animes-por-letra li:hover {
+    background-color: green;
+
+}
+
+.pesquisa-listadosanimes {
+    display: flex;
+    justify-content: center;
+}
+
+.barra-de-pesquisa-lista-dos-animes {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2rem;
+}
+
+.filtros-listadosanimes ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    
+}
+
+.filtros-internos {
+    display: flex;
+    cursor: pointer;
+} 
+
+.filtros-listadosanimes li:hover {
+    color: white;
+} 
+
+.filtros-internos img {
+    height: 1rem;
+    padding-right: 10px;
+} 
+
+img.seta-baixo {
+    height: 0.5rem;
+    display: flex;
+    padding-left: 0.3rem;
+}
+
+.filtros-internos {
+    align-items: center;
+}
+
+.seta-baixo {
+    height: 0.5rem;
+}
+
+.filtros-listadosanimes div {
+    background-color: rgb(29, 29, 31);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: 1px solid rgb(15, 15, 15);
+}
+
+.numero-de-animes-na-pagina-listadosanimes h4 {
+    color: white;
+    margin: 1rem;
+}
+
+.numero-da-pagina-listadosanimes ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+
+.numero-da-pagina-listadosanimes li {
+    background-color: rgb(29, 29, 31);
+    padding: 0.8rem;
+    border: 1px solid rgb(20, 20, 20);
+    margin: 0.5rem;
+    color: white;
+}
+
+.numero-da-pagina-listadosanimes img {
+    height: 1rem;
+}
+
+.numero-da-pagina-listadosanimes a {
+    text-decoration: none;
+}
+
+.capa-onepiece-listadosanimes {
+    background-color: gray;
+    margin: 0.5rem;
+}
+
+.lista-dos-animes-capas {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    font-family:"Roboto",sans-serif;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+.site-animes-contato {
+    background-color: black;
+}
+
+.titulo-principal-contato h2 {
+    background-color: blue;
+    text-align: center;
+    color: white;
+}
+
+.balao-de-contato {
+    display: flex;
+    justify-content: center;
+}
+
+.texto-de-contato {
+    border: 2px solid white;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    width: 70%;
+    border-radius: 15px;
+    background-color: rgb(29, 29, 31);
+}
+
+.texto-de-contato h3 {
+    text-align: center;
+    color: white;
+    padding: 5rem;
+}
+
+.espaco-contato {
+    background-color: black;
+    padding-top: 2rem;
+}
