@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    font-family:"Roboto",sans-serif;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+.pagina-area-cliente {
+    background-color: black;
+    color: white;
+
+}
+
+.area-cliente {
+    background-color: rgb(29, 29, 31);
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.perfil-cliente img {
+    width: 10rem;
+    padding-bottom: 0.5rem;
+}
+
+.perfil-cliente {
+    text-align: center;
+}
+
+.topicos-da-area-do-cliente ul {
+    display: flex;
+    
+}
+
+.topicos-da-area-do-cliente li {
+    margin: 2rem;
+    text-align: center;
+    
+}
+

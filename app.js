@@ -16,6 +16,9 @@ const episodiosAdicionadosRoute = require('./src/routes/episodiosAdicionadosRout
 const filmesAdicionadosRoute = require('./src/routes/filmesAdicionadosRoute');
 const contatoRoute = require('./src/routes/contatoRoute');
 const paginaDoEpisodioSelecionadoRoute = require('./src/routes/paginaDoEpisodioSelecionadoRoute');
+const loginRoute = require('./src/routes/loginRoute');
+const cadastroRoute = require('./src/routes/cadastroRoute');
+const areaClienteRoute = require('./src/routes/areaClienteRoute');
 
 
 
@@ -56,8 +59,11 @@ app.use('/pedidosDeAnimes', pedidosDeAnimesRoute);
 app.use('/melhorias', melhoriasRoute);
 app.use('/generos', generosRoute);
 app.use('/episodiosAdicionados', episodiosAdicionadosRoute);
+app.use('/paginaDoEpisodioSelecionado', paginaDoEpisodioSelecionadoRoute);
 app.use('/filmesAdicionados', filmesAdicionadosRoute);
 app.use('/contato', contatoRoute);
-app.use('/paginaDoEpisodioSelecionado', paginaDoEpisodioSelecionadoRoute);
+app.use('/login', loginRoute);
+app.use('/cadastro', cadastroRoute);
+app.use('/areaCliente', areaClienteRoute);
 
 

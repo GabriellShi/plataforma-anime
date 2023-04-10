@@ -1,3 +1,13 @@
+.icone-login-partials {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: hsl(0, 0%, 0%);
+}
+
+
+
 /*Definindo fonte padrão dos textos do site e zerando margem do site total*/
 *{
     margin: 0;
@@ -150,8 +160,57 @@
     width: 1.5rem;
 }
 
+.categoria-desktop-login ul {
+    padding: 0;
+}
 
 
+.categoria-desktop-login ul li{
+    position: relative;
+    z-index: 5
+};
+
+.categoria-desktop-login ul li a {
+    text-decoration: none;  
+}
+
+.categoria-desktop-login ul li :hover {
+    color: rgb(2, 2, 2);
+    font-weight: bold;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+}
+
+.categoria-desktop-login ul ul{
+    display: none;
+    left: -5.4rem;
+    top: 2.2rem;
+    position: absolute;  
+    padding: 0;
+}
+
+.categoria-desktop-login ul li:hover ul{
+    display: block;
+    background-color: rgb(8, 37, 168);
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.categoria-desktop-login ul ul {
+    width: auto;
+    padding:0.5rem;
+}
+
+.categoria-desktop-login ul ul li a{
+    display: block;
+    color: rgb(255, 255, 255);
+    border-bottom: 1px dashed rgb(255, 255, 255);
+    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 10px;
+}
 
  /* ---------------------- Estilização do menu categorias --------------------  */
 
@@ -206,6 +265,10 @@
 .categorias-partials li {
     border-radius: 0;
     border: 0;
+}
+
+.categoria-desktop img {
+    width: 1rem;
 }
 
 /*  -------------------- DAQUI PARA BAIXO FICA A ESTILIZAÇÃO DO HEADER MOBILE -------------------- */

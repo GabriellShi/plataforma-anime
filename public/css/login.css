@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    font-family:"Roboto",sans-serif;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+.capa-fundo-login img {
+    width: 100%;
+    position: relative;
+}
+
+.formulario-login {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    left: 26rem;
+    top: 6.5rem;
+    color: white;
+}
+
+.bk-formulario-login {
+    background-color: rgb(29, 29, 31);
+    width: 32rem;
+    height: 32rem;
+    border-radius: 15px;
+}
+
+.titulo-principal-login h2 {
+    background-color: white;
+    text-align: center;
+    background-color: blue;
+    border-radius: 15px 15px 0 0;
+    padding: 0.5rem;
+}
+
+.input-login-nome {
+    display: grid;
+    margin: 1.5rem;
+    
+}
+
+.input-login-nome input {
+    height: 2.5rem;
+    margin-top: 0.5rem;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+
+}
+
+.input-login-nome label {
+    font-size: 1.3rem;
+}
+
+.input-login-email {
+    display: grid;
+    margin: 1.5rem;
+    
+}
+
+.input-login-email input {
+    height: 2.5rem;
+    margin-top: 0.5rem;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+}
+
+.input-login-email label {
+    font-size: 1.3rem;
+}
+
+.icone-nao-sou-robo  {
+    background-color: rgb(28, 236, 236);
+    width: 40%;
+    height: 3rem;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    margin-left: 10rem;
+}
+
+.texto-conectado-login {
+    display: flex;
+    margin: 1rem;
+    justify-content: center;
+}
+
+.texto-conectado-login h4 {
+    margin-left: 0.5rem;
+}
+
+.botao-entrar-login {
+    display: flex;
+    justify-content: center;
+}
+
+.botao-entrar-login button {
+    background-color: blue;
+    border: 0;
+    border-radius: 5px;
+    margin: 1rem;
+    width: 18rem;
+    height: 2.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+.botao-entrar-login button:hover {
+    background-color: rgb(13, 192, 236);
+}
+
+.opcao-cadastro-senha {
+    display: flex;
+    justify-content: space-around;
+}
+
+.opcao-cadastro-senha a {
+    color: white;
+}
+
+.opcao-cadastro-senha h4 {
+    font-size: 1rem;
+    padding-top: 1rem;
+}
