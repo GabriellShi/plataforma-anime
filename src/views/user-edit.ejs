@@ -1,0 +1,43 @@
+<%- include("./partials/head-admin") %>
+<%- include("./partials/header-admin") %>
+
+    <main>
+        <h2> Atualizar Usuario </h2>
+        <% if(locals.error){ %>
+            <h2> <%= error.message%> </h2>
+        <% } %> 
+        <form action="/user/edit/<%= user.id %>?_method=put" method="post">
+            <label for="nome">Nome</label>
+            <input value="<%= user.nome %>" type="text" name="nome" placeholder="Nome"  />
+
+            <label for="nomedeuser">Nome de Usuario</label>
+            <input value="<%= user.nomedeuser %>" type="text" name="nomedeuser" placeholder="Nome de Usuario" />
+
+            <label for="email">Email</label>
+            <input value="<%= user.email %>" type="email" name="email" placeholder="Email" />
+
+            <label for="senha">Senha</label>
+            <input value="<%= user.senha %>" type="number" name="senha" placeholder="Senha" />
+            <button type="submit">Atualizar</button>
+        </form>
+    </main>
+
+
+
+    <main>
+        <h1>Visualizar Usuario</h1>
+        <% if(locals.user){ %>
+        <div class="imagem-usuario">
+            <img src="<%= user.avatar %>" alt="avatar"/>
+        <span>| Id: <%= user.id %>  </span>
+        <span>| Nome: <%= user.nome %>  </span>
+        <span>| Nome de Usuario: <%= user.nomedeuser %>  </span>
+        <span>| Email: <%= user.email %> </span>
+        <span>| Senha: <%= user.senha %> </span>
+        </div>
+        <% } else {%>
+            <h2>Usuario não Entrado por motivos do além</h2>
+        <% }  %>
+
+    </main>
+

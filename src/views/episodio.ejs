@@ -1,0 +1,16 @@
+<%- include("./partials/head-admin") %>
+<%- include("./partials/header-admin") %>
+
+    <main>
+        <h1>Visualizar Episodio</h1>
+        <% if(locals.episodio){ %>
+        <div class="imagem-usuario">
+            <img src="<%= episodio.imagem %>" alt="avatar"/>
+        <span>Nome : <%= episodio.nome %>  </span>
+        <span>Data: <%= episodio.data %> </span>
+        </div>
+        <% } else {%>
+            <h2>Usuario não Entrado por motivos do além</h2>
+        <% }  %>
+
+    </main>

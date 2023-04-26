@@ -7,7 +7,8 @@
 }
 
 .titulo-principal-generos {
-    background-color: rgb(29, 29, 31);
+    background-color: rgb(0, 0, 255);
+
 }
 
 .lista-generos {
@@ -20,8 +21,9 @@
 
 }
 
-.lista-generos ul {
+.lista-generos ul { 
     display: flex;
+    justify-content: center;
     flex-direction:row;
     flex-flow: wrap;
     margin-top: 1rem;
@@ -39,3 +41,18 @@
     background-color: rgb(29, 29, 31);
     text-align: center;
 }
+
+.generos-2 li {
+   padding-left: 3.9rem;
+   padding-right: 3.9rem;
+}
+
+.generos-3 li {
+    padding-left: 5.4rem;
+    padding-right: 5.4rem;
+ }
+
+ .generos-4 li {
+    padding-left: 4.8rem;
+    padding-right: 4.8rem;
+ }

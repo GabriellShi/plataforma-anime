@@ -1,0 +1,32 @@
+<%- include("./partials/head-admin") %>
+<%- include("./partials/header-admin") %>
+
+    <main>
+        <h1>Lista de Episodios</h1>
+        <% if(episodios.length > 0){   %>
+         
+                <% for(let episodio of episodios) {%>
+               
+                 
+                            <li class="capa-e-numero-do-episodio-pagina-anime">
+                                <div>
+                                    <img src="<%= episodio.imagem %>" alt="avatar"/>
+                                </div>
+                                <div class="data-lancamento">
+                                    <div>
+                                        <h3> <%= episodio.nome %> </h3>
+
+                                        <h4>Episódio <%= episodio.id %> </h4>
+                                        <h5><%= episodio.data %></h5>
+                                    </div>
+                                </div>
+                                <a href="/episodio/<%= episodio.id %>">Visualizar</a>
+                                <a href="/user/delete/<%= episodio.id %>">Excluir</a>
+                            </li>
+              
+                <% } %>
+                
+        <% } else { %>
+        <h2> Nenhum Usuário Encontrado</h2>
+       <%} %>
+    </main>

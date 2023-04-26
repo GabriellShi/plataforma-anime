@@ -8,16 +8,22 @@
     <div class="lado-esquerdo-do-site-pagina-anime">
         <div class="espaco-episodio-selecionado"></div>
         <div class="titulo-principal-episodio-selecionado">
-            <img src="/img/barra-azul.png" alt="">
             <h2>One Piece - Episodio 1055</h2>
         </div>
 
         <div class="capa-episodio-selecionado">
             <a href="#"><img src="/img/capa-para-o-episodio.jpg" alt=""></a>
         </div>
+        <button class="botao-para-episodio"><h2>ABRIR O PLAYER</h2></button>
 
         <div class="icones-episodios-anter-prox-episodio-selecionado">
             <ul>
+                <a href="#">
+                    <li class="adicionar-a-lista1">
+                        <img src="/img/icone-favorito.png" alt="">
+                        <h4>Favorito</h4>
+                    </li>
+                </a>
                 <a href="#">
                     <li>
                     <img src="/img/icone-seta-direita2.png" alt="">
@@ -27,7 +33,7 @@
                 <a href="#">
                     <li>
                     <img src="/img/icone-lista-anime2.png" alt="">
-                    <h4>Lista de Episódio</h4>
+                    <h4>Lista de Episódios</h4>
                     </li>
                 </a>
                 <a href="#">
@@ -37,11 +43,18 @@
                     </li>
                 </a>
                 <a href="#">
-                    <li>
+                    <li class="adicionar-a-lista2">
+                        <img src="/img/icone-favorito.png" alt="">
+                        <h4>Favorito</h4>
+                    </li>
+                </a>
+                <a href="#">
+                    <li class="erro-reportar">
                         <img src="/img/icone-reportar-erro.png" alt="">
                         <h4>REPORTAR</h4>
                     </li>
                 </a>
+
             </ul>
         </div>
 
@@ -55,7 +68,7 @@
         <div class="espaco-episodio-selecionado"></div>
 
 
-        <div class="formulario-envio-de-pedido-pedidosanimes">
+        <div class="formulario-envio-de-pedido-pedidosanimes comentarios-do-episodio">
             <form action="">
                 <div class="titulo-formulario-pedidosanimes">
                     <img src="/img/icone-pedido-anime.png" alt="">
@@ -64,12 +77,14 @@
     
                 <div class="info-do-solicitante-pedidosanimes">
                     <div class="dados-nome-pedidosaimes dados-pedidosanimes">
-                        <label for="">Nome</label>
-                        <input type="text">
+                        <label for="">Nome de Usuário</label>
+                        <input id="name" type="text" name="Nome" 
+                        placeholder="Seu Nome de Usuário" required>
                     </div>
                     <div class="dados-email-pedidosaimes dados-pedidosanimes">
                         <label for="">Email</label>
-                        <input type="text">
+                        <input id="email" type="email" name="Email" 
+                        placeholder="Seu e-mail aqui" required>
                     </div>
                 </div>
     
@@ -96,56 +111,66 @@
             <section class="sessao-1-lado-direiro-index">
                 <div class="animes-populares-index mangas-populares-index o-anime-popular-episodio-selecionado">
                     <h2>Episódios</h2>
-                <div class="o-anime-popular-index dd">
-                    <div class="capa-do-anime-popular-index"> 
-                        <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro ">
-                        <div>
-                            <h4>Episódio 1053</h4>
-                            <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
+                <a href="">
+                    <div class="o-anime-popular-index dd">
+                        <div class="capa-do-anime-popular-index"> 
+                            <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt=""> 
+                        </div>
+                        <div class="o-anime-popular-index-lado-direiro ">
+                            <div>
+                                <h4>Episódio 1053</h4>
+                                <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="o-anime-popular-index o-anime-popular-episodio-selecionado">
-                    <div class="capa-do-anime-popular-index"> 
-                        <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>Episódio 1054</h4>
-                            <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index o-anime-popular-episodio-selecionado">
+                        <div class="capa-do-anime-popular-index"> 
+                            <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt=""> 
+                        </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>Episódio 1054</h4>
+                                <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="o-anime-popular-index o-anime-popular-episodio-selecionado">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>Episódio 1055</h4>
-                            <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index o-anime-popular-episodio-selecionado">
+                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt=""> 
+                        </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>Episódio 1055</h4>
+                                <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="o-anime-popular-index o-anime-popular-episodio-selecionado">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>Episódio 1056</h4>
-                            <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index o-anime-popular-episodio-selecionado">
+                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
                         </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>Episódio 1056</h4>
+                                <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    
-                </div>
+                </a>
+
                 </div>
             </section>
 
             <section class="sessao-1-lado-direiro-index">
                 <div class="animes-populares-index mangas-populares-index">
                     <h2>NOTICÍAS DO BLOG</h2>
-                <div class="o-anime-popular-index">
+                <a href="">
+                    <div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -155,7 +180,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -165,7 +192,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -175,17 +204,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index">
+                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                         </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>NORAGAMI</h4>
+                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    
-                </div>
+                </a>
+                
                 </div>
             </section>
     </div>

@@ -1,0 +1,30 @@
+<%- include("./partials/head-admin") %>
+<%- include("./partials/header-admin") %>
+
+    <main>
+        <h2> Adicionar Usuario </h2>
+        <% if(locals.error){ %>
+            <h2> <%= error.message%> </h2>
+        <% } %> 
+        <form action="/anime/create" method="post">
+            <input type="text" name="nome" placeholder="Nome do Anime" required />
+            <label for="tipo">Tipo de lingua</label>
+        <select name="tipo" aria-required="true" aria-invalid="false"><option value="-"></option><option value="legendado">Legendado</option><option value="dublado" >Dublado</option></select>
+            <input type="text" name="autor" placeholder="Autor do Anime" required/>
+            <input type="text" name="estudio" placeholder="Estudio do Anime" required/>
+            <label for="status" >Status do Anime</label>
+        <select name="status" aria-required="true" aria-invalid="false"><option value="-"></option><option value="lançamento">Em Lançamento</option><option value="comcluido" >Comcluido</option></select>
+            <input type="text" name="sinopse" placeholder="Resenha sobre o Anime" required/>
+
+        <input type="text" name="genero" placeholder="Generos" required/>
+       
+
+            <input type="file" name="capa" placeholder="Capa do Anime" accept="image/png, image/jpeg" required />
+            <button type="submit">Adicionar</button>
+        </form>
+    </main>
+
+
+
+  
+        

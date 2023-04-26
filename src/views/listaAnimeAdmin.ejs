@@ -1,0 +1,128 @@
+
+
+<%- include("./partials/head-admin") %>
+<%- include("./partials/header-Admin") %>
+
+
+
+<section class="listadeanimes">
+    
+    <div class="titulo-principal-lista-animes">
+        <h2>LISTA DE ANIMES ADM</h2>
+    </div>
+
+     <div class="lista-de-animes-por-letra">
+        <ul>
+            <li class="all-listadeanimes"><p>ALL</p></li>
+            <li>#</li>
+            <li>A</li>
+            <li>B</li>
+            <li>C</li>
+            <li>D</li>
+            <li>E</li>
+            <li>F</li>
+            <li>G</li>
+            <li>H</li>
+            <li>I</li>
+            <li>J</li>
+            <li>K</li>
+            <li>L</li>
+            <li>M</li>
+            <li>N</li>
+            <li>O</li>
+            <li>P</li>
+            <li>Q</li>
+            <li>R</li>
+            <li>S</li>
+            <li>T</li>
+            <li>U</li>
+            <li>V</li>
+            <li>W</li>
+            <li>X</li>
+            <li>Y</li>
+            <li>Z</li>
+        </ul>
+    </div> 
+
+    <div class="pesquisa-listadosanimes">
+        <div class="barra-de-pesquisa-partials barra-de-pesquisa-lista-dos-animes">
+            <div class="pesquisa-lista-dos-animes"><input type="search" placeholder="Pesquisar Pelo Nome..."></div>
+            <div><button><img src="/img/lupa.png" alt="Lupa"></button></div>
+        </div>
+    </div>
+
+    <div class="filtros-listadosanimes">
+        <ul>
+            <div class="filtros-internos">
+                <img src="/img/icone-filtro.png" alt="">
+                <li>Filtro</li>
+            </div>
+            <div class="filtros-internos">
+                <img src="/img/icone-linguagem.png" alt="">
+                <li>Legendado/Dublado</li>
+            </div>
+            <div class="filtros-internos">
+                <img src="/img/icone-ordem.png" alt="">
+                <li>Ordenar</li>
+            </div>
+            <div class="filtros-internos">
+                <li>Nº de Animes</li>
+            </div>
+            <div class="filtros-internos">
+                <img src="/img/icone-organizar-cimaebaixo.png" alt="">
+                <li>Organizar</li>
+                <img src="/img/icone-seta-baixo.png"  class="seta-baixo" alt="">
+            </div>
+        </ul>
+    </div>
+
+    <div class="numero-de-animes-na-pagina-listadosanimes">
+        <h4>Exibindo 30 Animes - Página 1 de 90</h4>
+    </div>
+
+    <div class="numero-da-pagina-listadosanimes">
+        <ul>
+            <a href=""><li> <img src="/img/icone-seta-direita.png" alt=""> </li></a>
+            <a href=""><li>1</li></a>
+            <a href=""><li>2</li></a>
+            <a href=""><li>3</li></a>
+            <a href=""><li>...</li></a>
+            <a href=""><li>90</li></a>
+            <a href=""><li><img src="/img/icone-seta-esquerda.png" alt=""></li></a>
+        </ul>
+    </div>
+
+   
+   
+    <div class="animes-lancados lista-dos-animes-capas">
+        <% for(let anime of listaAnimeAdmin) {%>
+        <div class="capa-onepiece-index capa-onepiece-listadosanimes">
+                <img src="<%= anime.capa %>" alt="capa"/>
+                <h4><%= anime.id %> - <%= anime.nome %></h4>
+                <td>
+                    <a href="/anime/<%= anime.id %>">Visualizar</a>
+                    <a href="/anime/edit/<%= anime.id %>">Editar</a>
+              
+                </td>
+          
+        </div>
+        <% } %>
+    </div>
+  
+
+
+    <div class="numero-da-pagina-listadosanimes">
+        <ul>
+            <a href=""><li> <img src="/img/icone-seta-direita.png" alt=""> </li></a>
+            <a href=""><li>1</li></a>
+            <a href=""><li>2</li></a>
+            <a href=""><li>3</li></a>
+            <a href=""><li>...</li></a>
+            <a href=""><li>90</li></a>
+            <a href=""><li><img src="/img/icone-seta-esquerda.png" alt=""></li></a>
+        </ul>
+    </div>
+    <div class="espaco-contato"></div>
+
+</section>
+

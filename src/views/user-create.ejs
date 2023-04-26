@@ -1,40 +1,50 @@
 <%- include("./partials/head") %>
 <%- include("./partials/header") %>
 
-<section class="">
+<section class="pagina-cadastro">
+    <div class="espaco-episodio-selecionado"></div>
     <div class="capa-fundo-login">
         <img src="/img/capa-login.jpg" alt="">
     </div>
 
-    <div class="formulario-login">
-            <div class="bk-formulario-login">
-                <form action="">
+    <div class="formulario-login formulario-cadastro">
+            <div class="bk-formulario-login bk-formulario-cadastro">
+                <% if(locals.error){ %>
+                    <h2> <%= error.message%> </h2>
+                <% } %> 
+                <form action="/user/create" method="post" >
+
                     <div class="titulo-principal-login">
                         <h2>CADASTRE-SE</h2>
                     </div>
 
                     <div class="informacoes-de-cadastro">
                         <div>
-                            <div class="input-login-nome input-login-nome2 ">
+                            <div class="input-login-nome input-login-nome2 input-cadastro">
                                 <label for="">Nome</label>
-                                <input type="text">
+                                <input  type="text" name="nome" 
+                                placeholder="Seu Nome" required>
                             </div>
                 
-                            <div class="input-login-email input-login-email2">
+                            <div class="input-login-email input-login-email2 input-cadastro">
                                 <label for="">Nome de Usuario</label>
-                                <input type="text">
+                                <input type="text" name="nomedeuser" 
+                                placeholder="Seu Nome de Usuário" required>
                             </div>
                         </div>
 
                         <div>
-                            <div class="input-login-nome input-login-nome2">
+                            <div class="input-login-nome input-login-nome2 input-cadastro">
                                 <label for="">Email</label>
-                                <input type="text">
+                                <input type="email" name="email" 
+                                placeholder="Seu E-mail" required>
                             </div>
                 
-                            <div class="input-login-email input-login-email2">
+                            <div class="input-login-email input-login-email2 input-cadastro">
                                 <label for="">Senha</label>
-                                <input type="text">
+                                 <input  type="password" name="senha"  
+                                placeholder="Sua Senha" required>
+                                <!-- id="senha" -->
                             </div>
                         </div>
                     </div>
@@ -51,7 +61,8 @@
                     </div>
         
                     <div class="botao-entrar-login">
-                        <button>ENTRAR</button>
+                        
+                        <button type="submit">ENTRAR</button>
                     </div>
 
                     <div class="opcao-cadastro-senha">
@@ -64,11 +75,16 @@
                         <a href="/areaCliente">
                             <h4>Perfil cliente / provisorio</h4>
                         </a>
+                        <a href="indexAdmin">
+                            <h4>PainelAdm</h4>
+                        </a>
+
                     </div>
                 </form>
             </div>
         </div>
 </section>
+<div class="espaco-episodio-selecionado"></div>
 
 
 <%- include("./partials/footer") %> 

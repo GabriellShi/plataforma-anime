@@ -1,7 +1,9 @@
 <%- include("./partials/head") %>
 <%- include("./partials/header") %>
 
-<section class="">
+<section class=" pagina-login">
+    <div class="espaco-episodio-selecionado"></div>
+
     <div class="capa-fundo-login">
         <img src="/img/capa-login.jpg" alt="">
     </div>
@@ -14,18 +16,23 @@
                     </div>
         
                     <div class="input-login-nome">
-                        <label for="">Nome</label>
-                        <input type="text">
+                        <label for="">Nome de Usuário / E-mail</label>
+                        <input id="name" type="text" type="email" name="Name" 
+                        placeholder="Seu Nome de Usuário ou seu E-mail" required>
                     </div>
+
+                  
         
                     <div class="input-login-email">
-                        <label for="">Email</label>
-                        <input type="text">
+                        <label for="">Senha</label>
+                        <input id="senha" type="password" name="Senha" placeholder="Sua Senha" required>
                     </div>
         
+
+                    
                     <div class="icone-nao-sou-robo">
                         <div>
-                            ffff
+                            <h4>NÃO SOU ROBO</h4>
                         </div>
                     </div>
         
@@ -39,10 +46,10 @@
                     </div>
         
                     <div class="opcao-cadastro-senha">
-                        <a href="/cadastro">
+                        <a href="/user/create">
                             <h4>CADASTRE-SE</h4>
                         </a>
-                        <a href="#">
+                        <a href="/recuperarSenha">
                             <h4>RECUPERAR SENHA</h4>
                         </a>
                     </div>
@@ -50,6 +57,7 @@
             </div>
         </div>
 </section>
+<div class="espaco-episodio-selecionado"></div>
 
 
 <%- include("./partials/footer") %> 

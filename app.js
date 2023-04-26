@@ -1,14 +1,11 @@
 const express = require("express");
 const app = express();
-const port = 3005;
+const port = 3010;
 const methodOverride = require('method-override');
-const path = require("path");
-const session = require("express-session");
-const cookieParser = require("cookie-parser");
+
 
 const indexRoute = require('./src/routes/indexRoute');
 const listaDosAnimesRoute = require('./src/routes/listaDosAnimesRoute');
-const paginaDoAnimeRoute = require('./src/routes/paginaDoAnimeRoute');
 const pedidosDeAnimesRoute = require('./src/routes/pedidosDeAnimesRoute');
 const melhoriasRoute = require('./src/routes/melhoriasRoute');
 const generosRoute = require('./src/routes/generosRoute');
@@ -17,8 +14,14 @@ const filmesAdicionadosRoute = require('./src/routes/filmesAdicionadosRoute');
 const contatoRoute = require('./src/routes/contatoRoute');
 const paginaDoEpisodioSelecionadoRoute = require('./src/routes/paginaDoEpisodioSelecionadoRoute');
 const loginRoute = require('./src/routes/loginRoute');
-const cadastroRoute = require('./src/routes/cadastroRoute');
 const areaClienteRoute = require('./src/routes/areaClienteRoute');
+const recuperarSenhaRoute = require('./src/routes/recuperarSenhaRoute');
+
+const indexAdminRoute = require("./src/routes/indexAdminRoute")   
+const userRoute = require("./src/routes/userRoute") 
+const animeRoute = require("./src/routes/animeRoute") 
+const episodioRoute = require("./src/routes/episodioRoute") 
+
 
 
 
@@ -30,31 +33,25 @@ app.use(methodOverride("_method"));
 // Converter corpo da requisição (body) em objeto literal
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: false }))
 
-app.use(cookieParser());
-app.use(session({
-  secret: "senha",
-  resave: true,
-  saveUninitialized: true,
-}));
-
-
+//   
 // Configura pasta estática para acesso externo
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname + "/public"));
+
 // Configura o template engine, troca do padrão (jade) para ejs
 app.set("view engine", "ejs");
 // Configura o caminho para os views, troca o padrão que é no raiz para o src
-app.set("views", path.join(__dirname, "src", "views"));
+app.set("views", __dirname + "/src/views");
 
 
 // Inicia o servidor
 app.listen(port, () => {
-  console.log("Estamos rodando em: http://localhost:" + port);
+  console.log("Estamos rodando na porta" + " " + port);
 });
 
-app.use('/index', indexRoute);
+app.use('/', indexRoute);
 app.use('/listaDosAnimes', listaDosAnimesRoute);
-app.use('/paginaDoAnime', paginaDoAnimeRoute);
 app.use('/pedidosDeAnimes', pedidosDeAnimesRoute);
 app.use('/melhorias', melhoriasRoute);
 app.use('/generos', generosRoute);
@@ -63,7 +60,11 @@ app.use('/paginaDoEpisodioSelecionado', paginaDoEpisodioSelecionadoRoute);
 app.use('/filmesAdicionados', filmesAdicionadosRoute);
 app.use('/contato', contatoRoute);
 app.use('/login', loginRoute);
-app.use('/cadastro', cadastroRoute);
 app.use('/areaCliente', areaClienteRoute);
+app.use('/recuperarSenha', recuperarSenhaRoute);
 
 
+app.use("/indexAdmin", indexAdminRoute) 
+app.use("/user", userRoute) 
+app.use("/anime", animeRoute) 
+app.use("/episodio", episodioRoute) 

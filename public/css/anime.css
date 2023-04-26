@@ -14,7 +14,7 @@
 }
 
 .titulo-principal-pagina-anime {
-    background-color: rgb(29, 29, 31);
+    background-color: rgb(0, 0, 255);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +26,7 @@
 
 .titulo-principal-pagina-anime img {
     width: 2rem;
-    margin: 0.5rem;
+    margin: 0.2rem;
 }
 
 .sessao1-primeira-parte-lista-anime {
@@ -44,7 +44,7 @@
 }
 
 .capa-do-anime-pagina-anime img {
-    width: 18.6rem;
+    width: 21.3rem;
 }
 
 
@@ -52,8 +52,11 @@
     display: flex;
     background-color: rgb(26, 25, 25);
     padding: 0.5rem;
+    width: 21.3rem;
+}
 
-    width: 18.6rem;
+.lista-de-animes h4 {
+    margin-right: 0.5rem;
 }
 
 .icones-da-capa-do-anime-lista-anime img {
@@ -72,6 +75,12 @@
     cursor: pointer;
 }
 
+.icones-da-capa-do-anime-lista-anime li:hover {
+
+    background-color: rgb(37, 37, 37);
+    border: 1px solid rgb(255, 255, 255);
+}
+
 .icone-gostei-pagina-anime img {
     margin-right: 0.5rem;
 }
@@ -84,6 +93,8 @@
     background-color: rgb(22, 21, 21);
     padding: 0;
     border: 1px solid rgb(78, 76, 76);
+    margin-right: 2rem;
+    margin: 1rem;
 
 }
 
@@ -162,6 +173,8 @@ li.status-lista-anime {
 .capa-e-numero-do-episodio-pagina-anime {
     display: flex;
     align-items: center;
+    color: white;
+    background-color: rgb(31, 31, 31);
 }
 
 .capa-e-numero-do-episodio-pagina-anime img {
@@ -177,6 +190,11 @@ li.status-lista-anime {
 
 .numero-do-episodio-pagina-anime ul {
     margin-right: 3rem;
+
+}
+
+.numero-do-episodio-pagina-anime a {
+    color: white;
 }
 
 li.ultimo-capa-e-numero-do-episodio-pagina-anime {
@@ -186,4 +204,40 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
 .numero-do-episodio-pagina-anime {
     padding-bottom: 2rem;
+}
+
+.data-lancamento :hover{
+    color: rgb(0, 204, 255);
+}
+
+
+@media (max-width: 558px) {
+    .sessao1-primeira-parte-lista-anime {
+        display: grid;
+    }
+
+    .capa-do-anime-escolhido {
+        display: grid;
+        justify-content: center;
+    }
+
+    .sinopse-anime-lista-anime {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .temporadas-pagina-anime ul {
+        margin: 0.8rem;
+        margin-top: 3rem;
+    }
+
+    .numero-do-episodio-pagina-anime ul {
+        margin-right: 0.5rem;
+        padding: 1rem;
+    }
+}
+
+.anime-edit {
+    background-color: black;
+    color: white;
 }

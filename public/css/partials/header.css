@@ -92,7 +92,7 @@
 
 /* Deixando uma linha branca entre o header e o container 1  */
 .linha-partials {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #3a9faa;
 }
 
 /* estilizando a barra de pesquisa, definindo cores, larguras, margens e centralizando itens.  */
@@ -175,7 +175,7 @@
 }
 
 .categoria-desktop-login ul li :hover {
-    color: rgb(2, 2, 2);
+    color: rgb(255, 255, 255);
     font-weight: bold;
     background-color: transparent;
     display: flex;
@@ -184,17 +184,17 @@
 
 .categoria-desktop-login ul ul{
     display: none;
-    left: -5.4rem;
-    top: 2.2rem;
+    left: -4.4rem;
+    top: 3rem;
     position: absolute;  
     padding: 0;
 }
 
 .categoria-desktop-login ul li:hover ul{
     display: block;
-    background-color: rgb(8, 37, 168);
+    background-color: #00E6FF;
     border-radius: 10px;
-    border: 1px solid white;
+
 }
 
 .categoria-desktop-login ul ul {
@@ -204,8 +204,8 @@
 
 .categoria-desktop-login ul ul li a{
     display: block;
-    color: rgb(255, 255, 255);
-    border-bottom: 1px dashed rgb(255, 255, 255);
+    color: black;
+    border-bottom: 1px dashed rgb(0, 0, 0);
     padding-bottom: 10px;
     padding-top: 5px;
     padding-left: 5px;
@@ -268,12 +268,20 @@
 }
 
 .categoria-desktop img {
-    width: 1rem;
+    width: 1.5rem;
 }
 
 /*  -------------------- DAQUI PARA BAIXO FICA A ESTILIZAÇÃO DO HEADER MOBILE -------------------- */
 
 /* Retirando o espaçamento dos topicos do menu de navegação e minuindo os itens  */
+
+@media (max-width: 1115px){
+    .menu-partials li { 
+        font-size: 0.7rem;
+    }
+
+}
+
 @media (max-width: 1078px){
     .menu-partials li { 
         font-size: 0.7rem;
@@ -295,7 +303,7 @@
 /* Retirando o espaçamento dos topicos do menu de navegação  */
 @media (max-width: 1001px){
     .nav-partials ul { 
-        gap: 1rem;
+        gap: 0.7rem;
     }
 }
 
@@ -308,6 +316,15 @@
 }
 
 
+
+@media (max-width: 900px){
+    .login-pesquisa-partials {
+        display: none;
+    }
+}
+
+
+
 /*------------------DAQUI PARA BAIXO COMEÇA A ESTILIZAÇÃO MOBILE DE 630PX PARA BAIXO--------------------------*/
 
 @media (max-width: 887px)
@@ -317,9 +334,6 @@
 
 
 
-.toggle-partials-2-pai, .login-pesquisa-partials, .categoria-desktop {
-    display: none;
-}
 
 .login-pesquisa-partials-2, .categoria-mobile {
     display: list-item;
@@ -384,6 +398,12 @@
 
 
 @media (max-width: 530px){
+
+    .icone-login-desk 
+    {
+        display: none;
+    }
+
     .nav-partials {
         display: flex;
         justify-content: space-between;
@@ -455,6 +475,14 @@
 .barra-de-pesquisa-partials-mobile img {
     width: 1.5rem;
 }
+
+
+.icone-login-mob ul ul{
+    left: .1rem;
+
 }
+}
+
+
 
 

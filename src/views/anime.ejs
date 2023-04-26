@@ -1,6 +1,8 @@
-
 <%- include("./partials/head") %>
 <%- include("./partials/header") %>
+    
+ 
+    <% if(locals.anime){ %>
 
 <section class="site-animes-pagina-anime">
 
@@ -8,18 +10,21 @@
         <section class="sessao1-pagina-anime">
             <div class="titulo-principal-pagina-anime">
                     <img src="/img/icone.png" alt="">
-                    <h2>One Piece - Legendado</h2>
+                    <h2><%= anime.nome %> - <%= anime.tipo %> </h2>
             </div>
 
             <div class="sessao1-primeira-parte-lista-anime">
                 <div class="capa-do-anime-escolhido">
                     <div class="capa-do-anime-pagina-anime">
-                        <img src="/img/capa-do-anime.png" alt="">
+                        <img src="<%= anime.capa %>" alt="capa"/>
                     </div>
                     <div class="icones-da-capa-do-anime-lista-anime">
                         <ul>
                             <li><img src="/img/icone-favorito.png" alt=""></li>
-                            <li><img src="/img/icone-lista-anime.png" alt=""></li>
+                            <li class="lista-de-animes">
+                                <h4>Lista</h4>
+                                <img src="/img/icone-lista-anime.png" alt="">
+                            </li>
                             <li class="icone-gostei-pagina-anime"> 
                             <img src="/img/icone-gostei.png" alt=""> <p>91</p> 
                             </li>
@@ -30,39 +35,30 @@
                     </div>
                 </div>
     
+        
                 <div class="informações-do-anime-lista-anime">
                     <ul>
-                        <li><h3>Tipo: Legendado</h3></li>
+                        <li><h3>Tipo: <%= anime.tipo %></h3></li>
                         <li><h3>Formato: Anime</h3></li>
-                        <li><h3>Gêneros: Ação, Aventura, Fantasia, Shounen, Super Poder</h3></li>
-                        <li><h3>Autor: Eiichiro Oda</h3></li>
-                        <li><h3>Estúdio: Toei Animation</h3></li>
-                        <li><h3>Total de Episódios: 1056</h3></li>
-                        <li><h3>Ovas: 2</h3></li>
-                        <li><h3>Filmes: 5</h3></li>
-                        <li class="status-lista-anime"><h3>Status: Lançamento</h3></li>
+                        <li><h3>Gêneros: <%= anime.generos %></h3></li>
+                        <li><h3>Autor: <%= anime.autor %></h3></li>
+                        <li><h3>Estúdio: <%= anime.estudio %></h3></li>
+                        <li><h3>Total de Episódios: <%= anime.episodios %></h3></li>
+                        <li><h3>Ovas: <%= anime.ovas %></h3></li>
+                        <li><h3>Filmes: <%= anime.filmes %></h3></li>
+                        <li class="status-lista-anime"><h3>Status: <%= anime.status %></h3></li>
                     </ul>
                 </div>
             </div>
 
             <div class="titulo-assistir-anime-online-lista-anime">
-                <h3>Assistir One Piece Todos Episódios em HD com a melhor qualidade</h3>
+                <h3>Assistir <%= anime.nome %> Todos Episódios em HD com a melhor qualidade</h3>
             </div>
 
             <div class="sinopse-anime-lista-anime">
-                <h2>Sinopse - One Piece</h2>
+                <h2>Sinopse - <%= anime.nome %></h2>
                 <p>
-                    Houve um homem que conquistou tudo aquilo que o mundo tinha a oferecer, o lendário Rei
-                    dos Piratas, Gold Roger. Capturado e condenado à execução pelo Governo Mundial, suas 
-                    últimas palavras lançaram legiões aos mares. “Meu tesouro? Se quiserem, podem pegá-lo.
-                    Procurem-no! Ele contém tudo que este mundo pode oferecer!”. Foi a revelação do maior
-                    tesouro, o One Piece, cobiçado por homens de todo o mundo, sonhando com fama e riqueza
-                    imensuráveis… Assim começou a Grande Era dos Piratas! Monkey D. Luffy de 17 anos,
-                    desafia a definição de pirata. Sem a típica personalidade vil e cruel, suas motivações
-                    são simples: a aventura e as possibilidades de conhecer novos amigos. Luffy e seus
-                    companheiros partem em direção à Grand Line, a mais perigosa das rotas do mundo,
-                    em incríveis aventuras, revelando mistérios e enfrentando poderosos oponentes
-                    em busca do One Piece.
+                    <%= anime.sinopse %>
                 </p>
             </div>
         </section>
@@ -83,9 +79,11 @@
                                 <div>
                                     <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
                                 </div>
-                                <div>
-                                    <h3>Episódio 1 - 1</h3>
+                                <div class="data-lancamento">
+                                    <div>
+                                        <h3>Episódio 1 - 1</h3>
                                     <h5>19 de março de 2023</h5>
+                                    </div>
                                 </div>
                             </li>
                         </a>
@@ -93,18 +91,22 @@
                             <div>
                                 <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
                             </div>
-                            <div>
-                                <h3>Episódio 2 - 1</h3>
+                            <div class="data-lancamento">
+                                <div>
+                                    <h3>Episódio 2 - 1</h3>
                                 <h5>19 de março de 2023</h5>
+                                </div>
                             </div>
                         </li>
                         <li class="capa-e-numero-do-episodio-pagina-anime">
                             <div>
                                 <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
                             </div>
-                            <div>
-                                <h3>Episódio 3 - 1</h3>
+                            <div class="data-lancamento">
+                                <div>
+                                    <h3>Episódio 3 - 1</h3>
                                 <h5>19 de março de 2023</h5>
+                                </div>
                             </div>
                         </li>
                         <li class="capa-e-numero-do-episodio-pagina-anime 
@@ -112,9 +114,11 @@
                             <div>
                                 <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
                             </div>
-                            <div>
-                                <h3>Episódio 4 - 1</h3>
+                            <div class="data-lancamento">
+                                <div>
+                                    <h3>Episódio 4 - 1</h3>
                                 <h5>19 de março de 2023</h5>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -134,27 +138,33 @@
                             <div>
                                 <img src="/img/capa-da-lista-de-episodios-do-anime2.png" alt="">
                             </div>
-                            <div>
-                                <h3>Episódio 1 - 1</h3>
+                            <div class="data-lancamento">
+                                <div>
+                                    <h3>Episódio 1 - 2</h3>
                                 <h5>19 de março de 2023</h5>
+                                </div>
                             </div>
                         </li>
                         <li class="capa-e-numero-do-episodio-pagina-anime">
                             <div>
                                 <img src="/img/capa-da-lista-de-episodios-do-anime2.png" alt="">
                             </div>
-                            <div>
-                                <h3>Episódio 2 - 1</h3>
+                            <div class="data-lancamento">
+                                <div>
+                                    <h3>Episódio 2 - 2</h3>
                                 <h5>19 de março de 2023</h5>
+                                </div>
                             </div>
                         </li>
                         <li class="capa-e-numero-do-episodio-pagina-anime">
                             <div>
                                 <img src="/img/capa-da-lista-de-episodios-do-anime2.png" alt="">
                             </div>
-                            <div>
-                                <h3>Episódio 3 - 1</h3>
+                            <div class="data-lancamento">
+                                <div>
+                                    <h3>Episódio 3 - 2</h3>
                                 <h5>19 de março de 2023</h5>
+                                </div>
                             </div>
                         </li>
                         <li class="capa-e-numero-do-episodio-pagina-anime 
@@ -162,9 +172,11 @@
                             <div>
                                 <img src="/img/capa-da-lista-de-episodios-do-anime2.png" alt="">
                             </div>
-                            <div>
-                                <h3>Episódio 4 - 1</h3>
+                            <div class="data-lancamento">
+                                <div>
+                                    <h3>Episódio 4 - 2</h3>
                                 <h5>19 de março de 2023</h5>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -184,7 +196,7 @@
             <section class="sessao-1-lado-direiro-index">
                 <div class="animes-populares-index">
                     <h2>ANIMES MAIS POPULARES</h2>
-                <div class="o-anime-popular-index">
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -194,7 +206,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
+                </a>
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -204,7 +217,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
+                </a>
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -214,24 +228,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index">
+                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                        </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>NORAGAMI</h4>
+                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                            </div>
                         </div>
                     </div>
-                    
-                </div>
+                </a>
+
                 </div>
             </section>
         
             <section class="sessao-1-lado-direiro-index">
                 <div class="animes-populares-index mangas-populares-index">
                     <h2>MANGAS POPULARES</h2>
-                <div class="o-anime-popular-index">
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -241,7 +258,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
+                </a>
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -251,7 +269,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
+                </a>
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -261,24 +280,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index">
+                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                         </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>NORAGAMI</h4>
+                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    
-                </div>
+                </a>
+                
                 </div>
             </section>
 
             <section class="sessao-1-lado-direiro-index">
                 <div class="animes-populares-index mangas-populares-index">
                     <h2>NOTICÍAS DO BLOG</h2>
-                <div class="o-anime-popular-index">
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -288,7 +311,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
+                </a>
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -298,7 +322,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
+                </a>
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -308,22 +333,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index">
+                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                         </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>NORAGAMI</h4>
+                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    
-                </div>
+                </a>
+                
                 </div>
             </section>
     </div>
 
 </section>
-
+<% } else {%>
+    <h2>Usuario não Entrado por motivos do além</h2>
+<% }  %>
 
 <%- include("./partials/footer") %> 

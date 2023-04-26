@@ -1,7 +1,8 @@
 const melhoriasController = {
     // Pode retornar uma página ou não
     melhorias: (req, res) => {
-        return res.render("melhorias", {title: "Pagina do Anime", user: req.cookies.user,})
+        return res.render("melhorias", {title: "Pagina do Anime", //user: req.cookies.user,
+    })
     },
 };
 

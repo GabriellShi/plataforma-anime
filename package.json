@@ -20,8 +20,16 @@
   },
   "author": "Gabriel Oliveira",
   "license": "ISC",
-
   "devDependencies": {
     "nodemon": "^2.0.21"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabriellShi/plataforma-anime.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/GabriellShi/plataforma-anime/issues"
+  },
+  "homepage": "https://github.com/GabriellShi/plataforma-anime#readme"
 }

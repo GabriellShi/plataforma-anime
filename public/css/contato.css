@@ -13,6 +13,7 @@
     background-color: blue;
     text-align: center;
     color: white;
+    padding: 0.4rem;
 }
 
 .balao-de-contato {
@@ -21,6 +22,7 @@
 }
 
 .texto-de-contato {
+
     border: 2px solid white;
     margin-top: 5rem;
     margin-bottom: 5rem;
@@ -33,9 +35,20 @@
     text-align: center;
     color: white;
     padding: 5rem;
+    width: 100%;
 }
 
 .espaco-contato {
     background-color: black;
-    padding-top: 2rem;
+    padding-top: 3.2rem;
+}
+
+
+@media (max-width: 696px) {
+
+    .texto-de-contato h3 {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+
 }
