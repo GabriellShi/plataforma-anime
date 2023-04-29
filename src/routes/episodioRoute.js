@@ -7,11 +7,15 @@ const episodioController = require ('../controllers/EpisodioController');
 // Rota do controlador 'store' que ira criar um novo usuario
 router.get("/create", episodioController.create);
 
-
-
 // Essa rota faz conecção com a create de cima, ela ira ser a responsavel pelo envio do formulario
 // com o metodo 'post '
 router.post("/create", episodioController.store);
+
+router.get("/episodiosAdicionados", episodioController.episodiosAdicionados);
+
+router.get("/index", episodioController.index);
+
+
 
 // Rota do controlador 'index' que ira mostras a lista dos usuarios 
 router.get("/", episodioController.index);

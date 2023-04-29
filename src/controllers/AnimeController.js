@@ -132,8 +132,16 @@ const listaAnimeAdmin = [
 
 const episodios = [
     {
+
         id: 1,
-        nome: "Tokyo Ghoul",
+        nome: "One Piece - está em animeController",
+        data: "/08/08",
+        imagem: "/img/episodios-adicionados-onepiece.jpg",
+    },
+    
+    {
+        id: 2,
+        nome: "Tokyo Ghoul - está em animeController",
         data: "/08/08",
         imagem: "/img/episodios-adicionados-onepiece.jpg",
     },
@@ -149,7 +157,7 @@ const animeController = {
 // esse codigo renderiza a tabela 'users' dos usuarios
 // /Pode retornar uma página ou não
     index: (req, res) => {
-        return res.render("listaAnimeAdmin", {title: "Lista de Anime", listaAnimeAdmin,  }) 
+        return res.render("listaAnimeAdmin", {title: "Lista de Anime", listaAnimeAdmin, episodios, }) 
         // users: users
     },
 
@@ -167,7 +175,7 @@ const animeController = {
             });
         }
         return res.render("anime", {
-            title: "Visualizar Anime",
+            title: "Visualizar Anime", episodios, 
             anime: userResult,
         });
 
@@ -209,12 +217,12 @@ const animeController = {
                 const userResult = listaAnimeAdmin.find((user) => user.id === parseInt(id));
                 if(!userResult){
                     return res.render("error", {
-                        title: "Ops!", 
+                        title: "Ops!",  
                         message: "Anime não encontrado",
                     });
                 }
                 return res.render("anime-edit", {
-                    title: "Editar Anime",
+                    title: "Editar Anime", listaAnimeAdmin, episodios,
                     anime: userResult
                 })
                 
@@ -291,8 +299,10 @@ const animeController = {
     },
 
     listaAnimeUsuario:  (req, res) => {
-      return  res.render('listaAnimeUsuario', { title: "Lista de Anime ", episodios});
+      return  res.render('listaAnimeUsuario', { title: "Lista de Anime ", listaAnimeAdmin, episodios,});
 },
+
+
 
 
 

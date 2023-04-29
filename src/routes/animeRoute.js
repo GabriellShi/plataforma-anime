@@ -42,6 +42,7 @@ router.get("/listaAnimeUsuario", animeController.listaAnimeUsuario);
 
 
 
+
 // Rota do controlador 'index' que ira mostras a lista dos usuarios 
 router.get("/", animeController.index);
 

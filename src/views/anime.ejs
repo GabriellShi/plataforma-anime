@@ -1,9 +1,11 @@
 <%- include("./partials/head") %>
 <%- include("./partials/header") %>
     
- 
+
     <% if(locals.anime){ %>
 
+
+ 
 <section class="site-animes-pagina-anime">
 
     <div class="lado-esquerdo-do-site-pagina-anime">
@@ -63,6 +65,7 @@
             </div>
         </section>
 
+     
         <section class="sessao2-pagina-anime">
 
             <div>
@@ -74,19 +77,27 @@
                 </div>
                 <div class="numero-do-episodio-pagina-anime">
                     <ul> 
-                        <a href="/paginaDoEpisodioSelecionado">
-                            <li class="capa-e-numero-do-episodio-pagina-anime">
-                                <div>
-                                    <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
-                                </div>
-                                <div class="data-lancamento">
-                                    <div>
-                                        <h3>Episódio 1 - 1</h3>
-                                    <h5>19 de março de 2023</h5>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
+       
+
+
+                <% for(let episodio of episodios) {%>
+                    <a href="/episodio/<%= episodio.id %>">
+                        <li class="capa-e-numero-do-episodio-pagina-anime">
+                            
+                        <div>
+                            
+                            <img src="<%= episodio.imagem %>" alt="capa"/>
+                        </div>
+                        <div class="data-lancamento">
+                            <div>
+                                <h3>Episódio - <%= episodio.id %></h3>
+                                <h5><%= episodio.nome %> - <%= episodio.data %>
+                                
+                            </div>      
+                        </div>   
+                        </li>
+                    </a>
+                    <% } %>
                         <li class="capa-e-numero-do-episodio-pagina-anime">
                             <div>
                                 <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
@@ -124,6 +135,11 @@
                     </ul>
                 </div>
             </div>
+
+
+            
+
+
 
             <div>
                 <div class="temporadas-pagina-anime">
@@ -356,5 +372,7 @@
 <% } else {%>
     <h2>Usuario não Entrado por motivos do além</h2>
 <% }  %>
+
+
 
 <%- include("./partials/footer") %> 

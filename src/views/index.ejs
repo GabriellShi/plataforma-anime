@@ -1,6 +1,7 @@
 <%- include("./partials/head") %>
 <%- include("./partials/header") %>
 
+
 <section class="site-animes">
 
     <div class="lado-esquerdo-do-site-index">
@@ -16,6 +17,9 @@
                     <button><img src="/img/seta-vermelha-direita.png" alt="seta vermelha virada para esquerda"></button>
                 </div>
             </div>
+  
+
+
             <div class="animes-lancados">
                 <% for(let anime of listaAnimeAdmin) {%>
                 <div class="capa-onepiece-index">
@@ -25,7 +29,7 @@
                     <h4><%= anime.nome %></h4>
                 </div>
                 <% } %>
-
+ 
                 
             </div>
         </section>
@@ -40,49 +44,25 @@
                 </div>
     
                 <div class="botao-vermais-index"> 
-                    <a href="/episodiosAdicionados"><button>VER MAIS</button></a>
+                    <a href="/episodio/episodiosAdicionados"><button>VER MAIS</button></a>
                     
                 </div>
             </div>
     
             <div class="animes-adicionados">
+
+                <% for(let episodio of episodios) {%>
                 <div class="capa-onepiece-index">
-                    <a href="/paginaDoEpisodioSelecionado">
-                        <img src="/img/episodios-adicionados-onepiece.jpg" alt="capa one piece">
-                    <h4>26 de març 2023 <br> One Piece <br> Episódio 12</h4>
-                </a>
+                    <a href="/episodio/<%= episodio.id %>">
+                        <img src="<%= episodio.imagem %>" alt="capa one piece">
+                    </a>
+                    <h4><%= episodio.data %> <br> <%= episodio.nome %> <br> Episódio <%= episodio.id %></h4>
+                    </a>
                 </div>
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/episodios-adicionados-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>26 de març 2023 <br> One Piece <br> Episódio 12</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href=""><img src="/img/episodios-adicionados-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>26 de març 2023 <br> One Piece <br> Episódio 12</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/episodios-adicionados-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>26 de març 2023 <br> One Piece <br> Episódio 12</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/episodios-adicionados-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>26 de març 2023 <br> One Piece <br> Episódio 12</h4>
-                </div>   
-                <div class="capa-onepiece-index">
-                    <a href=""><img src="/img/episodios-adicionados-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>26 de març 2023 <br> One Piece <br> Episódio 12</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/episodios-adicionados-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>26 de març 2023 <br> One Piece <br> Episódio 12</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/episodios-adicionados-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>26 de març 2023 <br> One Piece <br> Episódio 12</h4>
-                </div>             
+                <% } %>
             </div>
         </section>
-    
+
         <div class="linha-index"></div>
         
         <section class="sessao-1-index">
@@ -297,7 +277,6 @@
 </section>
 
 <!-- Botão de Scroll para o topo da pagina  -->
-
 
 
 

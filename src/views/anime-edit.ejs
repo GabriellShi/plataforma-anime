@@ -122,108 +122,31 @@
                         <button type="submit">Adicionar</button>
                     </form>
                 </main>
-
-                
-                <div class="numero-do-episodio-pagina-anime">
-                    <ul> 
                        
+                <% for(let episodio of episodios) {%>
+                    <a href="/episodio/<%= episodio.id %>">
+                        <li class="capa-e-numero-do-episodio-pagina-anime">
+                                
+                            <div>
+                                
+                                <img src="<%= episodio.imagem %>" alt="capa"/>
+                            </div>
+                            <div class="data-lancamento">
+                                <div>
+                                    <h3>Episódio <%= episodio.id %></h3>
+                                    <h5><%= episodio.nome %></h5>
+                                    <h5><%= episodio.data %></h5>
+                                </div>      
+                            </div>   
+                        </li>
+                    </a>
+                        <% } %>
+
    
-                        <li class="capa-e-numero-do-episodio-pagina-anime">
-                            <div>
-                                <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
-                            </div>
-                            <div class="data-lancamento">
-                                <div>
-                                    <h3>Episódio 2 </h3>
-                                <h5>19 de março de 2023</h5>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="capa-e-numero-do-episodio-pagina-anime">
-                            <div>
-                                <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
-                            </div>
-                            <div class="data-lancamento">
-                                <div>
-                                    <h3>Episódio 3 </h3>
-                                <h5>19 de março de 2023</h5>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="capa-e-numero-do-episodio-pagina-anime 
-                        ultimo-capa-e-numero-do-episodio-pagina-anime ">
-                            <div>
-                                <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
-                            </div>
-                            <div class="data-lancamento">
-                                <div>
-                                    <h3>Episódio 4 </h3>
-                                <h5>19 de março de 2023</h5>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+       
+                      
 
-            <div>
-                <div class="temporadas-pagina-anime">
-                    <ul>
-                        <li class="numero-da-tempora-pagina-anime">2</li>
-                        <li class="numero-da-tempora2-pagina-anime">Temporada 2</li>
-                    </ul>
-                </div>
-                <div class="numero-do-episodio-pagina-anime">
-                    <ul> 
-                        <li class="capa-e-numero-do-episodio-pagina-anime">
-                            <div>
-                                <img src="/img/capa-da-lista-de-episodios-do-anime2.png" alt="">
-                            </div>
-                            <div class="data-lancamento">
-                                <div>
-                                    <h3>Episódio 1 - 2</h3>
-                                <h5>19 de março de 2023</h5>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="capa-e-numero-do-episodio-pagina-anime">
-                            <div>
-                                <img src="/img/capa-da-lista-de-episodios-do-anime2.png" alt="">
-                            </div>
-                            <div class="data-lancamento">
-                                <div>
-                                    <h3>Episódio 2 - 2</h3>
-                                <h5>19 de março de 2023</h5>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="capa-e-numero-do-episodio-pagina-anime">
-                            <div>
-                                <img src="/img/capa-da-lista-de-episodios-do-anime2.png" alt="">
-                            </div>
-                            <div class="data-lancamento">
-                                <div>
-                                    <h3>Episódio 3 - 2</h3>
-                                <h5>19 de março de 2023</h5>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="capa-e-numero-do-episodio-pagina-anime 
-                        ultimo-capa-e-numero-do-episodio-pagina-anime ">
-                            <div>
-                                <img src="/img/capa-da-lista-de-episodios-do-anime2.png" alt="">
-                            </div>
-                            <div class="data-lancamento">
-                                <div>
-                                    <h3>Episódio 4 - 2</h3>
-                                <h5>19 de março de 2023</h5>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
+                        
 
         </section>
 
