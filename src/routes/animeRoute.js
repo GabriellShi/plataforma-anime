@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const upload = require("../helpers/multer");
+
 // Controllers
 const animeController = require ('../controllers/AnimeController');
 
@@ -17,14 +19,14 @@ router.get("/create", animeController.create);
 
 // Essa rota faz conecção com a create de cima, ela ira ser a responsavel pelo envio do formulario
 // com o metodo 'post '
-router.post("/create", animeController.store);
+router.post("/create", upload.single("capa"), animeController.store);
 
 
 // Mostra a tela 
 router.get("/edit/:id", animeController.edit);
 
 // Executa a atualização 
-router.put("/edit/:id", animeController.update);
+router.put("/edit/:id", upload.single("capa"), animeController.update);
 
 
 
@@ -33,7 +35,7 @@ router.get("/delete/:id", animeController.delete);
 router.delete("/delete/:id", animeController.destroy);
 
 
-router.get("/listaAnimeUsuario", animeController.listaAnimeUsuario);
+router.get("/listaAnimeUsuario",  animeController.listaAnimeUsuario);
 
 
 

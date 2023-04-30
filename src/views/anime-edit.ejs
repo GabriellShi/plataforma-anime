@@ -11,7 +11,7 @@
             <% if(locals.error){ %>
                 <h2> <%= error.message%> </h2>
             <% } %> 
-            <form action="/anime/edit/<%= anime.id %>?_method=put" method="post">
+            <form action="/anime/edit/<%= anime.id %>?_method=put" method="post" enctype="multipart/form-data">
 
 <section class="site-animes-pagina-anime">
 
@@ -117,7 +117,7 @@
                     <form action="/episodio/create" method="post">
                         <input type="text" name="nome" placeholder="Nome"  />
                         <input type="date" name="data" placeholder="Data" />
-                        <input type="image" name="imagem" placeholder="Imagem" />
+                        <input type="file" name="capa" />
             
                         <button type="submit">Adicionar</button>
                     </form>

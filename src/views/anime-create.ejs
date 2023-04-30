@@ -6,7 +6,7 @@
         <% if(locals.error){ %>
             <h2> <%= error.message%> </h2>
         <% } %> 
-        <form action="/anime/create" method="post">
+        <form action="/anime/create" method="post" enctype="multipart/form-data">
             <input type="text" name="nome" placeholder="Nome do Anime" required />
             <label for="tipo">Tipo de lingua</label>
         <select name="tipo" aria-required="true" aria-invalid="false"><option value="-"></option><option value="legendado">Legendado</option><option value="dublado" >Dublado</option></select>
@@ -19,7 +19,7 @@
         <input type="text" name="genero" placeholder="Generos" required/>
        
 
-            <input type="file" name="capa" placeholder="Capa do Anime" accept="image/png, image/jpeg" required />
+        <input type="file" name="capa"  required/>
             <button type="submit">Adicionar</button>
         </form>
     </main>
