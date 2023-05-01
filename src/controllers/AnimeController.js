@@ -1,5 +1,5 @@
-const fs = require("fs")
-const files = require ("../helpers/files")
+const fs = require("fs");
+const files = require("../helpers/files");
 const upload = require("../config/upload")
 
 // Lista dos usuarios 
@@ -119,7 +119,9 @@ const episodios = [
     },
 ]
 
-// const episodio = require("./EpisodioController");
+
+module.exports = { listaAnimeAdmin};
+
 
 
 
@@ -129,43 +131,49 @@ const animeController = {
 // esse codigo renderiza a tabela 'users' dos usuarios
 // /Pode retornar uma página ou não
     index: (req, res) => {
+        const listaAnimeAdminWithBase64Capa = listaAnimeAdmin.map((anime) => ({
+            ...anime,
+            capa: files.base64Encode(upload.path + anime.capa),
+          }));
+          
+          return res.render("listaAnimeAdmin", {
+            title: "Lista de Anime",  listaAnimeAdmin, episodios,
+            listaAnimeAdmin: listaAnimeAdminWithBase64Capa,
+          });
+          
+        },
 
-        return res.render("listaAnimeAdmin", {title: "Lista de Anime", listaAnimeAdmin, episodios, }) 
-        // users: users
-        
-    },
 
 // show - controlador que ira visualizar os detalhas de cada usuario da lista 'users' 
-    show: (req, res) => {
-        const { id } = req.params;
-
-// Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
-// apresentando uma mensagem caso encontrado ou não 
-        const animeResult = listaAnimeAdmin.find((user) => user.id === parseInt(id));
-        if(!animeResult){
-            return res.render("error", {
-                title: "Ops!", 
-                message: "Anime não encontrado", 
-            });
-        }
-
-        const anime = {
-            ...animeResult,
-            capa: files.base64Encode (upload.path + animeResult.capa),
-        }
-        return res.render("anime", {
-            title: "Visualizar Anime", episodios, 
-            anime,
-        });
-
-
-    },
+show: (req, res) => {
+    // Pega o parametro que vem da url, ou seja, na url a baixo, pegaria o valor 4
+    // localhost:3000/user/4
+    // id = 4
+    const { id } = req.params;
+    const animeResult = listaAnimeAdmin.find((anime) => anime.id === parseInt(id));
+    if (!animeResult) {
+      return res.render("error", {
+        title: "Ops!",
+        message: "Usuário não encontrado",
+      });
+    }
+    const anime = {
+      ...animeResult,
+      capa: files.base64Encode(
+        upload.path + animeResult.capa
+      ),
+    };
+    return res.render("anime", {
+      title: "Visualizar usuário",
+      anime, episodios,
+    });
+  },
 
     create: (req, res) => {
         return res.render("anime-create", {title: "Cadastrar Anime"});
     },
     store: (req, res) => {
-        const { nome, tipo, generos, autor, estudio, status, sinopse } = req.body;
+        const { nome, tipo, generos, autor, estudio, status, sinopse, } = req.body;
         let filename = "user-default.jpeg";
         if(req.file){
             filename = req.file.filename;
@@ -196,7 +204,7 @@ const animeController = {
 
         // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
         // apresentando uma mensagem caso encontrado ou não 
-                const animeResult = listaAnimeAdmin.find((user) => user.id === parseInt(id));
+                const animeResult = listaAnimeAdmin.find((anime) => anime.id === parseInt(id));
                 if(!animeResult){
                     return res.render("error", {
                         title: "Ops!",  
@@ -222,7 +230,7 @@ const animeController = {
       
         // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
         // apresentando uma mensagem caso encontrado ou não 
-                const animeResult = listaAnimeAdmin.find((user) => user.id === parseInt(id));
+                const animeResult = listaAnimeAdmin.find((anime) => anime.id === parseInt(id));
                 let filename;
                 if(req.file){
                     filename = req.file.filename;
@@ -261,7 +269,7 @@ const animeController = {
 
         // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
         // apresentando uma mensagem caso encontrado ou não 
-                const animeResult = listaAnimeAdmin.find((user) => user.id === parseInt(id));
+                const animeResult = listaAnimeAdmin.find((anime) => anime.id === parseInt(id));
                 if(!animeResult){
                     return res.render("error", {
                         title: "Ops!", 
@@ -284,7 +292,7 @@ const animeController = {
 
         // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
         // apresentando uma mensagem caso encontrado ou não 
-                const result = listaAnimeAdmin.findIndex((user) => user.id === parseInt(id));
+                const result = listaAnimeAdmin.findIndex((anime) => anime.id === parseInt(id));
                 if(!result === -1   ){
                     return res.render("error", {
                         title: "Ops!", 
@@ -301,11 +309,20 @@ const animeController = {
                 })
     },
 
+
+
+
     listaAnimeUsuario:  (req, res) => {
-                return res.render("listaAnimeUsuario", {
-                    title: "Editar Anime", listaAnimeAdmin, episodios,
-                    
-                })
+        const listaAnimeAdminWithBase64Capa = listaAnimeAdmin.map((anime) => ({
+            ...anime,
+            capa: files.base64Encode(upload.path + anime.capa),
+          }));
+          
+          return res.render("listaAnimeUsuario", {
+            title: "Lista de Anime",  listaAnimeAdmin, episodios,
+            listaAnimeAdmin: listaAnimeAdminWithBase64Capa,
+          });
+      
 },
 
 

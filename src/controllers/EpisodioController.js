@@ -1,11 +1,13 @@
-
+const fs = require("fs");
+const files = require("../helpers/files");
+const upload = require("../config/upload")
 // Lista dos episodios
 const episodios = [
     {
         id: 1,
         nome: "Nanatsu",
         data: "08/08",
-        imagem: "/img/episodios-adicionados-onepiece.jpg",
+        imagem: "nanatsu.jpg",
 
     },
 
@@ -13,7 +15,7 @@ const episodios = [
         id: 2,
         nome: "Tokyo Ghoul",
         data: "08/08",
-        imagem: "/img/episodios-adicionados-onepiece.jpg",
+        imagem: "tokyo-ghoul.jpg",
 
     },
 
@@ -21,25 +23,11 @@ const episodios = [
         id: 3,
         nome: "Bleach",
         data: "08/08",
-        imagem: "/img/episodios-adicionados-onepiece.jpg",
+        imagem: "bleach.png",
 
     },
 
-    {
-        id: 4,
-        nome: "One Piece",
-        data: "08/08",
-        imagem: "/img/episodios-adicionados-onepiece.jpg",
 
-    },
-
-    {
-        id: 5,
-        nome: "Dororo",
-        data: "08/08",
-        imagem: "/img/episodios-adicionados-onepiece.jpg",
-
-    },
 
 ]
 
@@ -49,8 +37,16 @@ const episodioController = {
 // esse codigo renderiza a tabela 'users' dos usuarios
 // /Pode retornar uma página ou não
     index: (req, res) => {
-        return res.render("episodios", {title: "Lista de Episodios", episodios }) 
-        // users: users
+        const episodiosWithBase64Imagem = episodios.map((episodio) => ({
+            ...episodio,
+            imagem: files.base64Encode(upload.path + episodio.imagem),
+          }));
+          
+          return res.render("episodios", {
+            title: "Lista de Episodios",  episodios, episodios,
+            episodios: episodiosWithBase64Imagem,
+          });
+
     },
 
 
@@ -60,16 +56,23 @@ const episodioController = {
 
 // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
 // apresentando uma mensagem caso encontrado ou não 
-        const episodioResult = episodios.find((user) => user.id === parseInt(id));
+        const episodioResult = episodios.find((episodio) => episodio.id === parseInt(id));
         if(!episodioResult){
             return res.render("error", {
                 title: "Ops!", 
                 message: "Episodio não encontrado",
             });
         }
+
+        const episodio = {
+            ...episodioResult,
+            imagem: files.base64Encode(
+              upload.path + episodioResult.imagem
+            ),
+          };
         return res.render("episodio", {
             title: "Visualizar Episodio",
-            episodio: episodioResult,
+            episodio,
         });
     },
 
@@ -77,16 +80,19 @@ const episodioController = {
         return res.render("episodio-create", {title: "Cadastrar Episodio"});
     },
     store: (req, res) => {
-        const { nome, data, imagem } = req.body;
-
-        const newUser = {
+        const { nome, data } = req.body;
+        let filename = "user-default.jpeg";
+        if(req.file){
+            filename = req.file.filename;
+        }
+        const newEpisodio = {
             id: episodios.length + 1,
             nome,
             data,
-            imagem,
+            imagem: filename,
   
         };
-        episodios.push(newUser)
+        episodios.push(newEpisodio)
         return res.render("success", {
             title: "Sucesso!",
             message: "Episodio cadastrado com sucesso",
@@ -95,14 +101,13 @@ const episodioController = {
         });
     },
 
+
   episodiosAdicionados: (req, res) => {
         return res.render("episodiosAdicionados", {title: "Pagina dos Episodios Adiconados", episodios,});
     },
  };
 
- index: (req, res) => {
-    return res.render("index", {title: "Pagina dos Episodios Adiconados", episodios, listaAnimeAdmin});
-},
+
 
 module.exports = episodioController;
 

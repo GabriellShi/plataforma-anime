@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const upload = require("../helpers/multer");
 // Controllers
 const episodioController = require ('../controllers/EpisodioController');
 
@@ -9,11 +9,11 @@ router.get("/create", episodioController.create);
 
 // Essa rota faz conecção com a create de cima, ela ira ser a responsavel pelo envio do formulario
 // com o metodo 'post '
-router.post("/create", episodioController.store);
+router.post("/create", upload.single("imagem"), episodioController.store);
 
 router.get("/episodiosAdicionados", episodioController.episodiosAdicionados);
 
-router.get("/index", episodioController.index);
+
 
 
 

@@ -35,9 +35,7 @@ router.get("/delete/:id", animeController.delete);
 router.delete("/delete/:id", animeController.destroy);
 
 
-router.get("/listaAnimeUsuario",  animeController.listaAnimeUsuario);
-
-
+router.get("/listaAnimeUsuario", animeController.listaAnimeUsuario);
 
 
 

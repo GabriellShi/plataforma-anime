@@ -114,10 +114,10 @@
                     <% if(locals.error){ %>
                         <h2> <%= error.message%> </h2>
                     <% } %> 
-                    <form action="/episodio/create" method="post">
+                    <form action="/episodio/create " method="post" enctype="multipart/form-data">
                         <input type="text" name="nome" placeholder="Nome"  />
                         <input type="date" name="data" placeholder="Data" />
-                        <input type="file" name="capa" />
+                        <input type="file" name="imagem" />
             
                         <button type="submit">Adicionar</button>
                     </form>
