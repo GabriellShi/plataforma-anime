@@ -22,7 +22,11 @@
 
 .titulo-principal-pagina-anime h2 {
     color: white;
-}
+}   
+
+
+
+
 
 .titulo-principal-pagina-anime img {
     width: 2rem;
@@ -208,6 +212,37 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
 .data-lancamento :hover{
     color: rgb(0, 204, 255);
+}
+
+
+ /* Daqui para baixo fica a estilização da pagina anime-edit  */
+
+
+ .lado-esquerdo-do-site-pagina-anime input, select{
+    text-align: center;
+    border: 0;
+    border-radius: 2px;
+    font-size: 1rem;
+ }
+ .titulo-principal-pagina-anime input {
+    font-size: 1.5rem;
+}
+
+.capa-do-anime-escolhido input {
+    cursor: pointer;
+}
+
+.titulo-principal-anime-edit {
+    text-align: center;
+    background-color: rgb(255, 238, 0);
+    color: black;
+    padding: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.sinopse-anime-lista-anime input {
+    width: 100%;
+    height: 8rem;
 }
 
 

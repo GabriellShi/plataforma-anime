@@ -1,54 +1,45 @@
-<%- include("./partials/head") %>
-<%- include("./partials/header") %>
+<%- include("./partials/head") %> <%- include("./partials/header") %>
 <div class="espaco-area-cliente"></div>
 
 <section class="pagina-area-cliente">
+  <% if(locals.success){ %>
+  <h2><%= success.message %></h2>
+  <% } %>
 
+  <div class="area-cliente">
+    <div class="perfil-cliente">
+      <img src="/img/icone-foto-perfil.jpg" alt="" />
 
-    <% if(locals.success){ %>
-        <h2> <%= success.message %> </h2>
-    <% } %>
-
-    <div class="area-cliente">
-        <div class="perfil-cliente">
-            <img src="/img/icone-foto-perfil.jpg" alt="">
-
-                <h2> Gabriel</h2>
-        </div>
-
-        <form action="/user/create" method="post" enctype="multipart/form-data">
-
-            <input type="file" name="image"  />
-            <button type="submit">Adicionar</button>
-        </form>
-            
-        
-    
-        <div class="topicos-da-area-do-cliente">
-            <ul >
-                <li class="acomp">
-                    <h3>Acompanhando</h3>
-                    <h5>volte no episodio que parou</h5>
-                </li>
-                <li class="favor">
-                    <h3>FAVORITOS</h3>
-                    <h5>Veja seus animes favoritados</h5>
-                </li>
-                <li class="hist">
-                    <h3>Historico</h3>
-                    <h5>historico de atividades</h5>
-                </li>
-                <li class="list">
-                    <h3>Lista de Anime</h3>
-                    <h5>veja sua lista personalizada</h5>
-                </li>
-            </ul>
-        </div>
+      <h2>Gabriel</h2>
     </div>
 
+    <form action="/user/create" method="post" enctype="multipart/form-data">
+      <input type="file" name="image" />
+      <button type="submit">Adicionar</button>
+    </form>
 
+    <div class="topicos-da-area-do-cliente">
+      <ul>
+        <li class="acomp">
+          <h3>Acompanhando</h3>
+          <h5>volte no episodio que parou</h5>
+        </li>
+        <li class="favor">
+          <h3>FAVORITOS</h3>
+          <h5>Veja seus animes favoritados</h5>
+        </li>
+        <li class="hist">
+          <h3>Historico</h3>
+          <h5>historico de atividades</h5>
+        </li>
+        <li class="list">
+          <h3>Lista de Anime</h3>
+          <h5>veja sua lista personalizada</h5>
+        </li>
+      </ul>
+    </div>
+  </div>
 </section>
 <div class="espaco-area-cliente"></div>
 
-
-<%- include("./partials/footer") %> 
+<%- include("./partials/footer") %>

@@ -1,25 +1,23 @@
-*{
-    margin: 0;
-    font-family:"Roboto",sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 .menu {
-    background-color: blue;
-    color: white;
+  background-color: blue;
+  color: white;
 }
 
 .menu li {
-    list-style: none;
-    font-size: 1.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    color: white;
+  list-style: none;
+  font-size: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: white;
 }
 
 .menu a {
-    text-decoration: none;
+  text-decoration: none;
 }
-
-

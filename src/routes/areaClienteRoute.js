@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // Controllers
-const areaClienteController = require ('../controllers/areaClienteController');
+const areaClienteController = require("../controllers/areaClienteController");
 
 router.get("/", areaClienteController.areaCliente);
 

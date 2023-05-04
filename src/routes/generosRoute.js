@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // Controllers
-const generosController = require ('../controllers/generosController');
+const generosController = require("../controllers/generosController");
 
 router.get("/", generosController.generos);
 

@@ -1,19 +1,18 @@
-<%- include("./partials/head-admin") %>
-<%- include("./partials/header-admin") %>
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")
+%>
 
-    <main>
-        <h1>Visualizar Usuario</h1>
-        <% if(locals.user){ %>
-        <div class="imagem-usuario">
-            <img src="<%= user.image %>" alt="avatar"/>
-        <span>| Id: <%= user.id %>  </span>
-        <span>| Nome: <%= user.nome %>  </span>
-        <span>| Nome de Usuario: <%= user.nomedeuser %>  </span>
-        <span>| Email: <%= user.email %> </span>
-        <span>| Senha: <%= user.senha %> </span>
-        </div>
-        <% } else {%>
-            <h2>Usuario não Entrado por motivos do além</h2>
-        <% }  %>
-
-    </main>
+<main>
+  <h1>Visualizar Usuario</h1>
+  <% if(locals.user){ %>
+  <div class="imagem-usuario">
+    <img src="<%= user.image %>" alt="avatar" />
+    <span>| Id: <%= user.id %> </span>
+    <span>| Nome: <%= user.nome %> </span>
+    <span>| Nome de Usuario: <%= user.nomedeuser %> </span>
+    <span>| Email: <%= user.email %> </span>
+    <span>| Senha: <%= user.senha %> </span>
+  </div>
+  <% } else {%>
+  <h2>Usuario não Entrado por motivos do além</h2>
+  <% } %>
+</main>

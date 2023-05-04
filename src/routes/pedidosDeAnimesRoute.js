@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // Controllers
-const pedidosDeAnimesController = require ('../controllers/pedidosDeAnimesController');
+const pedidosDeAnimesController = require("../controllers/pedidosDeAnimesController");
 
 router.get("/", pedidosDeAnimesController.pedidosDeAnimes);
 

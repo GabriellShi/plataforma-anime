@@ -1,444 +1,430 @@
 .icone-login-partials {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    background-color: hsl(0, 0%, 0%);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: hsl(0, 0%, 0%);
 }
 
-
-
 /*Definindo fonte padrão dos textos do site e zerando margem do site total*/
-*{
-    margin: 0;
-    font-family:"Roboto",sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 /* Defininfo a largura e retirando as margem do header  */
 .wrapper-partials {
-    width: 100%;
-    margin: 0 auto;
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* retirando o espaçamento entre o logo e os itens do menu  */
 .menu-partials ul {
-    padding: 0;
+  padding: 0;
 }
 
 /* Dando margem lateral ao logo  */
 .logo-partials {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 /* Definindo cor, dando esaçamento e centralizando os itens dentro da tag nav (menu-navegador)  */
 .nav-partials {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    background-color: hsl(0, 0%, 0%);
-    
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: hsl(0, 0%, 0%);
 }
 
 /* Definindo a largura e dando margem a imagem que fai no menu de navegação  */
-.nav-partials img  {
-    width:6.5rem;
-    padding-top: 0.8rem;
-    padding-bottom: 0.8rem;
+.nav-partials img {
+  width: 6.5rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
 }
 
 /* Deixando os item no menu de navegação um ao lado do outro, dando espaçamento com gap e tirando os topicos das listas  */
 .nav-partials ul {
-    list-style: none;
-    display: flex;
-    gap: 0.5rem;
-    
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
 }
-  
+
 /* tirando o sublinhado dos links do menu de navegação  */
 .nav-partials a {
-    text-decoration: none;
-    color: #00E6FF;
+  text-decoration: none;
+  color: #00e6ff;
 }
 
 .nav-partials #toggle-partials,
 .nav-partials label {
-    display: none;
+  display: none;
 }
 
 .nav-partials #toggle-partials-2,
 .nav-partials label {
-    display: none;
+  display: none;
 }
 
 /* Defindo tamanho, margin interna e cores do texto e da borda dos itens do menu de navegação  */
 .menu-partials li {
-    font-size: 1rem;
-    border: 1px solid #00E6FF;
-    background-color: transparent;
-    border-radius: 1px 10px;
-    color: #00E6FF;
-    padding: 0.5rem;
-    margin-left: 1rem;
+  font-size: 1rem;
+  border: 1px solid #00e6ff;
+  background-color: transparent;
+  border-radius: 1px 10px;
+  color: #00e6ff;
+  padding: 0.5rem;
+  margin-left: 1rem;
 }
 
 /* definindo a cores que os itens do menu terão ao passar o mouse neles */
 .menu-partials li:hover {
-    background-color: #00E6FF;
-    color: white;
+  background-color: #00e6ff;
+  color: white;
 }
 
 /* Deixando uma linha branca entre o header e o container 1  */
 .linha-partials {
-    border-bottom: 1px solid #3a9faa;
+  border-bottom: 1px solid #3a9faa;
 }
 
 /* estilizando a barra de pesquisa, definindo cores, larguras, margens e centralizando itens.  */
-.barra-de-pesquisa-partials{
-    background-color: rgb(66, 65, 65);
-    padding: 3px;
-    color: white;
-    border-radius: 5px;
-    width: 14rem;
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.barra-de-pesquisa-partials {
+  background-color: rgb(66, 65, 65);
+  padding: 3px;
+  color: white;
+  border-radius: 5px;
+  width: 14rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* deixando o icone de login e barra de pesquisa na mesma linha  */
 .login-pesquisa-partials {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 /* dando uma magin lateral as divs dos icones de login e barra de pesquisa   */
 .login-pesquisa-partials div {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 /* Estilizando o input da barra de pesquisa, definindo o tamanho do texto, a largura e altura do input e cor de fundo  */
-.barra-de-pesquisa-partials input{
-    width: 12rem;
-    height: 2.0rem;
-    background-color: rgb(66, 65, 65);
-    border: 0;
-    font-size: 1rem;
-    margin-left: 1rem;
-    outline: 0;
-    color: white;
-    border-radius: 5px;
+.barra-de-pesquisa-partials input {
+  width: 12rem;
+  height: 2rem;
+  background-color: rgb(66, 65, 65);
+  border: 0;
+  font-size: 1rem;
+  margin-left: 1rem;
+  outline: 0;
+  color: white;
+  border-radius: 5px;
 }
 
 /* tirando o fundo do botão lupa e deixando ele como notão clicável  */
 .barra-de-pesquisa-partials button {
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
 }
 
 /* Definindo a largura da imagem da lupa e dando uma margem lateral interna */
 .barra-de-pesquisa-partials img {
-    width: 1.5rem;
-    margin-left: -1rem;
+  width: 1.5rem;
+  margin-left: -1rem;
 }
 
-.barra-de-pesquisa-partials-mobile, .icone-login-partials-mobile, .toggle-partials-2-pai,
-.icone-login-partials-mobile, .login-pesquisa-partials-2, .categoria-mobile {
-    display: none;
+.barra-de-pesquisa-partials-mobile,
+.icone-login-partials-mobile,
+.toggle-partials-2-pai,
+.icone-login-partials-mobile,
+.login-pesquisa-partials-2,
+.categoria-mobile {
+  display: none;
 }
 
 /* definindo a largura da barra que separa a barra de pesquisa e o icone de login  */
 .barra-separadora-partials img {
-    width: 2.2px;
+  width: 2.2px;
 }
 
 /* definindo a largura do icone de login  */
 .icone-login-partials img {
-    width: 1.5rem;
+  width: 1.5rem;
 }
 
 .categoria-desktop-login ul {
-    padding: 0;
+  padding: 0;
 }
 
-
-.categoria-desktop-login ul li{
-    position: relative;
-    z-index: 5
-};
+.categoria-desktop-login ul li {
+  position: relative;
+  z-index: 5;
+}
 
 .categoria-desktop-login ul li a {
-    text-decoration: none;  
+  text-decoration: none;
 }
 
 .categoria-desktop-login ul li :hover {
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-}
-
-.categoria-desktop-login ul ul{
-    display: none;
-    left: -4.4rem;
-    top: 3rem;
-    position: absolute;  
-    padding: 0;
-}
-
-.categoria-desktop-login ul li:hover ul{
-    display: block;
-    background-color: #00E6FF;
-    border-radius: 10px;
-
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
 }
 
 .categoria-desktop-login ul ul {
-    width: auto;
-    padding:0.5rem;
+  display: none;
+  left: -4.4rem;
+  top: 3rem;
+  position: absolute;
+  padding: 0;
 }
 
-.categoria-desktop-login ul ul li a{
-    display: block;
-    color: black;
-    border-bottom: 1px dashed rgb(0, 0, 0);
-    padding-bottom: 10px;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 10px;
+.categoria-desktop-login ul li:hover ul {
+  display: block;
+  background-color: #00e6ff;
+  border-radius: 10px;
 }
 
- /* ---------------------- Estilização do menu categorias --------------------  */
+.categoria-desktop-login ul ul {
+  width: auto;
+  padding: 0.5rem;
+}
 
- .menu-partials ul {
-    text-align: center;
+.categoria-desktop-login ul ul li a {
+  display: block;
+  color: black;
+  border-bottom: 1px dashed rgb(0, 0, 0);
+  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
+/* ---------------------- Estilização do menu categorias --------------------  */
+
+.menu-partials ul {
+  text-align: center;
 }
 
 .menu-partials ul li {
-    position: relative;
-    z-index: 5
-};
+  position: relative;
+  z-index: 5;
+}
 
 .menu-partials ul li a {
-    color: #00E6FF;
-    text-decoration: none;  
+  color: #00e6ff;
+  text-decoration: none;
 }
 
 .menu-partials ul li :hover {
-    color: rgb(182, 17, 17);
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-
-}
-
-.menu-partials ul ul{
-    display: none;
-    left: -2.4rem;
-    top: 2.5rem;
-    position: absolute;  
-}
-
-.menu-partials ul li:hover ul{
-    display: block;
-    background-color: rgb(26, 25, 25);
+  color: rgb(182, 17, 17);
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
 }
 
 .menu-partials ul ul {
-    width: auto;
-    padding-right: 15px;
+  display: none;
+  left: -2.4rem;
+  top: 2.5rem;
+  position: absolute;
 }
 
-.menu-partials ul ul li a{
-    display: block;
-    color: rgb(255, 255, 255);
-    border-bottom: 1px dashed black;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+.menu-partials ul li:hover ul {
+  display: block;
+  background-color: rgb(26, 25, 25);
+}
+
+.menu-partials ul ul {
+  width: auto;
+  padding-right: 15px;
+}
+
+.menu-partials ul ul li a {
+  display: block;
+  color: rgb(255, 255, 255);
+  border-bottom: 1px dashed black;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .categorias-partials li {
-    border-radius: 0;
-    border: 0;
+  border-radius: 0;
+  border: 0;
 }
 
 .categoria-desktop img {
-    width: 1.5rem;
+  width: 1.5rem;
 }
 
 /*  -------------------- DAQUI PARA BAIXO FICA A ESTILIZAÇÃO DO HEADER MOBILE -------------------- */
 
 /* Retirando o espaçamento dos topicos do menu de navegação e minuindo os itens  */
 
-@media (max-width: 1115px){
-    .menu-partials li { 
-        font-size: 0.7rem;
-    }
-
+@media (max-width: 1115px) {
+  .menu-partials li {
+    font-size: 0.7rem;
+  }
 }
 
-@media (max-width: 1078px){
-    .menu-partials li { 
-        font-size: 0.7rem;
-        margin: 0;
-    }
+@media (max-width: 1078px) {
+  .menu-partials li {
+    font-size: 0.7rem;
+    margin: 0;
+  }
 
-    .menu-partials ul ul{
-        display: none;
-        left: -2rem;
-        top: 1.9rem;
-        position: absolute;  
-    }
+  .menu-partials ul ul {
+    display: none;
+    left: -2rem;
+    top: 1.9rem;
+    position: absolute;
+  }
 
-    .menu-partials ul ul {
-        padding-left: 15px;
-    }
+  .menu-partials ul ul {
+    padding-left: 15px;
+  }
 }
 
 /* Retirando o espaçamento dos topicos do menu de navegação  */
-@media (max-width: 1001px){
-    .nav-partials ul { 
-        gap: 0.7rem;
-    }
+@media (max-width: 1001px) {
+  .nav-partials ul {
+    gap: 0.7rem;
+  }
 }
 
 /* Diminuindo o tamanho e dando uma margin inferior nos itens do menu de navegação  */
-@media (max-width: 905px){
-    .menu-partials li {
-        font-size: 0.7rem;
-        margin-bottom: 2px;
-    }
+@media (max-width: 905px) {
+  .menu-partials li {
+    font-size: 0.7rem;
+    margin-bottom: 2px;
+  }
 }
 
-
-
-@media (max-width: 900px){
-    .login-pesquisa-partials {
-        display: none;
-    }
+@media (max-width: 900px) {
+  .login-pesquisa-partials {
+    display: none;
+  }
 }
-
-
 
 /*------------------DAQUI PARA BAIXO COMEÇA A ESTILIZAÇÃO MOBILE DE 630PX PARA BAIXO--------------------------*/
 
-@media (max-width: 887px)
-{
+@media (max-width: 887px) {
+  /*------------------Daqui Para baixo fica a estilização do HEADER MOBILE--------------------------*/
 
-/*------------------Daqui Para baixo fica a estilização do HEADER MOBILE--------------------------*/
-
-
-
-
-.login-pesquisa-partials-2, .categoria-mobile {
+  .login-pesquisa-partials-2,
+  .categoria-mobile {
     display: list-item;
-}
+  }
 
-
-/* deixando o icone de login e barra de pesquisa na mesma linha  */
-.login-pesquisa-partials-2 {
+  /* deixando o icone de login e barra de pesquisa na mesma linha  */
+  .login-pesquisa-partials-2 {
     display: flex;
     align-items: center;
-}
+  }
 
-/* dando uma magin lateral as divs dos icones de login e barra de pesquisa   */
-.login-pesquisa-partials-2 div {
+  /* dando uma magin lateral as divs dos icones de login e barra de pesquisa   */
+  .login-pesquisa-partials-2 div {
     margin-right: 1rem;
+  }
+
+  /* Definindo a largura, altura e deixando os itens na mesma linha do menu de navegação  */
+  .nav-partials .menu-partials {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+  }
+
+  /* Dando margem e espaçamento ao menu de navegação */
+  .nav-partials {
+    justify-content: space-between;
+    padding-left: 0.3rem;
+    flex-wrap: none;
+  }
+
+  /* Deixando os itens do menu de navegação um em cima do outro, centralizando e dando margem interna  */
+  .nav-partials ul {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+
+  /* Dando cor e deixando o cursor com um formato que clicagem  */
+  .nav-partials label {
+    display: inline-flex;
+    color: white;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+
+  /* Definindo a largura da imagem do logo do menu de navegação  */
+  .nav-partials label img {
+    width: 2.3rem;
+  }
+
+  /* zerando a margem da imagem do menu de navegação  */
+  .nav-partials img {
+    margin-right: 0;
+  }
+
+  /* Deixando a altura do menu de navegação em 100%  */
+  .nav-partials #toggle-partials:checked ~ .menu-partials {
+    height: 100%;
+  }
 }
 
-/* Definindo a largura, altura e deixando os itens na mesma linha do menu de navegação  */
-.nav-partials .menu-partials {
-      width: 100%;
-      height: 0;
-      overflow: hidden;
-}
+@media (max-width: 530px) {
+  .icone-login-desk {
+    display: none;
+  }
 
-/* Dando margem e espaçamento ao menu de navegação */
-.nav-partials {
-  justify-content: space-between;
-  padding-left: 0.3rem;
-  flex-wrap: none;
-}
+  .nav-partials {
+    display: flex;
+    justify-content: space-between;
+  }
 
-/* Deixando os itens do menu de navegação um em cima do outro, centralizando e dando margem interna  */
-.nav-partials ul {
-  flex-direction: column;
-  align-items: center;
-  padding: 0.5rem 0;
-}
+  .icone-login-partials-mobile {
+    position: relative;
+    right: 3rem;
+  }
 
-/* Dando cor e deixando o cursor com um formato que clicagem  */
-.nav-partials label {
-  display: inline-flex;
-  color: white;
-  cursor: pointer;
-  margin-right: 1rem;
-}
+  .toggle-partials-2-pai {
+    position: relative;
+    left: 2rem;
+  }
 
-/* Definindo a largura da imagem do logo do menu de navegação  */
-.nav-partials label img {
-  width: 2.3rem;
-}
+  .nav-partials label img {
+    width: 1.5rem;
+  }
+  .toggle-partials-2-pai,
+  .icone-login-partials-mobile,
+  .toggle-partials-2-pai {
+    display: list-item;
+  }
 
-/* zerando a margem da imagem do menu de navegação  */
-.nav-partials img  {
-  margin-right: 0;
-}
+  .icone-login-partials-mobile img {
+    width: 1rem;
+  }
 
-/* Deixando a altura do menu de navegação em 100%  */
-.nav-partials #toggle-partials:checked ~ .menu-partials {
-  height: 100%;
-}
-}
+  .toggle-partials-2-pai label {
+    margin: 0;
+  }
 
-
-@media (max-width: 530px){
-
-    .icone-login-desk 
-    {
-        display: none;
-    }
-
-    .nav-partials {
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    .icone-login-partials-mobile {
-        position: relative;
-        right: 3rem;
-    }
-
-    .toggle-partials-2-pai {
-        position: relative;
-        left: 2rem;
-    }
-
-    .nav-partials label img {
-        width: 1.5rem;
-      }
-    .toggle-partials-2-pai, .icone-login-partials-mobile, .toggle-partials-2-pai{
-        display:list-item;
-    }
-    
-
-
-    .icone-login-partials-mobile img {
-        width: 1rem;
-    }
-
-    .toggle-partials-2-pai label {
-        margin: 0;
-    }
-
-    .icone-login-partials, .barra-separadora-partials, .barra-de-pesquisa-partials {
-        display: none;
-    }
+  .icone-login-partials,
+  .barra-separadora-partials,
+  .barra-de-pesquisa-partials {
+    display: none;
+  }
 
   .barra-de-pesquisa-partials-mobile {
     background-color: rgb(66, 65, 65);
@@ -452,10 +438,10 @@
     align-items: center;
   }
 
-/* Estilizando o input da barra de pesquisa, definindo o tamanho do texto, a largura e altura do input e cor de fundo  */
-.barra-de-pesquisa-partials-mobile input{
+  /* Estilizando o input da barra de pesquisa, definindo o tamanho do texto, a largura e altura do input e cor de fundo  */
+  .barra-de-pesquisa-partials-mobile input {
     width: 12rem;
-    height: 2.0rem;
+    height: 2rem;
     background-color: rgb(66, 65, 65);
     border: 0;
     font-size: 1rem;
@@ -463,26 +449,20 @@
     outline: 0;
     color: white;
     border-radius: 5px;
-}
+  }
 
-/* tirando o fundo do botão lupa e deixando ele como notão clicável  */
-.barra-de-pesquisa-partials-mobile button {
+  /* tirando o fundo do botão lupa e deixando ele como notão clicável  */
+  .barra-de-pesquisa-partials-mobile button {
     background-color: transparent;
     border: 0;
     cursor: pointer;
-}
+  }
 
-.barra-de-pesquisa-partials-mobile img {
+  .barra-de-pesquisa-partials-mobile img {
     width: 1.5rem;
+  }
+
+  .icone-login-mob ul ul {
+    left: 0.1rem;
+  }
 }
-
-
-.icone-login-mob ul ul{
-    left: .1rem;
-
-}
-}
-
-
-
-
