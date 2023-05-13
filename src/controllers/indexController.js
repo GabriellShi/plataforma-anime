@@ -176,6 +176,10 @@ const indexController = {
       episodios,
     });
   },
+
+
+  
 };
+
 
 module.exports = indexController;
