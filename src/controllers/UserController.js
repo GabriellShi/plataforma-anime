@@ -1,56 +1,35 @@
 const fs = require("fs");
 const files = require("../helpers/files");
 const upload = require("../config/upload");
-// Lista dos usuarios
-const users = [
-  {
-    id: 1,
-    nome: "Gabriel",
-    nomedeuser: "Oliveira",
-    email: "gabriel@gmail.com",
-    senha: 23,
-    image: "luffy.jpg",
-  },
+const bcrypt = require("../helpers/bcrypt");
+const path = require("path");
 
-  {
-    id: 2,
-    nome: "Rafael",
-    nomedeuser: "Ferreira",
-    email: "bruno@gmail.com",
-    senha: 19,
-    image: "zoro.jpg",
-  },
 
-  {
-    id: 3,
-    nome: "Beatriz",
-    nomedeuser: "Costa",
-    email: "beah@gmail.com",
-    senha: 21,
-    image: "nami.jpg",
-  },
 
-  {
-    id: 4,
-    nome: "joana",
-    nomedeuser: "oliveira",
-    email: "joana196@gmail.com",
-    senha: 43,
-    image: "sanji.jpeg",
-  },
-];
+
 
 const userController = {
+
+
+
   // index - controlador da aba que visualiza a lista dos usuario /
   // esse codigo renderiza a tabela 'users' dos usuarios
   // /Pode retornar uma página ou não
   index: (req, res) => {
+
+    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
+    const users = JSON.parse(usersJson);
+ 
     return res.render("users", { title: "Lista de Usuarios", users });
     // users: users
   },
 
   // show - controlador que ira visualizar os detalhas de cada usuario da lista 'users'
   show: (req, res) => {
+
+    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
+    const users = JSON.parse(usersJson);
+
     const { id } = req.params;
 
     // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
@@ -74,41 +53,18 @@ const userController = {
   },
 
   create: (req, res) => {
-    return res.render("user-create", { title: "Cadastrar Usuario" });
+    return res.render("register", { title: "Cadastrar Usuario" });
+    
   },
   store: (req, res) => {
-    const { nome, nomedeuser, senha, email } = req.body;
-    let filename = "user-default.jpeg";
-    if (req.file) {
-      filename = req.file.filename;
-    }
-    if (!nome || !nomedeuser || !senha || !email) {
-      return res.render("user-create", {
-        title: "Cadastrar Usuario",
-        error: {
-          message: "Preencha todos os campos",
-        },
-      });
-    }
-    const newUser = {
-      id: users.length + 1,
-      nome,
-      nomedeuser,
-      email,
-      senha,
-      image: filename,
-    };
-    users.push(newUser);
-    return res.render("areaCliente", {
-      title: "Sucesso!",
-      success: {
-        message: "Cadastro Criado com sucesso",
-      },
-    });
+   
   },
 
   // Mostra a tela
   edit: (req, res) => {
+    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
+    const users = JSON.parse(usersJson);
+
     const { id } = req.params;
 
     // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
@@ -133,6 +89,10 @@ const userController = {
 
   // Executa a atualização
   update: (req, res) => {
+
+    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
+    const users = JSON.parse(usersJson);
+
     const { id } = req.params;
     const { nome, nomedeuser, senha, email } = req.body;
 
@@ -167,6 +127,10 @@ const userController = {
   },
 
   delete: (req, res) => {
+
+    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
+    const users = JSON.parse(usersJson);
+
     const { id } = req.params;
 
     // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
@@ -189,6 +153,10 @@ const userController = {
   },
 
   destroy: (req, res) => {
+
+    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
+    const users = JSON.parse(usersJson);
+    
     const { id } = req.params;
 
     // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
@@ -209,6 +177,8 @@ const userController = {
       message: "Usuário deletado com sucesso!",
     });
   },
+
+
 };
 
 module.exports = userController;

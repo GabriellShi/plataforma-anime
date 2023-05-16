@@ -24,7 +24,7 @@ const paginasController = {
   },
 
   areaCliente: (req, res) => {
-    return res.render("areaCliente", { title: "Area do Cliente" });
+    return res.render("areaCliente", { title: "Area do Cliente", user: req.cookies.user, });
   },
 
 };

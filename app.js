@@ -8,11 +8,11 @@ const cookieParser = require("cookie-parser");
 
 const indexRoute = require("./src/routes/indexRoute");
 const paginasRoute = require("./src/routes/paginasRoute");
-const loginRoute = require("./src/routes/loginRoute");
 const indexAdminRoute = require("./src/routes/indexAdminRoute");
 const userRoute = require("./src/routes/userRoute");
 const animeRoute = require("./src/routes/animeRoute");
 const episodioRoute = require("./src/routes/episodioRoute");
+const authRoute = require("./src/routes/authRoute");
 
 
 // Configura o methodOverride no express
@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.use(cookieParser());
-
+app.use(session({ secret: "Eu amo cuscuz" }));
 //
 // Configura pasta estática para acesso externo
 app.use(express.static(path.join(__dirname, "public")));
@@ -44,8 +44,8 @@ app.listen(port, () => {
 
 app.use("/", indexRoute);
 app.use("/", paginasRoute);
-app.use("/login", loginRoute);
 app.use("/indexAdmin", indexAdminRoute);
 app.use("/user", userRoute);
 app.use("/anime", animeRoute);
 app.use("/episodio", episodioRoute);
+app.use("/", authRoute);

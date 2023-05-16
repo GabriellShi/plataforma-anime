@@ -9,7 +9,10 @@
 
   <div class="formulario-login">
     <div class="bk-formulario-login">
-      <form action="">
+      <form action="/login" method="post">
+        <% if(locals.error){ %>
+          <h2 class="error-alert"><%= error.message %></h2>
+         <% } %>
         <div class="titulo-principal-login">
           <h2>LOGIN</h2>
         </div>
@@ -17,12 +20,11 @@
         <div class="input-login-nome">
           <label for="">Nome de Usuário / E-mail</label>
           <input
-            id="name"
-            type="text"
+            id="email"
             type="email"
-            name="Name"
-            placeholder="Seu Nome de Usuário ou seu E-mail"
-            required
+            name="email"
+            placeholder="Seu E-mail"
+  
           />
         </div>
 
@@ -31,9 +33,9 @@
           <input
             id="senha"
             type="password"
-            name="Senha"
+            name="senha"
             placeholder="Sua Senha"
-            required
+
           />
         </div>
 
@@ -49,7 +51,7 @@
         </div>
 
         <div class="botao-entrar-login">
-          <button>ENTRAR</button>
+          <button type="submit">ENTRAR</button>
         </div>
 
         <div class="opcao-cadastro-senha">

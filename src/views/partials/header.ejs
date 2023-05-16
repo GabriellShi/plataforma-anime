@@ -108,12 +108,28 @@
                             <li class="categoria-desktop categoria-desktop-login2">
                                 <a href="#"><img src="/img/icone-login.png" alt="icone login"></a>
                                 <ul class="categorias-partials">
-                                    <li><a href="/login">Login</a></li>
-                                    <li><a href="/user/create">Cadastro</a></li>
+                                    <% if(locals.user && locals.user.admin) {%> 
+                                        <a href="/indexAdmin">Administrador</a>
+                                        <% }%> <% if(locals.user){%> 
+                                            
+                                            
+                                        <form action="/logout" method="post">
+   
+                                          <button type="submit" class="btn-logout">Logout</button>
+                                        </form>
+                                        <% }else {%> 
+                                        
+                                        <li><a href="/login">Login</a></li>
+                                        <li><a href="/user/create">Cadastro</a></li>
+                                        <% }%>
+                                    
                                 </ul>
                             </li>
                 </div>
         </nav>
+        <div>
+
+          </div>
         <!-- <div class="barra-de-pesquisa-partials-mobile">
             <div><input type="search" placeholder="Pesquisar..."></div>
             <div><button><img src="/img/lupa.png" alt="Lupa"></button></div>

@@ -6,6 +6,9 @@ const upload = require("../helpers/multer");
 // Controllers
 const userController = require("../controllers/UserController");
 
+
+
+
 // Rota do controlador 'store' que ira criar um novo usuario
 router.get("/create", userController.create);
 

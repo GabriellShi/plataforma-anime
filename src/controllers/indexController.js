@@ -174,6 +174,7 @@ const indexController = {
       title: "plataforma de animes",
       listaAnimeAdmin,
       episodios,
+      user: req.cookies.user,
     });
   },
 
