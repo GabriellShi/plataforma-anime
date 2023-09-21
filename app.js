@@ -5,6 +5,9 @@ const methodOverride = require("method-override");
 const path = require("path");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const compression = require("compression"); // Importe o middleware de compressão
+
+
 
 const indexRoute = require("./src/routes/indexRoute");
 const paginasRoute = require("./src/routes/paginasRoute");
@@ -14,6 +17,8 @@ const animeRoute = require("./src/routes/animeRoute");
 const episodioRoute = require("./src/routes/episodioRoute");
 const authRoute = require("./src/routes/authRoute");
 
+// Use o middleware de compressão GZIP
+app.use(compression());
 
 // Configura o methodOverride no express
 // methodOverride = Pacote que transforma um método http em outro
@@ -49,3 +54,11 @@ app.use("/user", userRoute);
 app.use("/anime", animeRoute);
 app.use("/episodio", episodioRoute);
 app.use("/", authRoute);
+
+
+app.use("/images", express.static(path.join(__dirname, "/uploads")));
+
+// Rota de erro 404 - página não encontrada
+app.use((req, res) => {
+  res.status(404).render('erro-404.ejs', { title: 'Página não encontrada' });
+});
