@@ -9,7 +9,7 @@ router.get("/create", episodioController.create);
 
 // Essa rota faz conecção com a create de cima, ela ira ser a responsavel pelo envio do formulario
 // com o metodo 'post '
-router.post("/create", upload.single("imagem"), episodioController.store);
+router.post("/create", upload.single("image"), episodioController.store);
 
 router.get("/episodiosAdicionados", episodioController.episodiosAdicionados);
 
@@ -18,5 +18,16 @@ router.get("/", episodioController.index);
 
 // Rota do controlador 'show' que ira fazer a visualização de cada usuario
 router.get("/:id", episodioController.show);
+
+// Mostra a tela
+router.get("/edit/:id", episodioController.edit);
+
+// Executa a atualização
+router.put("/edit/:id", upload.single("image"), episodioController.update);
+
+router.get("/delete/:id", episodioController.delete);
+
+router.delete("/delete/:id", episodioController.destroy);
+
 
 module.exports = router;

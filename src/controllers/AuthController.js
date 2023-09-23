@@ -2,6 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const bcrypt = require("../helpers/bcrypt");
 
+const db = require("../config/sequelize");
+const Users = require("../models/Users");
+const { Op } = require("sequelize");
+const { Sequelize } = require("../config/sequelize")
+
 const authController = {
   // Tela para cadastro do usuario
   register: (req, res) => {
@@ -13,16 +18,7 @@ const authController = {
   },
 
   // Processamento do cadastro do usuario
-  create: (req, res) => {
-    const usersJson = fs.readFileSync(
-      // caminho do Arquivo
-      path.join(__dirname, "..", "data", "users.json"),
-      // formato de leitura
-      "utf-8",
-    );
-    const users = JSON.parse(usersJson);
-
-
+  create: async (req, res) => {
 
     const { nome, nomedeuser, senha, email } =
       req.body;
@@ -49,11 +45,9 @@ const authController = {
     //     },
     //   });
     // }
+    try {
 
-    const newId = users[users.length - 1].id + 1;
-
-    const newUser = {
-      id: newId,
+      const novaUsers = await Users.create({
       nome,
       nomedeuser,
       email,
@@ -61,17 +55,20 @@ const authController = {
       admin: false,
       criadoEm: new Date(),
       modificadoEm: new Date(),
-    };
+    });
 
-    newUser.id = newId;
-    users.push(newUser);
-    fs.writeFileSync(
-      path.join(__dirname, "..", "data", "users.json"),
-      JSON.stringify(users),
-    );
+
     res.redirect("/login");
-  },
-
+  } catch (error) {
+    console.error(error); // Adicione essa linha para registrar o erro no console
+    res.render("register", {
+      title: "Erro",
+      message: "Erro ao criar usuario!",
+ 
+      
+    });
+  }
+ },
   // Tela para realizar Login
   login: (req, res) => {
     return res.render("login", {

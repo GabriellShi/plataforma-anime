@@ -7,7 +7,7 @@
 
   <li class="capa-e-numero-do-episodio-pagina-anime">
     <div>
-      <img src="<%= episodio.imagem %>" alt="avatar" />
+      <img src="<%= episodio.image %>" alt="avatar" />
     </div>
     <div class="data-lancamento">
       <div>
@@ -18,6 +18,7 @@
       </div>
     </div>
     <a href="/episodio/<%= episodio.id %>">Visualizar</a>
+    <a href="/episodio/edit/<%= episodio.id %>">Editar</a>
     <a href="/episodio/delete/<%= episodio.id %>">Excluir</a>
   </li>
 

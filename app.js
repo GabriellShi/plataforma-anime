@@ -3,7 +3,7 @@ const app = express();
 const port = 3010;
 const methodOverride = require("method-override");
 const path = require("path");
-const session = require("express-session");
+// const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const compression = require("compression"); // Importe o middleware de compressão
 
@@ -27,11 +27,11 @@ app.use(methodOverride("_method"));
 // Converter corpo da requisição (body) em objeto literal
 app.use(express.json());
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); 
 
 
 app.use(cookieParser());
-app.use(session({ secret: "Eu amo cuscuz" }));
+// app.use(session({ secret: "Eu amo cuscuz" }));
 //
 // Configura pasta estática para acesso externo
 app.use(express.static(path.join(__dirname, "public")));
@@ -49,7 +49,7 @@ app.listen(port, () => {
 
 app.use("/", indexRoute);
 app.use("/", paginasRoute);
-app.use("/indexAdmin", indexAdminRoute);
+app.use("/", indexAdminRoute);
 app.use("/user", userRoute);
 app.use("/anime", animeRoute);
 app.use("/episodio", episodioRoute);

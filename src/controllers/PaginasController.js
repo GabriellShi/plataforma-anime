@@ -1,4 +1,38 @@
+const fs = require("fs");
+const files = require("../helpers/files");
+const upload = require("../config/upload");
+const path = require("path");
+
+
+const db = require("../config/sequelize");
+const Animes = require("../models/Animes");
+const Episodios = require("../models/Episodios");
+const { Op } = require("sequelize");
+const { Sequelize } = require("../config/sequelize")
+
 const paginasController = {
+
+  listaAnimeUsuario: async (req, res) => {
+    try {
+      // Busque todas as notícias do banco de dados
+      const listaAnimeAdmin = await Animes.findAll({
+      });
+
+
+    return res.render("listaAnimeUsuario", {
+      title: "Lista de Anime",
+      listaAnimeAdmin,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).render("error", {
+      title: "Erro",
+      message: "Ocorreu um erro ao carregar a lista de Animes",
+    });
+  }
+  },
+
+
   contato: (req, res) => {
     return res.render("contato", { title: "Contato" });
   },

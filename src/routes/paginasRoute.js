@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
+const upload = require("../helpers/multer");
+
 // Controllers
 const paginasController = require("../controllers/PaginasController");
+
+router.get("/listaAnimeUsuario", paginasController.listaAnimeUsuario);
 
 
 router.get("/contato", paginasController.contato);

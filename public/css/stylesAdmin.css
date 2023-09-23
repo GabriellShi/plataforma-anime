@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    font-family:"Roboto",sans-serif;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+
+ /* ---------------------- ESTILIZAÇÃO HEADER ADMIN ------------------------  */
+
+ * {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+  }
+  
+  .menu {
+    background-color: blue;
+    color: white;
+  }
+  
+  .menu li {
+    list-style: none;
+    font-size: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: white;
+  }
+  
+  .menu a {
+    text-decoration: none;
+  }
+  
+  
+  
+    /* -------** Configuração do Header ADM **-------- */
+  
+    .header-adm {
+  
+      background-color: blue;
+      
+    }
+  
+    .header-adm ul {
+      display: flex;
+      margin-left: 0.5rem;
+    }
+  
+    .header-adm li {
+      padding-right: 1rem;
+      font-size: 1.5rem;
+      padding: 0.5rem;
+    }
+  
+    .header-adm a:hover {
+      color: rgb(255, 251, 0);
+    }
+  
+    .header-adm a {
+      text-decoration: none;
+      color:  white;
+    }
+  
+    @media (max-width: 473px) {
+      .header-adm li {
+        padding-right: 0rem;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+      }
+   }
+
+
+   
+  .main-news-adm {
+    
+    background-color: #031a64;
+    padding-top: 1.8rem;
+    text-align: center;
+    padding-bottom: 10.3rem;
+
+  }
+
+  .main-news-adm li a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bolder;
+    background-color: rgb(17, 0, 255);
+    padding: 0.4rem;
+    border-radius: 10px;
+  }
+
+  .main-news-adm li a:hover{
+    color: black;
+    background-color: yellow;
+  }
+
+  .main-news-adm li {
+
+    margin-bottom: 2rem;
+  }
+
+  .main-news-adm ul {
+    margin-top: 5rem;
+  }

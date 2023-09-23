@@ -4,7 +4,10 @@ const upload = require("../config/upload");
 const bcrypt = require("../helpers/bcrypt");
 const path = require("path");
 
-
+const db = require("../config/sequelize");
+const Users = require("../models/Users");
+const { Op } = require("sequelize");
+const { Sequelize } = require("../config/sequelize")
 
 
 
@@ -15,167 +18,200 @@ const userController = {
   // index - controlador da aba que visualiza a lista dos usuario /
   // esse codigo renderiza a tabela 'users' dos usuarios
   // /Pode retornar uma página ou não
-  index: (req, res) => {
+  index: async (req, res) => {
+    try {
+      // Busque todas as notícias do banco de dados
+      const users = await Users.findAll({
+        order: [['created_at', 'DESC']]
+      });
 
-    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
-    const users = JSON.parse(usersJson);
- 
-    return res.render("users", { title: "Lista de Usuarios", users });
-    // users: users
+      return res.render("users", {
+        title: "Lista de Usuarios",
+        users,   
+      
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).render("error", {
+        title: "Erro",
+        message: "Ocorreu um erro ao carregar os Usuarios",
+      });
+    }
   },
 
   // show - controlador que ira visualizar os detalhas de cada usuario da lista 'users'
-  show: (req, res) => {
+  show: async (req, res) => {
 
-    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
-    const users = JSON.parse(usersJson);
-
+    try {
     const { id } = req.params;
 
-    // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
-    // apresentando uma mensagem caso encontrado ou não
-    const userResult = users.find((user) => user.id === parseInt(id));
-    if (!userResult) {
+    const user = await Users.findOne({
+
+    });
+
+    if (!user) {
       return res.render("error", {
         title: "Ops!",
-        message: "Usuario não encontrado",
+        message: "Detalhes do Usuario não encontrado",
       });
     }
+    // // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
+    // // apresentando uma mensagem caso encontrado ou não
+    // const userResult = users.find((user) => user.id === parseInt(id));
+    // if (!userResult) {
+    //   return res.render("error", {
+    //     title: "Ops!",
+    //     message: "Usuario não encontrado",
+    //   });
+    // }
 
-    const user = {
-      ...userResult,
-      image: files.base64Encode(upload.path + userResult.image),
-    };
+    // const user = {
+    //   ...userResult,
+    //   image: files.base64Encode(upload.path + userResult.image),
+    // };
     return res.render("user", {
       title: "Visualizar usuario",
       user,
     });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).render("error", {
+      title: "Erro",
+      message: "Ocorreu um erro ao carregar os detalhes do Usuario",
+    });
+  }
   },
 
-  create: (req, res) => {
+  create: async(req, res) => {
     return res.render("register", { title: "Cadastrar Usuario" });
     
   },
-  store: (req, res) => {
+  store: async (req, res) => {
    
   },
 
   // Mostra a tela
-  edit: (req, res) => {
-    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
-    const users = JSON.parse(usersJson);
+  edit: async (req, res) => {
 
     const { id } = req.params;
 
-    // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
-    // apresentando uma mensagem caso encontrado ou não
-    const userResult = users.find((user) => user.id === parseInt(id));
-    if (!userResult) {
-      return res.render("error", {
-        title: "Ops!",
-        message: "Usuario não encontrado",
-      });
-    }
+    try {
+      // Busque os detalhes da notícia no banco de dados pelo ID
+      const user = await Users.findByPk(id);
+  
+      if (!user) {
+        return res.render("error", {
+          title: "Ops!",
+          message: "Detalhes da notícia não encontrados",
+        });
+      }
 
-    const user = {
-      ...userResult,
-      image: files.base64Encode(upload.path + userResult.image),
-    };
     return res.render("user-edit", {
       title: "Editar Usuário",
       user,
     });
+    
+  } catch (error) {
+    console.error(error);
+    return res.status(500).render("error", {
+      title: "Erro",
+      message:
+        "Ocorreu um erro ao carregar os detalhes do Usuario para edição",
+    });
+  }
   },
 
   // Executa a atualização
-  update: (req, res) => {
-
-    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
-    const users = JSON.parse(usersJson);
+  update: async (req, res) => {
 
     const { id } = req.params;
     const { nome, nomedeuser, senha, email } = req.body;
 
-    // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
-    // apresentando uma mensagem caso encontrado ou não
-    const userResult = users.find((user) => user.id === parseInt(id));
-    let filename;
-    if (req.file) {
-      filename = req.file.filename;
-    }
-    if (!userResult) {
-      return res.render("error", {
-        title: "Ops!",
-        message: "Usuario não encontrado",
+  
+    try {
+      const usersToUpdate = await Users.findByPk(id);
+  
+      await usersToUpdate.update({
+        nome, 
+        nomedeuser, 
+        senha, 
+        email
       });
-    }
 
-    const updateUser = userResult;
-    if (nome) updateUser.nome = nome;
-    if (nomedeuser) updateUser.nomedeuser = nomedeuser;
-    if (senha) updateUser.senha = senha;
-    if (email) updateUser.email = email;
-    if (filename) {
-      let imageTmp = updateUser.image;
-      fs.unlinkSync(upload.path + imageTmp);
-      updateUser.image = filename;
-    }
     return res.render("success", {
       title: "Usuário Atualizado",
-      message: `Usuário ${updateUser.nome} foi atualizado`,
+      message: `Usuário ${usersToUpdate.nome} foi atualizado`,
     });
+
+  } catch (error) {
+    console.error(error);
+    return res.render("error", {
+      title: "Erro",
+      message: "Erro ao atualizar Usuario",
+    });
+  }
   },
 
-  delete: (req, res) => {
+  delete: async (req, res) => {
 
-    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
-    const users = JSON.parse(usersJson);
 
     const { id } = req.params;
 
-    // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
-    // apresentando uma mensagem caso encontrado ou não
-    const userResult = users.find((user) => user.id === parseInt(id));
-    if (!userResult) {
-      return res.render("error", {
-        title: "Ops!",
-        message: "Usuario não encontrado",
-      });
-    }
-    const user = {
-      ...userResult,
-      image: files.base64Encode(upload.path + userResult.image),
-    };
+    try {
+      // Busque os detalhes da notícia no banco de dados pelo ID
+      const user = await Users.findByPk(id);
+
+      if (!user) {
+        return res.render("error", {
+          title: "Ops!",
+          message: "Detalhes do Usuario não encontrados",
+        });
+      }
+
     return res.render("user-delete", {
       title: "Deletar Usuario",
       user,
     });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).render("error", {
+      title: "Erro",
+      message:
+        "Ocorreu um erro ao carregar os detalhes do Usario para exclusão",
+    });
+  }
   },
 
-  destroy: (req, res) => {
+  destroy: async (req, res) => {
 
-    const usersJson = fs.readFileSync(path.join(__dirname, "..", "data", "users.json"),"utf-8",);
-    const users = JSON.parse(usersJson);
-    
+ 
     const { id } = req.params;
 
-    // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
-    // apresentando uma mensagem caso encontrado ou não
-    const result = users.findIndex((user) => user.id === parseInt(id));
-    if (!result === -1) {
-      return res.render("error", {
-        title: "Ops!",
-        message: "Usuario não encontrado",
-      });
-    }
+    try {
+      const usersToDelete = await Users.findByPk(id);
 
-    fs.unlinkSync(upload.path + users[result].image);
+      if (!usersToDelete) {
+        return res.render("error", {
+          title: "Ops!",
+          message: "Usuario não encontrada",
+        });
+      }
+    
+      await usersToDelete.destroy();
 
-    users.splice(result, 1);
     return res.render("success", {
       title: "Usuario Deletado",
       message: "Usuário deletado com sucesso!",
     });
+
+  } catch (error) {
+    console.error(error);
+    return res.render("error", {
+      title: "Erro",
+      message: "Erro ao deletar Usuario",
+    });
+  }
   },
 
 

@@ -1,0 +1,24 @@
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
+
+
+<main class="form-news-create main-news-adm">
+  <h1 class="titulo-news-create">Deletar Episodio</h1>
+  <% if(locals.episodio){ %>
+  <div class="imagem-usuario">
+    <li class="lado-esquerdo-neto1 lado-esquerdo-neto1-destaque">
+    <img src="<%= episodio.image %>" alt="imagem" />
+    </li>
+    <span>Titulo: <%= episodio.titulo %>  </span>
+    <span>Descrição: <%= episodio.description %> </span>
+    <span>Conexão: <%= episodio.conecxao %> </span>
+    <span>Categoria: <%= episodio.categoria %> </span>
+  </div>
+  <form action="/episodio/delete/ <%= episodio.id %>?_method=delete" method="post">
+    <h2>Deseja Deletar esse episodio</h2>
+    <a href="/episodio"><button type="button">Não</button></a>
+    <button type="submit">Sim</button>
+  </form>
+  <% } else {%>
+  <h2>episodio não Entrado por motivos do além</h2>
+  <% } %>
+</main>

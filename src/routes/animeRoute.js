@@ -23,7 +23,6 @@ router.get("/delete/:id", animeController.delete);
 
 router.delete("/delete/:id", animeController.destroy);
 
-router.get("/listaAnimeUsuario", animeController.listaAnimeUsuario);
 
 // Rota do controlador 'index' que ira mostras a lista dos usuarios
 router.get("/", animeController.index);

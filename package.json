@@ -18,6 +18,7 @@
     "method-override": "^3.0.0",
     "microformat-node": "^2.0.1",
     "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
     "mysql2": "^3.6.1",
     "node": "^19.8.1",
     "node-jsonld": "^1.0.0",

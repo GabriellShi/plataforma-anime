@@ -1,0 +1,17 @@
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
+
+<main class="form-news-create main-news-adm">
+    <h1 class="titulo-news-create">Editar Episodio</h1>
+
+    <form action="/episodio/edit/<%= episodio.id %>" method="post" enctype="multipart/form-data" >
+        <input type="hidden" name="_method" value="POST">
+        <input type="text" name="nome" placeholder="Nome"  value=" <%= episodio.nome %>">
+        <input type="date" name="data" placeholder="Data" value=" <%= episodio.data %>">
+        <input type="text" name="image" placeholder="Imagem" value=" <%= episodio.image %>">
+
+        <button type="submit"> Atualizar Episodio </button>
+
+    </form>
+
+
+</main>
