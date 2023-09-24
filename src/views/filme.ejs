@@ -1,0 +1,34 @@
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
+
+<section class="site-animes">
+    <div class="lado-esquerdo-do-site-index">
+
+        <section class="sessao-2-index">
+           <div class="titulo-principal-episodios-adicionados">
+            <div class="barra-titulo-1-episodios-adicionados"></div>
+            <div class="barra-titulo-2-episodios-adicionados">
+                <h2>Filmes</h2>
+            </div>
+            <div class="barra-titulo-3-episodios-adicionados"></div>
+           </div>
+           <div class="barra-separacao-index barra-separacao-episodios-adicionados ">
+            <img src="/img/barra-azul.png" alt="barra de sepração azul">
+            <h3>Últimos Adicionados</h3>
+            </div>
+
+
+            <div class="animes-lancados">
+                <% for(let detailsFilme of filmes) {%>
+                <div class="capa-onepiece-index">
+                    <a href="/filme/<%= detailsFilme.id %>">
+                        <img src="<%= detailsFilme.capa %>" alt="capa"/>
+                    </a>
+                    <h4><%= detailsFilme.nome %></h4>
+                    <a href="/filme/<%= detailsFilme.id %>">Visualizar</a>
+                    <a href="/filme/edit/<%= detailsFilme.id %>">Editar</a>
+                </div>
+                <% } %>
+
+            </div>
+    </div>
+</section>

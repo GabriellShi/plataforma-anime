@@ -24,12 +24,14 @@
     
             <div class="animes-adicionados">
 
-                <% for(let episodio of episodios) {%>
+                <% for(let episodio of episodios.slice(0, 30)) {%>
                 <div class="capa-onepiece-index">
                     <a href="/episodio/<%= episodio.id %>">
-                        <img src="<%= episodio.imagem %>" alt="capa one piece">
+                        <img src="<%= episodio.image %>" alt="Imagem">
                     </a>
-                    <h4> <%= episodio.nome %> - <%= episodio.data %> <br> Episódio <%= episodio.id %></h4>
+                    <h4> <%= episodio.data %></h4>
+                    <h4><%= episodio.nome %></h4>
+                    <h4>Episódio <%= episodio.id %></h4>
                     </a>
                 </div>
                 <% } %>

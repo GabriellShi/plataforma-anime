@@ -5,7 +5,10 @@
 <section class="site-animes">
 
     <div class="lado-esquerdo-do-site-index">
+
+
         <section class="sessao-1-index">
+
             <div class="textodelacamento-e-iconedecarrosel">
                 <div class="barra-separacao-index">
                     <img src="/img/barra-azul.png" alt="barra de sepração azul">
@@ -13,26 +16,42 @@
                 </div>
     
                 <div class="setas-carrosel-index"> 
-                    <button><img src="/img/seta-vermelha-esquerda.png" alt=" seta vermelha virada para direita"></button>
-                    <button><img src="/img/seta-vermelha-direita.png" alt="seta vermelha virada para esquerda"></button>
+                    <button data-target="#animeCarousel" data-slide="prev">
+                    </button>
+                    <button data-target="#animeCarousel" data-slide="next">
+                    </button>
                 </div>
-            </div>
-  
-
-
-            <div class="animes-lancados">
-               
-                <% for(let anime of listaAnimeAdmin) {%>
-                <div class="capa-onepiece-index">
-                    <a href="/anime/<%= anime.id %>">
-                        <img src="<%= anime.capa %>" alt="capa"/>
-                    </a>
-                    <h4><%= anime.nome %></h4>
-                </div>
-                <% } %>
- 
                 
             </div>
+
+            <div class="carrossel">
+                <div id="animeCarousel" class="carousel slide" data-ride="carousel">
+                  <!-- Slides do Carrossel -->
+                  <div class="carousel-inner animes-lancados-index">
+                    <% 
+                    const gruposAnimes = chunkArray(listaAnimeAdmin, 5); // Dividir a lista em grupos de 5
+                    gruposAnimes.forEach((grupo, grupoIndex) => { %>
+                      <div class="carousel-item <%= grupoIndex === 0 ? 'active' : '' %>">
+                        <div class=" row">
+                          <% grupo.forEach((anime, index) => { %>
+                            <div class="col-md-2">
+                              <div class="capa-onepiece-index capa-onepiece-index2">
+                                <a href="/anime/<%= anime.id %>">
+                                  <img src="<%= anime.capa %>" alt="capa"/>
+                                </a>
+                                <h4><%= anime.nome %></h4>
+                              </div>
+                            </div>
+                          <% }); %>
+                        </div>
+                      </div>
+                    <% }); %>
+                  </div>
+              
+
+                </div>
+              </div>
+              
         </section>
     
         <div class="linha-index"></div>
@@ -45,21 +64,26 @@
                 </div>
     
                 <div class="botao-vermais-index"> 
-                    <a href="/episodio/episodiosAdicionados"><button>VER MAIS</button></a>
+                    <a href="/episodiosAdicionados"><button>VER MAIS</button></a>
                     
                 </div>
             </div>
     
             <div class="animes-adicionados">
+                <% if (episodios.length > 0) { %>
 
-                <% for(let episodio of episodios) {%>
+                <% for(let episodio of episodios.slice(0, 18)) {%>
                 <div class="capa-onepiece-index">
-                    <a href="/episodio/<%= episodio.id %>">
-                        <img src="<%= episodio.imagem %>" alt="capa one piece">
+                    <a  href="/episodio/<%= episodio.id%>" target="">
+
+                        <img src="<%= episodio.image %>" alt="capa one piece">
                     </a>
-                    <h4> <%= episodio.nome %> - <%= episodio.data %> <br> Episódio <%= episodio.id %></h4>
+                    <h4> <%= episodio.data %></h4>
+                    <h4><%= episodio.nome %></h4>
+                    <h4>Episódio <%= episodio.id %></h4>
                     </a>
                 </div>
+                <% } %>
                 <% } %>
             </div>
         </section>
@@ -80,26 +104,17 @@
             </div>
     
             <div class="animes-lancados">
+               
+                <% for (let detailsFilme of filmes.slice(0, 5)) { %>
                 <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
+                    <a href="/filme/<%= detailsFilme.id %>">
+                        <img src="<%= detailsFilme.capa %>" alt="capa"/>
+                    </a>
+                    <h4><%= detailsFilme.nome %></h4>
                 </div>
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href=""><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
+                <% } %>
+ 
+                
             </div>
         </section>
     </div>
@@ -276,11 +291,6 @@
     </div>
 
 </section>
-
-<!-- Botão de Scroll para o topo da pagina  -->
-
-
-
 
 
 <%- include("./partials/footer") %> 

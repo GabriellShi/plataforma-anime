@@ -1,28 +1,56 @@
-<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")
-%>
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
 
-<main>
-  <h1>Lista de Episodios</h1>
-  <% if(episodios.length > 0){ %> <% for(let episodio of episodios) {%>
 
-  <li class="capa-e-numero-do-episodio-pagina-anime">
-    <div>
-      <img src="<%= episodio.image %>" alt="avatar" />
+<section class="site-animes">
+
+    <div class="lado-esquerdo-do-site-index">
+
+
+
+        <section class="sessao-2-index">
+
+           <div class="titulo-principal-episodios-adicionados">
+            <div class="barra-titulo-1-episodios-adicionados"></div>
+            <div class="barra-titulo-2-episodios-adicionados">
+                <h2>Episódios</h2>
+            </div>
+            <div class="barra-titulo-3-episodios-adicionados"></div>
+           </div>
+
+           <div class="barra-separacao-index barra-separacao-episodios-adicionados ">
+            <img src="/img/barra-azul.png" alt="barra de sepração azul">
+            <h3>Últimos Adicionados</h3>
+            </div>
+    
+            <div class="animes-adicionados">
+
+                <% for(let episodio of episodios) {%>
+                <div class="capa-onepiece-index">
+                    <a href="/episodio/<%= episodio.id %>">
+                        <img src="<%= episodio.image %>" alt="Imagem">
+                    </a>
+                    <h4> <%= episodio.data %></h4>
+                    <h4><%= episodio.nome %></h4>
+                    <h4>Episódio <%= episodio.id %></h4>
+                    </a>
+                    
+                    <a href="/episodio/<%= episodio.id %>">Visualizar</a>
+                    <a href="/episodio/edit/<%= episodio.id %>">Editar</a>
+                    <a href="/episodio/delete/<%= episodio.id %>">Excluir</a>
+                </div>
+                <% } %>
+            </div>
+            
+        </section>
+
+  
+        
+       
     </div>
-    <div class="data-lancamento">
-      <div>
-        <h3><%= episodio.nome %></h3>
 
-        <h4>Episódio <%= episodio.id %></h4>
-        <h5><%= episodio.data %></h5>
-      </div>
-    </div>
-    <a href="/episodio/<%= episodio.id %>">Visualizar</a>
-    <a href="/episodio/edit/<%= episodio.id %>">Editar</a>
-    <a href="/episodio/delete/<%= episodio.id %>">Excluir</a>
-  </li>
 
-  <% } %> <% } else { %>
-  <h2>Nenhum Usuário Encontrado</h2>
-  <%} %>
-</main>
+
+</section>
+
+
+

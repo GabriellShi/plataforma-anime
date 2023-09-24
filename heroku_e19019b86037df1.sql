@@ -38,9 +38,14 @@ CREATE TABLE animes(
     sinopse TEXT(1000) NOT NULL,
     genero VARCHAR(100) NOT NULL,
     capa VARCHAR(500),
+    tipo VARCHAR(100) NOT NULL,
+    status VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- Adiciona um Novo Anime
+-- ALTER TABLE animes ADD status VARCHAR(100) NOT NULL;
 
 -- Insere um ou mais usuário
 INSERT INTO animes (nome, autor, estudio, sinopse, genero)
@@ -49,6 +54,53 @@ VALUES ("Bleach", "Tite Cubo", "tv tokyo", "Chegou a ultima tempora", "Ação");
 -- Lista todos os usuários
 SELECT * FROM animes;
 
+
+
+
+
+-- Cria tabela de usuário
+CREATE TABLE episodios(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    data VARCHAR(100) NOT NULL,
+    image VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Insere um ou mais usuário
+INSERT INTO episodios (nome, data )
+VALUES ("One Piece 1052", "23/09/2023" );
+
+-- Lista todos os usuários
+SELECT * FROM episodios;
+
+
+
+
+
+
+-- Cria tabela de usuário
+CREATE TABLE filmes(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    autor VARCHAR(100) NOT NULL,
+    estudio VARCHAR(100) NOT NULL,
+    sinopse TEXT(1000) NOT NULL,
+    genero VARCHAR(100) NOT NULL,
+    capa VARCHAR(500),
+    tipo VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+-- Insere um ou mais usuário
+INSERT INTO filmes (nome, autor, estudio, sinopse, genero, tipo)
+VALUES ("Bleach", "Tite Cubo", "tv tokyo", "Chegou a ultima tempora", "Ação", "Legendado");
+
+-- Lista todos os usuários
+SELECT * FROM filmes;
 
 
 

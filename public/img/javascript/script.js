@@ -11,3 +11,4 @@ window.addEventListener('scroll', function() {
         behavior: 'smooth'
     })
   }
+

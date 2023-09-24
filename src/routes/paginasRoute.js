@@ -8,6 +8,8 @@ const paginasController = require("../controllers/PaginasController");
 
 router.get("/listaAnimeUsuario", paginasController.listaAnimeUsuario);
 
+router.get("/episodiosAdicionados", paginasController.episodiosAdicionados);
+
 
 router.get("/contato", paginasController.contato);
 

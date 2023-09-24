@@ -8,31 +8,6 @@ const Episodios = require("../models/Episodios");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize"); 
 
-
-// Lista dos episodios
-// const episodios = [
-//   {
-//     id: 1,
-//     nome: "Nanatsu",
-//     data: "08/08",
-//     imagem: "nanatsu.jpg",
-//   },
-
-//   {
-//     id: 2,
-//     nome: "Tokyo Ghoul",
-//     data: "08/08",
-//     imagem: "tokyo-ghoul.jpg",
-//   },
-
-//   {
-//     id: 3,
-//     nome: "Bleach",
-//     data: "08/08",
-//     imagem: "bleach.png",
-//   },
-// ];
-
 const episodioController = {
   // index - controlador da aba que visualiza a lista dos usuario /
   // esse codigo renderiza a tabela 'users' dos usuarios
@@ -64,8 +39,7 @@ const episodioController = {
 
     const { id } = req.params;
 
-    const episodio = await Episodios.findOne({
-    }); 
+    const episodio = await Episodios.findByPk(id); 
 
     if (!episodio) {
       return res.render("error", {
@@ -227,19 +201,6 @@ const episodioController = {
   }
   },
 
-
-  episodiosAdicionados: async (req, res) => {
-    const episodiosWithBase64Imagem = episodios.map((episodio) => ({
-      ...episodio,
-      imagem: files.base64Encode(upload.path + episodio.imagem),
-    }));
-
-    return res.render("episodiosAdicionados", {
-      title: "Pagina dos Episodios Adiconados",
-      episodios,
-      episodios: episodiosWithBase64Imagem,
-    });
-  },
 };
 
 module.exports = episodioController;

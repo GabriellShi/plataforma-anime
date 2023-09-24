@@ -2,8 +2,8 @@ const db = require("../config/sequelize");
 const Sequelize = require("sequelize");
 
 
-const Animes = db.define(
-  "Animes",
+const Filmes = db.define(
+  "Filmes",
   {
     id: {
       type: Sequelize.DataTypes.INTEGER.UNSIGNED,
@@ -39,11 +39,6 @@ const Animes = db.define(
       type: Sequelize.DataTypes.TEXT(1000),
       allowNull: false,
     },
-    status: {
-      type: Sequelize.DataTypes.STRING(100),
-      allowNull: false,
-    },
-
 
     created_at: {
       type: Sequelize.DataTypes.DATE,
@@ -53,10 +48,10 @@ const Animes = db.define(
   },
 
   {
-    tableName: "animes", // Defina o nome da tabela aqui
+    tableName: "filmes", // Defina o nome da tabela aqui
     timestamps: false, // Isso desativará as colunas de timestamps
   },
 
 );
 
-module.exports = Animes;
+module.exports = Filmes;

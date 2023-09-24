@@ -45,9 +45,7 @@ const userController = {
     try {
     const { id } = req.params;
 
-    const user = await Users.findOne({
-
-    });
+    const user = await Users.findByPk(id);
 
     if (!user) {
       return res.render("error", {

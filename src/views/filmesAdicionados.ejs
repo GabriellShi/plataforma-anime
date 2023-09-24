@@ -23,106 +23,17 @@
             </div>
     
             <div class="animes-lancados">
+               
+                <% for(let detailsFilme of filmes.slice(0, 30)) {%>
                 <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
+                    <a href="/filme/<%= detailsFilme.id %>">
+                        <img src="<%= detailsFilme.capa %>" alt="capa"/>
+                    </a>
+                    <h4><%= detailsFilme.nome %></h4>
                 </div>
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href=""><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>  
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href=""><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div> 
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href=""><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>   
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href=""><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div> 
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href=""><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>            
-                <div class="capa-onepiece-index">
-                    <a href="#"><img src="/img/animes-lancamento-onepiece.jpg" alt="capa one piece"></a>
-                    <h4>One Piece</h4>
-                </div>         
+                <% } %>
+ 
+                
             </div>
         </section>
 

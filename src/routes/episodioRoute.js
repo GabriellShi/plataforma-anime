@@ -11,8 +11,6 @@ router.get("/create", episodioController.create);
 // com o metodo 'post '
 router.post("/create", upload.single("image"), episodioController.store);
 
-router.get("/episodiosAdicionados", episodioController.episodiosAdicionados);
-
 // Rota do controlador 'index' que ira mostras a lista dos usuarios
 router.get("/", episodioController.index);
 

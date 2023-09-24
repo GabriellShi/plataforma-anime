@@ -44,8 +44,7 @@ const animeController = {
     // id = 4
     const { id } = req.params;
 
-    const anime = await Animes.findOne({
-    });
+    const anime = await Animes.findByPk(id)
 
     const episodios = await Episodios.findAll({
     });
@@ -129,16 +128,13 @@ const animeController = {
   // Executa a atualização
   update: async (req, res) => {
     const { id } = req.params;
-    const { nome, nomedeuser, senha, email, tipo, genero, autor, estudio, status, sinopse, capa } = req.body;
+    const { nome, tipo, genero, autor, estudio, status, sinopse, capa } = req.body;
 
     try {
       const animesToUpdate = await Animes.findByPk(id);
   
       await animesToUpdate.update({
         nome,
-        nomedeuser,
-        senha,
-        email,
         tipo,
         genero,
         autor,
@@ -175,7 +171,7 @@ const animeController = {
       });
     }
 
-    return res.render("anime-edit", {
+    return res.render("anime-delete", {
       title: "Deletar Anime",
       anime,
     });

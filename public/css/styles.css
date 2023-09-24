@@ -896,9 +896,6 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
     padding-left: 1rem;
   }
   
-
-
-
   /* ------------------------------ PAGINA DOS EPISODIO ADICIONADO --------------------------  */
 
   * {
@@ -2063,6 +2060,14 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
     text-align: center;
   }
   
+
+  .animes-lancados-index img{
+    width: 10rem;
+  }
+
+
+
+
   .capa-onepiece-index {
     padding: 1rem;
     text-align: center;
@@ -2073,7 +2078,59 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
   
   .capa-onepiece-index h4 {
     padding-top: 0.5rem;
+    font-size: 1rem;
   }
+
+  .capa-onepiece-index2 {
+    padding: 1.5rem;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .capa-onepiece-index2 h4{
+    font-size: 1rem;
+    color: white;
+  }
+
+  .row {
+    margin-bottom: 1rem;
+  }
+
+/* Estilize o botão de voltar (prev) */
+.setas-carrosel-index button[data-slide="prev"] {
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-right: 25px solid red; /* Ajuste a cor desejada */
+  padding: 0;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+/* Estilize o botão de avançar (next) */
+.setas-carrosel-index button[data-slide="next"] {
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-left: 25px solid red; /* Ajuste a cor desejada */
+  padding: 0;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.setas-carrosel-index button:hover[data-slide="prev"]{
+  border-right: 25px solid rgb(4, 0, 255); /* Ajuste a cor desejada */
+}
+
+.setas-carrosel-index button:hover[data-slide="next"]{
+  border-left: 25px solid rgb(4, 0, 255); /* Ajuste a cor desejada */
+}
+
   
   /* -----------Seção 2 da pagina----------  */
   
@@ -2084,11 +2141,15 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
     border-radius: 3px;
     height: 2rem;
     cursor: pointer;
+    font-weight: bold;
   }
   
   .botao-vermais-index button:hover {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-weight: bold;
+    width: 6rem;
+    background-color: blue;
+
   }
   
   .animes-adicionados {
@@ -2107,6 +2168,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
     color: white;
     background-color: rgb(29, 29, 31);
     padding: 5px;
+    font-size: 0.8rem;
   }
   
   .capa-onepiece-index a img {
