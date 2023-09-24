@@ -1620,6 +1620,11 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
     }
   }
   
+/* Adicione isso ao seu arquivo CSS */
+.numero-da-pagina-listadosanimes.current {
+  background-color: red; /* Cor de fundo para a página atual */
+  color: white; /* Cor do texto para a página atual */
+}
 
 
 

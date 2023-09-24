@@ -75,22 +75,40 @@
   </div>
 
   <div class="numero-de-animes-na-pagina-listadosanimes">
-    <h4>Exibindo 30 Animes - Página 1 de 90</h4>
+    <h4>Exibindo <%= listaAnimeAdmin.length %> Animes - Página <%= page %> de <%= totalPages %></h4>
   </div>
+  
 
-  <div class="numero-da-pagina-listadosanimes">
+  <div class="numero-da-pagina-listadosanimes numero-da-pagina-episodios-adiconados">
     <ul>
-      <a href=""
-        ><li><img src="/img/icone-seta-direita.png" alt="" /></li
-      ></a>
-      <a href=""><li>1</li></a>
-      <a href=""><li>2</li></a>
-      <a href=""><li>3</li></a>
-      <a href=""><li>...</li></a>
-      <a href=""><li>90</li></a>
-      <a href=""
-        ><li><img src="/img/icone-seta-esquerda.png" alt="" /></li
-      ></a>
+      <% if (page > 1) { %>
+        <a href="?page=<%= page - 1 %>"><li><img src="/img/icone-seta-direita.png" alt=""></li></a>
+      <% } %>
+      <% const maxVisiblePages1 = 6; // Número máximo de páginas visíveis %>
+      <% const startPage1 = Math.max(1, page - Math.floor(maxVisiblePages1 / 2)); %>
+      <% const endPage1 = Math.min(totalPages, startPage1 + maxVisiblePages1 - 1); %>
+      <% if (startPage1 > 1) { %>
+        <a href="?page=1"><li>1</li></a>
+        <% if (startPage1 > 2) { %>
+          <li>...</li>
+        <% } %>
+      <% } %>
+      <% for (let i = startPage1; i <= endPage1; i++) { %>
+        <a href="?page=<%= i %>">
+          <li <%= i === page ? 'class="current"' : '' %>>
+            <%= i %>
+          </li>
+        </a>
+      <% } %>
+      <% if (endPage1 < totalPages) { %>
+        <% if (endPage1 < totalPages - 1) { %>
+          <li>...</li>
+        <% } %>
+        <a href="?page=<%= totalPages %>"><li><%= totalPages %></li></a>
+      <% } %>
+      <% if (page < totalPages) { %>
+        <a href="?page=<%= page + 1 %>"><li><img src="/img/icone-seta-esquerda.png" alt=""></li></a>
+      <% } %>
     </ul>
   </div>
 
@@ -105,20 +123,39 @@
     <% } %>
   </div>
 
-  <div class="numero-da-pagina-listadosanimes">
-    <ul>
-      <a href=""
-        ><li><img src="/img/icone-seta-direita.png" alt="" /></li
-      ></a>
-      <a href=""><li>1</li></a>
-      <a href=""><li>2</li></a>
-      <a href=""><li>3</li></a>
-      <a href=""><li>...</li></a>
-      <a href=""><li>90</li></a>
-      <a href=""
-        ><li><img src="/img/icone-seta-esquerda.png" alt="" /></li
-      ></a>
-    </ul>
-  </div>
+<div class="numero-da-pagina-listadosanimes numero-da-pagina-episodios-adiconados">
+  <ul>
+    <% if (page > 1) { %>
+      <a href="?page=<%= page - 1 %>"><li><img src="/img/icone-seta-direita.png" alt=""></li></a>
+    <% } %>
+    <% const maxVisiblePages = 6; // Número máximo de páginas visíveis %>
+    <% const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2)); %>
+    <% const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1); %>
+    <% if (startPage > 1) { %>
+      <a href="?page=1"><li>1</li></a>
+      <% if (startPage > 2) { %>
+        <li>...</li>
+      <% } %>
+    <% } %>
+    <% for (let i = startPage; i <= endPage; i++) { %>
+      <a href="?page=<%= i %>">
+        <li <%= i === page ? 'class="current"' : '' %>>
+          <%= i %>
+        </li>
+      </a>
+    <% } %>
+    <% if (endPage < totalPages) { %>
+      <% if (endPage < totalPages - 1) { %>
+        <li>...</li>
+      <% } %>
+      <a href="?page=<%= totalPages %>"><li><%= totalPages %></li></a>
+    <% } %>
+    <% if (page < totalPages) { %>
+      <a href="?page=<%= page + 1 %>"><li><img src="/img/icone-seta-esquerda.png" alt=""></li></a>
+    <% } %>
+  </ul>
+</div>
+
+
   <div class="espaco-contato"></div>
 </section>

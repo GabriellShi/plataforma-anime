@@ -17,14 +17,51 @@
             <div class="barra-titulo-3-episodios-adicionados"></div>
            </div>
 
+         
+          <div class="pesquisa-listadosanimes">
+            <div class="barra-de-pesquisa-partials barra-de-pesquisa-lista-dos-animes">
+              <div class="pesquisa-lista-dos-animes">
+                <input type="search" placeholder="Pesquisar Pelo Nome..." />
+              </div>
+              <div>
+                <button><img src="/img/lupa.png" alt="Lupa" /></button>
+              </div>
+            </div>
+          </div>
+        
+          <div class="filtros-listadosanimes">
+            <ul>
+              <div class="filtros-internos">
+                <img src="/img/icone-filtro.png" alt="" />
+                <li>Filtro</li>
+              </div>
+              <div class="filtros-internos">
+                <img src="/img/icone-linguagem.png" alt="" />
+                <li>Legendado/Dublado</li>
+              </div>
+              <div class="filtros-internos">
+                <img src="/img/icone-ordem.png" alt="" />
+                <li>Ordenar</li>
+              </div>
+              <div class="filtros-internos">
+                <li>Nº de Animes</li>
+              </div>
+              <div class="filtros-internos">
+                <img src="/img/icone-organizar-cimaebaixo.png" alt="" />
+                <li>Organizar</li>
+                <img src="/img/icone-seta-baixo.png" class="seta-baixo" alt="" />
+              </div>
+            </ul>
+          </div>
+
            <div class="barra-separacao-index barra-separacao-episodios-adicionados ">
             <img src="/img/barra-azul.png" alt="barra de sepração azul">
-            <h3>Últimos Adicionados</h3>
+            <h3>Exibindo <%= filmes.length %> Animes - Página <%= page %> de <%= totalPages %></h3>
             </div>
     
             <div class="animes-lancados">
                
-                <% for(let detailsFilme of filmes.slice(0, 30)) {%>
+                <% for(let detailsFilme of filmes) {%>
                 <div class="capa-onepiece-index">
                     <a href="/filme/<%= detailsFilme.id %>">
                         <img src="<%= detailsFilme.capa %>" alt="capa"/>
@@ -37,17 +74,40 @@
             </div>
         </section>
 
-        <div class="numero-da-pagina-listadosanimes numero-da-pagina-episodios-adiconados ">
-            <ul>
-                <a href=""><li> <img src="/img/icone-seta-direita.png" alt=""> </li></a>
-                <a href=""><li>1</li></a>
-                <a href=""><li>2</li></a>
-                <a href=""><li>3</li></a>
-                <a href=""><li>...</li></a>
-                <a href=""><li>90</li></a>
-                <a href=""><li><img src="/img/icone-seta-esquerda.png" alt=""></li></a>
-            </ul>
-        </div>
+      
+<div class="numero-da-pagina-listadosanimes numero-da-pagina-episodios-adiconados">
+  <ul>
+    <% if (page > 1) { %>
+      <a href="?page=<%= page - 1 %>"><li><img src="/img/icone-seta-direita.png" alt=""></li></a>
+    <% } %>
+    <% const maxVisiblePages = 6; // Número máximo de páginas visíveis %>
+    <% const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2)); %>
+    <% const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1); %>
+    <% if (startPage > 1) { %>
+      <a href="?page=1"><li>1</li></a>
+      <% if (startPage > 2) { %>
+        <li>...</li>
+      <% } %>
+    <% } %>
+    <% for (let i = startPage; i <= endPage; i++) { %>
+      <a href="?page=<%= i %>">
+        <li <%= i === page ? 'class="current"' : '' %>>
+          <%= i %>
+        </li>
+      </a>
+    <% } %>
+    <% if (endPage < totalPages) { %>
+      <% if (endPage < totalPages - 1) { %>
+        <li>...</li>
+      <% } %>
+      <a href="?page=<%= totalPages %>"><li><%= totalPages %></li></a>
+    <% } %>
+    <% if (page < totalPages) { %>
+      <a href="?page=<%= page + 1 %>"><li><img src="/img/icone-seta-esquerda.png" alt=""></li></a>
+    <% } %>
+  </ul>
+</div>
+          
     
         
        
