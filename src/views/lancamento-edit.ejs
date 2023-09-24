@@ -1,0 +1,38 @@
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
+
+<main class="form-news-create main-news-adm">
+<h1 class="titulo-news-create">Editar Calendario</h1>
+
+  <form action="/detailsLancamento/edit/<%= lancamento.id %>" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="POST">
+
+    <label for="">Titulo</label>
+    <input class="input-form" type="text" name="titulo" placeholder="Titulo" value="<%= lancamento.titulo %>">
+    
+    <label for="">Horario</label>
+    <input class="input-form" type="text" name="horario" placeholder="Horario" value="<%= lancamento.horario %>">
+
+    <label for="">Dia</label>
+    <select class="input-form" name="dia">
+      <option value="" disabled selected>Dia:</option>
+      <option value="Domingo" <%= lancamento.dia === "Domingo" ? "selected" : "" %>>Domingo</option>
+      <option value="Segunda-Feira" <%= lancamento.dia === "Segunda-Feira" ? "selected" : "" %>>Segunda-Feira</option>
+      <option value="Terça-Feira" <%= lancamento.dia === "Terça-Feira" ? "selected" : "" %>>Terça-Feira</option>
+      <option value="Quarta-Feira" <%= lancamento.dia === "Quarta-Feira" ? "selected" : "" %>>Quarta-Feira</option>
+      <option value="Quinta-Feira" <%= lancamento.dia === "Quinta-Feira" ? "selected" : "" %>>Quinta-Feira</option>
+      <option value="Sexta-Feira" <%= lancamento.dia === "Sexta-Feira" ? "selected" : "" %>>Sexta-Feira</option>
+      <option value="Sábado" <%= lancamento.dia === "Sábado" ? "selected" : "" %>>Sábado</option>
+  </select>
+
+
+  <label for="">Streaming</label>
+    <input class="input-form" type="text" name="streaming" placeholder="Streaming" value="<%= lancamento.streaming %>">
+    
+    <label for="">Imagem</label>
+    <input class="input-form" type="text" name="image" value="<%= lancamento.image %>" placeholder="Imagem">
+    <li class="lado-esquerdo-neto1 lado-esquerdo-neto1-destaque">
+    <img src="<%= detailsLancamento.image %>" alt="Imagem" />
+    </li>
+    <button type="submit">Salvar Edições</button>
+  </form>
+</main>

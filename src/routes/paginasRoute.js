@@ -10,6 +10,8 @@ router.get("/listaAnimeUsuario", paginasController.listaAnimeUsuario);
 
 router.get("/episodiosAdicionados", paginasController.episodiosAdicionados);
 
+router.get("/calendario", paginasController.calendarioAnimes);
+
 
 router.get("/contato", paginasController.contato);
 

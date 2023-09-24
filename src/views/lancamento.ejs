@@ -1,0 +1,71 @@
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
+
+<main class="main-paginas">
+  <h1 class=" titulo-paginas">CALENDARIO</h1>
+
+  <div class="dias-da-semana-buttons">
+    <% const diasDaSemana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira",
+    "Sexta-Feira", "Sábado"]; %> <% for (const dia of diasDaSemana) { %>
+    <button class="dia-button" data-dia="<%= dia %>"><%= dia %></button>
+    <% } %>
+  </div>
+
+  <div class="lado-esquerdo-filho1">
+    <!-- Aqui vamos inserir os lançamentos dinamicamente usando JavaScript -->
+  </div>
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const diasButtons = document.querySelectorAll(".dia-button");
+    const lancamentosContainer = document.querySelector(".lado-esquerdo-filho1");
+    const lancamentoData = <%- JSON.stringify(lancamento) %>;
+
+    diasButtons.forEach(button => {
+      button.addEventListener("click", function() {
+        const diaClicado = this.getAttribute("data-dia");
+        const lancamentosDoDia = lancamentoData.filter(item => item.dia === diaClicado);
+
+        let lancamentosHTML = "";
+
+        if (lancamentosDoDia.length > 0) {
+          lancamentosDoDia.forEach(detailsLancamento => {
+            lancamentosHTML += `
+            <ul class="">
+          <li class="lado-esquerdo-neto1 lado-esquerdo-neto1-calendario lado-esquerdo-neto1-destaque">
+          <div class="zoomable-image-container">
+             <img class="zoomable-image" src="${detailsLancamento.image}" alt="Capa Noticia" />
+             <div class="zoomable-image-overlay"></div>
+          </div>
+
+          <div class="descricao-calendario">
+            <h2>${detailsLancamento.titulo}</h2>
+            <div> <h3>Horario do Lançamento:</h3> <h2>${detailsLancamento.horario}H</h2> </div>
+            <div> <h3>Streaming de Postagem:</h3> <h2>${detailsLancamento.streaming}</h2> </div>
+          </div>
+          <div class="botao-visualizar-adm">
+                  <a href="/detailsLancamento/ ${detailsLancamento.id}">Visualizar</a>
+                  <a href="/detailsLancamento/edit/ ${detailsLancamento.id}">Editar</a>
+                  <a href="/detailsLancamento/delete/ ${detailsLancamento.id}">Excluir</a>
+         </div>
+
+          </li>
+          
+        </ul>
+
+
+            `;
+            
+          });
+        } else {
+          lancamentosHTML = "<h2>Nenhum Lançamento Encontrado</h2>";
+        }
+
+        lancamentosContainer.innerHTML = lancamentosHTML;
+      });
+    });
+  });
+</script>
+
+
+</main>

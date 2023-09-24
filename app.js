@@ -16,6 +16,7 @@ const userRoute = require("./src/routes/userRoute");
 const animeRoute = require("./src/routes/animeRoute");
 const episodioRoute = require("./src/routes/episodioRoute");
 const detailsFilmeRoute = require("./src/routes/detailsFilmeRoute");
+const detailsLancamentoRoute = require("./src/routes/detailsLancamentoRoute");
 const authRoute = require("./src/routes/authRoute");
 
 // Use o middleware de compressão GZIP
@@ -55,6 +56,7 @@ app.use("/user", userRoute);
 app.use("/anime", animeRoute);
 app.use("/episodio", episodioRoute);
 app.use("/filme", detailsFilmeRoute);
+app.use("/lancamento", detailsLancamentoRoute);
 app.use("/", authRoute);
 
 

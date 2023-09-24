@@ -1,0 +1,80 @@
+<%- include("partials/head") %> <%- include("partials/header") %>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<main class="main-paginas">
+  <h1 class=" titulo-paginas">CALENDARIO</h1>
+
+
+  <div class="dias-da-semana-buttons">
+    <% const diasDaSemana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira",
+    "Sexta-Feira", "Sábado"]; %> <% for (const dia of diasDaSemana) { %>
+    <button class="dia-button" data-dia="<%= dia %>"><%= dia %></button>
+    <% } %>
+  </div>
+
+  <div class="lado-esquerdo-filho1">
+    <!-- Aqui vamos inserir os lançamentos dinamicamente usando JavaScript -->
+  </div>
+</main>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const diasButtons = document.querySelectorAll(".dia-button");
+    const lancamentosContainer = document.querySelector(".lado-esquerdo-filho1");
+    const lancamentoData = <%- JSON.stringify(lancamento) %>;
+
+    // Adicionar a classe 'selected' ao botão de Domingo
+    diasButtons.forEach(button => {
+      if (button.getAttribute("data-dia") === "Domingo") {
+        button.classList.add("selected"); // Adiciona a classe 'selected'
+      }
+
+      button.addEventListener("click", function() {
+        const diaClicado = this.getAttribute("data-dia");
+        const lancamentosDoDia = lancamentoData.filter(item => item.dia === diaClicado);
+
+        let lancamentosHTML = "";
+
+        if (lancamentosDoDia.length > 0) {
+          lancamentosDoDia.forEach(detailsLancamento => {
+            lancamentosHTML += `
+            <ul class="">
+          <li class="lado-esquerdo-neto1 lado-esquerdo-neto1-calendario lado-esquerdo-neto1-destaque">
+          <div class="zoomable-image-container">
+             <img class="zoomable-image" src="${detailsLancamento.image}" alt="Capa Noticia" />
+             <div class="zoomable-image-overlay"></div>
+          </div>
+
+          <div class="descricao-calendario">
+            <h2 class="titulo-calendarios">${detailsLancamento.titulo}</h2>
+            <div> <h3>Horario do Lançamento:</h3> <h3>${detailsLancamento.horario}H</h3> </div>
+            <div> <h3>Streaming:</h3> <h3>${detailsLancamento.streaming}</h3> </div>
+          </div>
+          </li>
+        </ul>
+            `;
+          });
+        } else {
+          lancamentosHTML = "<h2>Nenhum Lançamento Encontrado</h2>";
+        }
+
+        lancamentosContainer.innerHTML = lancamentosHTML;
+
+        // Remove a classe 'selected' de todos os botões e a adiciona ao botão clicado
+        diasButtons.forEach(btn => btn.classList.remove("selected"));
+        this.classList.add("selected");
+      });
+    });
+
+    // Simule o clique no botão de Domingo para carregar o conteúdo inicial
+    const domingoButton = document.querySelector(".dia-button[data-dia='Domingo']");
+    domingoButton.click();
+  });
+</script>
+
+
+
+</main>
+
+<%- include("./partials/footer") %>

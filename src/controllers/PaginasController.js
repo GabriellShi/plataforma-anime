@@ -8,6 +8,7 @@ const db = require("../config/sequelize");
 const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
 const Filmes = require("../models/Filmes");
+const Lancamento = require("../models/Lancamento");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize")
 
@@ -77,6 +78,18 @@ const paginasController = {
         message: "Ocorreu um erro ao carregar a Lista Filmes",
       });
     }
+  },
+
+  calendarioAnimes: async (req, res) => {
+    const lancamento = await Lancamento.findAll({
+      order: [['created_at', 'DESC']]
+
+    });
+
+    return res.render("calendarioAnimes", {
+      title: "Calendario - Go Geek" ,
+      lancamento, 
+    });
   },
 
   contato: async (req, res) => {

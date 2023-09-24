@@ -1,0 +1,22 @@
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
+
+ <main class="form-news-create main-news-adm">
+<h1 class="titulo-news-create">Criar Calendario</h1>
+
+    <form action="/lancamento/create" method="post" enctype="multipart/form-data" >
+            <input class="input-form" type="text" name="titulo" placeholder="Titulo">
+            <input class="input-form" type="text" name="horario" placeholder="Horario">
+            <input class="input-form" type="text" name="streaming" placeholder="Streaming">
+
+            <select class="input-form" name="dia"> <option value="" disabled selected>Dia</option>
+                <option value="Domingo">Domingo</option> <option value="Segunda-Feira">Segunda-Feira</option> 
+                <option value="Terça-Feira">Terça-Feira</option> <option value="Quarta-Feira">Quarta-Feira</option>
+                <option value="Quinta-Feira">Quinta-Feira</option> <option value="Sexta-Feira">Sexta-Feira</option>
+                <option value="Sábado">Sábado</option> 
+              </select>
+              
+            <input class="input-form" type="text" name="image" placeholder="Imagem">
+
+            <button type="submit"> Criar Calendario </button>
+    </form> 
+</main>

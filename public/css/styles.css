@@ -1,9 +1,11 @@
-*{
-    margin: 0;
-    font-family:"Roboto",sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-    list-style: none;
+* {
+  box-sizing: border-box;
+  list-style: none;
+  padding: 0;
+  scroll-behavior: smooth;
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  scroll-behavior: smooth;
 }
 
 /* --------------- Estilização do Header -------------------- */
@@ -15,15 +17,7 @@
     justify-content: space-between;
     background-color: hsl(0, 0%, 0%);
   }
-  
-  /*Definindo fonte padrão dos textos do site e zerando margem do site total*/
-  * {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-  }
-  
+
   /* Defininfo a largura e retirando as margem do header  */
   .wrapper-partials {
     width: 100%;
@@ -855,13 +849,6 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
 /* --------------------------- ESTILIZAÇÃO EPISODIOS ADICIONADOS -----------------------------  */
 
-* {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-  }
-  
   .barra-titulo-1-episodios-adicionados {
     background-color: rgb(29, 29, 31);
     width: 30%;
@@ -898,13 +885,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
   
   /* ------------------------------ PAGINA DOS EPISODIO ADICIONADO --------------------------  */
 
-  * {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-  }
-  
+
   .espaco-episodio-selecionado {
     background-color: black;
     padding-bottom: 2rem;
@@ -1132,14 +1113,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
   /* --------------------------------- PEDIDO DE ANIMES -----------------------------------  */
 
-  * {
 
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-    text-decoration: none;
-  }
   
   .site-animes-pedidos-de-animes {
     background-color: black;
@@ -1283,12 +1257,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
   /* ----------------------------- AREA DO CLIENTE ------------------------------  */
 
-  * {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-  }
+
   
   .pagina-area-cliente {
     background-color: black;
@@ -1353,13 +1322,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
   /* --------------------------------- CONTATOS -----------------------------------  */
 
-  * {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-  }
-  
+
   .site-animes-contato {
     background-color: black;
   }
@@ -1408,14 +1371,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
   /* ------------------------------------ ESTILIZAÇÃO GENEROS ----------------------------  */
 
-  * {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-    text-decoration: none;
-  }
-  
+
   .titulo-principal-generos {
     background-color: rgb(0, 0, 255);
   }
@@ -1470,13 +1426,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
   /* ---------------------------------------- LISTA DOS ANIMES --------------------------  */
 
 
-  /*Definindo fonte padrão dos textos do site e zerando margem do site total*/
-* {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-  }
+
   
   .listadeanimes {
     background-color: black;
@@ -1675,13 +1625,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
   /* ---------------------------------- ESTILIZAÇÃO LOGIN -------------------------  */
 
-  * {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-  }
-  
+
   .capa-fundo-login img {
     width: 100%;
     position: relative;
@@ -1867,13 +1811,6 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
   /* --------------------------------- ESTILIZAÇÃO USER CREATE ---------------------------------  */
 
-  * {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-  }
-  
   .informacoes-de-cadastro {
     display: flex;
     flex-direction: row;
@@ -1986,14 +1923,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
   /* ------------------------------ ESTILIZAÇÃO INDEX --------------------------------------  */
 
 
-  /*Definindo fonte padrão dos textos do site e zerando margem do site total*/
-* {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
-  }
-  
+
   .linha-index {
     width: 95%;
   
@@ -2265,3 +2195,163 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
     }
   }
   
+
+
+  /* ---------------------------- Estlizição Calendario/ Lancamentos -------------------------- */
+
+  .main-paginas {
+    background-color: #1c1c1c;
+    padding-top: 1.8rem;
+  }
+
+  .titulo-paginas {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #fff;
+    padding: 0.5rem;
+    background-color: #000;
+    border-radius: 0 0 15px 15px;
+    font-size: 1.8rem;
+  }
+  .dias-da-semana-buttons
+  {
+   display: flex;
+   justify-content: center;
+ }
+  
+.dias-da-semana-buttons button {
+  border: 1px solid #00e6ff;
+  color: #fff;
+  background: #2f2f2f;
+  border-radius: 11px 0;
+  width: 7rem;
+  height: 2.5rem;
+  margin: 0.5rem;
+}
+.dias-da-semana-buttons button:hover {
+  background-color: #00e6ff;
+  cursor: pointer;
+}
+
+
+
+.lado-esquerdo-filho1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 2rem;
+  color: #fff;
+  min-width: 18rem;
+}
+
+.descricao-calendario div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0.5rem;
+}
+.descricao-calendario h2 {
+  color: #fbff00;
+  font-size: 1rem;
+}
+
+.titulo-calendarios{
+  font-size: 3rem;
+}
+.zoomable-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.zoomable-image-container:hover .zoomable-image-overlay {
+  opacity: 1;
+}
+.zoomable-image-container {
+  position: relative;
+  overflow: hidden;
+  transition: filter 0.3s ease-in-out;
+}
+.zoomable-image {
+  max-width: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+.zoomable-image-container:hover .zoomable-image {
+  transform: scale(1.1);
+}
+.zoomable-image-container:hover {
+  filter: brightness(1.3) saturate(2);
+}
+
+.zoomable-image-container-temporada section {
+  min-width: 50%;
+  max-width: 50%;
+}
+
+.lado-esquerdo-neto1 a {
+  text-decoration: none;
+}
+
+.lado-esquerdo-neto1 {
+  border: 2px solid #dfdb04;
+  flex: 1;
+  min-width: 18rem;
+  max-width: 21rem;
+  margin: 10px 10px 1rem;
+  text-align: center;
+}
+.lado-esquerdo-neto1 h2 {
+  font-size: 1rem;
+  color: #ff0;
+  font-weight: 800;
+}
+
+.lado-esquerdo-neto1 h2:hover {
+  color: #fd0000;
+}
+.lado-esquerdo-neto1 p {
+  font-size: 0.8rem;
+  text-align: justify;
+  padding: 0.5rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.lado-esquerdo-neto1 img {
+  width: 100%;
+}
+
+.lado-esquerdo-neto1 h3 {
+  color: red;
+}
+
+.lado-esquerdo-neto1 h3 {
+  font-size: 0.7rem;
+  padding-top: 0.3rem;
+  padding-right: 0.5rem;
+  text-align: end;
+  color: #ffffff;
+}
+
+.lado-esquerdo-neto1-calendario {
+  min-width: 10rem;
+  max-width: 13rem;
+}
+
+.dia-button.selected {
+  background-color: #3498db;
+  color: #fff;
+}
+@media (max-width: 474px) {
+  .dias-da-semana-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: center;
+  }
+}
