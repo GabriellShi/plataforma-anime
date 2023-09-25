@@ -18,16 +18,16 @@
            </div>
 
          
-          <div class="pesquisa-listadosanimes">
+           <form class="pesquisa-listadosanimes" action="/filmesAdicionados" method="GET">
             <div class="barra-de-pesquisa-partials barra-de-pesquisa-lista-dos-animes">
               <div class="pesquisa-lista-dos-animes">
-                <input type="search" placeholder="Pesquisar Pelo Nome..." />
+                <input type="search" name="search" placeholder="Pesquisar Pelo Nome..." />
               </div>
               <div>
-                <button><img src="/img/lupa.png" alt="Lupa" /></button>
+                <button type="submit"><img src="/img/lupa.png" alt="Lupa" /></button>
               </div>
             </div>
-          </div>
+          </form>
         
           <div class="filtros-listadosanimes">
             <ul>

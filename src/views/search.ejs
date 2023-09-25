@@ -1,0 +1,38 @@
+<%- include("./partials/head") %> <%- include("./partials/header") %>
+
+<section class="listadeanimes">
+  <div class="titulo-principal-lista-animes">
+    <h2>Resultado para a pesquisa: <%= termoPesquisa %></h2>
+  </div>
+
+ 
+<section class="search-anime-filme">
+
+    <div class="animes-lancados lista-dos-animes-capas">
+        <% for(let anime of listaAnimeAdmin) {%>
+        <div class="capa-onepiece-index capa-onepiece-listadosanimes">
+          <a href="/anime/<%= anime.id %>">
+            <img src="<%= anime.capa %>" alt="capa" />
+            <h4><%= anime.nome %></h4>
+          </a>
+        </div>
+        <% } %>
+      </div>
+    
+      <div class="animes-lancados">
+                   
+        <% for(let detailsFilme of filmes) {%>
+        <div class="capa-onepiece-index">
+            <a href="/filme/<%= detailsFilme.id %>">
+                <img src="<%= detailsFilme.capa %>" alt="capa"/>
+            </a>
+            <h4><%= detailsFilme.nome %></h4>
+        </div>
+        <% } %>
+    </div>
+
+</section>
+
+
+  <div class="espaco-contato"></div>
+</section>

@@ -20,6 +20,7 @@ const animeController = {
       try {
         // Busque todas as notícias do banco de dados
         const listaAnimeAdmin = await Animes.findAll({
+        order: [['created_at', 'DESC']]
         });
   
         return res.render("listaAnimeAdmin", {

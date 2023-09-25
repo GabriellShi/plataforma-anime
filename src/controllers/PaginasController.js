@@ -13,18 +13,37 @@ const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize")
 
 const paginasController = {
-
   listaAnimeUsuario: async (req, res) => {
     try {
       const page = req.query.page || 1; // Página atual, padrão é 1
       const perPage = 20; // Número de animes por página
+      const selectedLetter = req.query.letter || 'all'; // Letra selecionada, padrão é 'all'
+      const searchQuery = req.query.search || ''; // Termo de pesquisa, padrão é vazio
+      const selectedType = req.query.tipo || ''; // Tipo de linguagem selecionada
   
       // Calcule o índice de início e fim com base na página atual
       const startIndex = (page - 1) * perPage;
       const endIndex = startIndex + perPage;
   
-      // Busque todos os animes do banco de dados
+      // Defina uma condição de filtro com base na letra selecionada
+      let condition = {};
+      if (selectedLetter !== 'all') {
+        condition = { nome: { [Op.like]: `${selectedLetter}%` } };
+      }
+  
+      // Adicione uma condição para a pesquisa pelo nome
+      if (searchQuery) {
+        condition.nome = { [Op.like]: `%${searchQuery}%` };
+      }
+  
+      // Adicione uma condição para o tipo de linguagem selecionada
+      if (selectedType) {
+        condition.tipo = selectedType;
+      }
+  
+      // Busque os animes do banco de dados com base na condição
       const listaAnimeAdmin = await Animes.findAll({
+        where: condition,
         order: [['created_at', 'DESC']]
       });
   
@@ -41,6 +60,9 @@ const paginasController = {
         page, // Página atual
         totalPages, // Número total de páginas
         totalAnimes, // Número total de animes
+        selectedLetter, // Letra selecionada
+        searchQuery, // Termo de pesquisa
+        selectedType, // Tipo de linguagem selecionada
       });
     } catch (error) {
       console.error(error);
@@ -50,6 +72,8 @@ const paginasController = {
       });
     }
   },
+  
+
   
 
   episodiosAdicionados: async (req, res) => {
@@ -97,13 +121,27 @@ const paginasController = {
     try {
       const page = req.query.page || 1; // Página atual, padrão é 1
       const perPage = 20; // Número de filmes por página
+      const searchQuery = req.query.search || ''; // Termo de pesquisa, padrão é vazio
+      const selectedLetter = req.query.letter || 'all'; // Letra selecionada, padrão é 'all'
+
+
   
       // Calcule o índice de início e fim com base na página atual
       const startIndex = (page - 1) * perPage;
       const endIndex = startIndex + perPage;
   
+            // Defina uma condição de filtro com base na letra selecionada
+            let condition = {};
+            if (selectedLetter !== 'all') {
+              condition = { nome: { [Op.like]: `${selectedLetter}%` } };
+            }
+
+      if (searchQuery) {
+        condition.nome = { [Op.like]: `%${searchQuery}%` };
+      }
       // Busque todos os filmes do banco de dados
       const filmes = await Filmes.findAll({
+        where: condition,
         order: [['created_at', 'DESC']],
       });
   
@@ -120,6 +158,8 @@ const paginasController = {
         page, // Página atual
         totalPages, // Número total de páginas
         totalFilmes, // Número total de animes
+        searchQuery, // Termo de pesquisa
+
       });
     } catch (error) {
       console.error(error);

@@ -18,6 +18,7 @@ const episodioRoute = require("./src/routes/episodioRoute");
 const detailsFilmeRoute = require("./src/routes/detailsFilmeRoute");
 const detailsLancamentoRoute = require("./src/routes/detailsLancamentoRoute");
 const authRoute = require("./src/routes/authRoute");
+const searchRoute = require("./src/routes/searchRoute");
 
 // Use o middleware de compressão GZIP
 app.use(compression());
@@ -58,6 +59,7 @@ app.use("/episodio", episodioRoute);
 app.use("/filme", detailsFilmeRoute);
 app.use("/lancamento", detailsLancamentoRoute);
 app.use("/", authRoute);
+app.use("/", searchRoute);
 
 
 app.use("/images", express.static(path.join(__dirname, "/uploads")));

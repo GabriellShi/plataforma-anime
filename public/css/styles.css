@@ -1443,6 +1443,11 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
     padding: 0.3rem;
   }
   
+  .lista-de-animes-por-letra {
+    display: flex;
+    justify-content: center;
+  }
+  
   .lista-de-animes-por-letra ul {
     padding: 0;
     display: flex;
@@ -1626,6 +1631,32 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
   color: white; /* Cor do texto para a página atual */
 }
 
+.filtro-opcao {
+  display: none;
+}
+
+.filtros-internos {
+  display: flex;
+  align-items: center;
+  position: relative; /* Adiciona posição relativa */
+
+}
+
+.filtro-opcoes-container {
+  display: none;
+  flex-direction: column;
+  position: absolute; /* Adiciona posição absoluta */
+  top: 100%; /* Coloca as opções abaixo do botão */
+  left: 0; /* Alinha as opções com o botão */
+  z-index: 1; /* Garante que as opções fiquem acima de outros elementos */
+}
+
+.filtro-opcao {
+  display: block;
+  margin: 5px 0;
+  border: 0;
+
+}
 
 
   /* ---------------------------------- ESTILIZAÇÃO LOGIN -------------------------  */
@@ -2359,4 +2390,12 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
     flex-flow: wrap;
     justify-content: center;
   }
+}
+
+
+
+/* ------------------------------- Estilização pagina Search -----------------------------  */
+
+.search-anime-filme {
+  display: flex;
 }

@@ -7,47 +7,53 @@
 
   <div class="lista-de-animes-por-letra">
     <ul>
-      <li class="all-listadeanimes"><p>ALL</p></li>
-      <li>#</li>
-      <li>A</li>
-      <li>B</li>
-      <li>C</li>
-      <li>D</li>
-      <li>E</li>
-      <li>F</li>
-      <li>G</li>
-      <li>H</li>
-      <li>I</li>
-      <li>J</li>
-      <li>K</li>
-      <li>L</li>
-      <li>M</li>
-      <li>N</li>
-      <li>O</li>
-      <li>P</li>
-      <li>Q</li>
-      <li>R</li>
-      <li>S</li>
-      <li>T</li>
-      <li>U</li>
-      <li>V</li>
-      <li>W</li>
-      <li>X</li>
-      <li>Y</li>
-      <li>Z</li>
+      <a href="/listaAnimeUsuario?letter=all"> <li>ALL</li> </a>
+      <a href="/listaAnimeUsuario?letter=%23"><li>#</li></a>
+
+      <!-- Adicione os links para outras letras do alfabeto -->
+      <a href="/listaAnimeUsuario?letter=A"> <li>A</li> </a>
+      <a href="/listaAnimeUsuario?letter=B"> <li>B</li> </a>
+      <a href="/listaAnimeUsuario?letter=C"> <li>C</li> </a>
+      <a href="/listaAnimeUsuario?letter=D"> <li>D</li> </a>
+      <a href="/listaAnimeUsuario?letter=E"> <li>E</li> </a>
+      <a href="/listaAnimeUsuario?letter=F"> <li>F</li> </a>
+      <a href="/listaAnimeUsuario?letter=G"> <li>G</li> </a>
+      <a href="/listaAnimeUsuario?letter=H"> <li>H</li> </a>
+      <a href="/listaAnimeUsuario?letter=I"> <li>I</li> </a>
+      <a href="/listaAnimeUsuario?letter=J"> <li>J</li> </a>
+      <a href="/listaAnimeUsuario?letter=K"> <li>K</li> </a>
+      <a href="/listaAnimeUsuario?letter=L"> <li>L</li> </a>
+      <a href="/listaAnimeUsuario?letter=M"> <li>M</li> </a>
+      <a href="/listaAnimeUsuario?letter=N"> <li>N</li> </a>
+      <a href="/listaAnimeUsuario?letter=O"> <li>O</li> </a>
+      <a href="/listaAnimeUsuario?letter=P"> <li>P</li> </a>
+      <a href="/listaAnimeUsuario?letter=Q"> <li>Q</li> </a>
+      <a href="/listaAnimeUsuario?letter=R"> <li>R</li> </a>
+      <a href="/listaAnimeUsuario?letter=S"> <li>S</li> </a>
+      <a href="/listaAnimeUsuario?letter=T"> <li>T</li> </a>
+      <a href="/listaAnimeUsuario?letter=U"> <li>U</li> </a>
+      <a href="/listaAnimeUsuario?letter=V"> <li>V</li> </a>
+      <a href="/listaAnimeUsuario?letter=W"> <li>W</li> </a>
+      <a href="/listaAnimeUsuario?letter=X"> <li>X</li> </a>
+      <a href="/listaAnimeUsuario?letter=Y"> <li>Y</li> </a>
+      <a href="/listaAnimeUsuario?letter=Z"> <li>Z</li> </a>
+
     </ul>
   </div>
 
-  <div class="pesquisa-listadosanimes">
+
+
+  <form class="pesquisa-listadosanimes" action="/listaAnimeUsuario" method="GET">
     <div class="barra-de-pesquisa-partials barra-de-pesquisa-lista-dos-animes">
       <div class="pesquisa-lista-dos-animes">
-        <input type="search" placeholder="Pesquisar Pelo Nome..." />
+        <input type="search" name="search" placeholder="Pesquisar Pelo Nome..." />
       </div>
       <div>
-        <button><img src="/img/lupa.png" alt="Lupa" /></button>
+        <button type="submit"><img src="/img/lupa.png" alt="Lupa" /></button>
       </div>
     </div>
-  </div>
+  </form>
+  
 
   <div class="filtros-listadosanimes">
     <ul>
@@ -55,10 +61,37 @@
         <img src="/img/icone-filtro.png" alt="" />
         <li>Filtro</li>
       </div>
+
+
       <div class="filtros-internos">
         <img src="/img/icone-linguagem.png" alt="" />
-        <li>Legendado/Dublado</li>
+        <li id="filtroLinguagem">Legendado/Dublado</li>
+        <div class="filtro-opcoes-container">
+          <a href="#"><div id="legendado" class="filtro-opcao" data-tipo="Legendado">Legendado</div></a>
+          <a href="#"><div id="dublado" class="filtro-opcao" data-tipo="Dublado">Dublado</div></a>
+        </div>
+        <form id="filtroForm" action="/listaAnimeUsuario" method="GET"> <!-- Use um formulário para enviar a seleção ao servidor -->
+          <input type="hidden" name="tipo" id="tipoSelecionado" value=""> <!-- Campo oculto para armazenar o tipo selecionado -->
+        </form>
       </div>
+      
+      <script>
+        $(document).ready(function () {
+          $("#filtroLinguagem").click(function () {
+            $(".filtro-opcoes-container").toggle(); // Alternar a visibilidade do contêiner
+          });
+      
+          // Lidar com o clique nas opções "Legendado" e "Dublado"
+          $(".filtro-opcao").click(function () {
+            const tipoSelecionado = $(this).data("tipo"); // Obter o tipo selecionado
+            $("#tipoSelecionado").val(tipoSelecionado); // Definir o valor no campo oculto
+            $("#filtroForm").submit(); // Enviar o formulário quando uma opção for selecionada
+          });
+        });
+      </script>
+      
+      
+
       <div class="filtros-internos">
         <img src="/img/icone-ordem.png" alt="" />
         <li>Ordenar</li>
@@ -75,7 +108,7 @@
   </div>
 
   <div class="numero-de-animes-na-pagina-listadosanimes">
-    <h4>Exibindo <%= listaAnimeAdmin.length %> Animes - Página <%= page %> de <%= totalPages %></h4>
+    <h4>Exibindo <%= listaAnimeAdmin.length %> Animes - Página <%= page %> de <%= totalPages %> (Letra: <%= selectedLetter.toUpperCase() %>)</h4>
   </div>
   
 
