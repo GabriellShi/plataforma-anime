@@ -57,10 +57,14 @@
 
   <div class="filtros-listadosanimes">
     <ul>
+      
       <div class="filtros-internos">
         <img src="/img/icone-filtro.png" alt="" />
         <li>Filtro</li>
       </div>
+
+
+
 
 
       <div class="filtros-internos">
@@ -90,20 +94,41 @@
         });
       </script>
       
-      
-
-      <div class="filtros-internos">
-        <img src="/img/icone-ordem.png" alt="" />
-        <li>Ordenar</li>
-      </div>
-      <div class="filtros-internos">
-        <li>Nº de Animes</li>
-      </div>
+     
       <div class="filtros-internos">
         <img src="/img/icone-organizar-cimaebaixo.png" alt="" />
-        <li>Organizar</li>
+        <li id="filtroOrganizar">Organizar</li>
         <img src="/img/icone-seta-baixo.png" class="seta-baixo" alt="" />
+        <div class="filtro-opcoes-container-organizar">
+          <a href="#"><div id="ordem-alfabetica" class="filtro-opcao-organizar filtro-opcao" data-tipo="OrdemAlfabetica">Ordem Alfabética</div></a>
+          <a href="#"><div id="recentes" class="filtro-opcao-organizar filtro-opcao" data-tipo="Recentes">Recentes</div></a>
+        </div>
+        <form id="filtroForm-organizar" action="/listaAnimeUsuario" method="GET">
+          <input type="hidden" name="tipo" id="tipoSelecionado" value="">
+          <input type="hidden" name="ordenacao" id="ordenacaoSelecionada" value="">
+        </form>
       </div>
+      
+      
+
+      <script>
+        $(document).ready(function () {
+          $("#filtroOrganizar").click(function () {
+            $(".filtro-opcoes-container-organizar").toggle();
+          });
+      
+          $(".filtro-opcao-organizar").click(function () {
+            const tipoSelecionado = $(this).data("tipo");
+            $("#ordenacaoSelecionada").val(tipoSelecionado); // Use "ordenacaoSelecionada" em vez de "tipoSelecionado"
+      
+            // Submeta o formulário para acionar a filtragem
+            $("#filtroForm-organizar").submit();
+          });
+        });
+      </script>
+      
+
+
     </ul>
   </div>
 

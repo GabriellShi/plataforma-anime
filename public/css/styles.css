@@ -1641,7 +1641,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
   position: relative; /* Adiciona posição relativa */
 
 }
-
+.filtro-opcoes-container-organizar,
 .filtro-opcoes-container {
   display: none;
   flex-direction: column;
@@ -1650,6 +1650,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
   left: 0; /* Alinha as opções com o botão */
   z-index: 1; /* Garante que as opções fiquem acima de outros elementos */
 }
+
 
 .filtro-opcao {
   display: block;

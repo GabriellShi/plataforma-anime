@@ -10,6 +10,7 @@ const Episodios = require("../models/Episodios");
 const Filmes = require("../models/Filmes");
 const Lancamento = require("../models/Lancamento");
 const { Op } = require("sequelize");
+
 const { Sequelize } = require("../config/sequelize")
 
 const paginasController = {
@@ -20,7 +21,15 @@ const paginasController = {
       const selectedLetter = req.query.letter || 'all'; // Letra selecionada, padrão é 'all'
       const searchQuery = req.query.search || ''; // Termo de pesquisa, padrão é vazio
       const selectedType = req.query.tipo || ''; // Tipo de linguagem selecionada
-  
+      const selectedOrder = req.query.ordenacao || 'recentes';
+
+
+              let order;
+        if (selectedOrder === 'OrdemAlfabetica') {
+          order = [['nome', 'ASC']];
+        } else {
+          order = [['created_at', 'DESC']];
+        }
       // Calcule o índice de início e fim com base na página atual
       const startIndex = (page - 1) * perPage;
       const endIndex = startIndex + perPage;
@@ -44,7 +53,7 @@ const paginasController = {
       // Busque os animes do banco de dados com base na condição
       const listaAnimeAdmin = await Animes.findAll({
         where: condition,
-        order: [['created_at', 'DESC']]
+        order: order,
       });
   
       // Filtrar os animes para a página atual
@@ -63,6 +72,7 @@ const paginasController = {
         selectedLetter, // Letra selecionada
         searchQuery, // Termo de pesquisa
         selectedType, // Tipo de linguagem selecionada
+        selectedOrder,
       });
     } catch (error) {
       console.error(error);
@@ -183,6 +193,65 @@ const paginasController = {
     });
   },
 
+  
+
+  paginaGeneroSelecionado: async (req, res) => {
+    try {
+      const page = req.query.page || 1;
+      const perPage = 20;
+      const selectedLetter = req.query.letter || 'all';
+      const searchQuery = req.query.search || '';
+      const selectedType = req.query.tipo || '';
+      const selectedOrder = req.query.ordenacao || 'recentes';
+      const genero = req.params.genero; // Obtenha o gênero da URL
+  
+      let order;
+      if (selectedOrder === 'OrdemAlfabetica') {
+        order = [['nome', 'ASC']];
+      } else {
+        order = [['created_at', 'DESC']];
+      }
+  
+   
+      // Sua lógica de consulta para buscar os animes com o gênero especificado
+      const listaAnimeAdmin = await Animes.findAll({
+        where: {
+          genero: genero, // Filtre pelo gênero da URL
+          // Outras condições de filtro aqui (letra, pesquisa, tipo)
+        },
+        order: order,
+      });
+
+
+      const totallistaAnimeAdmin = listaAnimeAdmin.length;
+      const totalPages = Math.ceil(totallistaAnimeAdmin / perPage);
+      return res.render("paginaGeneroSelecionado", {
+         title: "Generos" ,
+         listaAnimeAdmin,
+         page,
+         totalPages,
+         totallistaAnimeAdmin,
+         selectedLetter,
+        });
+  
+      // Restante da lógica para paginação e renderização
+      // ...
+    } catch (error) {
+      console.error(error);
+      return res.status(500).render("error", {
+        title: "Erro",
+        message: "Ocorreu um erro ao carregar a lista de Animes",
+      });
+    }
+  },
+  
+
+  
+  genero: async (req, res) => {
+    return res.render("genero", { title: "Generos" });
+  },
+
+
   contato: async (req, res) => {
     return res.render("contato", { title: "Contato" });
   },
@@ -197,10 +266,6 @@ const paginasController = {
 
   melhorias: async (req, res) => {
     return res.render("melhorias", { title: "Melhorias" });
-  },
-
-  generos: async (req, res) => {
-    return res.render("generos", { title: "Generos" });
   },
 
 

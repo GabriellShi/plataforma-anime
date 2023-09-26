@@ -1,0 +1,66 @@
+<%- include("./partials/head") %> <%- include("./partials/header") %>
+
+<section class="listadeanimes">
+  <div class="titulo-principal-lista-animes">
+    <h2>LISTA DE ANIMES COMPLETA</h2>
+  </div>
+
+
+
+    </ul>
+  </div>
+
+  <div class="numero-de-animes-na-pagina-listadosanimes">
+    <h4>Exibindo <%= listaAnimeAdmin.length %> Animes - Página <%= page %> de <%= totalPages %> (Letra: <%= selectedLetter.toUpperCase() %>)</h4>
+  </div>
+  
+
+
+  <div class="animes-lancados lista-dos-animes-capas">
+    <% for (let anime of listaAnimeAdmin) { %>
+      <div class="capa-onepiece-index capa-onepiece-listadosanimes">
+        <a href="/anime/<%= anime.id %>">
+          <img src="<%= anime.capa %>" alt="capa" />
+          <h4><%= anime.nome %></h4>
+        </a>
+      </div>
+    <% } %>
+  </div>
+  
+
+<div class="numero-da-pagina-listadosanimes numero-da-pagina-episodios-adiconados">
+  <ul>
+    <% if (page > 1) { %>
+      <a href="?page=<%= page - 1 %>"><li><img src="/img/icone-seta-direita.png" alt=""></li></a>
+    <% } %>
+    <% const maxVisiblePages = 6; // Número máximo de páginas visíveis %>
+    <% const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2)); %>
+    <% const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1); %>
+    <% if (startPage > 1) { %>
+      <a href="?page=1"><li>1</li></a>
+      <% if (startPage > 2) { %>
+        <li>...</li>
+      <% } %>
+    <% } %>
+    <% for (let i = startPage; i <= endPage; i++) { %>
+      <a href="?page=<%= i %>">
+        <li <%= i === page ? 'class="current"' : '' %>>
+          <%= i %>
+        </li>
+      </a>
+    <% } %>
+    <% if (endPage < totalPages) { %>
+      <% if (endPage < totalPages - 1) { %>
+        <li>...</li>
+      <% } %>
+      <a href="?page=<%= totalPages %>"><li><%= totalPages %></li></a>
+    <% } %>
+    <% if (page < totalPages) { %>
+      <a href="?page=<%= page + 1 %>"><li><img src="/img/icone-seta-esquerda.png" alt=""></li></a>
+    <% } %>
+  </ul>
+</div>
+
+
+  <div class="espaco-contato"></div>
+</section>

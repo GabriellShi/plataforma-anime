@@ -105,6 +105,31 @@ SELECT * FROM filmes;
 
 
 
+-- Cria tabela de usuário
+CREATE TABLE lancamento (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(150) NOT NULL,
+    horario VARCHAR(100) NOT NULL,
+    dia VARCHAR(100) NOT NULL,
+    image VARCHAR(500),
+    streaming VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO lancamento (
+titulo, horario, dia, image, streaming
+)
+
+VALUES 
+	(
+"tate no yusha", "08", "domingo", "0b5bd355eb900ff34ade.jpg", "disney"
+    );
+
+-- Lista todos os usuários
+SELECT * FROM lancamento;	
+
+
+
 
 
 
