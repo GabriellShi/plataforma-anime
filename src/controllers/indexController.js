@@ -29,6 +29,16 @@ const indexController = {
         order: [['created_at', 'DESC']]
       });
 
+      const animesPopulares = await Animes.findAll({
+        order: [
+            ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
+        ],
+        limit: 4, // Limitar a 4 resultados
+    });
+
+    // Ira ajustar a ordem que não está funcionando no DESC 
+  animesPopulares.sort((a, b) => b.likes - a.likes);
+
 // Função para dividir um array em grupos de tamanho especificado
 function chunkArray(array, chunkSize) {
   const chunks = [];
@@ -45,6 +55,7 @@ function chunkArray(array, chunkSize) {
       episodios,
       filmes,
       chunkArray,
+      animesPopulares,
       user: req.cookies.user,
     });
 

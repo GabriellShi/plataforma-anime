@@ -6,6 +6,13 @@ const upload = require("../helpers/multer");
 // Controllers
 const animeController = require("../controllers/AnimeController");
 
+
+// Rota para votar "gostei"
+router.post("/vote/:id/like", animeController.like);
+
+// Rota para votar "não gostei"
+router.post("/vote/:id/dislike", animeController.dislike);
+
 // Rota do controlador 'store' que ira criar um novo usuario
 router.get("/create", animeController.create);
 
@@ -29,5 +36,6 @@ router.get("/", animeController.index);
 
 // Rota do controlador 'show' que ira fazer a visualização de cada usuario
 router.get("/:id", animeController.show);
+
 
 module.exports = router;

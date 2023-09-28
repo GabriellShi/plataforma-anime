@@ -40,12 +40,14 @@ CREATE TABLE animes(
     capa VARCHAR(500),
     tipo VARCHAR(100) NOT NULL,
     status VARCHAR(100) NOT NULL,
+    likes VARCHAR(900) NOT NULL,
+    dislikes VARCHAR(900) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Adiciona um Novo Anime
--- ALTER TABLE animes ADD status VARCHAR(100) NOT NULL;
+-- ALTER TABLE animes ADD likes VARCHAR(900) NOT NULL;
 
 -- Insere um ou mais usuário
 INSERT INTO animes (nome, autor, estudio, sinopse, genero)
@@ -138,9 +140,7 @@ SELECT * FROM lancamento;
  -- ALTER TABLE news ADD description1 TEXT(1000)  NOT NULL;
   
  -- Apagar Coluna
- 
-  -- ALTER TABLE news
- -- DROP COLUMN image;
+  -- ALTER TABLE animes DROP COLUMN dislikes;
 
 
 -- UPDATE users SET is_admin = 1 WHERE id = 16;

@@ -58,13 +58,11 @@
   <div class="filtros-listadosanimes">
     <ul>
       
-      <div class="filtros-internos">
+      <div class="filtros-internos" id="filtro-generos">
         <img src="/img/icone-filtro.png" alt="" />
-        <li>Filtro</li>
-      </div>
-
-
-
+        <li>Generos</li>
+    </div>
+    
 
 
       <div class="filtros-internos">
@@ -132,6 +130,100 @@
     </ul>
   </div>
 
+  
+
+
+
+
+        
+
+<div class="lista-generos lista-generos-part-animes" id="lista-generos">
+
+  
+  <ul>
+
+    <a href="#" data-genero="Ação" class="<%= selectedGenres.includes('Ação') ? 'selected' : '' %>"><li>Ação</li></a>
+    <a href="#" data-genero="Comédia Romântica" class="<%= selectedGenres.includes('Comédia Romântica') ? 'selected' : '' %>"><li>Comédia Romântica</li></a>
+    <a href="#" data-genero="Animação" class="<%= selectedGenres.includes('Animação') ? 'selected' : '' %>"><li>Animação</li></a>
+    <a href="#" data-genero="Artes Marciais" class="<%= selectedGenres.includes('Artes Marciais') ? 'selected' : '' %>"><li>Artes Marciais</li></a>
+    <a href="#" data-genero="Aventura" class="<%= selectedGenres.includes('Aventura') ? 'selected' : '' %>"><li>Aventura</li></a>
+    <a href="#" data-genero="Comédia" class="<%= selectedGenres.includes('Comédia') ? 'selected' : '' %>"><li>Comédia</li></a>
+    <a href="#" data-genero="Cotidiano" class="<%= selectedGenres.includes('Cotidiano') ? 'selected' : '' %>"><li>Cotidiano</li></a>
+    <a href="#" data-genero="Drama" class="<%= selectedGenres.includes('Drama') ? 'selected' : '' %>"><li>Drama</li></a>
+    <a href="#" data-genero="Dorama" class="<%= selectedGenres.includes('Dorama') ? 'selected' : '' %>"><li>Dorama</li></a>
+    <a href="#" data-genero="Ecchi" class="<%= selectedGenres.includes('Ecchi') ? 'selected' : '' %>"><li>Ecchi</li></a>
+    <a href="#" data-genero="Escolar" class="<%= selectedGenres.includes('Escolar') ? 'selected' : '' %>"><li>Escolar</li></a>
+    <a href="#" data-genero="Esporte" class="<%= selectedGenres.includes('Esporte') ? 'selected' : '' %>"><li>Esporte</li></a>
+    <a href="#" data-genero="Fantasia" class="<%= selectedGenres.includes('Fantasia') ? 'selected' : '' %>"><li>Fantasia</li></a>
+    <a href="#" data-genero="Ficção Cientifica" class="<%= selectedGenres.includes('Ficção Cientifica') ? 'selected' : '' %>"><li>Ficção Cientifica</li></a>
+    <a href="#" data-genero="Game" class="<%= selectedGenres.includes('Game') ? 'selected' : '' %>"><li>Game</li></a>
+    <a href="#" data-genero="Harém" class="<%= selectedGenres.includes('Harém') ? 'selected' : '' %>"><li>Harém</li></a>
+    <a href="#" data-genero="Histórico" class="<%= selectedGenres.includes('Histórico') ? 'selected' : '' %>"><li>Histórico</li></a>
+    <a href="#" data-genero="Infantil" class="<%= selectedGenres.includes('Infantil') ? 'selected' : '' %>"><li>Infantil</li></a>
+    <a href="#" data-genero="Isekai" class="<%= selectedGenres.includes('Isekai') ? 'selected' : '' %>"><li>Isekai</li></a>
+    <a href="#" data-genero="Magia" class="<%= selectedGenres.includes('Magia') ? 'selected' : '' %>"><li>Magia</li></a>
+    <a href="#" data-genero="Mecha" class="<%= selectedGenres.includes('Mecha') ? 'selected' : '' %>"><li>Mecha</li></a>
+    <a href="#" data-genero="Mistério" class="<%= selectedGenres.includes('Mistério') ? 'selected' : '' %>"><li>Mistério</li></a>
+    <a href="#" data-genero="Mitoligia" class="<%= selectedGenres.includes('Mitoligia') ? 'selected' : '' %>"><li>Mitoligia</li></a>
+    <a href="#" data-genero="Musical" class="<%= selectedGenres.includes('Musical') ? 'selected' : '' %>"><li>Musical</li></a>
+    <a href="#" data-genero="Policial" class="<%= selectedGenres.includes('Policial') ? 'selected' : '' %>"><li>Policial</li></a>
+    <a href="#" data-genero="Psicológia" class="<%= selectedGenres.includes('Psicológia') ? 'selected' : '' %>"><li>Psicológia</li></a>
+    <a href="#" data-genero="Romance" class="<%= selectedGenres.includes('Romance') ? 'selected' : '' %>"><li>Romance</li></a>
+    <a href="#" data-genero="Samurai" class="<%= selectedGenres.includes('Samurai') ? 'selected' : '' %>"><li>Samurai</li></a>
+    <a href="#" data-genero="Seinen" class="<%= selectedGenres.includes('Seinen') ? 'selected' : '' %>"><li>Seinen</li></a>
+    <a href="#" data-genero="Shoujo" class="<%= selectedGenres.includes('Shoujo') ? 'selected' : '' %>"><li>Shoujo</li></a>
+    <a href="#" data-genero="Shounen" class="<%= selectedGenres.includes('Shounen') ? 'selected' : '' %>"><li>Shounen</li></a>
+    <a href="#" data-genero="Sobrenatural" class="<%= selectedGenres.includes('Sobrenatural') ? 'selected' : '' %>"><li>Sobrenatural</li></a>
+    <a href="#" data-genero="Super Poder" class="<%= selectedGenres.includes('Super Poder') ? 'selected' : '' %>"><li>Super Poder</li></a>
+    <a href="#" data-genero="Suspense" class="<%= selectedGenres.includes('Suspense') ? 'selected' : '' %>"><li>Suspense</li></a>
+    <a href="#" data-genero="Terror" class="<%= selectedGenres.includes('Terror') ? 'selected' : '' %>"><li>Terror</li></a>
+    <a href="#" data-genero="Vampiros" class="<%= selectedGenres.includes('Vampiros') ? 'selected' : '' %>"><li>Vampiros</li></a>
+    <a href="#" data-genero="Yaoi/Yuri" class="<%= selectedGenres.includes('Yaoi/Yuri') ? 'selected' : '' %>"><li>Yaoi/Yuri</li></a>
+
+  </ul>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Inicialmente, esconda a lista de gêneros
+    $("#lista-generos").hide();
+
+    // Adicione um evento de clique ao filtro "Gêneros"
+    $("#filtro-generos").click(function() {
+        // Use o método 'toggle' para alternar a visibilidade da lista de gêneros
+        $("#lista-generos").toggle();
+    });
+});
+</script>
+
+
+<!-- Adicione este código JavaScript no seu arquivo EJS -->
+<script>
+  $(document).ready(function() {
+    // Adicione um evento de clique aos links de gênero
+    $("a[data-genero]").click(function(e) {
+      e.preventDefault(); // Impedir o comportamento padrão do link
+      
+      const generoSelecionado = $(this).data("genero");
+      
+      // Redirecione para a página com o filtro de gênero
+      window.location.href = `/listaAnimeUsuario?genero=${generoSelecionado}`;
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
   <div class="numero-de-animes-na-pagina-listadosanimes">
     <h4>Exibindo <%= listaAnimeAdmin.length %> Animes - Página <%= page %> de <%= totalPages %> (Letra: <%= selectedLetter.toUpperCase() %>)</h4>
   </div>
@@ -170,7 +262,7 @@
     </ul>
   </div>
 
-  <div class="animes-lancados lista-dos-animes-capas">
+  <div id="lista-animes" class="animes-lancados lista-dos-animes-capas">
     <% for(let anime of listaAnimeAdmin) {%>
     <div class="capa-onepiece-index capa-onepiece-listadosanimes">
       <a href="/anime/<%= anime.id %>">

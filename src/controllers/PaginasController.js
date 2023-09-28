@@ -22,22 +22,28 @@ const paginasController = {
       const searchQuery = req.query.search || ''; // Termo de pesquisa, padrão é vazio
       const selectedType = req.query.tipo || ''; // Tipo de linguagem selecionada
       const selectedOrder = req.query.ordenacao || 'recentes';
-
-
-              let order;
-        if (selectedOrder === 'OrdemAlfabetica') {
-          order = [['nome', 'ASC']];
-        } else {
-          order = [['created_at', 'DESC']];
-        }
+      let selectedGenres = req.query.genero || [];
+  
+      if (!Array.isArray(selectedGenres)) {
+        selectedGenres = [selectedGenres];
+      }
+  
+      let order;
+      if (selectedOrder === 'OrdemAlfabetica') {
+        order = [['nome', 'ASC']];
+      } else {
+        order = [['created_at', 'DESC']];
+      }
+  
       // Calcule o índice de início e fim com base na página atual
       const startIndex = (page - 1) * perPage;
       const endIndex = startIndex + perPage;
   
       // Defina uma condição de filtro com base na letra selecionada
       let condition = {};
+  
       if (selectedLetter !== 'all') {
-        condition = { nome: { [Op.like]: `${selectedLetter}%` } };
+        condition.nome = { [Op.like]: `${selectedLetter}%` };
       }
   
       // Adicione uma condição para a pesquisa pelo nome
@@ -48,6 +54,11 @@ const paginasController = {
       // Adicione uma condição para o tipo de linguagem selecionada
       if (selectedType) {
         condition.tipo = selectedType;
+      }
+  
+      // Adicione a condição de filtro para o gênero selecionado
+      if (selectedGenres.length > 0) {
+        condition.genero = { [Op.in]: selectedGenres };
       }
   
       // Busque os animes do banco de dados com base na condição
@@ -73,6 +84,7 @@ const paginasController = {
         searchQuery, // Termo de pesquisa
         selectedType, // Tipo de linguagem selecionada
         selectedOrder,
+        selectedGenres,
       });
     } catch (error) {
       console.error(error);
@@ -102,6 +114,16 @@ const paginasController = {
         order: [['created_at', 'DESC']]
       });
 
+      const animesPopulares = await Animes.findAll({
+        order: [
+            ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
+        ],
+        limit: 4, // Limitar a 4 resultados
+    });
+
+        // Ira ajustar a ordem que não está funcionando no DESC 
+      animesPopulares.sort((a, b) => b.likes - a.likes);
+  
       const episodiosPaginaAtual = episodios.slice(startIndex, endIndex);
 
         // Calcule o número total de animes, o número total de páginas e a página atual
@@ -115,6 +137,7 @@ const paginasController = {
         page, // Página atual
         totalPages, // Número total de páginas
         totalEpisodios, // Número total de animes
+        animesPopulares,
       
       });
     } catch (error) {
@@ -154,7 +177,17 @@ const paginasController = {
         where: condition,
         order: [['created_at', 'DESC']],
       });
-  
+
+      const animesPopulares = await Animes.findAll({
+        order: [
+            ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
+        ],
+        limit: 4, // Limitar a 4 resultados
+    });
+
+        // Ira ajustar a ordem que não está funcionando no DESC 
+      animesPopulares.sort((a, b) => b.likes - a.likes);
+      
       // Filtrar os filmes para a página atual
       const filmesPaginaAtual = filmes.slice(startIndex, endIndex);
 
@@ -169,6 +202,7 @@ const paginasController = {
         totalPages, // Número total de páginas
         totalFilmes, // Número total de animes
         searchQuery, // Termo de pesquisa
+        animesPopulares,
 
       });
     } catch (error) {

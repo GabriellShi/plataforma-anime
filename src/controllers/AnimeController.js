@@ -50,6 +50,15 @@ const animeController = {
     const episodios = await Episodios.findAll({
     });
 
+    const animesPopulares = await Animes.findAll({
+      order: [
+          ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
+      ],
+      limit: 4, // Limitar a 4 resultados
+  });
+
+  animesPopulares.sort((a, b) => b.likes - a.likes);
+
 
     if (!anime) {
       return res.render("error", {
@@ -62,8 +71,47 @@ const animeController = {
       title: "Visualizar Anime",
       anime,
       episodios,
+      animesPopulares,
     });
   },
+
+  like: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const anime = await Animes.findByPk(id);
+        if (!anime) {
+            return res.status(404).json({ error: "Anime não encontrado" });
+        }
+
+        anime.likes++; // Incrementa o contador de "gostei"
+        await anime.save();
+
+        res.json({ likes: anime.likes });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+},
+
+dislike: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const anime = await Animes.findByPk(id);
+        if (!anime) {
+            return res.status(404).json({ error: "Anime não encontrado" });
+        }
+
+        anime.dislikes++; // Incrementa o contador de "não gostei"
+        await anime.save();
+
+        res.json({ dislikes: anime.dislikes });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+},
 
   create: async (req, res) => {
     return res.render("anime-create", { title: "Cadastrar Anime" });
@@ -219,3 +267,4 @@ const animeController = {
 };
 
 module.exports = animeController;
+

@@ -24,12 +24,49 @@
                                 <h4>Lista</h4>
                                 <img src="/img/icone-lista-anime.png" alt="">
                             </li>
-                            <li class="icone-gostei-pagina-anime"> 
-                            <img src="/img/icone-gostei.png" alt=""> <p>91</p> 
-                            </li>
-                            <li class="icone-desgostei-pagina-anime"> 
-                            <img src="/img/icone-desgostei.png" alt=""> <p>11</p> 
-                            </li>
+
+                        
+                            
+                         
+                        <li class="icone-gostei-pagina-anime">
+                            <img src="/img/icone-gostei.png" alt="Gostei">
+                            <p><span id="likesCount"><%= anime.likes %></span></p>
+                        </li>
+                        <li class="icone-desgostei-pagina-anime">
+                            <img src="/img/icone-desgostei.png" alt="Não Gostei">
+                            <p><span id="dislikesCount"><%= anime.dislikes %></span></p>
+                        </li>
+
+
+                            <script>
+                            // Dentro do seu arquivo HTML ou EJS
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const likesCount = document.getElementById("likesCount");
+                                const dislikesCount = document.getElementById("dislikesCount");
+
+                                document.querySelector(".icone-gostei-pagina-anime").addEventListener("click", async function() {
+                                    const animeId = <%= anime.id %>; // Substitua pelo ID do anime atual
+                                    const response = await fetch(`/anime/vote/${animeId}/like`, { method: "POST" });
+                                    if (response.ok) {
+                                        const data = await response.json();
+                                        likesCount.textContent = data.likes;
+                                    }
+                                });
+
+                                document.querySelector(".icone-desgostei-pagina-anime").addEventListener("click", async function() {
+                                    const animeId = <%= anime.id %>; // Substitua pelo ID do anime atual
+                                    const response = await fetch(`/anime/vote/${animeId}/dislike`, { method: "POST" });
+                                    if (response.ok) {
+                                        const data = await response.json();
+                                        dislikesCount.textContent = data.dislikes;
+                                    }
+                                });
+                            });
+
+                            </script>
+
+
+
                         </ul>
                     </div>
                 </div>
@@ -206,57 +243,30 @@
 
         <div class="linha-lateral-direita-index2"> </div>
         <div class="linha-lateral-direita-index">
-            <section class="sessao-1-lado-direiro-index">
-                <div class="animes-populares-index">
-                    <h2>ANIMES MAIS POPULARES</h2>
-                <a href=""><div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+            <!-- Dentro de sua visualização (sua_pagina.ejs) -->
+<section class="sessao-1-lado-direiro-index">
+    <div class="animes-populares-index">
+        <h2>ANIMES MAIS POPULARES</h2>
+        <% animesPopulares.forEach(anime => { %>
+            <a href="/anime/<%= anime.id %>">
+                <div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index">
+                        <img src="<%= anime.capa %>" alt="<%= anime.nome %>">
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
                         <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href=""><div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href=""><div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index">
-                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                        </div>
-                        <div class="o-anime-popular-index-lado-direiro">
-                            <div>
-                                <h4>NORAGAMI</h4>
-                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                            <h4><%= anime.nome %></h4>
+                            <div class="nota-do-anime-index">
+                                <img src="/img/nota.png" alt="">
                             </div>
                         </div>
                     </div>
-                </a>
-
                 </div>
-            </section>
+            </a>
+        <% }); %>
+    </div>
+</section>
+
         
             <section class="sessao-1-lado-direiro-index">
                 <div class="animes-populares-index mangas-populares-index">

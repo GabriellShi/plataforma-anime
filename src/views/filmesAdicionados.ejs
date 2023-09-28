@@ -121,56 +121,23 @@
             <section class="sessao-1-lado-direiro-index">
                 <div class="animes-populares-index">
                     <h2>ANIMES MAIS POPULARES</h2>
-                <a href="">
-                    <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index">
-                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                        </div>
-                        <div class="o-anime-popular-index-lado-direiro">
-                            <div>
-                                <h4>NORAGAMI</h4>
-                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                    <% animesPopulares.forEach(anime => { %>
+                        <a href="/anime/<%= anime.id %>">
+                            <div class="o-anime-popular-index">
+                                <div class="capa-do-anime-popular-index">
+                                    <img src="<%= anime.capa %>" alt="<%= anime.nome %>">
+                                </div>
+                                <div class="o-anime-popular-index-lado-direiro">
+                                    <div>
+                                        <h4><%= anime.nome %></h4>
+                                        <div class="nota-do-anime-index">
+                                            <img src="/img/nota.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        
-                    </div>
-                </a>
-                
+                        </a>
+                    <% }); %>
                 </div>
             </section>
         
