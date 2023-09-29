@@ -7,6 +7,8 @@
 
 <% if(locals.episodio){ %>
 
+<% if(locals.anime){ %>
+
 
 
 <section class="site-animes-pedidos-de-animes site-animes-episodio-selecionado ">
@@ -15,14 +17,14 @@
     <div class="lado-esquerdo-do-site-pagina-anime">
         <div class="espaco-episodio-selecionado"></div>
         <div class="titulo-principal-episodio-selecionado">
-            <h2><%= episodio.nome %> - Episodio <%= episodio.id %></h2>
+            <h2><%= episodio.nome %> - Episodio <%= episodio.numero_episodio %></h2>
         </div>
-
+        <a href="<%= episodio.video_url %>">
         <div class="capa-episodio-selecionado">
-            <a href="#"><img src="/img/capa-para-o-episodio.jpg" alt=""></a>
+            <img src="/img/capa-para-o-episodio.jpg" alt="">
         </div>
         <button class="botao-para-episodio"><h2>ABRIR O PLAYER</h2></button>
-
+    </a>
 
         <li class="capa-e-numero-do-episodio-pagina-anime">
             <div>
@@ -38,24 +40,33 @@
                         <h4>Favorito</h4>
                     </li>
                 </a>
-                <a href="#">
+                <% if (previousEpisode) { %>
+                <a href="/episodio/<%= previousEpisode.id %>">
                     <li>
                     <img src="/img/icone-seta-direita2.png" alt="">
                     <h4>Episódio Anterior</h4>
                     </li>
                 </a>
-                <a href="#">
+                <% } %>
+
+
+                <a href="/anime/<%= anime.id %>">
                     <li>
-                    <img src="/img/icone-lista-anime2.png" alt="">
-                    <h4>Lista de Episódios</h4>
+                        <img src="/img/icone-lista-anime2.png" alt="">
+                        <h4>Lista de Episódios</h4>
                     </li>
                 </a>
-                <a href="#">
+                
+  
+                <% if (nextEpisode) { %>
+                <a href="/episodio/<%= nextEpisode.id %>">
                     <li class="proximo-episodio-episodio-selecionado">
                     <h4>Próximo Episódio</h4>
                     <img src="/img/icone-seta-esquerda2.png" alt="">
                     </li>
                 </a>
+                <% } %>
+
                 <a href="#">
                     <li class="adicionar-a-lista2">
                         <img src="/img/icone-favorito.png" alt="">
@@ -73,8 +84,8 @@
         </div>
 
         <div class="texto-assistir-anime-online-episodio-selecionado">
-            <h3>Assistir <%= episodio.nome %>: Episodio <%= episodio.id %> - Online Gratis, Assistir <%= episodio.nome %>: Episodio <%= episodio.id %> -
-             Online Legendado, Assistir <%= episodio.nome %>: Episodio <%= episodio.id %> - Online em HD
+            <h3>Assistir <%= episodio.nome %>: Episodio <%= episodio.numero_episodio%> - Online Gratis, Assistir <%= episodio.nome %>: Episodio <%= episodio.numero_episodio %> -
+             Online Legendado, Assistir <%= episodio.nome %>: Episodio <%= episodio.numero_episodio%> - Online em HD
             </h3>
         </div>
 
@@ -123,62 +134,41 @@
         <div class="linha-lateral-direita-index">
 
             <section class="sessao-1-lado-direiro-index">
-                <div class="animes-populares-index mangas-populares-index o-anime-popular-episodio-selecionado">
-                    <h2>Episódios</h2>
-                <a href="">
-                    <div class="o-anime-popular-index dd">
-                        <div class="capa-do-anime-popular-index"> 
-                            <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt=""> 
-                        </div>
-                        <div class="o-anime-popular-index-lado-direiro ">
-                            <div>
-                                <h4>Episódio 1053</h4>
-                                <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index o-anime-popular-episodio-selecionado">
-                        <div class="capa-do-anime-popular-index"> 
-                            <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt=""> 
-                        </div>
-                        <div class="o-anime-popular-index-lado-direiro">
-                            <div>
-                                <h4>Episódio 1054</h4>
-                                <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index o-anime-popular-episodio-selecionado">
-                        <div class="capa-do-anime-popular-index"> <img src="<%= episodio.imagem %>" alt="avatar"/>
-                        </div>
-                        <div class="o-anime-popular-index-lado-direiro">
-                            <div>
-                                <h4>Episódio <%= episodio.id %></h4>
-                                <div class="nota-do-anime-index"><h6><%= episodio.data %></h6></div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index o-anime-popular-episodio-selecionado">
-                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
-                        </div>
-                        <div class="o-anime-popular-index-lado-direiro">
-                            <div>
-                                <h4>Episódio 1056</h4>
-                                <div class="nota-do-anime-index"><h6>19 de março de 2023</h6></div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </a>
-
+                <!-- Episódio Anterior -->
+                <% if (previousEpisode) { %>
+                    <div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index">
+                    <a href="/episodio/<%= previousEpisode.id %>">
+                      <img src="<%= previousEpisode.image %>" alt="Episódio Anterior">
+                      <h4>Episódio <%= previousEpisode.numero_episodio %></h4>
+                    </a>
+                  </div>
                 </div>
-            </section>
+                <% } %>
+              
+                <!-- Episódio Atual -->
+                <div class="o-anime-popular-index">
+                <div class="capa-do-anime-popular-index">
+                  <img src="<%= episodio.image %>" alt="Episódio Atual">
+                  <h4>Episódio <%= episodio.numero_episodio %></h4>
+                </div>
+            </div>
+              
+                <!-- Próximo Episódio -->
+                <% if (nextEpisode) { %>
+                    <div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index">
+                    <a href="/episodio/<%= nextEpisode.id %>">
+                      <img src="<%= nextEpisode.image %>" alt="Próximo Episódio">
+                      <h4>Episódio <%= nextEpisode.numero_episodio %></h4>
+                    </a>
+                  </div>
+                </div>
+                  
+                <% } %>
+              </section>
+              
+              
 
             <section class="sessao-1-lado-direiro-index">
                 <div class="animes-populares-index mangas-populares-index">
@@ -241,5 +231,9 @@
 <% } else {%>
     <h2>Usuario não Entrado por motivos do além</h2>
 <% }  %>
+<% } else {%>
+    <h2>Usuario não Entrado por motivos do além</h2>
+<% }  %>
+
 
 <%- include("./partials/footer") %> 

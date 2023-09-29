@@ -1,0 +1,96 @@
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
+
+
+
+<main>
+    <h2> Adicionar Episodio </h2>
+    <% if(locals.error){ %>
+        <h2> <%= error.message%> </h2>
+    <% } %> 
+    <form action="/episodio/create" method="post" enctype="multipart/form-data">
+        <input type="text" name="nome" placeholder="Nome do episodio" />
+        <input type="date" name="data" placeholder="Data" />
+        <input type="text" name="image" placeholder="Imagem" />
+        <!-- Novos campos -->
+        <input type="number" name="animes_id" placeholder="ID do Anime" />
+        <input type="number" name="numero_episodio" placeholder="Número do Episódio" />
+        <input type="text" name="video_url" placeholder="URL do Vídeo" />
+
+        <button type="submit">Adicionar</button>
+    </form>
+</main>
+
+
+
+<section class="listadeanimes">
+  <div class="titulo-principal-lista-animes">
+    <h2>Adicionar Episodio</h2>
+  </div>
+
+  <form class="pesquisa-listadosanimes" action="/listaAnimeUsuario" method="GET">
+    <div class="barra-de-pesquisa-partials barra-de-pesquisa-lista-dos-animes">
+      <div class="pesquisa-lista-dos-animes">
+        <input type="search" name="search" placeholder="Pesquisar Pelo Nome..." />
+      </div>
+      <div>
+        <button type="submit"><img src="/img/lupa.png" alt="Lupa" /></button>
+      </div>
+    </div>
+  </form>
+  
+
+  <div class="numero-de-animes-na-pagina-listadosanimes">
+    <h4>Exibindo <%= listaAnimeAdmin.length %> Animes - Página <%= page %> de <%= totalPages %> </h4>
+  </div>
+
+  <div id="lista-animes" class="animes-lancados lista-dos-animes-capas">
+    <% for(let anime of listaAnimeAdmin) {%>
+        <a href="/anime/edit/<%= anime.id %>">
+    <div class="capa-onepiece-index capa-onepiece-listadosanimes">
+        <img src="<%= anime.capa %>" alt="capa" />
+        <h4><%= anime.nome %></h4>
+        </a>
+    </div>
+    <% } %>
+  </div>
+
+<div class="numero-da-pagina-listadosanimes numero-da-pagina-episodios-adiconados">
+  <ul>
+    <% if (page > 1) { %>
+      <a href="?page=<%= page - 1 %>"><li><img src="/img/icone-seta-direita.png" alt=""></li></a>
+    <% } %>
+    <% const maxVisiblePages = 6; // Número máximo de páginas visíveis %>
+    <% const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2)); %>
+    <% const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1); %>
+    <% if (startPage > 1) { %>
+      <a href="?page=1"><li>1</li></a>
+      <% if (startPage > 2) { %>
+        <li>...</li>
+      <% } %>
+    <% } %>
+    <% for (let i = startPage; i <= endPage; i++) { %>
+      <a href="?page=<%= i %>">
+        <li <%= i === page ? 'class="current"' : '' %>>
+          <%= i %>
+        </li>
+      </a>
+    <% } %>
+    <% if (endPage < totalPages) { %>
+      <% if (endPage < totalPages - 1) { %>
+        <li>...</li>
+      <% } %>
+      <a href="?page=<%= totalPages %>"><li><%= totalPages %></li></a>
+    <% } %>
+    <% if (page < totalPages) { %>
+      <a href="?page=<%= page + 1 %>"><li><img src="/img/icone-seta-esquerda.png" alt=""></li></a>
+    <% } %>
+  </ul>
+</div>
+
+
+  <div class="espaco-contato"></div>
+</section>
+
+
+
+

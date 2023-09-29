@@ -1,7 +1,6 @@
 const db = require("../config/sequelize");
 const Sequelize = require("sequelize");
 
-
 const Episodios = db.define(
   "Episodios",
   {
@@ -11,32 +10,49 @@ const Episodios = db.define(
       primaryKey: true,
     },
 
-    nome: {
-      type: Sequelize.DataTypes.STRING(100),
+    animes_id: {
+      type: Sequelize.DataTypes.INTEGER.UNSIGNED,
+    },
+
+    numero_episodio: {
+      type: Sequelize.DataTypes.INTEGER,
       allowNull: false,
     },
-    data: {
-      type: Sequelize.DataTypes.STRING(100),
-      allowNull: false,
-    },
-      image: {
+
+    video_url: {
       type: Sequelize.DataTypes.STRING(500),
       allowNull: false,
     },
 
+    nome: {
+      type: Sequelize.DataTypes.STRING(100),
+      allowNull: false,
+    },
+    
+    data: {
+      type: Sequelize.DataTypes.STRING(100),
+      allowNull: false,
+    },
+    
+    image: {
+      type: Sequelize.DataTypes.STRING(500),
+      allowNull: false,
+    },
 
     created_at: {
       type: Sequelize.DataTypes.DATE,
-      defaultValue: Sequelize.NOW, // Define o valor padrão como a data e hora atual
+      defaultValue: Sequelize.NOW,
     },
 
   },
-
   {
-    tableName: "episodios", // Defina o nome da tabela aqui
-    timestamps: false, // Isso desativará as colunas de timestamps
-  },
+    tableName: "episodios",
+    timestamps: false,
+  }
 
+  
 );
+
+
 
 module.exports = Episodios;

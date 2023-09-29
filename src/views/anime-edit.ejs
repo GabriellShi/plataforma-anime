@@ -91,59 +91,55 @@
         <section class="sessao2-pagina-anime">
 
             <div>
-                <div class="temporadas-pagina-anime">
-                    <ul>
-                        <li class="numero-da-tempora-pagina-anime">1</li>
-                        <li class="numero-da-tempora2-pagina-anime">Temporada 1</li>
-                    </ul>
-                </div>
-
-  
-                <!-- <form action="/anime/create" method="post">
-
-                    
-                    <label for="nome"></label>
-                    <select name="nome-episodio" aria-required="true" aria-invalid="false"><option value="-">
-                    </option><option value="">Sasuke</option></select>
-
-                    <input type="file"  name="imagem" id="" placeholder="Imagem">
-                    <input type="date" name="data">
-                    <input type="submit">
-                </form> -->
 
                 <main>
                     <h2> Adicionar Episodio </h2>
                     <% if(locals.error){ %>
                         <h2> <%= error.message%> </h2>
                     <% } %> 
-                    <form action="/episodio/create " method="post" enctype="multipart/form-data">
-                        <input type="text" name="nome" placeholder="Nome"  />
+                    <form action="/episodio/create" method="post" enctype="multipart/form-data">
+                        <input type="text" name="nome" placeholder="Nome do Anime" value="<%= animeNome %>" readonly />
+
                         <input type="date" name="data" placeholder="Data" />
-                        <input type="file" name="imagem" />
-            
+                        <input type="text" name="image" placeholder="Imagem" />
+                        <input type="number" name="animes_id" placeholder="ID do Anime" value="<%= animeId %>" readonly />
+                        <input type="number" name="numero_episodio" placeholder="Número do Episódio" />
+                        <input type="text" name="video_url" placeholder="URL do Vídeo" />
+                
                         <button type="submit">Adicionar</button>
                     </form>
                 </main>
-                       
-                <% for(let episodio of episodios) {%>
-                    <a href="/episodio/<%= episodio.id %>">
-                        <li class="capa-e-numero-do-episodio-pagina-anime">
-                                
-                            <div>
-                                
-                                <img src="<%= episodio.imagem %>" alt="capa"/>
-                            </div>
-                            <div class="data-lancamento">
-                                <div>
-                                    <h3>Episódio <%= episodio.id %></h3>
-                                    <h5><%= episodio.nome %></h5>
-                                    <h5><%= episodio.data %></h5>
-                                </div>      
-                            </div>   
-                        </li>
-                    </a>
-                        <% } %>
 
+                <div class="temporadas-pagina-anime">
+                    <ul>
+                        <li class="numero-da-tempora-pagina-anime"></li>
+                        <li class="numero-da-tempora2-pagina-anime">EPISODIOS</li>
+                    </ul>
+                </div>
+                       
+                <div class="numero-do-episodio-pagina-anime">
+                    <ul> 
+                <% for(let episodio of episodios) {%>
+                        <li class="capa-e-numero-do-episodio-pagina-anime"> 
+                    <a href="/episodio/<%= episodio.id %>">
+                        <div>
+                            <img src="<%= episodio.image %>" alt="capa"/>
+                        </div>
+                        <div class="data-lancamento">
+                            <div>
+                                <h3>Episódio - <%= episodio.numero_episodio %></h3>
+                                <h5><%= episodio.nome %> - <%= episodio.data %> 
+                            </div>      
+                        </div> 
+                    </a>
+                        <a href="/episodio/edit/<%= episodio.id %>">Editar</a>
+                        <a href="/episodio/delete/<%= episodio.id %>">Excluir</a>  
+                        </li>
+                        
+                    
+                    <% } %>
+                    </ul>
+                </div>
    
        
                       

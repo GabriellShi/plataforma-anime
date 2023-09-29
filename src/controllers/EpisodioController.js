@@ -4,6 +4,7 @@ const upload = require("../config/upload");
 const path = require("path");
 
 const db = require("../config/sequelize");
+const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize"); 
@@ -35,64 +36,102 @@ const episodioController = {
 
   // show - controlador que ira visualizar os detalhas de cada usuario da lista 'users'
   show: async (req, res) => {
-  try {
-
-    const { id } = req.params;
-
-    const episodio = await Episodios.findByPk(id); 
-
-    if (!episodio) {
-      return res.render("error", {
-        title: "Ops!",
-        message: "Episodio não encontrado",
+    try {
+      const { id } = req.params;
+  
+      // Primeiro, encontre o episódio pelo ID
+      const episodio = await Episodios.findByPk(id);
+  
+      if (!episodio) {
+        return res.render("error", {
+          title: "Ops!",
+          message: "Episódio não encontrado",
+        });
+      }
+  
+      // Em seguida, obtenha o ID do anime relacionado a esse episódio
+      const animeId = episodio.animes_id;
+  
+      // Agora, busque o anime com base no animeId
+      const anime = await Animes.findByPk(animeId);
+  
+      // Em seguida, busque todos os episódios relacionados a esse anime
+      const episodios = await Episodios.findAll({
+        where: { animes_id: animeId },
+        order: [['numero_episodio', 'ASC']],
+      });
+  
+      // Obtenha o índice do episódio atual
+      const currentEpisodeIndex = episodios.findIndex(
+        (ep) => ep.numero_episodio === episodio.numero_episodio
+      );
+  
+      // Obtenha os episódios anterior e próximo com base no índice atual
+      const previousEpisode =
+        currentEpisodeIndex > 0 ? episodios[currentEpisodeIndex - 1] : null;
+      const nextEpisode =
+        currentEpisodeIndex < episodios.length - 1
+          ? episodios[currentEpisodeIndex + 1]
+          : null;
+  
+      return res.render("episodio", {
+        title: "Visualizar Episódio",
+        episodio,
+        anime,
+        episodios,
+        previousEpisode,
+        nextEpisode,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).render("error", {
+        title: "Erro",
+        message: "Ocorreu um erro ao carregar os detalhes do episódio",
       });
     }
-
-    return res.render("episodio", {
-      title: "Visualizar Episodio",
-      episodio,
-    });
-
-  } catch (error) {
-    console.error(error);
-    return res.status(500).render("error", {
-      title: "Erro",
-      message: "Ocorreu um erro ao carregar os detalhes do episodio",
-    });
-  }
   },
+  
 
   create: async (req, res) => {
-    return res.render("episodio-create", { title: "Cadastrar Episodio" });
-  },
-  store: async (req, res) => {
 
-    const { nome, data, image} = req.body;
+    return res.render("episodio-create", {
+      title: "Cadastrar Episodio"
+     });
+  },
+  
+  store: async (req, res) => {
+    const { nome, data, image, animes_id, numero_episodio, video_url } = req.body;
 
     try {
-      const novosEpisodios = await Episodios.create({
-      nome,
-      data,
-      image: image,
-    });
+        const novosEpisodios = await Episodios.create({
+            nome,
+            data,
+            image,
+            animes_id,
+            numero_episodio,
+            video_url,
+        });
 
-
-    res.redirect("/episodio");
-  } catch (error) {
-    console.error(error); // Adicione essa linha para registrar o erro no console
-    res.render("episodio-create", {
-      title: "Erro",
-      message: "Erro ao Cadastrar Episodio!",
-    });
-  }
-  },
+        res.redirect("/episodio");
+    } catch (error) {
+        console.error(error); 
+        res.render("episodio-create", {
+            title: "Erro",
+            message: "Erro ao Cadastrar Episodio!",
+        });
+    }
+},
 
   edit: async (req, res) => {
     const { id } = req.params;
 
     try {
+
+      const anime = await Animes.findByPk(id);
+
       // Busque os detalhes da notícia no banco de dados pelo ID
-      const episodio = await Episodios.findAll({});
+
+      const episodio = await Episodios.findByPk(id);
 
     if (!episodio) {
       return res.render("error", {
@@ -105,6 +144,8 @@ const episodioController = {
       title: "Editar episodio",
       episodio,
       episodios: episodio,
+      animeId: anime.id, // Adicione o ID do anime como uma variável local
+      animeNome: anime.nome, // Adicione o nome do anime como uma variável local
     });
   } catch (error) {
     console.error(error);
@@ -119,7 +160,7 @@ const episodioController = {
    // Executa a atualização
    update: async (req, res) => {
     const { id } = req.params;
-    const { nome, data, image} = req.body;
+    const { nome, data, image, numero_episodio} = req.body;
 
 
     try {
@@ -129,6 +170,7 @@ const episodioController = {
         nome,
         data,
         image,
+        numero_episodio,
       });
 
     return res.render("success", {

@@ -3,15 +3,26 @@
 <main class="form-news-create main-news-adm">
     <h1 class="titulo-news-create">Editar Episodio</h1>
 
+    <% if(locals.episodio){ %>
+
     <form action="/episodio/edit/<%= episodio.id %>" method="post" enctype="multipart/form-data" >
         <input type="hidden" name="_method" value="POST">
-        <input type="text" name="nome" placeholder="Nome"  value=" <%= episodio.nome %>">
-        <input type="date" name="data" placeholder="Data" value=" <%= episodio.data %>">
-        <input type="text" name="image" placeholder="Imagem" value=" <%= episodio.image %>">
-
+        <input type="text" name="nome" placeholder="Nome do Anime" value=" <%= episodio.nome %>"  />
+        <input type="date" name="data" placeholder="Data" />
+        <input type="text" name="image" placeholder="Imagem" value=" <%= episodio.image %>"/>
+        <input type="number" name="animes_id" placeholder="ID do Anime" value=" <%= episodio.animes_id %>" />
+        <input type="number" name="numero_episodio" placeholder="Número do Episódio" value=" <%= episodio.numero_episodio %>"/>
+        <input type="text" name="video_url" placeholder="URL do Vídeo" <%= episodio.video_url %>/>
         <button type="submit"> Atualizar Episodio </button>
 
     </form>
+    <% } else {%>
+        <h2>Usuario não Entrado por motivos do além</h2>
+    <% }  %>
+
+
+    <button type="submit">Adicionar</button>
+</form>
 
 
 </main>

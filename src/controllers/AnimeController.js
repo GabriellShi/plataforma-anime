@@ -45,10 +45,22 @@ const animeController = {
     // id = 4
     const { id } = req.params;
 
-    const anime = await Animes.findByPk(id)
+    const anime = await Animes.findByPk(id, {
+    })
+
+    if (!anime) {
+      return res.render("error", {
+        title: "Ops!",
+        message: "Anime não encontrado",
+      });
+    }
 
     const episodios = await Episodios.findAll({
-    });
+      where: { animes_id: anime.id }, // Filtrar por ID do anime
+      order: [['numero_episodio', 'ASC']], // Ordenar por número de episódio, se necessário
+  });
+
+
 
     const animesPopulares = await Animes.findAll({
       order: [
@@ -60,18 +72,14 @@ const animeController = {
   animesPopulares.sort((a, b) => b.likes - a.likes);
 
 
-    if (!anime) {
-      return res.render("error", {
-        title: "Ops!",
-        message: "Anime não encontrado",
-      });
-    }
+
 
     return res.render("anime", {
       title: "Visualizar Anime",
       anime,
       episodios,
       animesPopulares,
+      
     });
   },
 
@@ -150,7 +158,11 @@ dislike: async (req, res) => {
     try {
       // Busque os detalhes da notícia no banco de dados pelo ID
       const anime = await Animes.findByPk(id);
-      const episodios = await Episodios.findAll({});
+
+      const episodios = await Episodios.findAll({
+        where: { animes_id: anime.id }, // Filtrar por ID do anime
+        order: [['numero_episodio', 'ASC']], // Ordenar por número de episódio, se necessário
+    });
 
     if (!anime) {
       return res.render("error", {
@@ -163,6 +175,8 @@ dislike: async (req, res) => {
       title: "Editar Anime",
       episodios,
       anime,
+      animeId: anime.id, // Adicione o ID do anime como uma variável local
+      animeNome: anime.nome, // Adicione o nome do anime como uma variável local
     });
   } catch (error) {
     console.error(error);
