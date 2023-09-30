@@ -38,7 +38,7 @@
                 <div class="informações-do-anime-lista-anime">
                     <ul>
                         <li><h3>Tipo: <%= detailsFilme.tipo %></h3></li>
-                        <li><h3>Gêneros: <%= detailsFilme.generos %></h3></li>
+                        <li><h3>Gêneros: <%= detailsFilme.genero %></h3></li>
                         <li><h3>Autor: <%= detailsFilme.autor %></h3></li>
                         <li><h3>Estúdio: <%= detailsFilme.estudio %></h3></li>
                     </ul>
@@ -69,20 +69,21 @@
                 </div>
                 <div class="numero-do-episodio-pagina-anime">
                     <ul> 
-
-                        <li class="capa-e-numero-do-episodio-pagina-anime">
+                <% for(let episodio of episodios) {%>
+                    <a href="/episodio/<%= episodio.id %>">
+                        <li class="capa-e-numero-do-episodio-pagina-anime">        
+                        <div>
+                            <img src="<%= episodio.image %>" alt="capa"/>
+                        </div>
+                        <div class="data-lancamento">
                             <div>
-                                <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
-                            </div>
-                            <div class="data-lancamento">
-                                <div>
-                                    <h3>Episódio 2 - 1</h3>
-                                <h5>19 de março de 2023</h5>
-                                </div>
-                            </div>
+                                <h3>Episódio - <%= episodio.numero_episodio %></h3>
+                                <h5><%= episodio.nome %> - <%= episodio.data %> 
+                            </div>      
+                        </div>   
                         </li>
-
-                    
+                    </a>
+                    <% } %>
                     </ul>
                 </div>
             </div>

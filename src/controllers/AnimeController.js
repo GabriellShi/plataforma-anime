@@ -125,7 +125,7 @@ dislike: async (req, res) => {
     return res.render("anime-create", { title: "Cadastrar Anime" });
   },
   store: async (req, res) => {
-    const { nome, tipo, genero, autor, estudio, status, sinopse, capa } = req.body;
+    const { nome, tipo, genero, autor, estudio, status, sinopse, likes, dislikes, capa } = req.body;
 
     try {
 
@@ -137,6 +137,8 @@ dislike: async (req, res) => {
       estudio,
       status,
       sinopse,
+      likes,
+      dislikes,
       capa: capa,
     });
 

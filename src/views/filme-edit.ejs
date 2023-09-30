@@ -84,7 +84,24 @@
                 <button type="submit">Atualizar</button>
             </form>
     
-       
+            <main>
+                <h2> Adicionar Episodio </h2>
+                <% if(locals.error){ %>
+                    <h2> <%= error.message%> </h2>
+                <% } %> 
+                <form action="/episodio/create" method="post" enctype="multipart/form-data">
+                    <input type="text" name="nome" placeholder="Nome do Anime" value="<%= filmeNome %>" readonly />
+
+                    <input type="date" name="data" placeholder="Data" />
+                    <input type="text" name="image" placeholder="Imagem" />
+                    <input type="number" name="filmes_id" placeholder="ID do Filme" value="<%= filmeId %>" readonly />
+                    <input type="number" name="numero_episodio" placeholder="Número do Episódio" />
+                    <input type="text" name="video_url" placeholder="URL do Vídeo" />
+            
+                    <button type="submit">Adicionar</button>
+                </form>
+            </main>
+
             <section class="sessao2-pagina-anime">
 
                 <div>
@@ -96,20 +113,25 @@
                     </div>
                     <div class="numero-do-episodio-pagina-anime">
                         <ul> 
-    
-                            <li class="capa-e-numero-do-episodio-pagina-anime">
+                    <% for(let episodio of episodios) {%>
+                            <li class="capa-e-numero-do-episodio-pagina-anime"> 
+                        <a href="/episodio/<%= episodio.id %>">
+                            <div>
+                                <img src="<%= episodio.image %>" alt="capa"/>
+                            </div>
+                            <div class="data-lancamento">
                                 <div>
-                                    <img src="/img/capa-da-lista-de-episodios-do-anime.png" alt="">
-                                </div>
-                                <div class="data-lancamento">
-                                    <div>
-                                        <h3>Episódio 2 - 1</h3>
-                                    <h5>19 de março de 2023</h5>
-                                    </div>
-                                </div>
+                                    <h3>Episódio - <%= episodio.numero_episodio %></h3>
+                                    <h5><%= episodio.nome %> - <%= episodio.data %> 
+                                </div>      
+                            </div> 
+                        </a>
+                            <a href="/episodio/edit/<%= episodio.id %>">Editar</a>
+                            <a href="/episodio/delete/<%= episodio.id %>">Excluir</a>  
                             </li>
-    
+                            
                         
+                        <% } %>
                         </ul>
                     </div>
                 </div>

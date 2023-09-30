@@ -66,13 +66,29 @@ CREATE TABLE episodios(
     nome VARCHAR(100) NOT NULL,
     data VARCHAR(100) NOT NULL,
     image VARCHAR(500),
+	animes_id INT UNSIGNED,
+    numero_episodio INT NOT NULL,
+	video_url VARCHAR(500),
+    FOREIGN KEY (animes_id) REFERENCES animes(id),
+	filmes_id INT UNSIGNED,
+    FOREIGN KEY (filmes_id) REFERENCES filmes(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+ -- Apagar Coluna
+--   ALTER TABLE episodios DROP COLUMN anime_id;
+
+
+-- Adiciona um Novo Anime
+ -- ALTER TABLE episodios ADD FOREIGN KEY (filmes_id) REFERENCES filmes(id);
+
+
 -- Insere um ou mais usuário
-INSERT INTO episodios (nome, data )
-VALUES ("One Piece 1052", "23/09/2023" );
+INSERT INTO episodios (anime_id, numero_episodio, nome, data, video_url, image )
+VALUES  
+(84, 1, 'Episódio 1', '28/09/2023', 'URL do vídeo do Episódio 1', 'https://animesgames.cc/wp-content/uploads/2023/09/jujutsu-kaisen-2-episodio-9-animes-online.jpg'),
+(84, 2, 'Episódio 2', '28/09/2023', 'URL do vídeo do Episódio 2', 'https://animesgames.cc/wp-content/uploads/2023/09/jujutsu-kaisen-2-episodio-9-animes-online.jpg');
 
 -- Lista todos os usuários
 SELECT * FROM episodios;
@@ -95,6 +111,9 @@ CREATE TABLE filmes(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- Adiciona um Novo Anime
+ -- ALTER TABLE animes ADD FOREIGN KEY (filmes_id) REFERENCES filmes(id);
 
 
 -- Insere um ou mais usuário

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@ckeditor/ckeditor5-build-decoupled-document": "^39.0.2",
+    "axios": "^1.5.1",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cheerio": "^1.0.0-rc.12",

@@ -12,6 +12,9 @@ router.get("/paginasViews", indexAdminController.paginasViews);
 
 router.get("/adicionarEpisodiosLista", indexAdminController.adicionarEpisodiosLista);
 
+router.get("/adicionarFilmesLista", indexAdminController.adicionarFilmesLista);
+
+
 
 
 module.exports = router;

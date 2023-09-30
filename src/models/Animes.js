@@ -46,12 +46,10 @@ const Animes = db.define(
 
     likes: {
       type: Sequelize.DataTypes.STRING(900),
-      allowNull: false,
     },
 
     dislikes: {
       type: Sequelize.DataTypes.STRING(900),
-      allowNull: false,
     },
 
 

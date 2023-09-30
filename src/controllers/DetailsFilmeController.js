@@ -6,6 +6,8 @@ const path = require("path");
 
 const db = require("../config/sequelize");
 const Filmes = require("../models/Filmes");
+const Episodios = require("../models/Episodios");
+const Animes = require("../models/Animes");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize")
 
@@ -45,7 +47,6 @@ const detailsFilmeController = {
 
     const detailsFilme = await Filmes.findByPk(id)
 
-
     if (!detailsFilme) {
       return res.render("error", {
         title: "Ops!",
@@ -53,9 +54,20 @@ const detailsFilmeController = {
       });
     }
 
+    const episodios = await Episodios.findAll({
+      where: { filmes_id: detailsFilme.id }, // Filtrar por ID do anime
+      order: [['numero_episodio', 'ASC']], // Ordenar por número de episódio, se necessário
+  });
+
+
+
+
+
     return res.render("detailsFilme", {
       title: "Visualizar Filme",
       detailsFilme,
+      episodios,
+      
     });
   },
 
@@ -103,9 +115,17 @@ const detailsFilmeController = {
       });
     }
 
+    const episodios = await Episodios.findAll({
+      where: { filmes_id: detailsFilme.id }, // Filtrar por ID do anime
+      order: [['numero_episodio', 'ASC']], // Ordenar por número de episódio, se necessário
+  });
+
     return res.render("filme-edit", {
       title: "Editar Filme",
       detailsFilme,
+      episodios,
+      filmeId: detailsFilme.id, // Adicione o ID do filme como uma variável local
+      filmeNome: detailsFilme.nome, // Adicione o nome do filme como uma variável local
     });
   } catch (error) {
     console.error(error);

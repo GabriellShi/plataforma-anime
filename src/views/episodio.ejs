@@ -7,7 +7,6 @@
 
 <% if(locals.episodio){ %>
 
-<% if(locals.anime){ %>
 
 
 
@@ -50,12 +49,24 @@
                 <% } %>
 
 
-                <a href="/anime/<%= anime.id %>">
-                    <li>
-                        <img src="/img/icone-lista-anime2.png" alt="">
-                        <h4>Lista de Episódios</h4>
-                    </li>
-                </a>
+  <% }  if (locals.anime) { %>
+  <!-- Se apenas anime está presente -->
+  <a href="/anime/<%= anime.id %>">
+    <li>
+      <img src="/img/icone-lista-anime2.png" alt="">
+      <h4>Lista de Episódios</h4>
+    </li>
+  </a>
+  <% }  if (locals.detailsFilme) { %>
+  <!-- Se apenas detailsFilme está presente -->
+  <a href="/filme/<%= detailsFilme.id %>">
+    <li>
+      <img src="/img/icone-lista-anime2.png" alt="">
+      <h4>Lista de Episódios</h4>
+    </li>
+  </a>
+<% } %>
+                  
                 
   
                 <% if (nextEpisode) { %>
@@ -228,12 +239,6 @@
     </div>
 
 </section>
-<% } else {%>
-    <h2>Usuario não Entrado por motivos do além</h2>
-<% }  %>
-<% } else {%>
-    <h2>Usuario não Entrado por motivos do além</h2>
-<% }  %>
 
 
 <%- include("./partials/footer") %> 

@@ -14,6 +14,10 @@ const Episodios = db.define(
       type: Sequelize.DataTypes.INTEGER.UNSIGNED,
     },
 
+    filmes_id: {
+      type: Sequelize.DataTypes.INTEGER.UNSIGNED,
+    },
+
     numero_episodio: {
       type: Sequelize.DataTypes.INTEGER,
       allowNull: false,

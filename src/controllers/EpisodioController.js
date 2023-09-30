@@ -6,6 +6,7 @@ const path = require("path");
 const db = require("../config/sequelize");
 const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
+const Filmes = require("../models/Filmes");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize"); 
 
@@ -51,20 +52,36 @@ const episodioController = {
   
       // Em seguida, obtenha o ID do anime relacionado a esse episódio
       const animeId = episodio.animes_id;
+
+      const filmeId = episodio.filmes_id;
+
+
+
   
       // Agora, busque o anime com base no animeId
       const anime = await Animes.findByPk(animeId);
+
+      const detailsFilme = await Filmes.findByPk(filmeId);
+
+
+
   
       // Em seguida, busque todos os episódios relacionados a esse anime
       const episodios = await Episodios.findAll({
         where: { animes_id: animeId },
+        where: { filmes_id: filmeId },
         order: [['numero_episodio', 'ASC']],
       });
+
+  
+  
   
       // Obtenha o índice do episódio atual
       const currentEpisodeIndex = episodios.findIndex(
         (ep) => ep.numero_episodio === episodio.numero_episodio
       );
+
+
   
       // Obtenha os episódios anterior e próximo com base no índice atual
       const previousEpisode =
@@ -78,6 +95,7 @@ const episodioController = {
         title: "Visualizar Episódio",
         episodio,
         anime,
+        detailsFilme,
         episodios,
         previousEpisode,
         nextEpisode,
@@ -100,7 +118,7 @@ const episodioController = {
   },
   
   store: async (req, res) => {
-    const { nome, data, image, animes_id, numero_episodio, video_url } = req.body;
+    const { nome, data, image, animes_id, filmes_id, numero_episodio, video_url } = req.body;
 
     try {
         const novosEpisodios = await Episodios.create({
@@ -108,6 +126,7 @@ const episodioController = {
             data,
             image,
             animes_id,
+            filmes_id,
             numero_episodio,
             video_url,
         });
@@ -133,6 +152,8 @@ const episodioController = {
 
       const episodio = await Episodios.findByPk(id);
 
+      const detailsFilme = await Filmes.findByPk(id);
+
     if (!episodio) {
       return res.render("error", {
         title: "Ops!",
@@ -144,8 +165,8 @@ const episodioController = {
       title: "Editar episodio",
       episodio,
       episodios: episodio,
-      animeId: anime.id, // Adicione o ID do anime como uma variável local
-      animeNome: anime.nome, // Adicione o nome do anime como uma variável local
+      detailsFilme,
+
     });
   } catch (error) {
     console.error(error);
@@ -160,7 +181,7 @@ const episodioController = {
    // Executa a atualização
    update: async (req, res) => {
     const { id } = req.params;
-    const { nome, data, image, numero_episodio} = req.body;
+    const { nome, data, image, animes_id, filmes_id, numero_episodio, video_url} = req.body;
 
 
     try {
@@ -170,7 +191,10 @@ const episodioController = {
         nome,
         data,
         image,
+        animes_id,
+        filmes_id,
         numero_episodio,
+        video_url,
       });
 
     return res.render("success", {
