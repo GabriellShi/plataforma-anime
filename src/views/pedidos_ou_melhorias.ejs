@@ -1,0 +1,138 @@
+<%- include("./partials/head") %>
+<%- include("./partials/header") %>
+
+
+
+
+<section class="site-animes-pedidos-de-animes">
+
+
+        <section class="sect-pedidos">
+            <div>
+                <a href="#" id="toggleLink">
+                    <h2>Pedidos de Novos Animes</h2>
+                </a>
+            </div>
+    
+            ou
+    
+            <div>
+                <a href="#" id="toggleLink2">
+                    <h2>Melhorias e Avisos de Bug</h2>
+                </a>
+            </div>
+        </section>
+        
+        <div class="lado-esquerdo-do-site-pagina-anime" id="targetDiv">
+  
+            <div class="titulo-principal-pedidos-pedidosanimes">
+                <img src="/img/barra-azul.png" alt="">
+                <h2>Pedidos de Novos Animes</h2>
+            </div>
+        
+            <div class="inf-para-comentar-pedidosanimes">
+                <h4>Comente aqui algum Anime que você gostaria de assistir, e que não tem em nosso site.</h4>
+            </div>
+        
+            <div class="formulario-envio-de-pedido-pedidosanimes">
+                <form action="">
+                    <div class="titulo-formulario-pedidosanimes">
+                        <img src="/img/icone-pedido-anime.png" alt="">
+                        <h4>Faça seu Pedido de Anime</h4>
+                    </div>
+        
+                    <div class="info-do-solicitante-pedidosanimes">
+                        <div class="dados-nome-pedidosaimes dados-pedidosanimes">
+                            <label for="">Nome de Usuário</label>
+                            <input id="name" type="text" name="Nome" 
+                            placeholder="Seu Nome de Usuário" required>
+                        </div>
+                        <div class="dados-email-pedidosaimes dados-pedidosanimes">
+                            <label for="">Email</label>
+                            <input id="email" type="email" name="Email" 
+                            placeholder="Seu e-mail aqui" required>
+                        </div>
+                        <div class="dados-nomeanime-pedidosaimes dados-pedidosanimes ">
+                            <label for="">Nome do Anime</label>
+                            <input id="name-anime" type="text" name="Nome-Anime" 
+                            placeholder="Nome do Anime que você quer ver no Site" required>
+                        </div>
+                    </div>
+        
+                    <div class="comentario-pedidosanimes">
+                        <input type="" name="" id="" placeholder="Seu Comentario...">
+                    </div>
+        
+                    <div class="info-de-mensagem-publica-pedidosanimes">
+                        <h5>O envio do pedido ficara publico para que outras pessos possam apoia o pedido. </h5>
+                    </div>
+        
+                    <div class="botao-envio-pedidosanimes"><button>Enviar</button></div>
+                </form>
+            </div>
+        
+        </div>
+
+
+
+<div class="lado-esquerdo-do-site-pagina-anime" id="targetDiv2">
+        <div class="titulo-principal-pedidos-pedidosanimes">
+            <img src="/img/barra-azul.png" alt="">
+            <h2>Melhorias do Site</h2>
+        </div>
+    
+        <div class="inf-para-comentar-pedidosanimes">
+            <h4>Comente aqui alguma melhoria que você gostaria de ver no site, ou bug em uma pagina.</h4>
+        </div>
+    
+        <div class="formulario-envio-de-pedido-pedidosanimes">
+            <form action="">
+                <div class="titulo-formulario-pedidosanimes">
+                    <img src="/img/icone-pedido-anime.png" alt="">
+                    <h4>Faça um Feedback de melhoria ou Relato de um bug</h4>
+                </div>
+    
+                <div class="info-do-solicitante-pedidosanimes">
+                    <div class="dados-nome-pedidosaimes dados-pedidosanimes">
+                        <label for="">Nome de Usuário</label>
+                        <input id="name" type="text" name="Nome" 
+                        placeholder="Seu nome de usuário aqui" required>
+                    </div>
+                    <div class="dados-email-pedidosaimes dados-pedidosanimes">
+                        <label for="">Email</label>
+                        <input id="email" type="email" name="Email" 
+                        placeholder="Seu E-mail aqui" required>
+                    </div>
+                </div>
+    
+                <div class="comentario-pedidosanimes">
+                    <input type="" name="" id="" placeholder="Seu Comentario...">
+                </div>
+    
+                <div class="info-de-mensagem-publica-pedidosanimes">
+                    <h5>O envio do pedido ficara publico para que outras pessos possam apoia o pedido. </h5>
+                </div>
+    
+                <div class="botao-envio-pedidosanimes"><button>Enviar</button></div>
+            </form>
+        </div>
+    
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#toggleLink").click(function () {
+                $("#targetDiv").toggle();
+            });
+
+            $("#toggleLink2").click(function () {
+                $("#targetDiv2").toggle();
+            });
+        });
+    </script>
+    
+
+</section>
+
+<%- include("./partials/footer") %> 

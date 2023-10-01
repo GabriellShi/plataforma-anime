@@ -153,30 +153,62 @@ const paginasController = {
   filmesAdicionados: async (req, res) => {
     try {
       const page = req.query.page || 1; // Página atual, padrão é 1
-      const perPage = 20; // Número de filmes por página
-      const searchQuery = req.query.search || ''; // Termo de pesquisa, padrão é vazio
+      const perPage = 20; // Número de animes por página
       const selectedLetter = req.query.letter || 'all'; // Letra selecionada, padrão é 'all'
-
-
+      const searchQuery = req.query.search || ''; // Termo de pesquisa, padrão é vazio
+      const selectedType = req.query.tipo || ''; // Tipo de linguagem selecionada
+      const selectedOrder = req.query.ordenacao || 'recentes';
+      let selectedGenres = req.query.genero || [];
+  
+      if (!Array.isArray(selectedGenres)) {
+        selectedGenres = [selectedGenres];
+      }
+  
+      let order;
+      if (selectedOrder === 'OrdemAlfabetica') {
+        order = [['nome', 'ASC']];
+      } else {
+        order = [['created_at', 'DESC']];
+      }
   
       // Calcule o índice de início e fim com base na página atual
       const startIndex = (page - 1) * perPage;
       const endIndex = startIndex + perPage;
   
-            // Defina uma condição de filtro com base na letra selecionada
-            let condition = {};
-            if (selectedLetter !== 'all') {
-              condition = { nome: { [Op.like]: `${selectedLetter}%` } };
-            }
-
+      // Defina uma condição de filtro com base na letra selecionada
+      let condition = {};
+  
+      if (selectedLetter !== 'all') {
+        condition.nome = { [Op.like]: `${selectedLetter}%` };
+      }
+  
+      // Adicione uma condição para a pesquisa pelo nome
       if (searchQuery) {
         condition.nome = { [Op.like]: `%${searchQuery}%` };
       }
-      // Busque todos os filmes do banco de dados
+  
+      // Adicione uma condição para o tipo de linguagem selecionada
+      if (selectedType) {
+        condition.tipo = selectedType;
+      }
+  
+      // Adicione a condição de filtro para o gênero selecionado
+      if (selectedGenres.length > 0) {
+        condition.genero = { [Op.in]: selectedGenres };
+      }
+  
+      // Busque os animes do banco de dados com base na condição
       const filmes = await Filmes.findAll({
         where: condition,
-        order: [['created_at', 'DESC']],
+        order: order,
       });
+  
+      // Filtrar os animes para a página atual
+      const filmesPaginaAtual = filmes.slice(startIndex, endIndex);
+  
+      // Calcule o número total de animes, o número total de páginas e a página atual
+      const totalFilmes = filmes.length;
+      const totalPages = Math.ceil(totalFilmes / perPage);
 
       const animesPopulares = await Animes.findAll({
         order: [
@@ -185,32 +217,29 @@ const paginasController = {
         limit: 4, // Limitar a 4 resultados
     });
 
-        // Ira ajustar a ordem que não está funcionando no DESC 
-      animesPopulares.sort((a, b) => b.likes - a.likes);
-      
-      // Filtrar os filmes para a página atual
-      const filmesPaginaAtual = filmes.slice(startIndex, endIndex);
-
-          // Calcule o número total de animes, o número total de páginas e a página atual
-          const totalFilmes = filmes.length;
-          const totalPages = Math.ceil(totalFilmes / perPage);
+    // Ira ajustar a ordem que não está funcionando no DESC 
+  animesPopulares.sort((a, b) => b.likes - a.likes);
   
       return res.render("filmesAdicionados", {
-        title: "Filmes Adicionados",
+        title: "Lista de Filmes",
         filmes: filmesPaginaAtual,
         page, // Página atual
         totalPages, // Número total de páginas
-        totalFilmes, // Número total de animes
+        totalFilmes, // Número total de Filmes
+        selectedLetter, // Letra selecionada
         searchQuery, // Termo de pesquisa
+        selectedType, // Tipo de linguagem selecionada
+        selectedOrder,
+        selectedGenres,
         animesPopulares,
-
       });
     } catch (error) {
       console.error(error);
       return res.status(500).render("error", {
         title: "Erro",
-        message: "Ocorreu um erro ao carregar a Lista de Filmes",
+        message: "Ocorreu um erro ao carregar a lista de Animes",
       });
+
     }
   },
   
@@ -283,6 +312,10 @@ const paginasController = {
   
   genero: async (req, res) => {
     return res.render("genero", { title: "Generos" });
+  },
+
+  pedidos_ou_melhorias: async (req, res) => {
+    return res.render("pedidos_ou_melhorias", { title: "Generos" });
   },
 
 

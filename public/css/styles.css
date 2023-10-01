@@ -1094,7 +1094,6 @@ li.adicionar-a-lista1 {
 .site-animes-pedidos-de-animes {
   background-color: black;
   color: white;
-  display: flex;
 }
 
 .lado-esquerdo-do-site-pagina-anime {
@@ -2355,4 +2354,17 @@ img.seta-baixo {
 
 .selected {
   font-weight: bold; /* ou outra formatação visual desejada */
+}
+
+
+/* ----------   */
+
+/* Defina o estilo inicial para ocultar a div */
+#targetDiv {
+  display: none;
+}
+
+
+.sect-pedidos {
+  display: flex;
 }

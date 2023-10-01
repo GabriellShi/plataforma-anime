@@ -20,6 +20,9 @@ router.get("/genero", paginasController.genero); // Adicione esta linha
 
 router.get("/calendario", paginasController.calendarioAnimes);
 
+router.get("/pedidos_ou_melhorias", paginasController.pedidos_ou_melhorias);
+
+
 
 router.get("/contato", paginasController.contato);
 

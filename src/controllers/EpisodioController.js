@@ -68,10 +68,14 @@ const episodioController = {
   
       // Em seguida, busque todos os episódios relacionados a esse anime
       const episodios = await Episodios.findAll({
-        where: { animes_id: animeId },
-        where: { filmes_id: filmeId },
+        where: {
+          animes_id: animeId,
+          filmes_id: filmeId
+        },
         order: [['numero_episodio', 'ASC']],
       });
+
+      
 
   
   
