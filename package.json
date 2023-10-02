@@ -40,9 +40,9 @@
   "name": "site-imagem-center",
   "description": "Plataforma com conteudo de animes",
   "version": "1.0.0",
-  "main": "node app.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon app"
+    "start": "node app.js"
   },
   "author": "Gabriel Oliveira",
   "license": "ISC",
