@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const port = 3010;
 const methodOverride = require("method-override");
 const path = require("path");
 // const session = require("express-session");
@@ -8,6 +7,11 @@ const cookieParser = require("cookie-parser");
 const compression = require("compression"); // Importe o middleware de compressão
 
 
+// Inicia o servidor
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log("Servidor está rodando bem");
+});
 
 const indexRoute = require("./src/routes/indexRoute");
 const paginasRoute = require("./src/routes/paginasRoute");
@@ -43,11 +47,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 // Configura o caminho para os views, troca o padrão que é no raiz para o src
 app.set("views", path.join(__dirname, "src", "views"));
-
-// Inicia o servidor
-app.listen(port, () => {
-  console.log("Estamos rodando em: http://localhost:" + port);
-});
 
 
 app.use("/", indexRoute);

@@ -40,7 +40,7 @@
   "name": "site-imagem-center",
   "description": "Plataforma com conteudo de animes",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "node app.js",
   "scripts": {
     "start": "nodemon app"
   },
