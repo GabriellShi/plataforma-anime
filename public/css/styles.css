@@ -1981,10 +1981,12 @@ img.seta-baixo {
   display: flow-root;
   justify-content: center;
   align-items: center;
+  
 }
 
 .capa-onepiece-index h4 {
   padding-top: 0.5rem;
+  padding-bottom: 0;
   font-size: 1rem;
 }
 
@@ -2101,6 +2103,7 @@ img.seta-baixo {
 
 .animes-populares-index h4 {
   color: white;
+  font-size: 0.7rem;
 }
 
 .animes-populares-index h2 {
