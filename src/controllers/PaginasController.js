@@ -9,6 +9,8 @@ const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
 const Filmes = require("../models/Filmes");
 const Lancamento = require("../models/Lancamento");
+const Pedidos = require('../models/Pedidos');
+
 const { Op } = require("sequelize");
 
 const { Sequelize } = require("../config/sequelize")
@@ -308,14 +310,68 @@ const paginasController = {
     }
   },
   
+  // pedidosMelhorias: async (req, res) => {
+  //   try {
+  //     if (req.method === 'POST') {
+  //       // Lidar com o armazenamento de um novo pedido de melhorias
+  //       const { usuario, email, anime, comentario } = req.body;
+  
+  //       // Crie uma nova entrada no banco de dados usando o modelo Pedidos
+  //       await Pedidos.create({
+  //         usuario,
+  //         email,
+  //         anime,
+  //         comentario
+  //       });
+  
+  //       console.log('Pedido de novo anime salvo com sucesso no banco de dados.');
+  
+  //       // Redirecione para a mesma página após o armazenamento
+  //       return res.redirect("/pedidosMelhorias");
+  //     } else {
+  //       // Renderize a página de pedidos de melhorias quando receber uma solicitação GET
+  //       return res.render("pedidosMelhorias", { title: "Pedidos de Melhorias" });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     return res.status(500).render("error", {
+  //       title: "Erro",
+  //       message: "Ocorreu um erro ao salvar o pedido de novo anime",
+  //     });
+  //   }
+  // },
+  
+
+  // storePedidoMelhorias: async (req, res) => {
+  //   try {
+  //     const { usuario, email, anime, comentario } = req.body;
+  
+  //     // Crie uma nova entrada no banco de dados usando o modelo Pedidos
+  //     await Pedidos.create({
+  //       usuario,
+  //       email,
+  //       anime,
+  //       comentario
+  //     });
+  
+  //     console.log('Pedido de novo anime salvo com sucesso no banco de dados.');
+  
+  //     return res.redirect("/pedidosMelhorias"); // Redirecione para a página de pedidos de melhorias
+  //   } catch (error) {
+  //     console.error(error);
+  //     return res.status(500).render("error", {
+  //       title: "Erro",
+  //       message: "Ocorreu um erro ao salvar o pedido de novo anime",
+  //     });
+  //   }
+  // },
+  
 
   
+  
+
   genero: async (req, res) => {
     return res.render("genero", { title: "Generos" });
-  },
-
-  pedidos_ou_melhorias: async (req, res) => {
-    return res.render("pedidos_ou_melhorias", { title: "Generos" });
   },
 
 
@@ -327,9 +383,9 @@ const paginasController = {
     return res.render("recuperarSenha", { title: "Recuperar Senha" });
   },
 
-  pedidosDeAnimes: async (req, res) => {
-    return res.render("pedidosDeAnimes", { title: "Pedidos de Novos Animes" });
-  },
+  // pedidosDeAnimes: async (req, res) => {
+  //   return res.render("pedidosDeAnimes", { title: "Pedidos de Novos Animes" });
+  // },
 
   melhorias: async (req, res) => {
     return res.render("melhorias", { title: "Melhorias" });

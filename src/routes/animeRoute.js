@@ -6,6 +6,8 @@ const upload = require("../helpers/multer");
 // Controllers
 const animeController = require("../controllers/AnimeController");
 
+// Rota para salvar um novo comentário
+router.post("/:id/comment", animeController.storeComment);
 
 // Rota para votar "gostei"
 router.post("/vote/:id/like", animeController.like);

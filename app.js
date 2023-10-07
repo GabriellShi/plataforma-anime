@@ -5,7 +5,7 @@ const path = require("path");
 // const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const compression = require("compression"); // Importe o middleware de compressão
-
+const bodyParser = require('body-parser');
 
 // Inicia o servidor
 const port = process.env.PORT || 3001;
@@ -23,6 +23,7 @@ const detailsFilmeRoute = require("./src/routes/detailsFilmeRoute");
 const detailsLancamentoRoute = require("./src/routes/detailsLancamentoRoute");
 const authRoute = require("./src/routes/authRoute");
 const searchRoute = require("./src/routes/searchRoute");
+const pedidosRoute = require("./src/routes/pedidosRoute");
 
 // Use o middleware de compressão GZIP
 app.use(compression());
@@ -36,6 +37,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: false })); 
 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 // app.use(session({ secret: "Eu amo cuscuz" }));
@@ -59,6 +61,8 @@ app.use("/filme", detailsFilmeRoute);
 app.use("/lancamento", detailsLancamentoRoute);
 app.use("/", authRoute);
 app.use("/", searchRoute);
+app.use("/pedido", pedidosRoute);
+
 
 
 app.use("/images", express.static(path.join(__dirname, "/uploads")));

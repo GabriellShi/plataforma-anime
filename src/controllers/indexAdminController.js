@@ -1,26 +1,39 @@
 const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
 const Filmes = require("../models/Filmes");
+const Pedidos = require("../models/Pedidos");
 
 
 const indexAdminController = {
   // Pode retornar uma página ou não
-  indexAdmin: (req, res) => {
+  indexAdmin:async(req, res) => {
     return res.render("indexAdmin", {
       title: "Pagina do Anime", //user: req.cookies.user,
     });
   },
 
 
-paginasCreate: (req, res) => {
+paginasCreate: async(req, res) => {
   return res.render("paginasCreate", {
     title: "Pagina Creater", //user: req.cookies.user,
   });
 },
 
-paginasViews: (req, res) => {
+paginasViews: async(req, res) => {
   return res.render("paginasViews", {
     title: "Pagina Views", //user: req.cookies.user,
+  });
+},
+
+paginasComentarios: async(req, res) => {
+
+  const pedidos = await Pedidos.findAll({
+    order: [['created_at', 'DESC']]
+  });
+
+  return res.render("paginasComentarios", {
+    title: "Pagina Views", //user: req.cookies.user,
+    pedidos,
   });
 },
 

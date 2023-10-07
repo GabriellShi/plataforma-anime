@@ -10,6 +10,8 @@ router.get("/paginasCreate", indexAdminController.paginasCreate);
 
 router.get("/paginasViews", indexAdminController.paginasViews);
 
+router.get("/paginasComentarios", indexAdminController.paginasComentarios);
+
 router.get("/adicionarEpisodiosLista", indexAdminController.adicionarEpisodiosLista);
 
 router.get("/adicionarFilmesLista", indexAdminController.adicionarFilmesLista);

@@ -7,6 +7,7 @@ const path = require("path");
 const db = require("../config/sequelize");
 const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
+const Comentariosanimes = require("../models/Comentariosanimes");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize")
 
@@ -60,6 +61,9 @@ const animeController = {
       order: [['numero_episodio', 'ASC']], // Ordenar por número de episódio, se necessário
   });
 
+  const comentarios = await Comentariosanimes.findAll({
+    where: { animes_id: anime.id },
+  });
 
 
     const animesPopulares = await Animes.findAll({
@@ -71,15 +75,12 @@ const animeController = {
 
   animesPopulares.sort((a, b) => b.likes - a.likes);
 
-
-
-
     return res.render("anime", {
       title: "Visualizar Anime",
       anime,
       episodios,
       animesPopulares,
-      
+      comentarios,
     });
   },
 
@@ -153,6 +154,33 @@ dislike: async (req, res) => {
   }
   },
 
+  
+  storeComment: async (req, res) => {
+    const { usuario, email, comentario } = req.body;
+    const animeId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
+  
+    try {
+      await Comentariosanimes.create({
+        usuario,
+        email,
+        comentario,
+        animes_id: animeId, // Associa o comentário ao anime
+      });
+  
+      const comentarios = await Comentariosanimes.findAll({
+        where: { animes_id: animeId },
+      });
+  
+      // Envie os comentários atualizados como resposta JSON
+      res.redirect(`/anime/${animeId}`);
+    } catch (error) {
+      console.error(error);
+      // Lida com erros aqui, como enviar uma resposta de erro
+    }
+  },
+  
+  
+  
   // Mostra a tela
   edit: async (req, res) => {
     const { id } = req.params;

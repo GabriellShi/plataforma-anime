@@ -152,6 +152,28 @@ SELECT * FROM lancamento;
 
 
 
+-- Cria tabela de usuário
+CREATE TABLE pedidos (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(150) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    anime VARCHAR(100) NOT NULL,
+    comentario VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO pedidos (
+usuario, email, anime, comentario
+)
+
+VALUES 
+	(
+"Gabriel", "gabrielshi@", "Naruto", "traz pra mim"
+    );
+
+-- Lista todos os usuários
+SELECT * FROM pedidos;
+
 
 
 
