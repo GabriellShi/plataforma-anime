@@ -179,7 +179,33 @@ dislike: async (req, res) => {
     }
   },
   
-  
+ // Controlador para exclusão de comentários
+deleteComment: async (req, res) => {
+  const commentId = req.params.commentId; // Obtém o ID do comentário a partir dos parâmetros da rota
+
+  try {
+    // Aqui, você deve adicionar a lógica para excluir o comentário com base no commentId
+    await Comentariosanimes.destroy({
+      where: { id: commentId },
+    });
+
+    // Redireciona de volta à página do anime ou envia uma resposta JSON de sucesso
+    const animeId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
+
+    // Supondo que você esteja usando o Sequelize, você pode obter os comentários atualizados assim:
+    const comentarios = await Comentariosanimes.findAll({
+      where: { animes_id: animeId },
+    });
+
+    res.json({ success: true, comentarios });
+  } catch (error) {
+    console.error(error);
+    // Lida com erros aqui, como enviar uma resposta de erro
+    res.status(500).json({ error: "Erro ao excluir comentário" });
+  }
+},
+
+
   
   // Mostra a tela
   edit: async (req, res) => {

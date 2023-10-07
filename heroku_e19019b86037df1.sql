@@ -175,6 +175,19 @@ VALUES
 SELECT * FROM pedidos;
 
 
+-- Cria tabela de usuário
+CREATE TABLE comentariosanimes (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(150) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    comentario VARCHAR(500),
+	animes_id INT UNSIGNED,
+    FOREIGN KEY (animes_id) REFERENCES animes(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Lista todos os usuários
+SELECT * FROM comentariosanimes;
 
 
 -- Altera tabela

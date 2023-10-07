@@ -137,76 +137,108 @@
         </section>
 
         <section>
-                    <div class="temporadas-pagina-anime">
-            <ul>
+            <div class="temporadas-pagina-anime">
+              <ul>
                 <li class="numero-da-tempora-pagina-anime"></li>
                 <li class="numero-da-tempora2-pagina-anime">COMENTARIOS</li>
-            </ul>
-        </div>
-        <form action="/anime/<%= anime.id %>/comment" method="post">
-            <label for="usuario">Nome de Usuário</label>
-            <input type="text" name="usuario" id="usuario" required>
-          
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-          
-            <textarea name="comentario" id="comentario" placeholder="Seu Comentário..." required></textarea>
-          
-            <button type="submit">Enviar Comentário</button>
-          </form>
-
-          <div class="animes-adicionados" id="comentarios-section">
-            <% if (comentarios.length > 0) { %>
-    
-            <% for(let anime of comentarios.slice(0, 18)) {%>
-            <div class="capa-onepiece-index">
-                <h4> <%= anime.usuario %></h4>
-                <h4> <%= anime.comentario %></h4>
-    
+              </ul>
             </div>
-            <div>
-                <form action="/anime/delete/ <%= anime.id %>?_method=delete" method="post">
-                    <h2>Deseja Deletar esse Pedido?</h2>
-                    <a href="/<%= anime.id %>"><button type="button">Não</button></a>
-                    <button type="submit">Sim</button>
-                  </form>
+            <form action="/anime/<%= anime.id %>/comment" method="post">
+              <label for="usuario">Nome de Usuário</label>
+              <input type="text" name="usuario" id="usuario" required>
+            
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required>
+            
+              <textarea name="comentario" id="comentario" placeholder="Seu Comentário..." required></textarea>
+            
+              <button type="submit">Enviar Comentário</button>
+            </form>
+            <div class="animes-adicionados" id="comentarios-section">
+              <% if (comentarios.length > 0) { %>
+                <% for (let comment of comentarios.slice(0, 18)) { %>
+                    <div class="capa-onepiece-index">
+                      <h4> <%= comment.usuario %></h4>
+                      <h4> <%= comment.comentario %></h4>
+                    </div>
+                    <div>
+                      <form action="/anime/<%= anime.id %>/comment/<%= comment.id %>?_method=DELETE" method="post" class="delete-comment-form">
+                        <button type="button" class="delete-comment-button" data-comment-id="<%= comment.id %>">Excluir</button>
+                      </form>
+                    </div>
+                  <% } %>
+                  
+              <% } %>
             </div>
-            <% } %>
-            <% } %>
-    
-        </div>
-    
-        </section>
+          </section>
+          
+        
 
+          
         <script>
-            // Função para atualizar os comentários na página
-            function atualizarComentarios(comentarios) {
-              const comentariosSection = document.getElementById("comentarios-section");
-              comentariosSection.innerHTML = ""; // Limpa os comentários existentes
-          
-              for (const comentario of comentarios) {
-                const div = document.createElement("div");
-                div.classList.add("capa-onepiece-index");
-                div.innerHTML = `
-                  <h4>${comentario.usuario}</h4>
-                  <h4>${comentario.comentario}</h4>
-                `;
-          
-                const deleteForm = document.createElement("form");
-                deleteForm.action = `/anime/delete/${comentario.id}?_method=delete`;
-                deleteForm.method = "post";
-                deleteForm.innerHTML = `
-                  <h2>Deseja Deletar esse Pedido?</h2>
-                  <a href="/${comentario.id}"><button type="button">Não</button></a>
-                  <button type="submit">Sim</button>
-                `;
-          
-                comentariosSection.appendChild(div);
-                comentariosSection.appendChild(deleteForm);
-              }
-            }
-          
-       // Evento de envio do formulário de comentários
+
+// Função para adicionar eventos de clique aos botões de exclusão
+document.querySelectorAll(".delete-comment-button").forEach(button => {
+  button.addEventListener("click", () => {
+    const commentId = button.getAttribute("data-comment-id");
+    const confirmation = confirm("Tem certeza de que deseja excluir este comentário?");
+
+    if (confirmation) {
+      excluirComentario(commentId);
+    }
+  });
+});
+
+// Função para excluir um comentário
+async function excluirComentario(commentId) {
+  try {
+    const response = await fetch(`/anime/<%= anime.id %>/comment/${commentId}?_method=DELETE`, {
+      method: "POST",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      atualizarComentarios(data.comentarios);
+    } else {
+      console.error("Erro ao excluir comentário");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Função para atualizar os comentários na página
+function atualizarComentarios(comentarios) {
+  const comentariosSection = document.getElementById("comentarios-section");
+  comentariosSection.innerHTML = ""; // Limpa os comentários existentes
+
+  for (const comentario of comentarios) {
+    const div = document.createElement("div");
+    div.classList.add("capa-onepiece-index");
+    div.innerHTML = `
+      <h4>${comentario.usuario}</h4>
+      <h4>${comentario.comentario}</h4>
+    `;
+
+    const deleteForm = document.createElement("form");
+    deleteForm.action = `/anime/<%= anime.id %>/comment/${comentario.id}?_method=DELETE`;
+    deleteForm.method = "post";
+    deleteForm.innerHTML = `
+      <button type="button" class="delete-comment-button" data-comment-id="${comentario.id}">Excluir</button>
+    `;
+
+    deleteForm.addEventListener("click", () => {
+      const confirmation = confirm("Tem certeza de que deseja excluir este comentário?");
+      if (confirmation) {
+        excluirComentario(comentario.id);
+      }
+    });
+
+    comentariosSection.appendChild(div);
+    comentariosSection.appendChild(deleteForm);
+  }
+}
+
 // Evento de envio do formulário de comentários
 document.getElementById("comentario-form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -229,7 +261,6 @@ document.getElementById("comentario-form").addEventListener("submit", async (e) 
     // Lida com erros aqui, como mostrar uma mensagem de erro ao usuário
   }
 });
-
 
 
           </script>

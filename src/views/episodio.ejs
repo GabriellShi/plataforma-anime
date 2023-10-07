@@ -105,35 +105,136 @@
 
 
         <div class="formulario-envio-de-pedido-pedidosanimes comentarios-do-episodio">
-            <form action="">
-                <div class="titulo-formulario-pedidosanimes">
-                    <img src="/img/icone-pedido-anime.png" alt="">
-                    <h4>Comentarios</h4>
+            <section>
+                <div class="temporadas-pagina-anime">
+                  <ul>
+                    <li class="numero-da-tempora-pagina-anime"></li>
+                    <li class="numero-da-tempora2-pagina-anime">COMENTARIOS</li>
+                  </ul>
                 </div>
-    
-                <div class="info-do-solicitante-pedidosanimes">
-                    <div class="dados-nome-pedidosaimes dados-pedidosanimes">
-                        <label for="">Nome de Usuário</label>
-                        <input id="name" type="text" name="Nome" 
-                        placeholder="Seu Nome de Usuário" required>
-                    </div>
-                    <div class="dados-email-pedidosaimes dados-pedidosanimes">
-                        <label for="">Email</label>
-                        <input id="email" type="email" name="Email" 
-                        placeholder="Seu e-mail aqui" required>
-                    </div>
+                <form action="/episodio/<%= episodio.id %>/comment" method="post">
+                  <label for="usuario">Nome de Usuário</label>
+                  <input type="text" name="usuario" id="usuario" required>
+                
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="email" required>
+                
+                  <textarea name="comentario" id="comentario" placeholder="Seu Comentário..." required></textarea>
+                
+                  <button type="submit">Enviar Comentário</button>
+                </form>
+                <div class="animes-adicionados" id="comentarios-section">
+                  <% if (comentarios.length > 0) { %>
+                    <% for (let comment of comentarios.slice(0, 18)) { %>
+                        <div class="capa-onepiece-index">
+                          <h4> <%= comment.usuario %></h4>
+                          <h4> <%= comment.comentario %></h4>
+                        </div>
+                        <div>
+                          <form action="/episodio/<%= episodio.id %>/comment/<%= comment.id %>?_method=DELETE" method="post" class="delete-comment-form">
+                            <button type="button" class="delete-comment-button" data-comment-id="<%= comment.id %>">Excluir</button>
+                          </form>
+                        </div>
+                      <% } %>
+                      
+                  <% } %>
                 </div>
+              </section>
+              
+            
     
-                <div class="comentario-pedidosanimes">
-                    <input type="" name="" id="" placeholder="Seu Comentario...">
-                </div>
+              
+            <script>
     
-                <div class="info-de-mensagem-publica-pedidosanimes">
-                    <h5>O envio do pedido ficara publico para que outras pessos possam apoia o pedido. </h5>
-                </div>
+    // Função para adicionar eventos de clique aos botões de exclusão
+    document.querySelectorAll(".delete-comment-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const commentId = button.getAttribute("data-comment-id");
+        const confirmation = confirm("Tem certeza de que deseja excluir este comentário?");
     
-                <div class="botao-envio-pedidosanimes"><button>Enviar</button></div>
-            </form>
+        if (confirmation) {
+          excluirComentario(commentId);
+        }
+      });
+    });
+    
+    // Função para excluir um comentário
+    async function excluirComentario(commentId) {
+      try {
+        const response = await fetch(`/episodio/<%= episodio.id %>/comment/${commentId}?_method=DELETE`, {
+          method: "POST",
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          atualizarComentarios(data.comentarios);
+        } else {
+          console.error("Erro ao excluir comentário");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    
+    // Função para atualizar os comentários na página
+    function atualizarComentarios(comentarios) {
+      const comentariosSection = document.getElementById("comentarios-section");
+      comentariosSection.innerHTML = ""; // Limpa os comentários existentes
+    
+      for (const comentario of comentarios) {
+        const div = document.createElement("div");
+        div.classList.add("capa-onepiece-index");
+        div.innerHTML = `
+          <h4>${comentario.usuario}</h4>
+          <h4>${comentario.comentario}</h4>
+        `;
+    
+        const deleteForm = document.createElement("form");
+        deleteForm.action = `/episodio/<%= episodio.id %>/comment/${comentario.id}?_method=DELETE`;
+        deleteForm.method = "post";
+        deleteForm.innerHTML = `
+          <button type="button" class="delete-comment-button" data-comment-id="${comentario.id}">Excluir</button>
+        `;
+    
+        deleteForm.addEventListener("click", () => {
+          const confirmation = confirm("Tem certeza de que deseja excluir este comentário?");
+          if (confirmation) {
+            excluirComentario(comentario.id);
+          }
+        });
+    
+        comentariosSection.appendChild(div);
+        comentariosSection.appendChild(deleteForm);
+      }
+    }
+    
+    // Evento de envio do formulário de comentários
+    document.getElementById("comentario-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+    
+      const formData = new FormData(e.target);
+      const detailsFilmesId = window.location.pathname.split("/")[2]; // Obtém o ID do anime da URL
+    
+      try {
+        const response = await fetch(`/episodio/${episodio}/comment`, {
+          method: "POST",
+          body: formData,
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          atualizarComentarios(data.comentarios);
+        }
+      } catch (error) {
+        console.error(error);
+        // Lida com erros aqui, como mostrar uma mensagem de erro ao usuário
+      }
+    });
+    
+    
+              </script>
+    
+    
         </div>
     
     </div>
@@ -145,6 +246,8 @@
         <div class="linha-lateral-direita-index">
 
             <section class="sessao-1-lado-direiro-index">
+            <div class="animes-populares-index">
+                <h2>Lista de Episodios</h2>
                 <!-- Episódio Anterior -->
                 <% if (previousEpisode) { %>
                     <div class="o-anime-popular-index">
@@ -177,15 +280,99 @@
                 </div>
                   
                 <% } %>
+                </div>
+
               </section>
-              
-              
+    </div>
+
+
+
+    <div class="lado-direito-do-site-index">
+
+        <div class="linha-lateral-direita-index2"> </div>
+        <div class="linha-lateral-direita-index">
+            <!-- Dentro de sua visualização (sua_pagina.ejs) -->
+<section class="sessao-1-lado-direiro-index">
+    <div class="animes-populares-index">
+        <h2>ANIMES POPULARES</h2>
+        <% animesPopulares.forEach(anime => { %>
+            <a href="/anime/<%= anime.id %>">
+                <div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index">
+                        <img src="<%= anime.capa %>" alt="<%= anime.nome %>">
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4><%= anime.nome %></h4>
+                            <div class="nota-do-anime-index">
+                                <img src="/img/nota.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        <% }); %>
+    </div>
+</section>
+
+        
+            <section class="sessao-1-lado-direiro-index">
+                <div class="animes-populares-index mangas-populares-index">
+                    <h2>MANGAS POPULARES</h2>
+                <a href=""><div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4>NORAGAMI</h4>
+                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <a href=""><div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4>NORAGAMI</h4>
+                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <a href=""><div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4>NORAGAMI</h4>
+                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index">
+                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                        </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>NORAGAMI</h4>
+                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </a>
+                
+                </div>
+            </section>
 
             <section class="sessao-1-lado-direiro-index">
                 <div class="animes-populares-index mangas-populares-index">
                     <h2>NOTICÍAS DO BLOG</h2>
-                <a href="">
-                    <div class="o-anime-popular-index">
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -196,8 +383,7 @@
                     </div>
                 </div>
                 </a>
-                <a href="">
-                    <div class="o-anime-popular-index">
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">
@@ -208,8 +394,7 @@
                     </div>
                 </div>
                 </a>
-                <a href="">
-                    <div class="o-anime-popular-index">
+                <a href=""><div class="o-anime-popular-index">
                     <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
                     </div>
                     <div class="o-anime-popular-index-lado-direiro">

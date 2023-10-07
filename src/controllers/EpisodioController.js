@@ -7,6 +7,7 @@ const db = require("../config/sequelize");
 const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
 const Filmes = require("../models/Filmes");
+const Comentariosepisodios = require("../models/Comentariosepisodios");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize"); 
 
@@ -55,17 +56,11 @@ const episodioController = {
 
       const filmeId = episodio.filmes_id;
 
-
-
-  
       // Agora, busque o anime com base no animeId
       const anime = await Animes.findByPk(animeId);
 
       const detailsFilme = await Filmes.findByPk(filmeId);
 
-
-
-  
       // Em seguida, busque todos os episódios relacionados a esse anime
       const episodios = await Episodios.findAll({
         where: {
@@ -74,19 +69,12 @@ const episodioController = {
         },
         order: [['numero_episodio', 'ASC']],
       });
-
-      
-
-  
-  
   
       // Obtenha o índice do episódio atual
       const currentEpisodeIndex = episodios.findIndex(
         (ep) => ep.numero_episodio === episodio.numero_episodio
       );
 
-
-  
       // Obtenha os episódios anterior e próximo com base no índice atual
       const previousEpisode =
         currentEpisodeIndex > 0 ? episodios[currentEpisodeIndex - 1] : null;
@@ -94,6 +82,19 @@ const episodioController = {
         currentEpisodeIndex < episodios.length - 1
           ? episodios[currentEpisodeIndex + 1]
           : null;
+
+          const comentarios = await Comentariosepisodios.findAll({
+            where: { episodios_id: episodio.id },
+          });
+
+          const animesPopulares = await Animes.findAll({
+            order: [
+                ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
+            ],
+            limit: 4, // Limitar a 4 resultados
+        });
+      
+        animesPopulares.sort((a, b) => b.likes - a.likes);
   
       return res.render("episodio", {
         title: "Visualizar Episódio",
@@ -103,6 +104,8 @@ const episodioController = {
         episodios,
         previousEpisode,
         nextEpisode,
+        comentarios,
+        animesPopulares,
       });
     } catch (error) {
       console.error(error);
@@ -143,6 +146,56 @@ const episodioController = {
             message: "Erro ao Cadastrar Episodio!",
         });
     }
+},
+
+storeComment: async (req, res) => {
+  const { usuario, email, comentario } = req.body;
+  const episodioId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
+
+  try {
+    await Comentariosepisodios.create({
+      usuario,
+      email,
+      comentario,
+      episodios_id: episodioId, // Associa o comentário ao anime
+    });
+
+    const comentarios = await Comentariosepisodios.findAll({
+      where: { episodios_id: episodioId },
+    });
+
+    // Envie os comentários atualizados como resposta JSON
+    res.redirect(`/episodio/${episodioId}`);
+  } catch (error) {
+    console.error(error);
+    // Lida com erros aqui, como enviar uma resposta de erro
+  }
+},
+
+// Controlador para exclusão de comentários
+deleteComment: async (req, res) => {
+const commentId = req.params.commentId; // Obtém o ID do comentário a partir dos parâmetros da rota
+
+try {
+  // Aqui, você deve adicionar a lógica para excluir o comentário com base no commentId
+  await Comentariosepisodios.destroy({
+    where: { id: commentId },
+  });
+
+  // Redireciona de volta à página do anime ou envia uma resposta JSON de sucesso
+  const episodioId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
+
+  // Supondo que você esteja usando o Sequelize, você pode obter os comentários atualizados assim:
+  const comentarios = await Comentariosepisodios.findAll({
+    where: { episodios_id: episodioId },
+  });
+
+  res.json({ success: true, comentarios });
+} catch (error) {
+  console.error(error);
+  // Lida com erros aqui, como enviar uma resposta de erro
+  res.status(500).json({ error: "Erro ao excluir comentário" });
+}
 },
 
   edit: async (req, res) => {

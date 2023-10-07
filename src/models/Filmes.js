@@ -40,6 +40,14 @@ const Filmes = db.define(
       allowNull: false,
     },
 
+    likes: {
+      type: Sequelize.DataTypes.STRING(900),
+    },
+
+    dislikes: {
+      type: Sequelize.DataTypes.STRING(900),
+    },
+
     created_at: {
       type: Sequelize.DataTypes.DATE,
       defaultValue: Sequelize.NOW, // Define o valor padrão como a data e hora atual

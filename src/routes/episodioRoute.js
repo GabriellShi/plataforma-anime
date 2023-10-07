@@ -4,6 +4,11 @@ const upload = require("../helpers/multer");
 // Controllers
 const episodioController = require("../controllers/EpisodioController");
 
+ // Rota para salvar um novo comentário
+router.post("/:id/comment", episodioController.storeComment);
+
+router.delete("/:id/comment/:commentId", episodioController.deleteComment);
+
 // Rota do controlador 'store' que ira criar um novo usuario
 router.get("/create", episodioController.create);
 

@@ -6,6 +6,10 @@ const upload = require("../helpers/multer");
 // Controllers
 const datailsLancamentoController = require("../controllers/DetailsLancamentoController");
 
+
+
+
+
 // Rota do controlador 'store' que ira criar um novo usuario
 router.get("/create", datailsLancamentoController.create);
 

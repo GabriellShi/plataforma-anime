@@ -6,6 +6,17 @@
     // Controllers
     const detailsFilmeController = require("../controllers/DetailsFilmeController");
 
+        // Rota para salvar um novo comentário
+    router.post("/:id/comment", detailsFilmeController.storeComment);
+
+    router.delete("/:id/comment/:commentId", detailsFilmeController.deleteComment);
+
+        // Rota para votar "gostei"
+    router.post("/vote/:id/like", detailsFilmeController.like);
+
+    // Rota para votar "não gostei"
+    router.post("/vote/:id/dislike", detailsFilmeController.dislike);
+
     // Rota do controlador 'store' que ira criar um novo usuario
     router.get("/create", detailsFilmeController.create);
 

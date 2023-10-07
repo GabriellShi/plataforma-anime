@@ -8,6 +8,8 @@ const db = require("../config/sequelize");
 const Filmes = require("../models/Filmes");
 const Episodios = require("../models/Episodios");
 const Animes = require("../models/Animes");
+const Comentariosfilmes = require("../models/Comentariosfilmes");
+
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize")
 
@@ -60,16 +62,67 @@ const detailsFilmeController = {
   });
 
 
+  const comentarios = await Comentariosfilmes.findAll({
+    where: { filmes_id: detailsFilme.id },
+  });
 
 
+  const filmesPopulares = await Filmes.findAll({
+    order: [
+        ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
+    ],
+    limit: 4, // Limitar a 4 resultados
+});
+
+filmesPopulares.sort((a, b) => b.likes - a.likes);
 
     return res.render("detailsFilme", {
       title: "Visualizar Filme",
       detailsFilme,
       episodios,
-      
+      comentarios,
+      filmesPopulares,
     });
   },
+
+
+  like: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const detailsFilme = await Filmes.findByPk(id);
+        if (!detailsFilme) {
+            return res.status(404).json({ error: "Anime não encontrado" });
+        }
+
+        detailsFilme.likes++; // Incrementa o contador de "gostei"
+        await detailsFilme.save();
+
+        res.json({ likes: detailsFilme.likes });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+},
+
+dislike: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const detailsFilme = await Filmes.findByPk(id);
+        if (!detailsFilme) {
+            return res.status(404).json({ error: "Anime não encontrado" });
+        }
+
+        detailsFilme.dislikes++; // Incrementa o contador de "não gostei"
+        await detailsFilme.save();
+
+        res.json({ dislikes: detailsFilme.dislikes });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+},
 
   create: async (req, res) => {
     return res.render("filme-create", { title: "Cadastrar Filme" });
@@ -99,6 +152,57 @@ const detailsFilmeController = {
     });
   }
   },
+
+  storeComment: async (req, res) => {
+    const { usuario, email, comentario } = req.body;
+    const detailsFilmeId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
+  
+    try {
+      await Comentariosfilmes.create({
+        usuario,
+        email,
+        comentario,
+        filmes_id: detailsFilmeId, // Associa o comentário ao anime
+      });
+  
+      const comentarios = await Comentariosfilmes.findAll({
+        where: { filmes_id: detailsFilmeId },
+      });
+  
+      // Envie os comentários atualizados como resposta JSON
+      res.redirect(`/filme/${detailsFilmeId}`);
+    } catch (error) {
+      console.error(error);
+      // Lida com erros aqui, como enviar uma resposta de erro
+    }
+  },
+  
+ // Controlador para exclusão de comentários
+deleteComment: async (req, res) => {
+  const commentId = req.params.commentId; // Obtém o ID do comentário a partir dos parâmetros da rota
+
+  try {
+    // Aqui, você deve adicionar a lógica para excluir o comentário com base no commentId
+    await Comentariosfilmes.destroy({
+      where: { id: commentId },
+    });
+
+    // Redireciona de volta à página do anime ou envia uma resposta JSON de sucesso
+    const detailsFilmeId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
+
+    // Supondo que você esteja usando o Sequelize, você pode obter os comentários atualizados assim:
+    const comentarios = await Comentariosfilmes.findAll({
+      where: { filmes_id: detailsFilmeId },
+    });
+
+    res.json({ success: true, comentarios });
+  } catch (error) {
+    console.error(error);
+    // Lida com erros aqui, como enviar uma resposta de erro
+    res.status(500).json({ error: "Erro ao excluir comentário" });
+  }
+},
+
 
   // Mostra a tela
   edit: async (req, res) => {
