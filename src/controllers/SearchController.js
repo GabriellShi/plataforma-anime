@@ -10,6 +10,7 @@ const Filmes = require("../models/Filmes");
 
 const searchController = {
   search: async (req, res) => {
+
     const termoPesquisa = req.body.searchQuery; // Alterado para req.body
 
     try {
@@ -42,6 +43,8 @@ const searchController = {
         listaAnimeAdmin,
         filmes,
         termoPesquisa,
+      user: req.cookies.user,
+
       });
     } catch (error) {
       console.error(error);

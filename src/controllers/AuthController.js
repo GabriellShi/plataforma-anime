@@ -20,6 +20,7 @@ const authController = {
 
   // Processamento do cadastro do usuario
   create: async (req, res) => {
+    
     const { nome, email, senha, nomedeuser, image } = req.body;
     if (!nome || !email || !senha || !nomedeuser) {
       return res.render("register", {

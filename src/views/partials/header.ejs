@@ -119,18 +119,25 @@
                                 <a href="#"><img src="/img/icone-login.png" alt="icone login"></a>
                                 <ul class="categorias-partials">
                                     <% if(locals.user && locals.user.admin) {%> 
+
+                                        <!-- Aqui aparece quando estou logado ADM -->
                                         <a href="/indexAdmin">Administrador</a>
+
+                                        
+                                        <!-- Aqui aparece quando estou logado User -->
                                         <% }%> <% if(locals.user){%> 
-                                            
-                                            
                                         <form action="/logout" method="post">
-   
                                           <button type="submit" class="btn-logout">Logout</button>
                                         </form>
+                                        <a href="/areaCliente">Meu Perfil</a>
+
+
+                                        <!-- Aqui aparece quando estou Deslogado -->
                                         <% }else {%> 
                                         
                                         <li><a href="/login">Login</a></li>
                                         <li><a href="/user/create">Cadastro</a></li>
+
                                         <% }%>
                                     
                                 </ul>

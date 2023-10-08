@@ -13,6 +13,7 @@ const detailsLancamentoController = {
   // esse codigo renderiza a tabela 'users' dos usuarios
   // /Pode retornar uma página ou não
   index: async (req, res) => {
+
     try {
       // Busque todas as notícias do banco de dados
       const lancamento = await Lancamento.findAll({
@@ -22,6 +23,8 @@ const detailsLancamentoController = {
       return res.render("lancamento", {
         title: "Lista de lancamento",
         lancamento,
+      user: req.cookies.user,
+
 
       });
     } catch (error) {
@@ -35,11 +38,14 @@ const detailsLancamentoController = {
 
   // show - controlador que irá visualizar os detalhes de cada notícia
   show: async (req, res) => {
+
     try {
       const { id } = req.params;
 
       // Busque os detalhes da notícia no banco de dados pelo ID
-      const detailsLancamento = await Lancamento.findByPk(id);
+      const detailsLancamento = await Lancamento.findByPk(
+        id,
+        );
 
       if (!detailsLancamento) {
         return res.render("error", {
@@ -60,6 +66,9 @@ const detailsLancamentoController = {
         title: "Visualizar notícia",
         lancamento: detailsLancamento,
         detailsLancamento,
+      user: req.cookies.user,
+
+
       });
     } catch (error) {
       console.error(error);

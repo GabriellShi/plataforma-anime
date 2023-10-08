@@ -20,6 +20,7 @@ const detailsFilmeController = {
   // esse codigo renderiza a tabela 'users' dos usuarios
   // /Pode retornar uma página ou não
   index: async (req, res) => {
+
       try {
         // Busque todas as notícias do banco de dados
         const filmes = await Filmes.findAll({
@@ -28,6 +29,8 @@ const detailsFilmeController = {
         return res.render("filme", {
           title: "Lista de Filmes",
           filmes,
+          user: req.cookies.user,
+
         
         });
       } catch (error) {
@@ -42,12 +45,15 @@ const detailsFilmeController = {
 
   // show - controlador que ira visualizar os detalhas de cada usuario da lista 'users'
   show: async (req, res) => {
+
     // Pega o parametro que vem da url, ou seja, na url a baixo, pegaria o valor 4
     // localhost:3000/user/4
     // id = 4
     const { id } = req.params;
 
-    const detailsFilme = await Filmes.findByPk(id)
+    const detailsFilme = await Filmes.findByPk(
+      id,
+      )
 
     if (!detailsFilme) {
       return res.render("error", {
@@ -82,6 +88,8 @@ filmesPopulares.sort((a, b) => b.likes - a.likes);
       episodios,
       comentarios,
       filmesPopulares,
+      user: req.cookies.user,
+
     });
   },
 

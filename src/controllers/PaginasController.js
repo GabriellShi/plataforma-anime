@@ -17,6 +17,7 @@ const { Sequelize } = require("../config/sequelize")
 
 const paginasController = {
   listaAnimeUsuario: async (req, res) => {
+
     try {
       const page = req.query.page || 1; // Página atual, padrão é 1
       const perPage = 20; // Número de animes por página
@@ -87,6 +88,8 @@ const paginasController = {
         selectedType, // Tipo de linguagem selecionada
         selectedOrder,
         selectedGenres,
+        user: req.cookies.user,
+
       });
     } catch (error) {
       console.error(error);
@@ -140,6 +143,8 @@ const paginasController = {
         totalPages, // Número total de páginas
         totalEpisodios, // Número total de animes
         animesPopulares,
+      user: req.cookies.user,
+
       
       });
     } catch (error) {
@@ -153,6 +158,7 @@ const paginasController = {
 
 
   filmesAdicionados: async (req, res) => {
+
     try {
       const page = req.query.page || 1; // Página atual, padrão é 1
       const perPage = 20; // Número de animes por página
@@ -234,6 +240,8 @@ const paginasController = {
         selectedOrder,
         selectedGenres,
         animesPopulares,
+      user: req.cookies.user,
+
       });
     } catch (error) {
       console.error(error);
@@ -247,6 +255,7 @@ const paginasController = {
   
 
   calendarioAnimes: async (req, res) => {
+
     const lancamento = await Lancamento.findAll({
       order: [['created_at', 'DESC']]
 
@@ -255,12 +264,15 @@ const paginasController = {
     return res.render("calendarioAnimes", {
       title: "Calendario - Go Geek" ,
       lancamento, 
+      user: req.cookies.user,
+
     });
   },
 
   
 
   paginaGeneroSelecionado: async (req, res) => {
+
     try {
       const page = req.query.page || 1;
       const perPage = 20;
@@ -297,6 +309,8 @@ const paginasController = {
          totalPages,
          totallistaAnimeAdmin,
          selectedLetter,
+      user: req.cookies.user,
+
         });
   
       // Restante da lógica para paginação e renderização
@@ -310,85 +324,34 @@ const paginasController = {
     }
   },
   
-  // pedidosMelhorias: async (req, res) => {
-  //   try {
-  //     if (req.method === 'POST') {
-  //       // Lidar com o armazenamento de um novo pedido de melhorias
-  //       const { usuario, email, anime, comentario } = req.body;
   
-  //       // Crie uma nova entrada no banco de dados usando o modelo Pedidos
-  //       await Pedidos.create({
-  //         usuario,
-  //         email,
-  //         anime,
-  //         comentario
-  //       });
-  
-  //       console.log('Pedido de novo anime salvo com sucesso no banco de dados.');
-  
-  //       // Redirecione para a mesma página após o armazenamento
-  //       return res.redirect("/pedidosMelhorias");
-  //     } else {
-  //       // Renderize a página de pedidos de melhorias quando receber uma solicitação GET
-  //       return res.render("pedidosMelhorias", { title: "Pedidos de Melhorias" });
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     return res.status(500).render("error", {
-  //       title: "Erro",
-  //       message: "Ocorreu um erro ao salvar o pedido de novo anime",
-  //     });
-  //   }
-  // },
-  
-
-  // storePedidoMelhorias: async (req, res) => {
-  //   try {
-  //     const { usuario, email, anime, comentario } = req.body;
-  
-  //     // Crie uma nova entrada no banco de dados usando o modelo Pedidos
-  //     await Pedidos.create({
-  //       usuario,
-  //       email,
-  //       anime,
-  //       comentario
-  //     });
-  
-  //     console.log('Pedido de novo anime salvo com sucesso no banco de dados.');
-  
-  //     return res.redirect("/pedidosMelhorias"); // Redirecione para a página de pedidos de melhorias
-  //   } catch (error) {
-  //     console.error(error);
-  //     return res.status(500).render("error", {
-  //       title: "Erro",
-  //       message: "Ocorreu um erro ao salvar o pedido de novo anime",
-  //     });
-  //   }
-  // },
-  
-
-  
-  
-
   genero: async (req, res) => {
-    return res.render("genero", { title: "Generos" });
+
+    return res.render("genero", { title: "Generos",
+    user: req.cookies.user,
+  });
   },
 
 
   contato: async (req, res) => {
-    return res.render("contato", { title: "Contato" });
+
+    return res.render("contato", { title: "Contato",
+    user: req.cookies.user,
+  });
   },
 
   recuperarSenha: async (req, res) => {
-    return res.render("recuperarSenha", { title: "Recuperar Senha" });
+
+    return res.render("recuperarSenha", { title: "Recuperar Senha",
+    user: req.cookies.user,
+  });
   },
 
-  // pedidosDeAnimes: async (req, res) => {
-  //   return res.render("pedidosDeAnimes", { title: "Pedidos de Novos Animes" });
-  // },
-
   melhorias: async (req, res) => {
-    return res.render("melhorias", { title: "Melhorias" });
+
+    return res.render("melhorias", { title: "Melhorias",
+    user: req.cookies.user,
+  });
   },
 
 

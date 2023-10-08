@@ -20,6 +20,8 @@ const pedidosController = {
 
     return res.render("pedidos-create", { title: "Criar Calendario",
     pedidos,
+    user: req.cookies.user,
+
   });
   },
 
@@ -32,6 +34,7 @@ const pedidosController = {
         email,
         anime,
         comentario,
+
     
       });
 

@@ -7,6 +7,7 @@ const path = require("path");
 const db = require("../config/sequelize");
 const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
+const Users = require("../models/Users");
 const Comentariosanimes = require("../models/Comentariosanimes");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize")
@@ -18,6 +19,7 @@ const animeController = {
   // esse codigo renderiza a tabela 'users' dos usuarios
   // /Pode retornar uma página ou não
   index: async (req, res) => {
+
       try {
         // Busque todas as notícias do banco de dados
         const listaAnimeAdmin = await Animes.findAll({
@@ -27,6 +29,8 @@ const animeController = {
         return res.render("listaAnimeAdmin", {
           title: "Lista de Animes",
           listaAnimeAdmin,
+          user: req.cookies.user,
+
         
         });
       } catch (error) {
@@ -41,13 +45,18 @@ const animeController = {
 
   // show - controlador que ira visualizar os detalhas de cada usuario da lista 'users'
   show: async (req, res) => {
+
+    const { id } = req.params;
+
+
     // Pega o parametro que vem da url, ou seja, na url a baixo, pegaria o valor 4
     // localhost:3000/user/4
     // id = 4
-    const { id } = req.params;
 
-    const anime = await Animes.findByPk(id, {
+    const anime = await Animes.findByPk(id,{
     })
+
+
 
     if (!anime) {
       return res.render("error", {
@@ -81,6 +90,7 @@ const animeController = {
       episodios,
       animesPopulares,
       comentarios,
+      user: req.cookies.user,
     });
   },
 
@@ -123,6 +133,7 @@ dislike: async (req, res) => {
 },
 
   create: async (req, res) => {
+
     return res.render("anime-create", { title: "Cadastrar Anime" });
   },
   store: async (req, res) => {
@@ -209,6 +220,7 @@ deleteComment: async (req, res) => {
   
   // Mostra a tela
   edit: async (req, res) => {
+    
     const { id } = req.params;
 
     try {

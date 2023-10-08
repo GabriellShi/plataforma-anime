@@ -16,6 +16,7 @@ const episodioController = {
   // esse codigo renderiza a tabela 'users' dos usuarios
   // /Pode retornar uma página ou não
   index: async (req, res) => {
+
     try {
       // Busque todas as notícias do banco de dados
       const episodios = await Episodios.findAll({
@@ -25,6 +26,8 @@ const episodioController = {
       return res.render("episodios", {
         title: "Lista de Episodios",
         episodios,
+      user: req.cookies.user,
+
       
       });
     } catch (error) {
@@ -38,11 +41,14 @@ const episodioController = {
 
   // show - controlador que ira visualizar os detalhas de cada usuario da lista 'users'
   show: async (req, res) => {
+
     try {
       const { id } = req.params;
   
       // Primeiro, encontre o episódio pelo ID
-      const episodio = await Episodios.findByPk(id);
+      const episodio = await Episodios.findByPk(
+        id,
+        );
   
       if (!episodio) {
         return res.render("error", {
@@ -106,6 +112,9 @@ const episodioController = {
         nextEpisode,
         comentarios,
         animesPopulares,
+      user: req.cookies.user,
+
+
       });
     } catch (error) {
       console.error(error);
