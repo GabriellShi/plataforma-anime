@@ -8,16 +8,18 @@
 
   <div class="area-cliente">
     <div class="perfil-cliente">
-      <img src="/img/icone-foto-perfil.jpg" alt="" />
+      <img src="<%= user.image_filename ? '/uploads/' + user.image_filename : '/image/default-image.jpg' %>" alt="Imagem" />
 
-      <h2>Gabriel</h2>
+      <h2><%= user.nome %></h2>
     </div>
-
-    <form action="/user/create" method="post" enctype="multipart/form-data">
-      <input type="file" name="image" />
-      <button type="submit">Adicionar</button>
+    
+    
+    <form action="/areaCliente/updateImage" method="post" enctype="multipart/form-data">
+      <input type="file" name="image_filename" /> <!-- Deve coincidir com o nome "image_filename" no middleware Multer -->
+      <button type="submit">Atualizar Imagem</button>
     </form>
-
+    
+    
     <div class="topicos-da-area-do-cliente">
       <ul>
         <li class="acomp">

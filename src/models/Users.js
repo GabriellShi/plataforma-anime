@@ -27,10 +27,12 @@ const Users = db.define(
       type: Sequelize.DataTypes.STRING(100),
       allowNull: false,
     },
-    // image: {
-    //   type: Sequelize.DataTypes.STRING(500),
-    //   allowNull: false,
-    // },
+
+    image_filename: {
+      type: Sequelize.DataTypes.STRING(500),
+      allowNull: true,
+    },
+    
     is_active: {
         type: Sequelize.DataTypes.INTEGER.UNSIGNED,
         defaultValue: 1,

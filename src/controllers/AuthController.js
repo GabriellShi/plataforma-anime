@@ -1,11 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const bcrypt = require("../helpers/bcrypt");
+const upload = require("../helpers/multer");
 
 const db = require("../config/sequelize");
 const Users = require("../models/Users");
 const { Op } = require("sequelize");
-const { Sequelize } = require("../config/sequelize")
+const { Sequelize } = require("../config/sequelize");
 
 const authController = {
   // Tela para cadastro do usuario
@@ -19,15 +20,8 @@ const authController = {
 
   // Processamento do cadastro do usuario
   create: async (req, res) => {
-
-    const { nome, nomedeuser, senha, email } =
-      req.body;
-    if (
-      !nome ||
-      !email ||
-      !senha ||
-      !nomedeuser
-    ) {
+    const { nome, email, senha, nomedeuser, image } = req.body;
+    if (!nome || !email || !senha || !nomedeuser) {
       return res.render("register", {
         title: "Cadastro",
 
@@ -46,29 +40,25 @@ const authController = {
     //   });
     // }
     try {
-
       const novaUsers = await Users.create({
-      nome,
-      nomedeuser,
-      email,
-      senha: bcrypt.generateHash(senha),
-      admin: false,
-      criadoEm: new Date(),
-      modificadoEm: new Date(),
-    });
+        nome,
+        nomedeuser,
+        email,
+        senha: bcrypt.generateHash(senha),
+        admin: false,
+        criadoEm: new Date(),
+        modificadoEm: new Date(),
+      });
 
-
-    res.redirect("/login");
-  } catch (error) {
-    console.error(error); // Adicione essa linha para registrar o erro no console
-    res.render("register", {
-      title: "Erro",
-      message: "Erro ao criar usuario!",
- 
-      
-    });
-  }
- },
+      res.redirect("/login");
+    } catch (error) {
+      console.error(error); // Adicione essa linha para registrar o erro no console
+      res.render("register", {
+        title: "Erro",
+        message: "Erro ao criar usuario!",
+      });
+    }
+  },
   // Tela para realizar Login
   login: (req, res) => {
     return res.render("login", {
@@ -78,55 +68,162 @@ const authController = {
     });
   },
 
+  // Processamento do Login
+  // Processamento do Login
+  auth: async (req, res) => {
+    try {
+      console.log("Tentando encontrar o usuário com email:", req.body.email);
 
-// Processamento do Login
-auth: (req, res) => {
-  res.clearCookie("user");
-  res.clearCookie("admin");
-  const usersJson = fs.readFileSync(
-    // caminho do Arquivo
-    path.join(__dirname, "..", "data", "users.json"),
-    // formato de leitura
-    "utf-8",
-  );
-  const users = JSON.parse(usersJson);
+      const user = await Users.findOne({ where: { email: req.body.email } });
 
-  const { email, senha } = req.body;
-  const userAuth = users.find((user) => {
-    if (user.email === email) {
-      return bcrypt.compareHash(senha, user.senha);
+      console.log("Usuário encontrado:", user);
+
+      if (!user) {
+        return res.render("login", {
+          title: "Login",
+          error: {
+            message: "E-mail ou Senha inválidos",
+          },
+        });
+      }
+
+      const isPasswordValid = await bcrypt.compareHash(
+        req.body.senha,
+        user.senha
+      );
+
+      if (!isPasswordValid) {
+        return res.render("login", {
+          title: "Login",
+          error: {
+            message: "E-mail ou Senha inválidos",
+          },
+        });
+      }
+
+      // Autenticação bem-sucedida
+      // req.session.email = user.email;
+      res.cookie("user", {
+        id: user.id,
+        nome: user.nome,
+        admin: user.is_admin === 1,
+      });
+      res.redirect("/areaCliente");
+    } catch (error) {
+      console.error(error);
+      res.status(500).render("error", {
+        title: "Erro",
+        message: "Erro ao realizar o login",
+      });
     }
-  });
+  },
 
-  if (!userAuth) {
-    return res.render("login", {
-      title: "Login",
-      error: {
-        message: " E-mail ou Senha invalido",
-      },
-    });
-  }
+  // ...
 
-  // Filtra as chaves que o objeto ira ter
-  const user = JSON.parse(
-    JSON.stringify(userAuth, ["id", "nome", "sobrenome", "apelido", "admin"]),
-  );
+  areaCliente: async (req, res) => {
+    const userId = req.cookies.user.id;
+  
+    try {
+      const user = await Users.findByPk(userId);
+  
+      if (!user) {
+        return res.render("error", {
+          title: "Ops!",
+          message: "Usuário não encontrado",
+        });
+      }
+  
+      if (user.image_filename) {
+        user.image = `/uploads/${user.image_filename}`;
+      } else {
+        user.image = "/image/default-image.jpg"; // Substitua pelo caminho padrão da imagem
+      }
+  
+      return res.render("areaCliente", {
+        title: "Área do Cliente",
+        user,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).render("error", {
+        title: "Erro",
+        message: "Erro ao carregar a página da Área do Cliente",
+      });
+    }
+  },
+  
 
-  req.session.email = userAuth.email;
-  res.cookie("user", user);
-  res.cookie("admin", user.admin);
+// ...
 
-  res.redirect("/");
-},
+  
+  updateProfileImage: async (req, res) => {
+    const image = req.file; // A imagem enviada pelo formulário
+  
+    if (!image) {
+      return res.render("areaCliente", {
+        title: "Área do Cliente",
+        user: req.cookies.user,
+        error: "Selecione uma imagem de perfil para atualizar.",
+      });
+    }
+  
+    try {
+      const userId = req.cookies.user.id; // Recupera o ID do usuário a partir dos cookies
+  
+      // Recupere o usuário com base no ID do cookie
+      const user = await Users.findByPk(userId);
+  
+      if (!user) {
+        return res.render("error", {
+          title: "Ops!",
+          message: "Usuário não encontrado",
+        });
+      }
+  
+      // Verifique se o usuário já possui uma imagem de perfil existente
+      if (user.image_filename) {
+        // Construa o caminho completo do arquivo antigo
+        const oldImagePath = path.join(
+          __dirname,
+          "../../uploads",
+          user.image_filename
+        );
+  
+        // Verifique se o arquivo antigo existe antes de tentar excluí-lo
+        if (fs.existsSync(oldImagePath)) {
+          // Exclua o arquivo antigo da pasta "uploads"
+          fs.unlinkSync(oldImagePath);
+          console.log("Imagem antiga excluída com sucesso.");
+        } else {
+          console.log("A imagem antiga não foi encontrada na pasta 'uploads'.");
+        }
+      }
+  
+      // Salve o novo nome do arquivo da imagem no registro do usuário no banco de dados
+      await user.update({ image_filename: image.filename });
+  
+      const imagePath = `/uploads/${image.filename}`;
+      console.log("Caminho da nova imagem:", imagePath);
+  
+      res.redirect("/areaCliente");
+    } catch (error) {
+      console.error(error);
+      res.status(500).render("error", {
+        title: "Erro",
+        message: "Erro ao atualizar a imagem de perfil",
+      });
+    }
+  },
+  
 
-// Processamento do Deslogar
-logout: (req, res) => {
-  req.session.destroy();
-  res.clearCookie("user");
-  res.clearCookie("admin");
+  // Processamento do Deslogar
+  logout: (req, res) => {
+    // req.session.destroy();
+    res.clearCookie("user");
+    res.clearCookie("admin");
 
-  res.redirect("/");
-},
+    res.redirect("/");
+  },
 };
 
 module.exports = authController;

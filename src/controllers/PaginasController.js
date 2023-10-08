@@ -9,7 +9,7 @@ const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
 const Filmes = require("../models/Filmes");
 const Lancamento = require("../models/Lancamento");
-const Pedidos = require('../models/Pedidos');
+const Users = require('../models/Users');
 
 const { Op } = require("sequelize");
 
@@ -391,10 +391,6 @@ const paginasController = {
     return res.render("melhorias", { title: "Melhorias" });
   },
 
-
-  areaCliente: async (req, res) => {
-    return res.render("areaCliente", { title: "Area do Cliente", user: req.cookies.user, });
-  },
 
 };
 

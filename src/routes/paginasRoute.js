@@ -38,7 +38,6 @@ router.get("/melhorias", paginasController.melhorias);
 
 router.get("/filmesAdicionados", paginasController.filmesAdicionados);
 
-router.get("/areaCliente", paginasController.areaCliente);
 
 
 

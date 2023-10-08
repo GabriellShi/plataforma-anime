@@ -108,12 +108,14 @@ CREATE TABLE filmes(
     genero VARCHAR(100) NOT NULL,
     capa VARCHAR(500),
     tipo VARCHAR(100) NOT NULL,
+	likes VARCHAR(900) NOT NULL,
+    dislikes VARCHAR(900) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Adiciona um Novo Anime
- -- ALTER TABLE animes ADD FOREIGN KEY (filmes_id) REFERENCES filmes(id);
+  ALTER TABLE filmes ADD dislikes VARCHAR(900) NOT NULL;
 
 
 -- Insere um ou mais usuário
@@ -183,6 +185,8 @@ CREATE TABLE comentariosanimes (
     comentario VARCHAR(500),
 	animes_id INT UNSIGNED,
     FOREIGN KEY (animes_id) REFERENCES animes(id),
+    filmes_id INT UNSIGNED,
+    FOREIGN KEY (filmes_id) REFERENCES filmes(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -190,11 +194,40 @@ CREATE TABLE comentariosanimes (
 SELECT * FROM comentariosanimes;
 
 
+-- Cria tabela de usuário
+CREATE TABLE comentariosfilmes (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(150) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    comentario VARCHAR(500),
+    filmes_id INT UNSIGNED,
+    FOREIGN KEY (filmes_id) REFERENCES filmes(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Lista todos os usuários
+SELECT * FROM comentariosfilmes;
+
+-- Cria tabela de usuário
+CREATE TABLE comentariosepisodios (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(150) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    comentario VARCHAR(500),
+    episodios_id INT UNSIGNED,
+    FOREIGN KEY (episodios_id) REFERENCES episodios(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Lista todos os usuários
+SELECT * FROM comentariosepisodios;
+
+
 -- Altera tabela
- -- ALTER TABLE news ADD description1 TEXT(1000)  NOT NULL;
+-- ALTER TABLE comentariosanimes ADD FOREIGN KEY (filmes_id) REFERENCES filmes(id);
   
  -- Apagar Coluna
-  -- ALTER TABLE animes DROP COLUMN dislikes;
+ --  ALTER TABLE comentariosanimes DROP COLUMN  filmes_id;
 
 
 -- UPDATE users SET is_admin = 1 WHERE id = 16;

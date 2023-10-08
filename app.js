@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const methodOverride = require("method-override");
 const path = require("path");
-// const session = require("express-session");
+const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const compression = require("compression"); // Importe o middleware de compressão
 const bodyParser = require('body-parser');
@@ -28,6 +28,11 @@ const pedidosRoute = require("./src/routes/pedidosRoute");
 // Use o middleware de compressão GZIP
 app.use(compression());
 
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+
+
 // Configura o methodOverride no express
 // methodOverride = Pacote que transforma um método http em outro
 // Ex: POST => PUT
@@ -44,6 +49,8 @@ app.use(cookieParser());
 //
 // Configura pasta estática para acesso externo
 app.use(express.static(path.join(__dirname, "public")));
+
+// app.use(express.static("uploads")); 
 
 // Configura o template engine, troca do padrão (jade) para ejs
 app.set("view engine", "ejs");
@@ -65,7 +72,8 @@ app.use("/pedido", pedidosRoute);
 
 
 
-app.use("/images", express.static(path.join(__dirname, "/uploads")));
+
+
 
 // Rota de erro 404 - página não encontrada
 app.use((req, res) => {
