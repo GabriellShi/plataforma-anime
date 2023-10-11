@@ -29,7 +29,6 @@ router.get("/calendario", paginasController.calendarioAnimes);
 
 router.get("/contato", paginasController.contato);
 
-router.get("/recuperarSenha", paginasController.recuperarSenha);
 
 // router.get("/pedidosDeAnimes", paginasController.pedidosDeAnimes);
 

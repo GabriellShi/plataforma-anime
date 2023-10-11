@@ -5,8 +5,11 @@ const upload = require("../helpers/multer");
 
 // Controllers
 const userController = require("../controllers/UserController");
+const isAuth = require("../middlewares/auth");
 
 
+// Rota para exibir os animes favoritos do usuário
+router.get("/areaCliente/favorites", isAuth, userController.showFavorites);
 
 
 // Rota do controlador 'store' que ira criar um novo usuario

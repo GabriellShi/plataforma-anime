@@ -5,8 +5,13 @@ const upload = require("../helpers/multer");
 
 const db = require("../config/sequelize");
 const Users = require("../models/Users");
+const Animes = require("../models/Animes");
+const Favoritos = require("../models/Favoritos");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize");
+  
+const crypto = require('crypto');
+
 
 const authController = {
   // Tela para cadastro do usuario
@@ -127,6 +132,14 @@ const authController = {
     try {
       const user = await Users.findByPk(userId);
   
+
+      const favoritos = await Favoritos.findAll({
+        where: {
+          users_id: userId,
+        },
+        include: [Animes], // Isso trará os detalhes do anime associado aos favoritos
+      });
+
       if (!user) {
         return res.render("error", {
           title: "Ops!",
@@ -139,10 +152,14 @@ const authController = {
       } else {
         user.image = "/image/default-image.jpg"; // Substitua pelo caminho padrão da imagem
       }
-  
+
+
+
       return res.render("areaCliente", {
         title: "Área do Cliente",
         user,
+        favoritos,
+        // Você já está passando o usuário, certifique-se de que ele esteja disponível na página
       });
     } catch (error) {
       console.error(error);
@@ -207,6 +224,7 @@ const authController = {
       console.log("Caminho da nova imagem:", imagePath);
   
       res.redirect("/areaCliente");
+
     } catch (error) {
       console.error(error);
       res.status(500).render("error", {
@@ -225,6 +243,29 @@ const authController = {
 
     res.redirect("/");
   },
+
+
+
+  recuperarSenha: async (req, res) => {
+    // Lógica para processar a recuperação de senha
+    const { email } = req.body;
+
+
+function generatePasswordResetToken() {
+  return crypto.randomBytes(20).toString('hex');
+}
+    // Aqui você deve adicionar a lógica para gerar um token de redefinição de senha,
+    // enviar um e-mail com um link contendo o token para o usuário e armazenar o token
+    // no banco de dados associado ao usuário.
+  
+    // Após o envio do e-mail, redirecione o usuário para uma página de confirmação.
+  
+    return res.render("recuperarSenha", { title: "Recuperar Senha",
+    user: req.cookies.user,
+    generatePasswordResetToken,
+   });
+  },
+  
 };
 
 module.exports = authController;

@@ -340,12 +340,7 @@ const paginasController = {
   });
   },
 
-  recuperarSenha: async (req, res) => {
 
-    return res.render("recuperarSenha", { title: "Recuperar Senha",
-    user: req.cookies.user,
-  });
-  },
 
   melhorias: async (req, res) => {
 

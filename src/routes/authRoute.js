@@ -22,6 +22,9 @@ router.post("/areaCliente/updateImage", isAuth, upload.single("image_filename"),
 
 router.get("/areaCliente", authController.areaCliente);
 
+router.get("/favoritos", isAuth, authController.areaCliente);
+
+router.get("/recuperarSenha", authController.recuperarSenha);
 
 
 module.exports = router;

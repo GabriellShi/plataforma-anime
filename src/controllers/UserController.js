@@ -6,18 +6,15 @@ const path = require("path");
 
 const db = require("../config/sequelize");
 const Users = require("../models/Users");
+const Animes = require("../models/Animes");
+const Favoritos = require("../models/Favoritos");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize")
 
 
-
 const userController = {
 
-
-
   // index - controlador da aba que visualiza a lista dos usuario /
-  // esse codigo renderiza a tabela 'users' dos usuarios
-  // /Pode retornar uma página ou não
   index: async (req, res) => {
     try {
       // Busque todas as notícias do banco de dados
@@ -53,20 +50,6 @@ const userController = {
         message: "Detalhes do Usuario não encontrado",
       });
     }
-    // // Esse codigo abaixo ira fazer uma listagem dos id que tem na lista e fazer uma busca pelo usuario
-    // // apresentando uma mensagem caso encontrado ou não
-    // const userResult = users.find((user) => user.id === parseInt(id));
-    // if (!userResult) {
-    //   return res.render("error", {
-    //     title: "Ops!",
-    //     message: "Usuario não encontrado",
-    //   });
-    // }
-
-    // const user = {
-    //   ...userResult,
-    //   image: files.base64Encode(upload.path + userResult.image),
-    // };
     return res.render("user", {
       title: "Visualizar usuario",
       user,
@@ -79,6 +62,32 @@ const userController = {
     });
   }
   },
+
+  showFavorites: async (req, res) => {
+    try {
+      const userId = req.cookies.user.id; // Obtenha o ID do usuário logado a partir do cookie
+  
+      // Consulte a tabela de favoritos para obter os animes favoritos do usuário
+      const favorites = await Favoritos.findAll({
+        where: {
+          users_id: userId,
+        },
+        include: [Animes], // Isso carregará os detalhes completos dos animes favoritos
+      });
+  
+      return res.render("areaClienteFavoritos", {
+        title: "Seus Animes Favoritos",
+        favorites,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).render("error", {
+        title: "Erro",
+        message: "Ocorreu um erro ao carregar seus animes favoritos",
+      });
+    }
+  },
+  
 
   create: async(req, res) => {
     return res.render("register", { title: "Cadastrar Usuario" });

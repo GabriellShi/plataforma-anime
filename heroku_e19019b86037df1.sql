@@ -14,11 +14,16 @@ CREATE TABLE users(
     email VARCHAR(100) NOT NULL,
     senha VARCHAR(100) NOT NULL,
     image VARCHAR(500),
+    image_filename VARCHAR(500),
     is_active TINYINT DEFAULT 1,
     is_admin TINYINT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+ -- ALTER TABLE users ADD image_filename VARCHAR(500);
+ 
+ -- Apagar Coluna
+ -- ALTER TABLE users DROP COLUMN image_filename;
 
 -- Insere um ou mais usuário
 INSERT INTO users (nome, nomedeuser, email, senha, is_admin)
@@ -221,6 +226,37 @@ CREATE TABLE comentariosepisodios (
 
 -- Lista todos os usuários
 SELECT * FROM comentariosepisodios;
+
+
+
+
+-- Cria tabela de usuário
+CREATE TABLE favoritos(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	animes_id INT UNSIGNED,
+    FOREIGN KEY (animes_id) REFERENCES animes(id),
+	users_id INT UNSIGNED,
+    FOREIGN KEY (users_id) REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+ -- Apagar Coluna
+--   ALTER TABLE episodios DROP COLUMN anime_id;
+
+-- Adiciona um Novo Anime
+ -- ALTER TABLE favoritos ADD id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT;
+
+
+-- Lista todos os usuários
+SELECT * FROM favoritos;
+
+
+
+
+
+
+
 
 
 -- Altera tabela

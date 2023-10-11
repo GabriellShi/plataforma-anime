@@ -1,0 +1,132 @@
+<%- include("./partials/head") %> <%- include("./partials/header") %>
+<div class="espaco-area-cliente"></div>
+
+<section class="pagina-area-cliente">
+  <% if(locals.success){ %>
+  <h2><%= success.message %></h2>
+  <% } %>
+
+  <div class="area-cliente">
+    <div class="perfil-cliente">
+      <img src="<%= user.image_filename ? '/uploads/' + user.image_filename : '/image/default-image.jpg' %>" alt="Imagem" />
+
+      <h2><%= user.nome %></h2>
+    </div>
+    
+    
+    <form action="/areaCliente/updateImage" method="post" enctype="multipart/form-data">
+      <input type="file" name="image_filename" /> <!-- Deve coincidir com o nome "image_filename" no middleware Multer -->
+      <button type="submit">Atualizar Imagem</button>
+    </form>
+    
+    
+    <div class="topicos-da-area-do-cliente">
+      <ul>
+        <li class="acomp" id="acomp-item">
+          <h3>Acompanhando</h3>
+          <h5>Volte no episódio que parou</h5>
+        </li>
+
+        <!-- Seção de Favoritos -->
+        <li class="favoritos" id="favor-item">
+          <div>
+            <h3>Meus Favoritos</h3>
+            <h5>Veja seus animes favoritados</h5>
+          </div>
+        </li>
+
+        <li class="hist" id="hist-item">
+          <h3>Histórico</h3>
+          <h5>Histórico de atividades</h5>
+        </li>
+        <li class="list" id="list-item">
+          <h3>Lista de Anime</h3>
+          <h5>Veja sua lista personalizada</h5>
+        </li>
+        <!-- Outros itens da lista com IDs correspondentes -->
+      </ul>
+    </div>
+    
+    <div id="detalhes-container">
+      <!-- Os detalhes dos animes favoritos serão exibidos aqui -->
+    </div>
+    
+    <script>
+      // Mapeamento de IDs de itens para seus respectivos detalhes
+      const detalhesPorItem = {
+  'acomp-item': {
+    render: () => `
+      <!-- Código EJS para a seção "Acompanhando" -->
+    `
+  },
+  'favor-item': {
+    render: () => `
+    <h2> Meus Favoritos </h2>
+    <div class="animes-lancados lista-dos-animes-capas">
+
+        <% favoritos.forEach(favorito => { %>
+          <div class="capa-onepiece-index capa-onepiece-listadosanimes">
+            <a href="/anime/<%= favorito.Anime.id %>" data-anime-id="<%= favorito.Anime.id %>" class="anime-favorito">
+              <img src="<%= favorito.Anime.capa %>" alt="<%= favorito.Anime.nome %>">
+              <h4><%= favorito.Anime.nome %></h4>
+            </a>
+          </div>
+        <% }); %>
+      </div>
+    `
+  },
+  'hist-item': {
+    render: () => `
+      <!-- Código EJS para a seção "Histórico" -->
+    `
+  },
+  'list-item': {
+    render: () => `
+      <!-- Código EJS para a seção "Lista de Anime" -->
+    `
+  }
+  // Adicione outros itens e detalhes conforme necessário
+};
+
+    
+function showListaDetalhes(item) {
+  console.log(`Item clicado: ${item.id}`);
+  const detalhesContainer = document.getElementById('detalhes-container');
+  detalhesContainer.innerHTML = '';
+
+  // Verifica se há detalhes para o item clicado
+  if (detalhesPorItem[item.id]) {
+    const detalhes = document.createElement('div');
+    detalhes.classList.add('lista-detalhes'); // Adicione a classe apropriada para estilização
+
+    // Obtém os detalhes para o item
+    const codigoEJS = detalhesPorItem[item.id].render();
+
+    detalhes.innerHTML = codigoEJS;
+
+    detalhesContainer.appendChild(detalhes);
+  }
+}
+
+
+    
+      // Adicione um evento de clique a cada item da lista
+      const listaItems = document.querySelectorAll('li[id$="-item"]');
+      listaItems.forEach(item => {
+        item.addEventListener('click', () => {
+          showListaDetalhes(item);
+        });
+      });
+    </script>
+    
+    
+    
+    
+    
+
+
+  </div>
+</section>
+<div class="espaco-area-cliente"></div>
+
+<%- include("./partials/footer") %>

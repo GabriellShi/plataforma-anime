@@ -1,5 +1,17 @@
-<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")
+<%- include("./partials/head") %> <%- include("./partials/header")
 %>
+
+<div class="area-cliente">
+  <div class="perfil-cliente">
+    <img src="<%= user.image_filename ? '/uploads/' + user.image_filename : '/image/default-image.jpg' %>" alt="Imagem" />
+
+  </div>
+  
+<form action="/areaCliente/updateImage" method="post" enctype="multipart/form-data">
+  <input type="file" name="image_filename" />
+  <button type="submit">Trocar Imagem</button>
+
+</form>
 
 <main>
   <h2>Atualizar Usuario</h2>
@@ -43,24 +55,7 @@
       placeholder="Senha"
     />
 
-    <label for="image">Imagem Perfil</label>
-    <input value="<%= user.image %>" type="file" name="image" />
-    <button type="submit">Atualizar</button>
-  </form>
-</main>
 
-<main>
-  <h1>Visualizar Usuario</h1>
-  <% if(locals.user){ %>
-  <div class="imagem-usuario">
-    <img src="<%= user.image %>" alt="avatar" />
-    <span>| Id: <%= user.id %> </span>
-    <span>| Nome: <%= user.nome %> </span>
-    <span>| Nome de Usuario: <%= user.nomedeuser %> </span>
-    <span>| Email: <%= user.email %> </span>
-    <span>| Senha: <%= user.senha %> </span>
-  </div>
-  <% } else {%>
-  <h2>Usuario não Entrado por motivos do além</h2>
-  <% } %>
+    <button type="submit">Atualizar </button>
+  </form>
 </main>

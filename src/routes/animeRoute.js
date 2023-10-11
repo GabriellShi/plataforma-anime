@@ -5,6 +5,18 @@ const upload = require("../helpers/multer");
 
 // Controllers
 const animeController = require("../controllers/AnimeController");
+const isAuth = require("../middlewares/auth"); // Middleware de autenticação
+
+router.get("/:id", isAuth, animeController.show); // Protegido pelo middleware isAuth
+
+
+// Rota para adicionar um anime aos favoritos do usuário
+router.post("/:id/adicionar-favorito", animeController.adicionarFavorito);
+
+
+
+
+
 
 // Rota para salvar um novo comentário
 router.post("/:id/comment", animeController.storeComment);
@@ -41,7 +53,7 @@ router.delete("/delete/:id", animeController.destroy);
 router.get("/", animeController.index);
 
 // Rota do controlador 'show' que ira fazer a visualização de cada usuario
-router.get("/:id", animeController.show);
+router.get("/:id", isAuth, animeController.show);
 
 
 module.exports = router;

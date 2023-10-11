@@ -28,6 +28,12 @@ const Users = db.define(
       allowNull: false,
     },
 
+    token: {
+      type: Sequelize.DataTypes.STRING(200),
+      allowNull: false,
+    },
+
+
     image_filename: {
       type: Sequelize.DataTypes.STRING(500),
       allowNull: true,
