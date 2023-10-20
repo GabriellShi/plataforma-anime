@@ -30,7 +30,7 @@ const Users = db.define(
 
     token: {
       type: Sequelize.DataTypes.STRING(200),
-      allowNull: false,
+      allowNull: true,
     },
 
 

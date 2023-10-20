@@ -37,9 +37,15 @@
                             <div class="col-md-2">
                               <div class="capa-onepiece-index capa-onepiece-index2">
                                 <a href="/anime/<%= anime.id %>">
-                                  <img src="<%= anime.capa %>" alt="capa"/>
-                                </a>
+                                <div class="zoomable-image-container">
+                                  <img class="zoomable-image" src="<%= anime.capa %>" alt="capa"/>
+                                  <div class="zoomable-image-overlay"></div>
+                                </div>
+
+
                                 <h4><%= anime.nome %></h4>
+                            </a>
+
                               </div>
                             </div>
                           <% }); %>
@@ -73,14 +79,17 @@
                 <% if (episodios.length > 0) { %>
 
                 <% for(let episodio of episodios.slice(0, 18)) {%>
-                <div class="capa-onepiece-index">
+                <div class="capa-onepiece-index capa-onepiece-index-ep">
                     <a  href="/episodio/<%= episodio.id%>" target="">
 
-                        <img src="<%= episodio.image %>" alt="capa one piece">
-                    </a>
+                                <div class="zoomable-image-container">
+                                  <img class="zoomable-image" src="<%= episodio.image %>" alt="capa"/>
+                                  <div class="zoomable-image-overlay"></div>
+                                </div>
+                  <div class="descricao-ep-index">
                     <h4> <%= episodio.data %></h4>
-                    <h4><%= episodio.nome %></h4>
-                    <h4>Episódio <%= episodio.numero_episodio %></h4>
+                    <h2><%= episodio.nome %></h2>
+                    <h2>Episódio <%= episodio.numero_episodio %></h2></div>
                     </a>
                 </div>
                 <% } %>
@@ -106,7 +115,7 @@
             <div class="animes-lancados">
                
                 <% for (let detailsFilme of filmes.slice(0, 5)) { %>
-                <div class="capa-onepiece-index">
+                <div class="capa-onepiece-index capa-onepiece-index-film">
                     <a href="/filme/<%= detailsFilme.id %>">
                         <img src="<%= detailsFilme.capa %>" alt="capa"/>
                     </a>

@@ -11,7 +11,7 @@ const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize");
   
 const crypto = require('crypto');
-
+const nodemailer = require('nodemailer');
 
 const authController = {
   // Tela para cadastro do usuario
@@ -245,27 +245,79 @@ const authController = {
   },
 
 
-
-  recuperarSenha: async (req, res) => {
-    // Lógica para processar a recuperação de senha
+  renderRecuperarSenha: (req, res) => {
+    return res.render("recuperarSenha", { title: "Recuperar Senha", user: req.cookies.user });
+  },
+  // Controlador para recuperação de senha
+recuperarSenha: async (req, res) => {
+  if (req.method === 'POST') {
     const { email } = req.body;
 
+    if (!email) {
+      console.log('Erro: O campo de e-mail está vazio.');
+      return res.render('recuperarSenha', { title: 'Recuperar Senha', user: req.cookies.user });
+    } else {
+      console.log('Email recebido:', email);
+    }
 
-function generatePasswordResetToken() {
-  return crypto.randomBytes(20).toString('hex');
-}
-    // Aqui você deve adicionar a lógica para gerar um token de redefinição de senha,
-    // enviar um e-mail com um link contendo o token para o usuário e armazenar o token
-    // no banco de dados associado ao usuário.
-  
-    // Após o envio do e-mail, redirecione o usuário para uma página de confirmação.
-  
-    return res.render("recuperarSenha", { title: "Recuperar Senha",
-    user: req.cookies.user,
-    generatePasswordResetToken,
-   });
-  },
-  
+    console.log('Email capturado do formulário:', email);
+
+    // Verificar se o usuário existe
+    const user = await Users.findOne({ where: { email } });
+
+    if (!user) {
+      console.log('Erro: Usuário não encontrado para o e-mail fornecido.');
+      return res.render('recuperarSenha', { title: 'Recuperar Senha', user: req.cookies.user });
+    }
+
+    // Função para gerar um token de recuperação de senha
+    function generatePasswordResetToken() {
+      return crypto.randomBytes(20).toString('hex');
+    }
+
+    // Configurar o transporte nodemailer com os dados da credencial
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'contatoanimesblack@gmail.com', // Substitua pelo seu endereço de e-mail
+        clientId: '101298532470-42crnub0g8hs98b6qpud49ej2v4olq2n.apps.googleusercontent.com',
+        clientSecret: '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',
+        refreshToken: 'SEU_REFRESH_TOKEN_AQUI', // Você precisa obter o refresh token
+      },
+    });
+
+    async function sendPasswordResetEmail(user, token) {
+      const mailOptions = {
+        from: 'contatoanimesblack@gmail.com', // Deve ser o mesmo e-mail usado acima
+        to: user.email,
+        subject: 'Recuperação de Senha',
+        text: `Você solicitou a recuperação de senha. Use este token para redefinir sua senha: ${token}`,
+      };
+
+      await transporter.sendMail(mailOptions);
+    }
+
+    const token = generatePasswordResetToken();
+
+    // Salvar o token no banco de dados associado ao usuário
+    user.token = token;
+    await user.save();
+
+    // Enviar o token por e-mail
+    await sendPasswordResetEmail(user, token);
+
+    // Redirecionar para uma página de confirmação
+    return res.render('recuperarSenha', { title: 'Recuperar Senha', user: req.cookies.user });
+  } else {
+    console.log('GET request recebida para a página de recuperação de senha.');
+    // Lógica para renderizar a página de recuperação de senha
+    return res.render('recuperarSenha', { title: 'Recuperar Senha', user: req.cookies.user });
+  }
+},
+
+
+
+
 };
 
 module.exports = authController;

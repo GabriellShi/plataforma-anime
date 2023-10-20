@@ -24,7 +24,12 @@ router.get("/areaCliente", authController.areaCliente);
 
 router.get("/favoritos", isAuth, authController.areaCliente);
 
-router.get("/recuperarSenha", authController.recuperarSenha);
+// Rota para exibir a página de recuperação de senha (GET)
+router.get("/recuperarSenha", authController.renderRecuperarSenha);
+
+// Rota para tratar o envio de e-mail de recuperação de senha (POST)
+router.post("/recuperarSenha", authController.recuperarSenha);
+
 
 
 module.exports = router;

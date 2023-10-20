@@ -13,6 +13,7 @@ CREATE TABLE users(
     nomedeuser VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     senha VARCHAR(100) NOT NULL,
+    token VARCHAR(200) NOT NULL,
     image VARCHAR(500),
     image_filename VARCHAR(500),
     is_active TINYINT DEFAULT 1,
@@ -20,7 +21,7 @@ CREATE TABLE users(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
- -- ALTER TABLE users ADD image_filename VARCHAR(500);
+-- ALTER TABLE users ADD token VARCHAR(200) NOT NULL;
  
  -- Apagar Coluna
  -- ALTER TABLE users DROP COLUMN image_filename;
