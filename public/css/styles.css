@@ -1649,6 +1649,8 @@ img.seta-baixo {
   border: 0;
 }
 
+
+
 /* ---------------------------------- ESTILIZAÇÃO LOGIN -------------------------  */
 
 .capa-fundo-login img {
@@ -2570,3 +2572,10 @@ h2 {
   color: #007bff;
 }
 
+
+/* -----------------  */ /* Media Lista animes  */
+@media (max-width: 404px) {
+  .lista-dos-animes-capas img {
+    width: 8rem;
+  }
+}
