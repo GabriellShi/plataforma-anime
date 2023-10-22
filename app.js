@@ -13,6 +13,9 @@ app.listen(port, () => {
   console.log("Servidor está rodando bem");
 });
 
+
+
+
 const indexRoute = require("./src/routes/indexRoute");
 const paginasRoute = require("./src/routes/paginasRoute");
 const indexAdminRoute = require("./src/routes/indexAdminRoute");

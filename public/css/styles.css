@@ -6,7 +6,15 @@
   margin: 0;
   font-family: Roboto, sans-serif;
   scroll-behavior: smooth;
+  text-decoration: none;
+
 }
+
+/* Remova o sublinhado e aplique !important */
+a {
+  text-decoration: none !important;
+}
+
 
 /* --------------- Estilização do Header -------------------- */
 
@@ -1408,17 +1416,21 @@ li.adicionar-a-lista1 {
 }
 
 .lista-de-animes-por-letra {
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
+  background-color: rgb(17, 17, 17);
+  margin-top: 3rem;
+
 }
+
+
 
 .lista-de-animes-por-letra ul {
   padding: 0;
   display: flex;
   list-style: none;
   padding: 0;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+
 }
 
 .lista-de-animes-por-letra li {
@@ -1556,7 +1568,24 @@ img.seta-baixo {
   justify-content: center;
 }
 
+.lista-de-animes-por-letra ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+
+
 @media (max-width: 605px) {
+
+  .lista-de-animes-por-letra li {
+    border: 1px solid rgb(28, 28, 29);
+  }
+
+ 
+
+  
   .titulo-principal-lista-animes h2 {
     font-size: 1rem;
   }
@@ -1931,6 +1960,7 @@ img.seta-baixo {
 }
 .zoomable-image {
   max-width: 100%;
+  min-width: 100%;
   transition: transform 0.3s ease-in-out;
 }
 .zoomable-image-container:hover .zoomable-image {
@@ -1938,6 +1968,11 @@ img.seta-baixo {
 }
 .zoomable-image-container:hover {
   filter: brightness(1.3) saturate(2);
+}
+
+.zoomable-image-container-temporada section {
+  min-width: 50%;
+  max-width: 50%;
 }
 
 .linha-index {
@@ -2020,6 +2055,9 @@ img.seta-baixo {
   align-items: center;
 }
 
+
+
+
 .capa-onepiece-index h4,
 h2 {
   padding-top: 0.5rem;
@@ -2046,9 +2084,7 @@ h2 {
 
 
 
-div.col-md-2 {
-  padding: 0.4rem;
-}
+
 
 /* Estilize o botão de voltar (prev) */
 .setas-carrosel-index button[data-slide="prev"] {
@@ -2148,6 +2184,7 @@ h2 {
   line-height: 0vi;
 }
 
+
 .capa-onepiece-index {
   margin: 0.5rem;
 }
@@ -2166,6 +2203,12 @@ h2 {
 
 }
 
+@media (max-width: 768px) {
+  .col-md-2 {
+    width: 50%; /* Duas colunas em telas menores */
+  }
+}
+
 /* 
   -----------Seção 3 da pagina----------  */
 
@@ -2178,7 +2221,7 @@ h2 {
 }
 
 .capa-do-anime-popular-index img {
-  width: 4rem;
+  width: 5rem;
 }
 
 .animes-populares-index h4 {
@@ -2193,15 +2236,30 @@ h2 {
   color: yellow;
 }
 
+.nota-do-anime-index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.nota-do-anime-index h4  {
+  font-size: 1.2rem;
+  padding-top: 0.7rem;
+}
+
 .nota-do-anime-index img {
-  width: 5rem;
+  width: 1.5rem;
+  margin-left: 0.5rem;
+
 }
 
 .o-anime-popular-index {
   display: flex;
   justify-content: space-around;
   border: 1px solid white;
-  margin: 2rem;
+  margin: 1rem;
   border-radius: 5px;
   padding: 0.5rem;
   padding-left: 1rem;
@@ -2221,7 +2279,14 @@ h2 {
   text-align: center;
   display: flex;
   align-items: center;
-  padding-left: 2rem;
+  padding-left: 0.8rem;
+}
+
+.o-anime-popular-index-lado-direiro  h3{
+  font-size: 1rem;
+  font-weight: bolder;
+  color: yellow;
+
 }
 
 .mangas-populares-index {
@@ -2247,6 +2312,8 @@ h2 {
     padding: 0;
     margin: 0;
   }
+
+
 
   .capa-onepiece-index-film img {
     width: 13rem;
@@ -2319,38 +2386,9 @@ h2 {
 .titulo-calendarios {
   font-size: 3rem;
 }
-.zoomable-image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-.zoomable-image-container:hover .zoomable-image-overlay {
-  opacity: 1;
-}
-.zoomable-image-container {
-  position: relative;
-  overflow: hidden;
-  transition: filter 0.3s ease-in-out;
-}
-.zoomable-image {
-  max-width: 100%;
-  transition: transform 0.3s ease-in-out;
-}
-.zoomable-image-container:hover .zoomable-image {
-  transform: scale(1.1);
-}
-.zoomable-image-container:hover {
-  filter: brightness(1.3) saturate(2);
-}
 
-.zoomable-image-container-temporada section {
-  min-width: 50%;
-  max-width: 50%;
-}
+
+
 
 .lado-esquerdo-neto1 a {
   text-decoration: none;
@@ -2450,6 +2488,7 @@ h2 {
 .botao-vermais-index button {
   font-size: 0.8rem;
   height: 3rem;
+  margin-right: 0.6rem;
 }
 
 .barra-separacao-index h3 {

@@ -24,8 +24,11 @@
                 
             </div>
 
+            <div class="animes-lancados"> 
             <div class="carrossel">
                 <div id="animeCarousel" class="carousel slide" data-ride="carousel">
+
+                    
                   <!-- Slides do Carrossel -->
                   <div class="carousel-inner animes-lancados-index">
                     <% 
@@ -44,7 +47,7 @@
 
 
                                 <h4><%= anime.nome %></h4>
-                            </a>
+                                </a>
 
                               </div>
                             </div>
@@ -57,7 +60,7 @@
 
                 </div>
               </div>
-              
+            </div>
         </section>
     
         <div class="linha-index"></div>
@@ -80,7 +83,7 @@
 
                 <% for(let episodio of episodios.slice(0, 18)) {%>
                 <div class="capa-onepiece-index capa-onepiece-index-ep">
-                    <a  href="/episodio/<%= episodio.id%>" target="">
+                    <a class="ddds" href="/episodio/<%= episodio.id%>" target="">
 
                                 <div class="zoomable-image-container">
                                   <img class="zoomable-image" src="<%= episodio.image %>" alt="capa"/>
@@ -117,8 +120,13 @@
                 <% for (let detailsFilme of filmes.slice(0, 5)) { %>
                 <div class="capa-onepiece-index capa-onepiece-index-film">
                     <a href="/filme/<%= detailsFilme.id %>">
-                        <img src="<%= detailsFilme.capa %>" alt="capa"/>
+                        <div class="zoomable-image-container">
+                                  <img class="zoomable-image" src="<%= detailsFilme.capa %>" alt="capa"/>
+                                  <div class="zoomable-image-overlay"></div>
+                                </div>
                     </a>
+
+
                     <h4><%= detailsFilme.nome %></h4>
                 </div>
                 <% } %>
@@ -134,26 +142,33 @@
         <div class="linha-lateral-direita-index2"> </div>
         <div class="linha-lateral-direita-index">
             <section class="sessao-1-lado-direiro-index">
-    <div class="animes-populares-index">
-        <h2>ANIMES MAIS POPULARES</h2>
-        <% animesPopulares.forEach(anime => { %>
-            <a href="/anime/<%= anime.id %>">
-                <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index">
-                        <img src="<%= anime.capa %>" alt="<%= anime.nome %>">
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4><%= anime.nome %></h4>
-                            <div class="nota-do-anime-index">
-                                <img src="/img/nota.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        <% }); %>
-    </div>
+
+                
+                <div class="animes-populares-index">
+  <h2>ANIMES POPULARES</h2>
+  <% animesPopulares.forEach(anime => { %>
+    <a href="/anime/<%= anime.id %>">
+      <div class="o-anime-popular-index">
+        <div class="capa-do-anime-popular-index">
+          <img src="<%= anime.capa %>" alt="<%= anime.nome %>">
+        </div>
+        <div class="o-anime-popular-index-lado-direiro">
+          <div>
+            <h3><%= anime.nome.substring(0, 15) %></h3>
+            <div class="nota-do-anime-index">
+                     <h4><%= anime.percentage %></h4>
+                    <img src="/img/nota.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  <% }); %>
+</div>
+
+
+
+
 </section>
         
             <section class="sessao-1-lado-direiro-index">
