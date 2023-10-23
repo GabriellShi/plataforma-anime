@@ -1,132 +1,121 @@
 
-<%- include("./partials/head") %>
-<%- include("./partials/header") %>
 
-<section class="site-animes-pedidos-de-animes">
-
-    <div class="lado-esquerdo-do-site-pagina-anime">
-        <div class="titulo-principal-pedidos-pedidosanimes titulo-principal-generos">
-            <h2>TODOS GÊNEROS</h2>
-        </div>
+    <%- include("./partials/head") %>
+    <%- include("./partials/header") %>
     
-    <div class="lista-generos">
-        <ul>
+    
+    <section class="site-animes">
+    
+    <div class="lado-esquerdo-do-site-index">
+       
+    
+        <section class="site-animes-pedidos-de-animes">
 
-
-            <div class="generos-1">
-            <a href="/genero/Ação"><li>Ação</li></a>
-            <a href="/genero/Comédia Romântica"><li>Comédia Romântica</li></a>
-            <a href="/genero/Animação"><li>Animação</li></a>
-            <a href="/genero/Artes Marciais"><li>Artes Marciais</li></a>
-            <a href="/genero/Aventura"><li>Aventura</li></a>
-            <a href="/genero/Comédia"><li>Comédia</li></a>
-            <a href="/genero/Cotidiano"><li>Cotidiano</li></a>
-            <a href="/genero/Drama"><li>Drama</li></a>
+            <div class="lado-esquerdo-do-site-pagina-anime">
+                <div class="titulo-principal-pedidos-pedidosanimes titulo-principal-generos">
+                    <h2>TODOS GÊNEROS</h2>
+                </div>
+            
+            <div class="lista-generos">
+                <ul>
+        
+        
+                    <div class="generos-1">
+                    <a href="/genero/Ação"><li>Ação</li></a>
+                    <a href="/genero/Comédia Romântica"><li>Comédia Romântica</li></a>
+                    <a href="/genero/Animação"><li>Animação</li></a>
+                    <a href="/genero/Artes Marciais"><li>Artes Marciais</li></a>
+                    <a href="/genero/Aventura"><li>Aventura</li></a>
+                    <a href="/genero/Comédia"><li>Comédia</li></a>
+                    <a href="/genero/Samurai"><li>Samurai</li></a>
+                    <a href="/genero/Drama"><li>Drama</li></a>
+                    <a href="/genero/Dorama"><li>Dorama</li></a>
+        
+                    </div>
+                    <div class="generos-2">
+                    <a href="/genero/Ecchi"><li>Ecchi</li></a>
+                    <a href="/genero/Escolar"><li>Escolar</li></a>
+                    <a href="/genero/Esporte"><li>Esporte</li></a>
+                    <a href="/genero/Fantasia"><li>Fantasia</li></a>
+                    <a href="/genero/Ficção Cientifica"><li>Ficção Cientifica</li></a>
+                    <a href="/genero/Game"><li>Game</li></a>
+                    <a href="/genero/Harém"><li>Harém</li></a>
+                    <a href="/genero/Histórico"><li>Histórico</li></a>
+                    <a href="/genero/Infantil"><li>Infantil</li></a>
+                    </div>
+                    <div class="generos-3">
+                    <a href="/genero/Isekai"><li>Isekai</li></a>
+                    <a href="/genero/Magia"><li>Magia</li></a>
+                    <a href="/genero/Mecha"><li>Mecha</li></a>
+                    <a href="/genero/Mistério"><li>Mistério</li></a>
+                    <a href="/genero/Mitoligia"><li>Mitoligia</li></a>
+                    <a href="/genero/Musica"><li>Musical</li></a>
+                    <a href="/genero/Policial"><li>Policial</li></a>
+                    <a href="/genero/Psicológia"><li>Psicológia</li></a>
+                    <a href="/genero/Romance"><li>Romance</li></a>
+                    </div>
+                    <div class="generos-4">
+                    <a href="/genero/Seinen"><li>Seinen</li></a>
+                    <a href="/genero/Shoujo"><li>Shoujo</li></a>
+                    <a href="/genero/Shounen"><li>Shounen</li></a>
+                    <a href="/genero/Sobrenatural"><li>Sobrenatural</li></a>
+                    <a href="/genero/Super Poder"><li>Super Poder</li></a>
+                    <a href="/genero/Suspense"><li>Suspense</li></a>
+                    <a href="/genero/Terror"><li>Terror</li></a>
+                    <a href="/genero/Yaoi/Yuri"><li>Yaoi/Yuri</li></a>
+                    <a href="/genero/Vampiros"><li>Vampiros</li></a>
+                    </div>
+                </ul>
             </div>
-            <div class="generos-2">
-            <a href="/genero/Dorama"><li>Dorama</li></a>
-            <a href="/genero/Ecchi"><li>Ecchi</li></a>
-            <a href="/genero/Escolar"><li>Escolar</li></a>
-            <a href="/genero/Esporte"><li>Esporte</li></a>
-            <a href="/genero/Fantasia"><li>Fantasia</li></a>
-            <a href="/genero/Ficção Cientifica"><li>Ficção Cientifica</li></a>
-            <a href="/genero/Game"><li>Game</li></a>
-            <a href="/genero/Harém"><li>Harém</li></a>
-            <a href="/genero/Histórico"><li>Histórico</li></a>
-            <a href="/genero/Infantil"><li>Infantil</li></a>
+            
             </div>
-            <div class="generos-3">
-            <a href="/genero/Isekai"><li>Isekai</li></a>
-            <a href="/genero/Magia"><li>Magia</li></a>
-            <a href="/genero/Mecha"><li>Mecha</li></a>
-            <a href="/genero/Mistério"><li>Mistério</li></a>
-            <a href="/genero/Mitoligia"><li>Mitoligia</li></a>
-            <a href="/genero/Musica"><li>Musical</li></a>
-            <a href="/genero/Policial"><li>Policial</li></a>
-            <a href="/genero/Psicológia"><li>Psicológia</li></a>
-            <a href="/genero/Romance"><li>Romance</li></a>
-            </div>
-            <div class="generos-4">
-            <a href="/genero/Samurai"><li>Samurai</li></a>
-            <a href="/genero/Seinen"><li>Seinen</li></a>
-            <a href="/genero/Shoujo"><li>Shoujo</li></a>
-            <a href="/genero/Shounen"><li>Shounen</li></a>
-            <a href="/genero/Sobrenatural"><li>Sobrenatural</li></a>
-            <a href="/genero/Super Poder"><li>Super Poder</li></a>
-            <a href="/genero/Suspense"><li>Suspense</li></a>
-            <a href="/genero/Terror"><li>Terror</li></a>
-            <a href="/genero/Vampiros"><li>Vampiros</li></a>
-            <a href="/genero/Yaoi/Yuri"><li>Yaoi/Yuri</li></a>
-            </div>
-        </ul>
+        
+        </section>
     </div>
     
-    </div>
-
-
-    <div class="lado-direito-do-site-index">
-
-        <div class="linha-lateral-direita-index2"> </div>
-        <div class="linha-lateral-direita-index">
-
-            <section class="sessao-1-lado-direiro-index">
-                <div class="animes-populares-index mangas-populares-index">
-                    <h2>NOTICÍAS DO BLOG</h2>
-                <a href="">
-                    <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4>NORAGAMI</h4>
-                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href="">
-                    <div class="o-anime-popular-index">
-                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
-                        </div>
-                        <div class="o-anime-popular-index-lado-direiro">
+    
+        <div class="lado-direito-do-site-index ">
+    
+            <div class="linha-lateral-direita-index2"> </div>
+            <div class="linha-lateral-direita-index"></div>
+                <section class="sessao-1-lado-direiro-index">
+    
+                    
+                <div class="animes-populares-index">
+                    <h2>ANIMES POPULARES</h2>
+                    <% animesPopulares.forEach(anime => { %>
+                        <a href="/anime/<%= anime.id %>">
+                        <div class="o-anime-popular-index">
+                            <div class="capa-do-anime-popular-index">
+                            <img src="<%= anime.capa %>" alt="<%= anime.nome %>">
+                            </div>
+                            <div class="o-anime-popular-index-lado-direiro">
                             <div>
-                                <h4>NORAGAMI</h4>
-                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                                <h3><%= anime.nome.substring(0, 15) %></h3>
+                                <div class="nota-do-anime-index">
+                                        <h4><%= anime.percentage %></h4>
+                                        <img src="/img/nota.png" alt="">
+                                </div>
+                            </div>
                             </div>
                         </div>
-                        
-                    </div>
-                </a>
-                
+                        </a>
+                    <% }); %>
                 </div>
             </section>
-    </div>
+        </div>
+    
+    
+    
+    
+           
+    
+    </section>
+    
+    
+    <%- include("./partials/footer") %> 
+    
 
-</section>
 
 
 <%- include("./partials/footer") %> 

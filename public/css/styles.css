@@ -150,6 +150,7 @@ a {
 .barra-de-pesquisa-partials img {
   width: 1.5rem;
   margin-left: -1rem;
+  z-index: 50;
 }
 
 .barra-de-pesquisa-partials-mobile,
@@ -337,6 +338,10 @@ a {
   .login-pesquisa-partials-2,
   .categoria-mobile {
     display: list-item;
+  }
+
+  .categoria-desktop {
+    display: none;
   }
 
   /* deixando o icone de login e barra de pesquisa na mesma linha  */
@@ -584,6 +589,14 @@ a {
 
 /*Definindo fonte padrão dos textos do site e zerando margem do site total*/
 
+.section-detalhes {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: space-around;
+}
+
+
 .site-animes-pagina-anime {
   background-color: black;
   color: white;
@@ -627,12 +640,26 @@ a {
 .icones-da-capa-do-anime-lista-anime ul {
   display: flex;
   background-color: rgb(26, 25, 25);
-  padding: 0.5rem;
-  width: 21.3rem;
-}
+  padding: 0.3rem;
+  }
+
 
 .lista-de-animes h4 {
   margin-right: 0.5rem;
+  padding-top: 0.4rem;
+}
+
+/* .lista-de-animes  {
+  margin-right: 0.5rem;
+} */
+
+.icone-favoritos {
+  border: 0;
+}
+
+.adicionar-favorito {
+  background-color: transparent;
+  border: 0;
 }
 
 .icones-da-capa-do-anime-lista-anime img {
@@ -640,8 +667,8 @@ a {
 }
 
 .icones-da-capa-do-anime-lista-anime li {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.9rem;
+  padding-right: 0.9rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   align-items: center;
@@ -739,8 +766,15 @@ li.status-lista-anime {
   align-items: center;
 }
 
+.numero-da-tempora2-pagina-anime2 {
+  display: flex;
+  justify-content: center;
+  color: yellow;
+}
+
 .capa-e-numero-do-episodio-pagina-anime img {
-  width: 6rem;
+  width: 8rem;
+  margin-left: 0.5rem;
 }
 
 .capa-e-numero-do-episodio-pagina-anime {
@@ -775,6 +809,7 @@ li.ultimo-capa-e-numero-do-episodio-pagina-anime {
 
 .numero-do-episodio-pagina-anime {
   padding-bottom: 2rem;
+  margin-left: 2.5rem;
 }
 
 .data-lancamento :hover {
@@ -811,7 +846,38 @@ select {
   height: 8rem;
 }
 
-@media (max-width: 558px) {
+
+
+
+@media (max-width: 999px) {
+  .lado-direito-do-site-index-animes {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .titulo-principal-pagina-anime h2 {
+    font-size: 1.7rem;
+    margin-left: 0.4rem;
+    text-align: center;
+  }
+
+  .informações-do-anime-lista-anime h3 {
+    font-size: 1.5rem;
+  }
+
+  .titulo-assistir-anime-online-lista-anime h3 {
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .sinopse-anime-lista-anime h2 {
+    font-size: 1.5rem;
+  }
+}
+
+  @media (max-width: 558px) {
   .sessao1-primeira-parte-lista-anime {
     display: grid;
   }
@@ -1108,7 +1174,31 @@ li.adicionar-a-lista1 {
 
 .site-animes-pedidos-de-animes {
   background-color: black;
+  padding-bottom: 18rem;
   color: white;
+}
+
+/* Defina o estilo inicial para ocultar a div */
+#targetDiv {
+  display: none;
+}
+
+.sect-pedidos {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.sect-pedidos h2 {
+  background-color: #070591;
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin: 1rem;
+}
+
+.sect-pedidos h2:hover {
+  color: rgb(255, 251, 7);
+  font-weight: bolder;
 }
 
 .lado-esquerdo-do-site-pagina-anime {
@@ -1242,6 +1332,13 @@ li.adicionar-a-lista1 {
   }
 }
 
+
+@media (max-width: 535px) {
+  .sect-pedidos h2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+}
 /* ----------------------------- AREA DO CLIENTE ------------------------------  */
 
 .pagina-area-cliente {
@@ -1357,6 +1454,8 @@ li.adicionar-a-lista1 {
 .lista-generos {
   display: flex;
   justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .lista-generos li:hover {
@@ -1461,10 +1560,12 @@ li.all-listadeanimes {
   text-align: center;
   justify-content: space-between;
   padding: 1.2rem;
+  z-index: 2;
 }
 
 .barra-de-pesquisa-lista-dos-animes input {
   width: 95%;
+  z-index: 2;
 }
 
 .pesquisa-lista-dos-animes {
@@ -1557,6 +1658,7 @@ img.seta-baixo {
   border: 1px solid rgb(8, 190, 245);
   margin: 0.5rem;
   border-radius: 8px;
+  padding: 0.5rem;
 }
 
 .capa-onepiece-listadosanimes:hover {
@@ -1566,6 +1668,11 @@ img.seta-baixo {
 .lista-dos-animes-capas {
   display: flex;
   justify-content: center;
+}
+
+
+.lista-dos-animes-capas h4 {
+  font-size: 0.9rem;
 }
 
 .lista-de-animes-por-letra ul {
@@ -1961,7 +2068,7 @@ img.seta-baixo {
   transition: filter 0.3s ease-in-out;
 }
 .zoomable-image {
-  max-width: 100%;
+  
   min-width: 100%;
   transition: transform 0.3s ease-in-out;
 }
@@ -1976,6 +2083,10 @@ img.seta-baixo {
   min-width: 50%;
   max-width: 50%;
 }
+.animes-lancados-index img {
+  width: 40rem;
+}
+
 
 .linha-index {
   width: 95%;
@@ -2014,6 +2125,7 @@ img.seta-baixo {
   display: flex;
   justify-content: space-between;
   padding: 1.5rem;
+  padding-bottom: 0;
 }
 
 .barra-separacao-index {
@@ -2032,7 +2144,6 @@ img.seta-baixo {
   flex-direction: row;
   flex-flow: wrap;
 
-  padding-bottom: 2rem;
 }
 
 .animes-lancados img {
@@ -2046,9 +2157,8 @@ img.seta-baixo {
 }
 
 
-.animes-lancados-index img {
-  width: 10rem;
-}
+
+
 
 .capa-onepiece-index {
   text-align: center;
@@ -2439,8 +2549,10 @@ h2 {
 
 .lado-esquerdo-neto1-calendario {
   min-width: 10rem;
-  max-width: 13rem;
+  max-width: 14rem;
 }
+
+
 
 .dia-button.selected {
   background-color: #3498db;
@@ -2453,6 +2565,15 @@ h2 {
     flex-flow: wrap;
     justify-content: center;
   }
+
+  .lado-esquerdo-neto1-calendario {
+    min-width: 10rem;
+    max-width: 20rem;
+  }
+
+  .lado-esquerdo-neto1-calendario img {
+  width: 16rem;
+}
 }
 
 /* ------------------------------- Estilização pagina Search -----------------------------  */
@@ -2497,23 +2618,6 @@ h2 {
   font-size: 1.5rem;
 }
 
-/* Defina o estilo inicial para ocultar a div */
-#targetDiv {
-  display: none;
-}
-
-.sect-pedidos {
-  display: flex;
-  justify-content: center;
-  padding-top: 2rem;
-}
-
-.sect-pedidos h2 {
-  background-color: #00e6ff;
-  border-radius: 10px;
-  padding: 0.2rem;
-  margin: 1rem;
-}
 
 .lado-esquerdo-none,
 .lado-esquerdo-none2 {
@@ -2577,5 +2681,9 @@ h2 {
 @media (max-width: 404px) {
   .lista-dos-animes-capas img {
     width: 8rem;
+  }
+
+  .animes-lancados h4 {
+    font-size: 0.8rem;
   }
 }

@@ -266,7 +266,10 @@ $(document).ready(function() {
     <% for(let anime of listaAnimeAdmin) {%>
     <div class="capa-onepiece-index capa-onepiece-listadosanimes">
       <a href="/anime/<%= anime.id %>">
-        <img src="<%= anime.capa %>" alt="capa" />
+        <div class="zoomable-image-container">
+          <img class="zoomable-image" src="<%= anime.capa %>" alt="capa"/>
+          <div class="zoomable-image-overlay"></div>
+        </div>
         <h4><%= anime.nome %></h4>
       </a>
     </div>

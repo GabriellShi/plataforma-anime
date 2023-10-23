@@ -73,6 +73,13 @@ const animeController = {
 
     animesPopulares.sort((a, b) => b.likes - a.likes);
 
+     // Função para calcular a porcentagem com base nos votos
+     function calculatePercentage(anime) {
+      const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+      const percentage = (anime.likes / totalLikes) * 100;
+      return percentage.toFixed(1); // Arredonde para uma casa decimal
+    }
+
     return res.render("anime", {
       title: "Visualizar Anime",
       anime,
@@ -80,6 +87,11 @@ const animeController = {
       animesPopulares,
       comentarios,
       user: req.cookies.user, // Passando o objeto user para a página
+
+      animesPopulares: animesPopulares.map((anime, index) => ({
+        ...anime.get({ plain: true }),
+        percentage: calculatePercentage(anime), // Adicione a porcentagem
+      })),
     });
   },
 
