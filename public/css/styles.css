@@ -781,7 +781,7 @@ li.status-lista-anime {
   display: flex;
   align-items: center;
   color: white;
-  background-color: rgb(31, 31, 31);
+  background-color: rgb(51, 51, 51);
 }
 
 .capa-e-numero-do-episodio-pagina-anime img {
@@ -789,7 +789,7 @@ li.status-lista-anime {
 }
 
 .capa-e-numero-do-episodio-pagina-anime {
-  background-color: rgb(12, 11, 11);
+  background-color: rgb(27, 26, 26);
   border-bottom: 1px solid white;
   padding: 0.3rem;
   cursor: pointer;
@@ -855,29 +855,14 @@ select {
   }
 }
 
-@media (max-width: 420px) {
-  .titulo-principal-pagina-anime h2 {
-    font-size: 1.7rem;
-    margin-left: 0.4rem;
-    text-align: center;
-  }
 
-  .informações-do-anime-lista-anime h3 {
-    font-size: 1.5rem;
-  }
-
-  .titulo-assistir-anime-online-lista-anime h3 {
-    font-size: 1rem;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .sinopse-anime-lista-anime h2 {
-    font-size: 1.5rem;
-  }
-}
 
   @media (max-width: 558px) {
+
+    .numero-do-episodio-pagina-anime {
+      margin-left: 0.3rem;
+    }
+
   .sessao1-primeira-parte-lista-anime {
     display: grid;
   }
@@ -903,6 +888,27 @@ select {
   }
 }
 
+@media (max-width: 420px) {
+  .titulo-principal-pagina-anime h2 {
+    font-size: 1.7rem;
+    margin-left: 0.4rem;
+    text-align: center;
+  }
+
+  .informações-do-anime-lista-anime h3 {
+    font-size: 1.5rem;
+  }
+
+  .titulo-assistir-anime-online-lista-anime h3 {
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .sinopse-anime-lista-anime h2 {
+    font-size: 1.5rem;
+  }
+}
 .anime-edit {
   background-color: black;
   color: white;
