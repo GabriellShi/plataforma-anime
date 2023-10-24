@@ -82,12 +82,22 @@ const detailsFilmeController = {
 
 filmesPopulares.sort((a, b) => b.likes - a.likes);
 
+function calculatePercentage(filme) {
+  const totalLikes = filmesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+  const percentage = (filme.likes / totalLikes) * 100;
+  return percentage.toFixed(1); // Arredonde para uma casa decimal
+}
+
     return res.render("detailsFilme", {
       title: "Visualizar Filme",
       detailsFilme,
       episodios,
       comentarios,
       filmesPopulares,
+      filmesPopulares: filmesPopulares.map((filme, index) => ({
+        ...filme.get({ plain: true }),
+        percentage: calculatePercentage(filme), // Adicione a porcentagem
+      })),
       user: req.cookies.user,
 
     });

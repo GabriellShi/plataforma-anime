@@ -129,6 +129,12 @@ const paginasController = {
         // Ira ajustar a ordem que não está funcionando no DESC 
       animesPopulares.sort((a, b) => b.likes - a.likes);
   
+      function calculatePercentage(anime) {
+        const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+        const percentage = (anime.likes / totalLikes) * 100;
+        return percentage.toFixed(1); // Arredonde para uma casa decimal
+      }
+
       const episodiosPaginaAtual = episodios.slice(startIndex, endIndex);
 
         // Calcule o número total de animes, o número total de páginas e a página atual
@@ -142,7 +148,10 @@ const paginasController = {
         page, // Página atual
         totalPages, // Número total de páginas
         totalEpisodios, // Número total de animes
-        animesPopulares,
+        animesPopulares: animesPopulares.map((anime, index) => ({
+          ...anime.get({ plain: true }),
+          percentage: calculatePercentage(anime), // Adicione a porcentagem
+        })),
       user: req.cookies.user,
 
       

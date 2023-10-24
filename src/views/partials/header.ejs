@@ -4,14 +4,13 @@
         <nav class="nav-partials">
 
             <input type="checkbox" name="" id="toggle-partials">
-            <label for="toggle-partials"> <img src="img/barra-de-navegação.png" alt="Barra de Navegação Mobile"></label>
+            <label for="toggle-partials"> <img src="../img/barra-de-navegação.png" alt="Barra de Navegação Mobile"></label>
             
             <div class="icone-login-partials-mobile">
                 
             <div class=" categoria-desktop-login icone-login-mob" id="home">
                 <ul>
                         <li class="categoria-desktop ">
-                            <a href="#"><img src="/img/icone-login.png" alt="icone login"></a>
                             <ul class="categorias-partials">
                                 <li><a href="/login">Login</a></li>
                                 <li><a href="/user/create">Cadastro</a></li>
@@ -25,30 +24,89 @@
 
 
             <div class="logo-partials">
-                <a href="/"><img src="img/logo.jpg" alt="Logo"></a>
+                <a href="/"><img src="../img/logo.jpg" alt="Logo"></a>
             </div>
-
+            <div class=" categoria-desktop-login icone-login-desk2" id="home">
+                <ul>
+                        <li class="categoria-desktop categoria-desktop-login3">
+                            <a href="#"><img src="../img/icone-login.png" alt="icone login"></a>
+                            <ul class="categorias-partials">
+                                <li><a href="/login">Login</a></li>
+                                <li><a href="/user/create">Cadastro</a></li>
+                            </ul>
+                        </li>
+            </div>
             <div class="toggle-partials-2-pai">
-                <input type="checkbox" name="" id="toggle-partials-2">
-                <label for="toggle-partials-2"> <img src="img/lupa.png" alt="Pesquisa Mobile"></label>
-            </div>
+                <div class="toggle-partials-2-pai">
+                  <input type="checkbox" id="toggle-partials-2" />
+                  <label for="toggle-partials-2">
+                    <button class="lupa-button">
+                      <img src="/img/lupa.png" alt="Lupa" />
+                    </button>
+                  </label>
+                  <form action="/search" method="post">
+                    <section class="partials-mobile-search-button">
+                      <div class="search-input">
+                        <input
+                          type="search"
+                          name="searchQuery"
+                          placeholder="Pesquisar..."
+                        />
+                      </div>
+                      <div class="button-l">
+                        <button type="submit">
+                          <img src="/img/lupa.png" alt="Lupa" />
+                        </button>
+                      </div>
+                    </section>
+                  </form>
+                </div>
+              </div>
+        
+              <script>
+                $(document).ready(function () {
+                  $(".lupa-button").on("click", function () {
+                    // Mostra ou esconde o campo de pesquisa e o botão de lupa com base no estado atual
+                    $(".search-input").toggle();
+                    $(".button-l").toggle();
+                    $(this).toggle(); // Esconde o próprio botão de lupa
+                  });
+                });
+              </script>
 
-
+<form action="/search" method="post">
+    <div class="login-pesquisa-partials-2">
+      <div class="barra-de-pesquisa-partials">
+        <div>
+          <input
+            type="search"
+            name="searchQuery"
+            placeholder="Pesquisar..."
+          />
+        </div>
+        <div>
+          <button type="submit">
+            <img src="/img/lupa.png" alt="Lupa" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
             <div class="login-pesquisa-partials-2">
 
                 <div class="barra-de-pesquisa-partials">
                     <div><input type="search" placeholder="Pesquisar..."></div>
-                    <div><button><img src="/img/lupa.png" alt="Lupa"></button></div>
+                    <div><button><img src="../img/lupa.png" alt="Lupa"></button></div>
                 </div>
 
                 <div class="barra-separadora-partials">
-                    <img src="/img/barra.png" alt="barra separadora">
+                    <img src="../img/barra.png" alt="barra separadora">
                 </div>
 
                 <div class=" categoria-desktop-login icone-login-desk" id="home">
                     <ul>
                             <li class="categoria-desktop categoria-desktop-login2">
-                                <a href="#"><img src="/img/icone-login.png" alt="icone login"></a>
+                                <a href="#"><img src="../img/icone-login.png" alt="icone login"></a>
                                 <ul class="categorias-partials">
                                     <li><a href="/login">Login</a></li>
                                     <li><a href="/user/create">Cadastro</a></li>
@@ -102,7 +160,7 @@
                         <input type="search" name="searchQuery" placeholder="Pesquisar...">
                         </div>
                         <div>
-                        <button type="submit"><img src="/img/lupa.png" alt="Lupa"></button>
+                        <button type="submit"><img src="../img/lupa.png" alt="Lupa"></button>
                         </div>
                     </div>
                 </form>
@@ -110,13 +168,13 @@
 
 
                 <div class="barra-separadora-partials">
-                    <img src="/img/barra.png" alt="barra separadora">
+                    <img src="../img/barra.png" alt="barra separadora">
                 </div>
 
                 <div class=" categoria-desktop-login" id="home">
                     <ul>
                             <li class="categoria-desktop categoria-desktop-login2">
-                                <a href="#"><img src="/img/icone-login.png" alt="icone login"></a>
+                                <a href="#"><img src="../img/icone-login.png" alt="icone login"></a>
                                 <ul class="categorias-partials">
                                     <% if(locals.user && locals.user.admin) {%> 
 

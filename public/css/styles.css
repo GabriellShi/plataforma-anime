@@ -7,14 +7,12 @@
   font-family: Roboto, sans-serif;
   scroll-behavior: smooth;
   text-decoration: none;
-
 }
 
 /* Remova o sublinhado e aplique !important */
 a {
   text-decoration: none !important;
 }
-
 
 /* --------------- Estilização do Header -------------------- */
 
@@ -49,6 +47,8 @@ a {
   align-items: center;
   justify-content: space-between;
   background-color: hsl(0, 0%, 0%);
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 }
 
 /* Definindo a largura e dando margem a imagem que fai no menu de navegação  */
@@ -281,6 +281,10 @@ a {
   width: 1.5rem;
 }
 
+.icone-login-desk2 {
+  display: none;
+}
+
 /*  -------------------- DAQUI PARA BAIXO FICA A ESTILIZAÇÃO DO HEADER MOBILE -------------------- */
 
 /* Retirando o espaçamento dos topicos do menu de navegação e minuindo os itens  */
@@ -340,9 +344,8 @@ a {
     display: list-item;
   }
 
-  .categoria-desktop {
-    display: none;
-  }
+  /* .categoria-desktop {
+  } */
 
   /* deixando o icone de login e barra de pesquisa na mesma linha  */
   .login-pesquisa-partials-2 {
@@ -373,7 +376,7 @@ a {
   .nav-partials ul {
     flex-direction: column;
     align-items: center;
-    padding: 0.5rem 0;
+    /* padding: 0.5rem 0; */
   }
 
   /* Dando cor e deixando o cursor com um formato que clicagem  */
@@ -399,97 +402,141 @@ a {
     height: 100%;
   }
 }
-
 @media (max-width: 530px) {
-  .icone-login-desk {
+  .button-l button,
+  .search-input input {
+    background-color: transparent;
+    border: 0;
+  }
+  .lupa-button {
+    background: 0 0;
+    border: none;
+    cursor: pointer;
+    display: inline;
+    padding: 0;
+    margin: 0;
+  }
+  .barra-de-pesquisa-partials-mobile,
+  .search-input {
+    padding: 3px;
+    border-radius: 5px;
+    background-color: #424141;
+    color: #fff;
+  }
+  .search-input {
     display: none;
+    width: 21rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+  }
+  .search-input input {
+    width: 19rem;
+    height: 1.6rem;
+    color: #fff;
+  }
+  input:focus {
+    outline: 0;
+  }
+  .button-l {
+    display: none;
+    width: 2rem;
+    height: 2rem;
+  }
+  .button-l button {
+    width: 2rem;
+    height: 2rem;
+    margin-left: -2rem;
+  }
+  .partials-mobile-search-button {
+    display: flex;
+  }
+  .partials-mobile-search-button img {
+    width: 20px;
+    margin-top: -0.5rem;
+    cursor: pointer;
+  }
+  #toggle-partials-2:checked + label .search-input {
+    display: block;
+  }
+  .barra-de-pesquisa-partials,
+  .barra-separadora-partials,
+  .icone-login-desk,
+  .icone-login-partials {
+    display: none;
+  }
+
+  .icone-login-desk2 {
+    display: list-item;
+  }
+
+  .categoria-desktop-login3 img {
+    width: 1.8rem;
+    margin-left: 1rem;
+    padding-top: 0.5rem;
+    margin-right: 0.5rem;
   }
 
   .nav-partials {
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
-
   .icone-login-partials-mobile {
     position: relative;
     right: 3rem;
   }
-
   .toggle-partials-2-pai {
     position: relative;
-    left: 2rem;
+    left: 0.5rem;
   }
-
+  .barra-de-pesquisa-partials-mobile img,
   .nav-partials label img {
-    width: 1.5rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
   }
-  .toggle-partials-2-pai,
   .icone-login-partials-mobile,
   .toggle-partials-2-pai {
     display: list-item;
   }
-
   .icone-login-partials-mobile img {
-    width: 1.5rem;
+    width: 1rem;
   }
-
   .toggle-partials-2-pai label {
     margin: 0;
   }
-
-  .icone-login-partials,
-  .barra-separadora-partials,
-  .barra-de-pesquisa-partials {
-    display: none;
-  }
-
   .barra-de-pesquisa-partials-mobile {
-    background-color: rgb(66, 65, 65);
-    padding: 3px;
-    color: white;
-    border-radius: 5px;
     width: 14rem;
     height: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
-  /* Estilizando o input da barra de pesquisa, definindo o tamanho do texto, a largura e altura do input e cor de fundo  */
   .barra-de-pesquisa-partials-mobile input {
     width: 12rem;
     height: 2rem;
-    background-color: rgb(66, 65, 65);
+    background-color: #424141;
     border: 0;
     font-size: 1rem;
     margin-left: 1rem;
     outline: 0;
-    color: white;
+    color: #fff;
     border-radius: 5px;
   }
-
-  /* tirando o fundo do botão lupa e deixando ele como notão clicável  */
   .barra-de-pesquisa-partials-mobile button {
     background-color: transparent;
     border: 0;
     cursor: pointer;
   }
-
-  .barra-de-pesquisa-partials-mobile img {
-    width: 1.5rem;
-  }
-
   .icone-login-mob ul ul {
     left: 0.1rem;
   }
+
+  
 }
 
-@media (max-width: 370px) {
+/* @media (max-width: 370px) {
   .nav-partials label img {
-    margin-right: 2rem;
   }
-}
+} */
 
 /* ------------------------------ ESTILIZAÇÃO FOOTER ------------------------------  */
 
@@ -585,6 +632,9 @@ a {
   transform: rotate(-90deg);
 }
 
+
+
+
 /* ---------------------------- ESTILIZAÇÃO ANIMES --------------------------------  */
 
 /*Definindo fonte padrão dos textos do site e zerando margem do site total*/
@@ -595,7 +645,6 @@ a {
   flex-flow: wrap;
   justify-content: space-around;
 }
-
 
 .site-animes-pagina-anime {
   background-color: black;
@@ -616,7 +665,7 @@ a {
 
 .titulo-principal-pagina-anime img {
   width: 2rem;
-  margin: 0.2rem;
+  margin-left: 1rem;
 }
 
 .sessao1-primeira-parte-lista-anime {
@@ -641,8 +690,7 @@ a {
   display: flex;
   background-color: rgb(26, 25, 25);
   padding: 0.3rem;
-  }
-
+}
 
 .lista-de-animes h4 {
   margin-right: 0.5rem;
@@ -846,22 +894,16 @@ select {
   height: 8rem;
 }
 
-
-
-
 @media (max-width: 999px) {
   .lado-direito-do-site-index-animes {
     display: none;
   }
 }
 
-
-
-  @media (max-width: 558px) {
-
-    .numero-do-episodio-pagina-anime {
-      margin-left: 0.3rem;
-    }
+@media (max-width: 558px) {
+  .numero-do-episodio-pagina-anime {
+    margin-left: 0.3rem;
+  }
 
   .sessao1-primeira-parte-lista-anime {
     display: grid;
@@ -937,7 +979,7 @@ select {
 .titulo-principal-episodios-adicionados {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  padding-top: 1rem;
   align-items: center;
 }
 
@@ -964,23 +1006,21 @@ select {
 }
 
 .titulo-principal-episodio-selecionado {
-  background-color: rgb(29, 29, 31);
+  background-color: rgb(17, 17, 17);
   color: white;
   display: flex;
   justify-content: center;
-  padding: 0.3rem;
-  /* margin-bottom: 1rem; */
 }
 
 .capa-episodio-selecionado img {
-  width: 90%;
+  width: 100%;
 }
 
 .botao-para-episodio {
-  position: relative;
-  bottom: 10%;
-  left: 39%;
-  height: 5%;
+  position:fixed;
+  top: 60%;
+  left: 30%;
+  height: 15%;
   background-color: blue;
   border: 2px solid black;
   border-radius: 15px;
@@ -989,6 +1029,7 @@ select {
   font-size: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  z-index: 999;
 }
 
 .botao-para-episodio:hover {
@@ -1017,7 +1058,7 @@ select {
   justify-content: center;
   align-items: center;
   background-color: rgb(29, 29, 31);
-  margin-right: 0.3rem;
+  margin: 0.3rem;
   padding: 0.5rem;
   border: 1px solid white;
   padding-left: 2rem;
@@ -1082,6 +1123,10 @@ li.adicionar-a-lista1 {
   background-color: rgb(4, 0, 255);
 }
 
+.icones-episodios-anter-prox-episodio-selecionado h4 {
+  padding-top: 0.5rem;
+}
+
 @media (max-width: 1115px) {
   .icones-episodios-anter-prox-episodio-selecionado h4 {
     font-size: 0.8rem;
@@ -1093,7 +1138,9 @@ li.adicionar-a-lista1 {
   }
 
   .botao-para-episodio {
-    left: 35%;
+    top: 50%;
+    left: 25%;
+    height: 15%;
   }
 }
 
@@ -1220,6 +1267,10 @@ li.adicionar-a-lista1 {
   padding: 0.2rem;
 }
 
+.titulo-principal-pedidos-pedidosanimes h2 {
+  font-size: 1.5rem;
+}
+
 .titulo-principal-pedidos-pedidosanimes img {
   height: 2.5rem;
   padding-right: 0.8rem;
@@ -1337,7 +1388,6 @@ li.adicionar-a-lista1 {
     padding-left: 0.6rem;
   }
 }
-
 
 @media (max-width: 535px) {
   .sect-pedidos h2 {
@@ -1525,17 +1575,13 @@ li.adicionar-a-lista1 {
   justify-content: center; */
   background-color: rgb(17, 17, 17);
   margin-top: 3rem;
-
 }
-
-
 
 .lista-de-animes-por-letra ul {
   padding: 0;
   display: flex;
   list-style: none;
   padding: 0;
-
 }
 
 .lista-de-animes-por-letra li {
@@ -1676,7 +1722,6 @@ img.seta-baixo {
   justify-content: center;
 }
 
-
 .lista-dos-animes-capas h4 {
   font-size: 0.9rem;
 }
@@ -1688,19 +1733,13 @@ img.seta-baixo {
   width: 100%;
 }
 
-
-
 @media (max-width: 605px) {
-
   .lista-de-animes-por-letra li {
     border: 1px solid rgb(28, 28, 29);
   }
 
- 
-
-  
   .titulo-principal-lista-animes h2 {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   .barra-de-pesquisa-lista-dos-animes {
@@ -1761,8 +1800,6 @@ img.seta-baixo {
   margin: 5px 0;
   border: 0;
 }
-
-
 
 /* ---------------------------------- ESTILIZAÇÃO LOGIN -------------------------  */
 
@@ -2074,7 +2111,6 @@ img.seta-baixo {
   transition: filter 0.3s ease-in-out;
 }
 .zoomable-image {
-  
   min-width: 100%;
   transition: transform 0.3s ease-in-out;
 }
@@ -2092,7 +2128,6 @@ img.seta-baixo {
 .animes-lancados-index img {
   width: 40rem;
 }
-
 
 .linha-index {
   width: 95%;
@@ -2149,11 +2184,10 @@ img.seta-baixo {
   justify-content: center;
   flex-direction: row;
   flex-flow: wrap;
-
 }
 
 .animes-lancados img {
-  width: 10rem;
+  width: 15rem;
 }
 
 .animes-lancados h4 {
@@ -2162,19 +2196,12 @@ img.seta-baixo {
   font-size: 0.8rem;
 }
 
-
-
-
-
 .capa-onepiece-index {
   text-align: center;
   display: flow-root;
   justify-content: center;
   align-items: center;
 }
-
-
-
 
 .capa-onepiece-index h4,
 h2 {
@@ -2186,23 +2213,17 @@ h2 {
   justify-content: center;
 }
 
-
 .capa-onepiece-index2 h4,
 h2 {
   font-size: 1rem;
   color: white;
 }
 
-
 .row {
   /* margin-bottom: 1rem; */
   display: flex;
   justify-content: center;
 }
-
-
-
-
 
 /* Estilize o botão de voltar (prev) */
 .setas-carrosel-index button[data-slide="prev"] {
@@ -2302,7 +2323,6 @@ h2 {
   line-height: 0vi;
 }
 
-
 .capa-onepiece-index {
   margin: 0.5rem;
 }
@@ -2318,7 +2338,6 @@ h2 {
 
 .descricao-ep-index h4 {
   color: yellow;
-
 }
 
 @media (max-width: 768px) {
@@ -2342,6 +2361,8 @@ h2 {
   width: 5rem;
 }
 
+
+
 .animes-populares-index h4 {
   color: white;
   font-size: 0.7rem;
@@ -2362,7 +2383,7 @@ h2 {
   margin-bottom: 0;
 }
 
-.nota-do-anime-index h4  {
+.nota-do-anime-index h4 {
   font-size: 1.2rem;
   padding-top: 0.7rem;
 }
@@ -2370,7 +2391,6 @@ h2 {
 .nota-do-anime-index img {
   width: 1.5rem;
   margin-left: 0.5rem;
-
 }
 
 .o-anime-popular-index {
@@ -2400,11 +2420,10 @@ h2 {
   padding-left: 0.8rem;
 }
 
-.o-anime-popular-index-lado-direiro  h3{
+.o-anime-popular-index-lado-direiro h3 {
   font-size: 1rem;
   font-weight: bolder;
   color: yellow;
-
 }
 
 .mangas-populares-index {
@@ -2430,8 +2449,6 @@ h2 {
     padding: 0;
     margin: 0;
   }
-
-
 
   .capa-onepiece-index-film img {
     width: 13rem;
@@ -2505,9 +2522,6 @@ h2 {
   font-size: 3rem;
 }
 
-
-
-
 .lado-esquerdo-neto1 a {
   text-decoration: none;
 }
@@ -2558,8 +2572,6 @@ h2 {
   max-width: 14rem;
 }
 
-
-
 .dia-button.selected {
   background-color: #3498db;
   color: #fff;
@@ -2578,8 +2590,8 @@ h2 {
   }
 
   .lado-esquerdo-neto1-calendario img {
-  width: 16rem;
-}
+    width: 16rem;
+  }
 }
 
 /* ------------------------------- Estilização pagina Search -----------------------------  */
@@ -2618,12 +2630,13 @@ h2 {
   font-size: 0.8rem;
   height: 3rem;
   margin-right: 0.6rem;
+  width: 100%;
 }
 
 .barra-separacao-index h3 {
   font-size: 1.5rem;
+  padding-top: 0.5rem;
 }
-
 
 .lado-esquerdo-none,
 .lado-esquerdo-none2 {
@@ -2682,7 +2695,6 @@ h2 {
   color: #007bff;
 }
 
-
 /* -----------------  */ /* Media Lista animes  */
 @media (max-width: 404px) {
   .lista-dos-animes-capas img {
@@ -2690,6 +2702,68 @@ h2 {
   }
 
   .animes-lancados h4 {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 }
+
+
+/* ---------------------------- ESTILIZAÇÃO EPISODIO --------------------------------  */
+
+.capa-do-anime-popular-index-episodio img {
+  width: 9rem;
+}
+
+.o-anime-popular-index h4 {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.sessao-1-lado-direiro-index-anime-mobile {
+  display: none;
+}
+
+
+@media (max-width: 722px) {
+  .sessao-1-lado-direiro-index-anime-mobile {
+    display: list-item;
+  }
+
+  .preview-episodios-mobile {
+    display: flex;
+    justify-content: center;
+  }
+
+  .capa-do-anime-popular-index-episodio img {
+    width: 7rem;
+  }
+
+  .o-anime-popular-index {
+    padding: 0.5rem;
+  }
+
+  .o-anime-popular-index h4 {
+    margin-bottom: 0;
+    font-size: 0.8rem;
+  }
+
+  .o-anime-popular-index {
+    margin: 0.5rem;
+  }
+  
+  .animes-populares-index h2 {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 447px) {
+  .capa-do-anime-popular-index-episodio img {
+    width: 4rem;
+  }
+
+  .o-anime-popular-index h4 {
+    font-size: 0.5rem;
+  }
+}
+
+

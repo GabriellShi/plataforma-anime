@@ -1,35 +1,75 @@
 <%- include("./partials/head") %>
 <%- include("./partials/header") %>
 
-
-
-
-
 <% if(locals.episodio){ %>
 
-
+  <div class="titulo-principal-episodio-selecionado">
+    <h2><%= episodio.nome %> - Episodio <%= episodio.numero_episodio %></h2>
+</div>
 
 
 <section class="site-animes-pedidos-de-animes site-animes-episodio-selecionado ">
 
     
-    <div class="lado-esquerdo-do-site-pagina-anime">
-        <div class="espaco-episodio-selecionado"></div>
-        <div class="titulo-principal-episodio-selecionado">
-            <h2><%= episodio.nome %> - Episodio <%= episodio.numero_episodio %></h2>
-        </div>
+  <div class="lado-esquerdo-do-site-pagina-anime">
+       
         <a href="<%= episodio.video_url %>">
-        <div class="capa-episodio-selecionado">
-            <img src="/img/capa-para-o-episodio.jpg" alt="">
-        </div>
-        <button class="botao-para-episodio"><h2>ABRIR O PLAYER</h2></button>
-    </a>
+          <div class="capa-episodio-selecionado">
+            <!-- <button class="botao-para-episodio"><h2>ABRIR O PLAYER</h2></button> -->
 
-        <li class="capa-e-numero-do-episodio-pagina-anime">
-            <div>
-              <img src="<%= episodio.image %>" alt="capa" />
+            <img src="/img/capa-para-o-episodio.jpg" alt="">
+          </div>
+        </a>
+
+    <section class="sessao-1-lado-direiro-index sessao-1-lado-direiro-index-anime-mobile">
+      <div class="animes-populares-index">
+          <h2>Preview dos Episodios</h2>
+         
+<section class="preview-episodios-mobile">
+  <div>
+     <!-- Episódio Anterior -->
+    <% if (previousEpisode) { %>
+      <div class="o-anime-popular-index o-anime-popular-index2">
+      <div class=" capa-do-anime-popular-index-episodio">
+      <a href="/episodio/<%= previousEpisode.id %>">
+        <img src="<%= previousEpisode.image %>" alt="Episódio Anterior">
+        <h4>Episódio <%= previousEpisode.numero_episodio %></h4>
+      </a>
+    </div>
+  </div>
+  <% } %>
+  </div>
+
+<div>
+            <!-- Episódio Atual -->
+            <div class="o-anime-popular-index o-anime-popular-index2">
+              <div class="capa-do-anime-popular-index-episodio">
+                <img src="<%= episodio.image %>" alt="Episódio Atual">
+                <h4>Episódio <%= episodio.numero_episodio %></h4>
+              </div>
             </div>
-        </li>
+</div>
+
+<div>
+    <!-- Próximo Episódio -->
+    <% if (nextEpisode) { %>
+      <div class="o-anime-popular-index o-anime-popular-index2">
+      <div class="capa-do-anime-popular-index-episodio">
+      <a href="/episodio/<%= nextEpisode.id %>">
+        <img src="<%= nextEpisode.image %>" alt="Próximo Episódio">
+        <h4>Episódio <%= nextEpisode.numero_episodio %></h4>
+      </a>
+    </div>
+  </div>
+    
+  <% } %>
+</div>
+</section>
+
+
+          </div>
+
+        </section>
 
         <div class="icones-episodios-anter-prox-episodio-selecionado">
             <ul>
@@ -49,23 +89,23 @@
                 <% } %>
 
 
-  <% }  if (locals.anime) { %>
-  <!-- Se apenas anime está presente -->
-  <a href="/anime/<%= anime.id %>">
-    <li>
-      <img src="/img/icone-lista-anime2.png" alt="">
-      <h4>Lista de Episódios</h4>
-    </li>
-  </a>
-  <% }  if (locals.detailsFilme) { %>
-  <!-- Se apenas detailsFilme está presente -->
-  <a href="/filme/<%= detailsFilme.id %>">
-    <li>
-      <img src="/img/icone-lista-anime2.png" alt="">
-      <h4>Lista de Episódios</h4>
-    </li>
-  </a>
-<% } %>
+                <% }  if (locals.anime) { %>
+                <!-- Se apenas anime está presente -->
+                <a href="/anime/<%= anime.id %>">
+                  <li>
+                    <img src="/img/icone-lista-anime2.png" alt="">
+                    <h4>Lista de Episódios</h4>
+                  </li>
+                </a>
+                <% }  if (locals.detailsFilme) { %>
+                <!-- Se apenas detailsFilme está presente -->
+                <a href="/filme/<%= detailsFilme.id %>">
+                  <li>
+                    <img src="/img/icone-lista-anime2.png" alt="">
+                    <h4>Lista de Episódios</h4>
+                  </li>
+                </a>
+              <% } %>
                   
                 
   
@@ -250,8 +290,8 @@
                 <h2>Lista de Episodios</h2>
                 <!-- Episódio Anterior -->
                 <% if (previousEpisode) { %>
-                    <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index">
+                    <div class="o-anime-popular-index o-anime-popular-index2">
+                    <div class=" capa-do-anime-popular-index-episodio">
                     <a href="/episodio/<%= previousEpisode.id %>">
                       <img src="<%= previousEpisode.image %>" alt="Episódio Anterior">
                       <h4>Episódio <%= previousEpisode.numero_episodio %></h4>
@@ -261,8 +301,8 @@
                 <% } %>
               
                 <!-- Episódio Atual -->
-                <div class="o-anime-popular-index">
-                <div class="capa-do-anime-popular-index">
+                <div class="o-anime-popular-index o-anime-popular-index2">
+                <div class="capa-do-anime-popular-index-episodio">
                   <img src="<%= episodio.image %>" alt="Episódio Atual">
                   <h4>Episódio <%= episodio.numero_episodio %></h4>
                 </div>
@@ -270,8 +310,8 @@
               
                 <!-- Próximo Episódio -->
                 <% if (nextEpisode) { %>
-                    <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index">
+                    <div class="o-anime-popular-index o-anime-popular-index2">
+                    <div class="capa-do-anime-popular-index-episodio">
                     <a href="/episodio/<%= nextEpisode.id %>">
                       <img src="<%= nextEpisode.image %>" alt="Próximo Episódio">
                       <h4>Episódio <%= nextEpisode.numero_episodio %></h4>
@@ -293,26 +333,27 @@
         <div class="linha-lateral-direita-index">
             <!-- Dentro de sua visualização (sua_pagina.ejs) -->
 <section class="sessao-1-lado-direiro-index">
-    <div class="animes-populares-index">
-        <h2>ANIMES POPULARES</h2>
-        <% animesPopulares.forEach(anime => { %>
-            <a href="/anime/<%= anime.id %>">
-                <div class="o-anime-popular-index">
-                    <div class="capa-do-anime-popular-index">
-                        <img src="<%= anime.capa %>" alt="<%= anime.nome %>">
-                    </div>
-                    <div class="o-anime-popular-index-lado-direiro">
-                        <div>
-                            <h4><%= anime.nome %></h4>
-                            <div class="nota-do-anime-index">
-                                <img src="/img/nota.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        <% }); %>
-    </div>
+  <div class="animes-populares-index">
+    <h2>ANIMES POPULARES</h2>
+    <% animesPopulares.forEach(anime => { %>
+      <a href="/anime/<%= anime.id %>">
+        <div class="o-anime-popular-index">
+          <div class="capa-do-anime-popular-index">
+            <img src="<%= anime.capa %>" alt="<%= anime.nome %>">
+          </div>
+          <div class="o-anime-popular-index-lado-direiro">
+            <div>
+              <h3><%= anime.nome.substring(0, 15) %></h3>
+              <div class="nota-do-anime-index">
+                       <h4><%= anime.percentage %></h4>
+                      <img src="/img/nota.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    <% }); %>
+  </div>
 </section>
 
         

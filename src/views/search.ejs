@@ -17,12 +17,10 @@
           </a>
         </div>
         <% } %>
-      </div>
     
-      <div class="animes-lancados">
                    
         <% for(let detailsFilme of filmes) {%>
-        <div class="capa-onepiece-index">
+          <div class="capa-onepiece-index capa-onepiece-listadosanimes">
             <a href="/filme/<%= detailsFilme.id %>">
                 <img src="<%= detailsFilme.capa %>" alt="capa"/>
             </a>
