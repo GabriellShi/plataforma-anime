@@ -1,22 +1,22 @@
 <%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
 
 <main>
-  <h2>Adicionar Filme</h2>
+  <h2>Adicionar Dorama</h2>
   <% if(locals.error){ %>
   <h2><%= error.message%></h2>
   <% } %>
-  <form action="/filme/create" method="post" enctype="multipart/form-data">
-    <input type="text" name="nome" placeholder="Nome do Filmes" required />
+  <form action="/dorama/create" method="post" enctype="multipart/form-data">
+    <input type="text" name="nome" placeholder="Nome do Dorama" required />
     <label for="tipo">Tipo de lingua</label>
     <select name="tipo" aria-required="true" aria-invalid="false">
       <option value="-"></option>
       <option value="legendado">Legendado</option>
       <option value="dublado">Dublado</option>
     </select>
-    <input type="text" name="autor" placeholder="Autor do Filmes" required />
-    <input type="text" name="estudio" placeholder="Estudio do Filmes" required />
+    <input type="text" name="autor" placeholder="Autor do Dorama" required />
+    <input type="text" name="estudio" placeholder="Estudio do Dorama" required />
 
-    <input type="text" name="sinopse" placeholder="Resenha sobre o Filmes" required />
+    <input type="text" name="sinopse" placeholder="Resenha sobre o Dorama" required />
 
     <input type="text" name="genero" placeholder="Generos" required />
 

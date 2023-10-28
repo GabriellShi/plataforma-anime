@@ -1,0 +1,405 @@
+<%- include("./partials/head") %>
+<%- include("./partials/header") %>
+
+    <% if(locals.detailsDorama){ %>
+ 
+<section class="site-animes-pagina-anime">
+
+    <div class="lado-esquerdo-do-site-pagina-anime">
+        <section class="sessao1-pagina-anime">
+            <div class="titulo-principal-pagina-anime">
+                    <img src="/img/icone.png" alt="">
+                    <h2><%= detailsDorama.nome %> - <%= detailsDorama.tipo %> </h2>
+            </div>
+
+            <div class="sessao1-primeira-parte-lista-anime">
+                <div class="capa-do-anime-escolhido">
+                    <div class="capa-do-anime-pagina-anime">
+                        <img src="<%= detailsDorama.capa %>" alt="capa"/>
+                    </div>
+                    <div class="icones-da-capa-do-anime-lista-anime">
+                        <ul>
+                            <li><img src="/img/icone-favorito.png" alt=""></li>
+                            <li class="lista-de-animes">
+                                <h4>Lista</h4>
+                                <img src="/img/icone-lista-anime.png" alt="">
+                            </li>
+                         
+                         
+                            <li class="icone-gostei-pagina-anime">
+                                <img src="/img/icone-gostei.png" alt="Gostei">
+                                <p><span id="likesCount"><%= detailsDorama.likes %></span></p>
+                            </li>
+                            <li class="icone-desgostei-pagina-anime">
+                                <img src="/img/icone-desgostei.png" alt="Não Gostei">
+                                <p><span id="dislikesCount"><%= detailsDorama.dislikes %></span></p>
+                            </li>
+    
+    
+                                <script>
+                                // Dentro do seu arquivo HTML ou EJS
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    const likesCount = document.getElementById("likesCount");
+                                    const dislikesCount = document.getElementById("dislikesCount");
+    
+                                    document.querySelector(".icone-gostei-pagina-anime").addEventListener("click", async function() {
+                                        const detailsDoramaId = <%= detailsDorama.id %>; // Substitua pelo ID do anime atual
+                                        const response = await fetch(`/dorama/vote/${detailsDoramaId}/like`, { method: "POST" });
+                                        if (response.ok) {
+                                            const data = await response.json();
+                                            likesCount.textContent = data.likes;
+                                        }
+                                    });
+    
+                                    document.querySelector(".icone-desgostei-pagina-anime").addEventListener("click", async function() {
+                                        const detailsDoramaId = <%= detailsDorama.id %>; // Substitua pelo ID do anime atual
+                                        const response = await fetch(`/dorama/vote/${detailsDoramaId}/dislike`, { method: "POST" });
+                                        if (response.ok) {
+                                            const data = await response.json();
+                                            dislikesCount.textContent = data.dislikes;
+                                        }
+                                    });
+                                });
+    
+                                </script>
+    
+
+                        </ul>
+                    </div>
+                </div>
+    
+        
+                <div class="informações-do-anime-lista-anime">
+                    <ul>
+                        <li><h3>Tipo: <%= detailsDorama.tipo %></h3></li>
+                        <li><h3>Gêneros: <%= detailsDorama.genero %></h3></li>
+                        <li><h3>Autor: <%= detailsDorama.autor %></h3></li>
+                        <li><h3>Estúdio: <%= detailsDorama.estudio %></h3></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="titulo-assistir-anime-online-lista-anime">
+                <h3>Assistir <%= detailsDorama.nome %> Dorama em HD com a melhor qualidade</h3>
+            </div>
+
+            <div class="sinopse-anime-lista-anime">
+                <h2>Sinopse - <%= detailsDorama.nome %></h2>
+                <p>
+                    <%= detailsDorama.sinopse %>
+                </p>
+            </div>
+        </section>
+
+     
+        <section class="sessao2-pagina-anime">
+
+            <div>
+                <div class="temporadas-pagina-anime">
+                    <ul>
+                        <li class="numero-da-tempora-pagina-anime"></li>
+                        <li class="numero-da-tempora2-pagina-anime">Dorama</li>
+                    </ul>
+                </div>
+                <div class="numero-do-episodio-pagina-anime">
+                    <ul> 
+                <% for(let episodio of episodios) {%>
+                    <a href="/episodio/<%= episodio.id %>">
+                        <li class="capa-e-numero-do-episodio-pagina-anime">        
+                        <div>
+                            <img src="<%= episodio.image %>" alt="capa"/>
+                        </div>
+                        <div class="data-lancamento">
+                            <div>
+                                <h3>Episódio - <%= episodio.numero_episodio %></h3>
+                                <h5><%= episodio.nome %> - <%= episodio.data %> 
+                            </div>      
+                        </div>   
+                        </li>
+                    </a>
+                    <% } %>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="temporadas-pagina-anime">
+              <ul>
+                <li class="numero-da-tempora-pagina-anime"></li>
+                <li class="numero-da-tempora2-pagina-anime">COMENTARIOS</li>
+              </ul>
+            </div>
+            <form action="/dorama/<%= detailsDorama.id %>/comment" method="post">
+              <label for="usuario">Nome de Usuário</label>
+              <input type="text" name="usuario" id="usuario" required>
+            
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required>
+            
+              <textarea name="comentario" id="comentario" placeholder="Seu Comentário..." required></textarea>
+            
+              <button type="submit">Enviar Comentário</button>
+            </form>
+            <div class="animes-adicionados" id="comentarios-section">
+              <% if (comentarios.length > 0) { %>
+                <% for (let comment of comentarios.slice(0, 18)) { %>
+                    <div class="capa-onepiece-index">
+                      <h4> <%= comment.usuario %></h4>
+                      <h4> <%= comment.comentario %></h4>
+                    </div>
+                    <div>
+                      <form action="/dorama/<%= detailsDorama.id %>/comment/<%= comment.id %>?_method=DELETE" method="post" class="delete-comment-form">
+                        <button type="button" class="delete-comment-button" data-comment-id="<%= comment.id %>">Excluir</button>
+                      </form>
+                    </div>
+                  <% } %>
+                  
+              <% } %>
+            </div>
+          </section>
+          
+        
+
+          
+        <script>
+
+// Função para adicionar eventos de clique aos botões de exclusão
+document.querySelectorAll(".delete-comment-button").forEach(button => {
+  button.addEventListener("click", () => {
+    const commentId = button.getAttribute("data-comment-id");
+    const confirmation = confirm("Tem certeza de que deseja excluir este comentário?");
+
+    if (confirmation) {
+      excluirComentario(commentId);
+    }
+  });
+});
+
+// Função para excluir um comentário
+async function excluirComentario(commentId) {
+  try {
+    const response = await fetch(`/dorama/<%= detailsDorama.id %>/comment/${commentId}?_method=DELETE`, {
+      method: "POST",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      atualizarComentarios(data.comentarios);
+    } else {
+      console.error("Erro ao excluir comentário");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Função para atualizar os comentários na página
+function atualizarComentarios(comentarios) {
+  const comentariosSection = document.getElementById("comentarios-section");
+  comentariosSection.innerHTML = ""; // Limpa os comentários existentes
+
+  for (const comentario of comentarios) {
+    const div = document.createElement("div");
+    div.classList.add("capa-onepiece-index");
+    div.innerHTML = `
+      <h4>${comentario.usuario}</h4>
+      <h4>${comentario.comentario}</h4>
+    `;
+
+    const deleteForm = document.createElement("form");
+    deleteForm.action = `/dorama/<%= detailsDorama.id %>/comment/${comentario.id}?_method=DELETE`;
+    deleteForm.method = "post";
+    deleteForm.innerHTML = `
+      <button type="button" class="delete-comment-button" data-comment-id="${comentario.id}">Excluir</button>
+    `;
+
+    deleteForm.addEventListener("click", () => {
+      const confirmation = confirm("Tem certeza de que deseja excluir este comentário?");
+      if (confirmation) {
+        excluirComentario(comentario.id);
+      }
+    });
+
+    comentariosSection.appendChild(div);
+    comentariosSection.appendChild(deleteForm);
+  }
+}
+
+// Evento de envio do formulário de comentários
+document.getElementById("comentario-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const detailsDoramasId = window.location.pathname.split("/")[2]; // Obtém o ID do anime da URL
+
+  try {
+    const response = await fetch(`/dorama/${detailsDoramaId}/comment`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      atualizarComentarios(data.comentarios);
+    }
+  } catch (error) {
+    console.error(error);
+    // Lida com erros aqui, como mostrar uma mensagem de erro ao usuário
+  }
+});
+
+
+          </script>
+
+
+
+    </div>
+
+
+    <div class="lado-direito-do-site-index">
+
+        <div class="linha-lateral-direita-index2"> </div>
+        <div class="linha-lateral-direita-index">
+            <!-- Dentro de sua visualização (sua_pagina.ejs) -->
+<section class="sessao-1-lado-direiro-index">
+    <div class="animes-populares-index">
+        <h2>Doramas POPULARES</h2>
+        <% doramasPopulares.forEach(detailsDorama => { %>
+            <a href="/dorama/<%= detailsDorama.id %>">
+                <div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index">
+                        <img src="<%= detailsDorama.capa %>" alt="<%= detailsDorama.nome %>">
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4><%= detailsDorama.nome %></h4>
+                            <div class="nota-do-anime-index">
+                            <h4><%= detailsDorama.percentage %></h4>
+                                <img src="/img/nota.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        <% }); %>
+    </div>
+</section>
+
+
+        
+            <section class="sessao-1-lado-direiro-index">
+                <div class="animes-populares-index mangas-populares-index">
+                    <h2>MANGAS POPULARES</h2>
+                <a href=""><div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4>NORAGAMI</h4>
+                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <a href=""><div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4>NORAGAMI</h4>
+                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <a href=""><div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4>NORAGAMI</h4>
+                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index">
+                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                        </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>NORAGAMI</h4>
+                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </a>
+                
+                </div>
+            </section>
+
+            <section class="sessao-1-lado-direiro-index">
+                <div class="animes-populares-index mangas-populares-index">
+                    <h2>NOTICÍAS DO BLOG</h2>
+                <a href=""><div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4>NORAGAMI</h4>
+                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <a href=""><div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4>NORAGAMI</h4>
+                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <a href=""><div class="o-anime-popular-index">
+                    <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                    </div>
+                    <div class="o-anime-popular-index-lado-direiro">
+                        <div>
+                            <h4>NORAGAMI</h4>
+                            <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <a href="">
+                    <div class="o-anime-popular-index">
+                        <div class="capa-do-anime-popular-index"> <img src="/img/capa-noragami.jpg" alt=""> 
+                        </div>
+                        <div class="o-anime-popular-index-lado-direiro">
+                            <div>
+                                <h4>NORAGAMI</h4>
+                                <div class="nota-do-anime-index"><img src="/img/nota.png" alt=""></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </a>
+                
+                </div>
+            </section>
+    </div>
+
+</section>
+<% } else {%>
+    <h2>Usuario não Entrado por motivos do além</h2>
+<% }  %>
+
+
+
+<%- include("./partials/footer") %> 

@@ -1,0 +1,259 @@
+<%- include("./partials/head") %>
+<%- include("./partials/header") %>
+
+<section class="listadeanimes ">
+
+    <div class="lado-esquerdo-do-site-index">
+
+
+
+        <section class="sessao-2-index">
+
+           <div class="titulo-principal-episodios-adicionados">
+            <div class="barra-titulo-1-episodios-adicionados"></div>
+            <div class="barra-titulo-2-episodios-adicionados">
+                <h2>Doramas</h2>
+            </div>
+            <div class="barra-titulo-3-episodios-adicionados"></div>
+           </div>
+
+           <form class="pesquisa-listadosanimes" action="/doramasAdicionados" method="GET">
+            <div class="barra-de-pesquisa-partials barra-de-pesquisa-lista-dos-animes">
+              <div class="pesquisa-lista-dos-animes">
+                <input type="search" name="search" placeholder="Pesquisar Pelo Nome..." />
+              </div>
+              <div>
+                <button type="submit"><img src="/img/lupa.png" alt="Lupa" /></button>
+              </div>
+            </div>
+          </form>
+        
+     
+  <div class="filtros-listadosanimes">
+    <ul>
+      
+      <div class="filtros-internos" id="filtro-generos">
+        <img src="/img/icone-filtro.png" alt="" />
+        <li>Generos</li>
+    </div>
+    
+
+
+      <div class="filtros-internos">
+        <img src="/img/icone-linguagem.png" alt="" />
+        <li id="filtroLinguagem">Legendado/Dublado</li>
+        <div class="filtro-opcoes-container">
+          <a href="#"><div id="legendado" class="filtro-opcao" data-tipo="Legendado">Legendado</div></a>
+          <a href="#"><div id="dublado" class="filtro-opcao" data-tipo="Dublado">Dublado</div></a>
+        </div>
+        <form id="filtroForm" action="/doramasAdicionados" method="GET"> <!-- Use um formulário para enviar a seleção ao servidor -->
+          <input type="hidden" name="tipo" id="tipoSelecionado" value=""> <!-- Campo oculto para armazenar o tipo selecionado -->
+        </form>
+      </div>
+      
+      <script>
+        $(document).ready(function () {
+          $("#filtroLinguagem").click(function () {
+            $(".filtro-opcoes-container").toggle(); // Alternar a visibilidade do contêiner
+          });
+      
+          // Lidar com o clique nas opções "Legendado" e "Dublado"
+          $(".filtro-opcao").click(function () {
+            const tipoSelecionado = $(this).data("tipo"); // Obter o tipo selecionado
+            $("#tipoSelecionado").val(tipoSelecionado); // Definir o valor no campo oculto
+            $("#filtroForm").submit(); // Enviar o formulário quando uma opção for selecionada
+          });
+        });
+      </script>
+      
+     
+      <div class="filtros-internos">
+        <img src="/img/icone-organizar-cimaebaixo.png" alt="" />
+        <li id="filtroOrganizar">Organizar</li>
+        <img src="/img/icone-seta-baixo.png" class="seta-baixo" alt="" />
+        <div class="filtro-opcoes-container-organizar">
+          <a href="#"><div id="ordem-alfabetica" class="filtro-opcao-organizar filtro-opcao" data-tipo="OrdemAlfabetica">Ordem Alfabética</div></a>
+          <a href="#"><div id="recentes" class="filtro-opcao-organizar filtro-opcao" data-tipo="Recentes">Recentes</div></a>
+        </div>
+        <form id="filtroForm-organizar" action="/doramasAdicionados" method="GET">
+          <input type="hidden" name="tipo" id="tipoSelecionado" value="">
+          <input type="hidden" name="ordenacao" id="ordenacaoSelecionada" value="">
+        </form>
+      </div>
+      
+      
+
+      <script>
+        $(document).ready(function () {
+          $("#filtroOrganizar").click(function () {
+            $(".filtro-opcoes-container-organizar").toggle();
+          });
+      
+          $(".filtro-opcao-organizar").click(function () {
+            const tipoSelecionado = $(this).data("tipo");
+            $("#ordenacaoSelecionada").val(tipoSelecionado); // Use "ordenacaoSelecionada" em vez de "tipoSelecionado"
+      
+            // Submeta o formulário para acionar a filtragem
+            $("#filtroForm-organizar").submit();
+          });
+        });
+      </script>
+      
+
+
+    </ul>
+  </div>
+
+  
+
+
+
+
+        
+
+<div class="lista-generos lista-generos-part-animes" id="lista-generos">
+
+  
+  <ul>
+
+    <a href="#" data-genero="Ação" class="<%= selectedGenres.includes('Ação') ? 'selected' : '' %>"><li>Ação</li></a>
+    <a href="#" data-genero="Comédia Romântica" class="<%= selectedGenres.includes('Comédia Romântica') ? 'selected' : '' %>"><li>Comédia Romântica</li></a>
+    <a href="#" data-genero="Animação" class="<%= selectedGenres.includes('Animação') ? 'selected' : '' %>"><li>Animação</li></a>
+    <a href="#" data-genero="Artes Marciais" class="<%= selectedGenres.includes('Artes Marciais') ? 'selected' : '' %>"><li>Artes Marciais</li></a>
+    <a href="#" data-genero="Aventura" class="<%= selectedGenres.includes('Aventura') ? 'selected' : '' %>"><li>Aventura</li></a>
+    <a href="#" data-genero="Comédia" class="<%= selectedGenres.includes('Comédia') ? 'selected' : '' %>"><li>Comédia</li></a>
+    <a href="#" data-genero="Cotidiano" class="<%= selectedGenres.includes('Cotidiano') ? 'selected' : '' %>"><li>Cotidiano</li></a>
+    <a href="#" data-genero="Drama" class="<%= selectedGenres.includes('Drama') ? 'selected' : '' %>"><li>Drama</li></a>
+    <a href="#" data-genero="Dorama" class="<%= selectedGenres.includes('Dorama') ? 'selected' : '' %>"><li>Dorama</li></a>
+    <a href="#" data-genero="Ecchi" class="<%= selectedGenres.includes('Ecchi') ? 'selected' : '' %>"><li>Ecchi</li></a>
+    <a href="#" data-genero="Escolar" class="<%= selectedGenres.includes('Escolar') ? 'selected' : '' %>"><li>Escolar</li></a>
+    <a href="#" data-genero="Esporte" class="<%= selectedGenres.includes('Esporte') ? 'selected' : '' %>"><li>Esporte</li></a>
+    <a href="#" data-genero="Fantasia" class="<%= selectedGenres.includes('Fantasia') ? 'selected' : '' %>"><li>Fantasia</li></a>
+    <a href="#" data-genero="Ficção Cientifica" class="<%= selectedGenres.includes('Ficção Cientifica') ? 'selected' : '' %>"><li>Ficção Cientifica</li></a>
+    <a href="#" data-genero="Game" class="<%= selectedGenres.includes('Game') ? 'selected' : '' %>"><li>Game</li></a>
+    <a href="#" data-genero="Harém" class="<%= selectedGenres.includes('Harém') ? 'selected' : '' %>"><li>Harém</li></a>
+    <a href="#" data-genero="Histórico" class="<%= selectedGenres.includes('Histórico') ? 'selected' : '' %>"><li>Histórico</li></a>
+    <a href="#" data-genero="Infantil" class="<%= selectedGenres.includes('Infantil') ? 'selected' : '' %>"><li>Infantil</li></a>
+    <a href="#" data-genero="Isekai" class="<%= selectedGenres.includes('Isekai') ? 'selected' : '' %>"><li>Isekai</li></a>
+    <a href="#" data-genero="Magia" class="<%= selectedGenres.includes('Magia') ? 'selected' : '' %>"><li>Magia</li></a>
+    <a href="#" data-genero="Mecha" class="<%= selectedGenres.includes('Mecha') ? 'selected' : '' %>"><li>Mecha</li></a>
+    <a href="#" data-genero="Mistério" class="<%= selectedGenres.includes('Mistério') ? 'selected' : '' %>"><li>Mistério</li></a>
+    <a href="#" data-genero="Mitoligia" class="<%= selectedGenres.includes('Mitoligia') ? 'selected' : '' %>"><li>Mitoligia</li></a>
+    <a href="#" data-genero="Musical" class="<%= selectedGenres.includes('Musical') ? 'selected' : '' %>"><li>Musical</li></a>
+    <a href="#" data-genero="Policial" class="<%= selectedGenres.includes('Policial') ? 'selected' : '' %>"><li>Policial</li></a>
+    <a href="#" data-genero="Psicológia" class="<%= selectedGenres.includes('Psicológia') ? 'selected' : '' %>"><li>Psicológia</li></a>
+    <a href="#" data-genero="Romance" class="<%= selectedGenres.includes('Romance') ? 'selected' : '' %>"><li>Romance</li></a>
+    <a href="#" data-genero="Samurai" class="<%= selectedGenres.includes('Samurai') ? 'selected' : '' %>"><li>Samurai</li></a>
+    <a href="#" data-genero="Seinen" class="<%= selectedGenres.includes('Seinen') ? 'selected' : '' %>"><li>Seinen</li></a>
+    <a href="#" data-genero="Shoujo" class="<%= selectedGenres.includes('Shoujo') ? 'selected' : '' %>"><li>Shoujo</li></a>
+    <a href="#" data-genero="Shounen" class="<%= selectedGenres.includes('Shounen') ? 'selected' : '' %>"><li>Shounen</li></a>
+    <a href="#" data-genero="Sobrenatural" class="<%= selectedGenres.includes('Sobrenatural') ? 'selected' : '' %>"><li>Sobrenatural</li></a>
+    <a href="#" data-genero="Super Poder" class="<%= selectedGenres.includes('Super Poder') ? 'selected' : '' %>"><li>Super Poder</li></a>
+    <a href="#" data-genero="Suspense" class="<%= selectedGenres.includes('Suspense') ? 'selected' : '' %>"><li>Suspense</li></a>
+    <a href="#" data-genero="Terror" class="<%= selectedGenres.includes('Terror') ? 'selected' : '' %>"><li>Terror</li></a>
+    <a href="#" data-genero="Vampiros" class="<%= selectedGenres.includes('Vampiros') ? 'selected' : '' %>"><li>Vampiros</li></a>
+    <a href="#" data-genero="Yaoi/Yuri" class="<%= selectedGenres.includes('Yaoi/Yuri') ? 'selected' : '' %>"><li>Yaoi/Yuri</li></a>
+
+  </ul>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Inicialmente, esconda a lista de gêneros
+    $("#lista-generos").hide();
+
+    // Adicione um evento de clique ao filtro "Gêneros"
+    $("#filtro-generos").click(function() {
+        // Use o método 'toggle' para alternar a visibilidade da lista de gêneros
+        $("#lista-generos").toggle();
+    });
+});
+</script>
+
+
+<!-- Adicione este código JavaScript no seu arquivo EJS -->
+<script>
+  $(document).ready(function() {
+    // Adicione um evento de clique aos links de gênero
+    $("a[data-genero]").click(function(e) {
+      e.preventDefault(); // Impedir o comportamento padrão do link
+      
+      const generoSelecionado = $(this).data("genero");
+      
+      // Redirecione para a página com o filtro de gênero
+      window.location.href = `/doramasAdicionados?genero=${generoSelecionado}`;
+    });
+  });
+</script>
+
+
+
+
+           <div class="barra-separacao-index barra-separacao-episodios-adicionados ">
+            <img src="/img/barra-azul.png" alt="barra de sepração azul">
+            <h3>Exibindo <%= doramas.length %> Animes - Página <%= page %> de <%= totalPages %></h3>
+            </div>
+    
+            <div class="animes-lancados">
+               
+                <% for(let detailsDorama of doramas) {%>
+                <div class="capa-onepiece-index">
+                    <a href="/dorama/<%= detailsDorama.id %>">
+                        <img src="<%= detailsDorama.capa %>" alt="capa"/>
+                    </a>
+                    <h4><%= detailsDorama.nome %></h4>
+                </div>
+                <% } %>
+ 
+                
+            </div>
+        </section>
+
+      
+<div class="numero-da-pagina-listadosanimes numero-da-pagina-episodios-adiconados">
+  <ul>
+    <% if (page > 1) { %>
+      <a href="?page=<%= page - 1 %>"><li><img src="/img/icone-seta-direita.png" alt=""></li></a>
+    <% } %>
+    <% const maxVisiblePages = 6; // Número máximo de páginas visíveis %>
+    <% const startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2)); %>
+    <% const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1); %>
+    <% if (startPage > 1) { %>
+      <a href="?page=1"><li>1</li></a>
+      <% if (startPage > 2) { %>
+        <li>...</li>
+      <% } %>
+    <% } %>
+    <% for (let i = startPage; i <= endPage; i++) { %>
+      <a href="?page=<%= i %>">
+        <li <%= i === page ? 'class="current"' : '' %>>
+          <%= i %>
+        </li>
+      </a>
+    <% } %>
+    <% if (endPage < totalPages) { %>
+      <% if (endPage < totalPages - 1) { %>
+        <li>...</li>
+      <% } %>
+      <a href="?page=<%= totalPages %>"><li><%= totalPages %></li></a>
+    <% } %>
+    <% if (page < totalPages) { %>
+      <a href="?page=<%= page + 1 %>"><li><img src="/img/icone-seta-esquerda.png" alt=""></li></a>
+    <% } %>
+  </ul>
+</div>
+          
+    
+        
+       
+    </div>
+
+
+    
+
+</section>
+
+
+<%- include("./partials/footer") %> 

@@ -211,37 +211,91 @@
 
         </section>
 
-        <section>
-            <div class="temporadas-pagina-anime">
+        <section class="section-comentarios">
+            <div class="">
               <ul>
                 <li class="numero-da-tempora2-pagina-anime numero-da-tempora2-pagina-anime2">COMENTARIOS</li>
               </ul>
+              <ul class="quantidade-comentarios">
+                <li> Quantidade de comentarios</li>
+
+                <div class="filtros-internos">
+                    <img src="/img/icone-organizar-cimaebaixo.png" alt="" />
+                    <li id="filtroOrganizar">Organizar</li>
+                    <img src="/img/icone-seta-baixo.png" class="seta-baixo" alt="" />
+                    <div class="filtro-opcoes-container-organizar">
+                      <a href="#"><div id="antigo" class="filtro-opcao-organizar filtro-opcao" data-tipo="Antigo">Antigo</div></a>
+                      <a href="#"><div id="recentes" class="filtro-opcao-organizar filtro-opcao" data-tipo="Recentes">Recentes</div></a>
+                    </div>
+                    <form id="filtroForm-organizar" action="/anime/<%= anime.id %>" method="GET">
+                      <input type="hidden" name="tipo" id="tipoSelecionado" value="">
+                      <input type="hidden" name="ordenacao" id="ordenacaoSelecionada" value="">
+                    </form>
+                  </div>
+              </ul>
+
+
+              
+
+              
+              
+        
+              <script>
+                $(document).ready(function () {
+                  $("#filtroOrganizar").click(function () {
+                    $(".filtro-opcoes-container-organizar").toggle();
+                  });
+              
+                  $(".filtro-opcao-organizar").click(function () {
+                    const tipoSelecionado = $(this).data("tipo");
+                    $("#ordenacaoSelecionada").val(tipoSelecionado); // Use "ordenacaoSelecionada" em vez de "tipoSelecionado"
+              
+                    // Submeta o formulário para acionar a filtragem
+                    $("#filtroForm-organizar").submit();
+                  });
+                });
+              </script>
+              
+              <div class="linha-index"></div>
+
             </div>
-            <form action="/anime/<%= anime.id %>/comment" method="post">
-              <label for="usuario">Nome de Usuário</label>
-              <input type="text" name="usuario" id="usuario" required>
-            
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" required>
-            
+            <form class="form-comentarios" action="/anime/<%= anime.id %>/comment" method="post">
+
               <textarea name="comentario" id="comentario" placeholder="Seu Comentário..." required></textarea>
+              <div>
+                <input type="text" name="usuario" id="usuario" placeholder="Usuario" required>
+              <input type="email" name="email" id="email" placeholder="E-mail" required>
+              </div>
+            
             
               <button type="submit">Enviar Comentário</button>
             </form>
-            <div class="animes-adicionados" id="comentarios-section">
+            <div id="comentarios-section">
               <% if (comentarios.length > 0) { %>
                 <% for (let comment of comentarios.slice(0, 18)) { %>
-                    <div class="capa-onepiece-index">
-                      <h4> <%= comment.usuario %></h4>
-                      <h4> <%= comment.comentario %></h4>
+                    <div class="comentarios-usuarios">
+                        <div class="img-usuario-inf">
+                            <img src="../img/icone-foto-perfil.jpg" alt="">
+                            <div>
+                                <h3> <%= comment.usuario %></h3>
+                                <h4> <%= comment.comentario %></h4>
+                            </div>
+                        </div>
+                        <ul class="like-deslike-respond-comentarios">
+                            <li><img src="../img/icone-gostei.png" alt=""></li>
+                            <li><img src="../img/icone-desgostei.png" alt=""></li>
+                            <li><h4>Responder</h4></li>
+                            <li><h4>Editar</h4></li>
+                        </ul>
+                        <div>
+                            <form action="/anime/<%= anime.id %>/comment/<%= comment.id %>?_method=DELETE" method="post" class="delete-comment-form">
+                              <button type="button" class="delete-comment-button" data-comment-id="<%= comment.id %>">Excluir</button>
+                            </form>
+                          </div>
                     </div>
-                    <div>
-                      <form action="/anime/<%= anime.id %>/comment/<%= comment.id %>?_method=DELETE" method="post" class="delete-comment-form">
-                        <button type="button" class="delete-comment-button" data-comment-id="<%= comment.id %>">Excluir</button>
-                      </form>
-                    </div>
+
                   <% } %>
-                  
+
               <% } %>
             </div>
           </section>

@@ -1,0 +1,148 @@
+<%- include("./partials/head-admin") %>
+<%- include("./partials/header-admin") %>
+<section class="anime-edit">
+
+        
+ 
+    <% if(locals.detailsDorama){ %>
+
+        <main>
+            <div class="titulo-principal-anime-edit">
+                <h2> Atualizar Dorama </h2>
+            </div>
+            <% if(locals.error){ %>
+                <h2> <%= error.message%> </h2>
+            <% } %> 
+            <form action="/dorama/edit/<%= detailsDorama.id %>?_method=put" method="post" enctype="multipart/form-data">
+
+<section class="site-animes-pagina-anime">
+
+    <div class="lado-esquerdo-do-site-pagina-anime">
+        <section class="sessao1-pagina-anime">
+            <div class="titulo-principal-pagina-anime">
+                    <img src="/img/icone.png" alt="">
+                    <h2><input value="<%= detailsDorama.nome %>" type="text" name="nome" placeholder="Nome do Anime"  /> - <%= detailsDorama.tipo %> </h2>
+            </div>
+
+
+            
+            <div class="sessao1-primeira-parte-lista-anime">
+                <div class="capa-do-anime-escolhido">
+                    <div class="capa-do-anime-pagina-anime">
+                        <img src="<%= detailsDorama.capa %>" alt="capa"/>
+                    </div>
+                    <input value="<%= detailsDorama.capa %>" type="text" name="capa" />
+                    <div class="icones-da-capa-do-anime-lista-anime">
+                        <ul>
+                            <li><img src="/img/icone-favorito.png" alt=""></li>
+                            <li class="lista-de-animes">
+                                <h4>Lista</h4>
+                                <img src="/img/icone-lista-anime.png" alt="">
+                            </li>
+                            <li class="icone-gostei-pagina-anime"> 
+                            <img src="/img/icone-gostei.png" alt=""> <p>91</p> 
+                            </li>
+                            <li class="icone-desgostei-pagina-anime"> 
+                            <img src="/img/icone-desgostei.png" alt=""> <p>11</p> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
+                <div class="informações-do-anime-lista-anime">
+                    <ul>
+                        <li><h3>Tipo: <select name="tipo" aria-required="true" aria-invalid="false"><option value=""><%= detailsDorama.tipo %></option><option value="Legendado">Legendado</option><option value="Dublado" >Dublado</option></select></h3></li>
+                        <li><h3>Gêneros: <input value="<%= detailsDorama.generos %>" type="text" name="generos" placeholder="Generos" /></h3></li>
+                        <li><h3>Autor: <input value="<%= detailsDorama.autor %>" type="text" name="autor" placeholder="Autor do Anime" /></h3></li>
+                        <li><h3>Estúdio: <input value="<%= detailsDorama.estudio %>" type="text" name="estudio" placeholder="Estudio do Anime" /></h3></li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+
+                             
+            <div class="titulo-assistir-anime-online-lista-anime">
+                <h3>Assistir <%= detailsDorama.nome %> Dorama em HD com a melhor qualidade</h3>
+            </div>
+
+            <div class="sinopse-anime-lista-anime">
+                <h2>Sinopse - <%= detailsDorama.nome %></h2>
+                <p>
+                    <input value="<%= detailsDorama.sinopse %>" type="text" name="sinopse" placeholder="Resenha sobre o Anime" />
+                </p>
+                
+            </div>
+        </section>
+
+    </section>
+    <% } else {%>
+        <h2>Usuario não Entrado por motivos do além</h2>
+    <% }  %>
+                
+                <button type="submit">Atualizar</button>
+            </form>
+    
+            <main>
+                <h2> Adicionar Episodio </h2>
+                <% if(locals.error){ %>
+                    <h2> <%= error.message%> </h2>
+                <% } %> 
+                <form action="/episodio/create" method="post" enctype="multipart/form-data">
+                    <input type="text" name="nome" placeholder="Nome do Anime" value="<%= doramaNome %>" readonly />
+
+                    <input type="date" name="data" placeholder="Data" />
+                    <input type="text" name="image" placeholder="Imagem" />
+                    <input type="number" name="doramas_id" placeholder="ID do dorama" value="<%= doramaId %>" readonly />
+                    <input type="number" name="numero_episodio" placeholder="Número do Episódio" />
+                    <input type="text" name="video_url" placeholder="URL do Vídeo" />
+            
+                    <button type="submit">Adicionar</button>
+                </form>
+            </main>
+
+            <section class="sessao2-pagina-anime">
+
+                <div>
+                    <div class="temporadas-pagina-anime">
+                        <ul>
+                            <li class="numero-da-tempora-pagina-anime"></li>
+                            <li class="numero-da-tempora2-pagina-anime">Dorama</li>
+                        </ul>
+                    </div>
+                    <div class="numero-do-episodio-pagina-anime">
+                        <ul> 
+                    <% for(let episodio of episodios) {%>
+                            <li class="capa-e-numero-do-episodio-pagina-anime"> 
+                        <a href="/episodio/<%= episodio.id %>">
+                            <div>
+                                <img src="<%= episodio.image %>" alt="capa"/>
+                            </div>
+                            <div class="data-lancamento">
+                                <div>
+                                    <h3>Episódio - <%= episodio.numero_episodio %></h3>
+                                    <h5><%= episodio.nome %> - <%= episodio.data %> 
+                                </div>      
+                            </div> 
+                        </a>
+                            <a href="/episodio/edit/<%= episodio.id %>">Editar</a>
+                            <a href="/episodio/delete/<%= episodio.id %>">Excluir</a>  
+                            </li>
+                            
+                        
+                        <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+    </div>
+
+    <form action="/dorama/delete/ <%= detailsDorama.id %>?_method=delete" method="post">
+        <h2>Deseja Deletar  esse usuário</h2>
+        <a href="/dorama"><button type="button">Não</button></a>
+        <button type="submit">Sim</button>
+    </form>
+
+</section>

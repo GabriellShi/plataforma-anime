@@ -6,7 +6,7 @@
 
 <section class="listadeanimes">
   <div class="titulo-principal-lista-animes">
-    <h2>Adicionar Episodio</h2>
+    <h2>Adicionar Episodio Anime</h2>
   </div>
 
   <form class="pesquisa-listadosanimes" action="/listaAnimeUsuario" method="GET">
@@ -22,15 +22,15 @@
   
 
   <div class="numero-de-animes-na-pagina-listadosanimes">
-    <h4>Exibindo <%= filmes.length %> Animes - Página <%= page %> de <%= totalPages %> </h4>
+    <h4>Exibindo <%= listaAnimeAdmin.length %> Animes - Página <%= page %> de <%= totalPages %> </h4>
   </div>
 
   <div id="lista-animes" class="animes-lancados lista-dos-animes-capas">
-    <% for(let detailsFilme of filmes) {%>
-        <a href="/filme/edit/<%= detailsFilme.id %>">
+    <% for(let anime of listaAnimeAdmin) {%>
+        <a href="/anime/edit/<%= anime.id %>">
     <div class="capa-onepiece-index capa-onepiece-listadosanimes">
-        <img src="<%= detailsFilme.capa %>" alt="capa" />
-        <h4><%= detailsFilme.nome %></h4>
+        <img src="<%= anime.capa %>" alt="capa" />
+        <h4><%= anime.nome %></h4>
         </a>
     </div>
     <% } %>

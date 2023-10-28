@@ -34,6 +34,9 @@ VALUES ("gabriel", "Gabriel_Shi", "gabriel@gmail.com", "Naruto67", "1");
 SELECT * FROM users;
 
 
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
+
 
 -- Cria tabela de usuário
 CREATE TABLE animes(
@@ -63,7 +66,8 @@ VALUES ("Bleach", "Tite Cubo", "tv tokyo", "Chegou a ultima tempora", "Ação");
 SELECT * FROM animes;
 
 
-
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
 
 
 -- Cria tabela de usuário
@@ -78,6 +82,8 @@ CREATE TABLE episodios(
     FOREIGN KEY (animes_id) REFERENCES animes(id),
 	filmes_id INT UNSIGNED,
     FOREIGN KEY (filmes_id) REFERENCES filmes(id),
+    doramas_id INT UNSIGNED,
+    FOREIGN KEY (doramas_id) REFERENCES doramas(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -87,7 +93,7 @@ CREATE TABLE episodios(
 
 
 -- Adiciona um Novo Anime
- -- ALTER TABLE episodios ADD FOREIGN KEY (filmes_id) REFERENCES filmes(id);
+--  ALTER TABLE episodios ADD FOREIGN KEY (doramas_id) REFERENCES doramas(id);
 
 
 -- Insere um ou mais usuário
@@ -100,8 +106,8 @@ VALUES
 SELECT * FROM episodios;
 
 
-
-
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
 
 
 -- Cria tabela de usuário
@@ -121,7 +127,7 @@ CREATE TABLE filmes(
 );
 
 -- Adiciona um Novo Anime
-  ALTER TABLE filmes ADD dislikes VARCHAR(900) NOT NULL;
+-- ALTER TABLE filmes ADD dislikes VARCHAR(900) NOT NULL;
 
 
 -- Insere um ou mais usuário
@@ -132,6 +138,40 @@ VALUES ("Bleach", "Tite Cubo", "tv tokyo", "Chegou a ultima tempora", "Ação", 
 SELECT * FROM filmes;
 
 
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
+
+
+-- Cria tabela de usuário
+CREATE TABLE doramas(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    autor VARCHAR(100) NOT NULL,
+    estudio VARCHAR(100) NOT NULL,
+    sinopse TEXT(1000) NOT NULL,
+    genero VARCHAR(100) NOT NULL,
+    capa VARCHAR(500),
+    tipo VARCHAR(100) NOT NULL,
+	likes VARCHAR(900) NOT NULL,
+    dislikes VARCHAR(900) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Adiciona um Novo Anime
+-- ALTER TABLE filmes ADD dislikes VARCHAR(900) NOT NULL;
+
+
+-- Insere um ou mais usuário
+INSERT INTO doramas (nome, autor, estudio, sinopse, genero, tipo, likes, dislikes)
+VALUES ("Bleach", "Tite Cubo", "tv tokyo", "Chegou a ultima tempora", "Ação", "Legendado", "1", "2");
+
+-- Lista todos os usuários
+SELECT * FROM doramas;
+
+
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
 
 
 -- Cria tabela de usuário
@@ -158,6 +198,8 @@ VALUES
 SELECT * FROM lancamento;	
 
 
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
 
 
 -- Cria tabela de usuário
@@ -183,6 +225,10 @@ VALUES
 SELECT * FROM pedidos;
 
 
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
+
+
 -- Cria tabela de usuário
 CREATE TABLE comentariosanimes (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -200,6 +246,10 @@ CREATE TABLE comentariosanimes (
 SELECT * FROM comentariosanimes;
 
 
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
+
+
 -- Cria tabela de usuário
 CREATE TABLE comentariosfilmes (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -213,6 +263,30 @@ CREATE TABLE comentariosfilmes (
 
 -- Lista todos os usuários
 SELECT * FROM comentariosfilmes;
+
+
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
+
+
+-- Cria tabela de usuário
+CREATE TABLE comentariosdoramas (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(150) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    comentario VARCHAR(500),
+    doramas_id INT UNSIGNED,
+    FOREIGN KEY (doramas_id) REFERENCES doramas(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Lista todos os usuários
+SELECT * FROM comentariosdoramas;
+
+
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
+
 
 -- Cria tabela de usuário
 CREATE TABLE comentariosepisodios (
@@ -229,6 +303,8 @@ CREATE TABLE comentariosepisodios (
 SELECT * FROM comentariosepisodios;
 
 
+-- ---------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------
 
 
 -- Cria tabela de usuário
@@ -236,6 +312,10 @@ CREATE TABLE favoritos(
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	animes_id INT UNSIGNED,
     FOREIGN KEY (animes_id) REFERENCES animes(id),
+    filmes_id INT UNSIGNED,
+    FOREIGN KEY (filmes_id) REFERENCES filmes(id),
+    doramas_id INT UNSIGNED,
+    FOREIGN KEY (doramas_id) REFERENCES doramas(id),
 	users_id INT UNSIGNED,
     FOREIGN KEY (users_id) REFERENCES users(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -246,7 +326,7 @@ CREATE TABLE favoritos(
 --   ALTER TABLE episodios DROP COLUMN anime_id;
 
 -- Adiciona um Novo Anime
- -- ALTER TABLE favoritos ADD id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT;
+-- ALTER TABLE favoritos ADD FOREIGN KEY (doramas_id) REFERENCES doramas(id);
 
 
 -- Lista todos os usuários

@@ -6,10 +6,10 @@
 
 <section class="listadeanimes">
   <div class="titulo-principal-lista-animes">
-    <h2>Adicionar Episodio</h2>
+    <h2>Adicionar Episodio Dorama</h2>
   </div>
 
-  <form class="pesquisa-listadosanimes" action="/listaAnimeUsuario" method="GET">
+  <form class="pesquisa-listadosanimes" action="/doramasAdicionados" method="GET">
     <div class="barra-de-pesquisa-partials barra-de-pesquisa-lista-dos-animes">
       <div class="pesquisa-lista-dos-animes">
         <input type="search" name="search" placeholder="Pesquisar Pelo Nome..." />
@@ -22,15 +22,15 @@
   
 
   <div class="numero-de-animes-na-pagina-listadosanimes">
-    <h4>Exibindo <%= listaAnimeAdmin.length %> Animes - Página <%= page %> de <%= totalPages %> </h4>
+    <h4>Exibindo <%= doramas.length %> Animes - Página <%= page %> de <%= totalPages %> </h4>
   </div>
 
   <div id="lista-animes" class="animes-lancados lista-dos-animes-capas">
-    <% for(let anime of listaAnimeAdmin) {%>
-        <a href="/anime/edit/<%= anime.id %>">
+    <% for(let detailsDorama of doramas) {%>
+        <a href="/dorama/edit/<%= detailsDorama.id %>">
     <div class="capa-onepiece-index capa-onepiece-listadosanimes">
-        <img src="<%= anime.capa %>" alt="capa" />
-        <h4><%= anime.nome %></h4>
+        <img src="<%= detailsDorama.capa %>" alt="capa" />
+        <h4><%= detailsDorama.nome %></h4>
         </a>
     </div>
     <% } %>

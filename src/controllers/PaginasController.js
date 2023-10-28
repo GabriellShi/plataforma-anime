@@ -10,6 +10,7 @@ const Episodios = require("../models/Episodios");
 const Filmes = require("../models/Filmes");
 const Lancamento = require("../models/Lancamento");
 const Users = require('../models/Users');
+const Doramas = require('../models/Doramas');
 
 const { Op } = require("sequelize");
 
@@ -261,6 +262,103 @@ const paginasController = {
 
     }
   },
+
+
+  doramasAdicionados: async (req, res) => {
+
+    try {
+      const page = req.query.page || 1; // Página atual, padrão é 1
+      const perPage = 20; // Número de animes por página
+      const selectedLetter = req.query.letter || 'all'; // Letra selecionada, padrão é 'all'
+      const searchQuery = req.query.search || ''; // Termo de pesquisa, padrão é vazio
+      const selectedType = req.query.tipo || ''; // Tipo de linguagem selecionada
+      const selectedOrder = req.query.ordenacao || 'recentes';
+      let selectedGenres = req.query.genero || [];
+  
+      if (!Array.isArray(selectedGenres)) {
+        selectedGenres = [selectedGenres];
+      }
+  
+      let order;
+      if (selectedOrder === 'OrdemAlfabetica') {
+        order = [['nome', 'ASC']];
+      } else {
+        order = [['created_at', 'DESC']];
+      }
+  
+      // Calcule o índice de início e fim com base na página atual
+      const startIndex = (page - 1) * perPage;
+      const endIndex = startIndex + perPage;
+  
+      // Defina uma condição de filtro com base na letra selecionada
+      let condition = {};
+  
+      if (selectedLetter !== 'all') {
+        condition.nome = { [Op.like]: `${selectedLetter}%` };
+      }
+  
+      // Adicione uma condição para a pesquisa pelo nome
+      if (searchQuery) {
+        condition.nome = { [Op.like]: `%${searchQuery}%` };
+      }
+  
+      // Adicione uma condição para o tipo de linguagem selecionada
+      if (selectedType) {
+        condition.tipo = selectedType;
+      }
+  
+      // Adicione a condição de filtro para o gênero selecionado
+      if (selectedGenres.length > 0) {
+        condition.genero = { [Op.in]: selectedGenres };
+      }
+  
+      // Busque os animes do banco de dados com base na condição
+      const doramas = await Doramas.findAll({
+        where: condition,
+        order: order,
+      });
+  
+      // Filtrar os animes para a página atual
+      const doramasPaginaAtual = doramas.slice(startIndex, endIndex);
+  
+      // Calcule o número total de animes, o número total de páginas e a página atual
+      const totalDoramas = doramas.length;
+      const totalPages = Math.ceil(totalDoramas / perPage);
+
+      const animesPopulares = await Animes.findAll({
+        order: [
+            ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
+        ],
+        limit: 4, // Limitar a 4 resultados
+    });
+
+    // Ira ajustar a ordem que não está funcionando no DESC 
+  animesPopulares.sort((a, b) => b.likes - a.likes);
+  
+      return res.render("doramasAdicionados", {
+        title: "Lista de doramas",
+        doramas: doramasPaginaAtual,
+        page, // Página atual
+        totalPages, // Número total de páginas
+        totalDoramas, // Número total de Filmes
+        selectedLetter, // Letra selecionada
+        searchQuery, // Termo de pesquisa
+        selectedType, // Tipo de linguagem selecionada
+        selectedOrder,
+        selectedGenres,
+        animesPopulares,
+      user: req.cookies.user,
+
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).render("error", {
+        title: "Erro",
+        message: "Ocorreu um erro ao carregar a lista de doramas",
+      });
+
+    }
+  },
   
 
   calendarioAnimes: async (req, res) => {
@@ -379,6 +477,8 @@ const paginasController = {
     user: req.cookies.user,
   });
   },
+
+
 
 
 };

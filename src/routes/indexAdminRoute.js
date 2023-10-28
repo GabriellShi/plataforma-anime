@@ -12,9 +12,11 @@ router.get("/paginasViews", indexAdminController.paginasViews);
 
 router.get("/paginasComentarios", indexAdminController.paginasComentarios);
 
-router.get("/adicionarEpisodiosLista", indexAdminController.adicionarEpisodiosLista);
+router.get("/adicionarEpAnimesLista", indexAdminController.adicionarEpAnimesLista);
 
-router.get("/adicionarFilmesLista", indexAdminController.adicionarFilmesLista);
+router.get("/adicionarEpFilmesLista", indexAdminController.adicionarEpFilmesLista);
+
+router.get("/adicionarEpDoramasLista", indexAdminController.adicionarEpDoramasLista);
 
 
 
