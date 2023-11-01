@@ -20,7 +20,7 @@ router.post("/logout", isAuth, authController.logout);
 // Em routes.js
 router.post("/areaCliente/updateImage", isAuth, upload.single("image_filename"), authController.updateProfileImage);
 
-router.get("/areaCliente", authController.areaCliente);
+router.get("/areaCliente", isAuth, authController.areaCliente);
 
 router.get("/favoritos", isAuth, authController.areaCliente);
 

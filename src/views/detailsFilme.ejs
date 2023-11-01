@@ -19,13 +19,120 @@
                     </div>
                     <div class="icones-da-capa-do-anime-lista-anime">
                         <ul>
-                            <li><img src="/img/icone-favorito.png" alt=""></li>
-                            <li class="lista-de-animes">
-                                <h4>Lista</h4>
-                                <img src="/img/icone-lista-anime.png" alt="">
+
+                              <!-- Botão para ir para a lista de favoritos ------------------------->
+                              <li class="lista-de-animes">
+                                <% if (user) { %>
+                                    <a href="/areaCliente">
+                                        <h4>MyList</h4>
+                                        <img src="/img/icone-lista-anime.png" alt="">
+                                    </a>
+                                <% } else { %>
+                                    <a href="javascript:void(0);" onclick="mostrarPopupFavoritos()"> <!-- Adicione esta linha -->
+                                        <h4>MyList</h4>
+                                        <img src="/img/icone-lista-anime.png" alt="">
+                                    </a>
+                                <% } %>
                             </li>
-                         
-                         
+                            
+                            <div id="popup-favoritos" class="popup">
+                                <div class="popup-content"> <!-- Adicione as classes para o conteúdo do pop-up -->
+                                    <span class="popup-close" onclick="fecharPopupFavoritos()">&times;</span>
+                                    <% if (user) { %>
+                                        <p>Sucesso! Adicionado aos favoritos de <%= user.nome %></p>
+                                    <% } else { %>
+                                        <p>Oops... Você precisa estar logado para ir a lista de favoritos!</p>
+                                        <a href="/login">Fazer Login</a>
+                                    <% } %>
+                                    <button onclick="fecharPopupFavoritos()">OK</button>
+                                </div>
+                            </div>
+                            
+                            
+                            <script>
+                                // Função para mostrar o pop-up de favoritos
+                                function mostrarPopupFavoritos() {
+                                    var popup = document.getElementById('popup-favoritos');
+                                    popup.style.display = 'block';
+                                }
+                            
+                                // Função para fechar o pop-up de favoritos
+                                function fecharPopupFavoritos() {
+                                    var popup = document.getElementById('popup-favoritos');
+                                    popup.style.display = 'none';
+                                }
+                            </script>
+                            
+
+
+
+
+                              <!-- Botão para adicionar o anime aos favoritos ------------------------->
+                              <li class="icone-favoritos">
+                                <button class="adicionar-favorito" onclick="mostrarPopup()" data-anime-id="<%= detailsFilme.id %>">
+                                    <h4></h4>
+                                    <img src="/img/icone-favorito.png" alt="">
+                                </button>
+                                
+                            </li>
+        
+                              <script>
+                                const adicionarFavoritoButtons = document.querySelectorAll('.adicionar-favorito');
+
+                                adicionarFavoritoButtons.forEach(button => {
+                                    button.addEventListener('click', () => {
+                                        const detailsFilme = button.getAttribute('data-anime-id');
+
+                                        fetch(`/filme/${detailsFilme}/adicionar-favorito`, {
+                                            method: 'POST'
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            // Adicione a classe de estilo se o item for adicionado com sucesso
+                                            if (data.success) {
+                                                button.classList.add('favorito-adicionado');
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Erro ao adicionar aos favoritos', error);
+                                        });
+                                    });
+                                });
+
+                              </script>
+                              
+                              <div id="popup" class="popup">
+                                <div class="popup-content">
+                                    <span class="popup-close" onclick="fecharPopup()">&times;</span>
+                                    <% if (user) { %>
+                                        <p>Sucesso! Filme adicionado aos favoritos do <%= user.nome %> (Filme: <%= detailsFilme.nome %>)</p>
+                                    <% } else { %>
+                                        <p>Oops... Você precisa estar logado para marcar essa opção!</p>
+                                        <a href="/login">Fazer Login</a>
+                                    <% } %>
+                                    <button onclick="fecharPopup()">OK</button>
+                                </div>
+                            </div>
+                              
+                              <script>
+                                // Função para mostrar o pop-up
+                                function mostrarPopup() {
+                                  var popup = document.getElementById('popup');
+                                  popup.style.display = 'block';
+                                }
+                              
+                                // Função para fechar o pop-up
+                                function fecharPopup() {
+                                  var popup = document.getElementById('popup');
+                                  popup.style.display = 'none';
+                                }
+                              </script>
+
+
+
+
+
+                              <!-- Botão para like e deslike  ------------------------------>
                             <li class="icone-gostei-pagina-anime">
                                 <img src="/img/icone-gostei.png" alt="Gostei">
                                 <p><span id="likesCount"><%= detailsFilme.likes %></span></p>

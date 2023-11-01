@@ -8,6 +8,7 @@ const db = require("../config/sequelize");
 const Filmes = require("../models/Filmes");
 const Episodios = require("../models/Episodios");
 const Doramas = require("../models/Doramas");
+const Favoritos = require("../models/Favoritos");
 const Animes = require("../models/Animes");
 const Comentariosdoramas = require("../models/Comentariosdoramas");
 
@@ -103,6 +104,76 @@ function calculatePercentage(dorama) {
 
     });
   },
+
+  adicionarFavorito: async (req, res) => {
+    try {
+      const userId = req.cookies.user.id;
+      const { id } = req.params;
+      const detailsDoramaId = req.params.id;
+
+      // Verifique se o anime já está nos favoritos do usuário
+      const favorite = await Favoritos.findOne({
+        where: {
+          doramas_id: detailsDoramaId,
+          users_id: userId,
+        },
+      });
+
+      if (favorite) {
+        console.log("Dorama já está nos favoritos do usuário");
+        res
+          .status(400)
+          .json({ message: "Dorama já está nos favoritos do usuário" });
+      } else {
+        // O anime ainda não está nos favoritos do usuário, adicione-o
+        await Favoritos.create({
+          doramas_id: id,
+          users_id: userId,
+        });
+
+        console.log("Dorama adicionado aos favoritos com sucesso");
+        res
+          .status(200)
+          .json({ message: "Dorama adicionado aos favoritos com sucesso" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+
+  adicionarFavorito: async (req, res) => {
+
+    try {
+        const userId = req.cookies.user.id;
+        const detailsDoramaId = req.params.id; 
+
+        // Verifique se o anime já está nos favoritos do usuário
+        const favorite = await Favoritos.findOne({
+            where: {
+                doramas_id: detailsDoramaId,
+                users_id: userId,
+            },
+        });
+
+        if (favorite) {
+            console.log("Dorama já está nos favoritos do usuário");
+            res.status(400).json({ message: "Dorama já está nos favoritos do usuário" });
+        } else {
+            // O anime ainda não está nos favoritos do usuário, adicione-o
+            await Favoritos.create({
+                doramas_id: detailsDoramaId,
+                users_id: userId,
+            });
+
+            console.log("Dorama adicionado aos favoritos com sucesso");
+            res.status(200).json({ message: "Dorama adicionado aos favoritos com sucesso" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+},
 
 
   like: async (req, res) => {

@@ -6,6 +6,10 @@ const upload = require("../helpers/multer");
 // Controllers
 const detailsDoramaController = require("../controllers/DetailsDoramaController");
 
+
+router.post("/:id/adicionar-favorito", detailsDoramaController.adicionarFavorito);
+
+
     // Rota para salvar um novo comentário
 router.post("/:id/comment", detailsDoramaController.storeComment);
 

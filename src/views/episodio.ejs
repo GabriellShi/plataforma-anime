@@ -89,23 +89,38 @@
                 <% } %>
 
 
-                <% }  if (locals.anime) { %>
-                <!-- Se apenas anime está presente -->
-                <a href="/anime/<%= anime.id %>">
-                  <li>
-                    <img src="/img/icone-lista-anime2.png" alt="">
-                    <h4>Lista de Episódios</h4>
-                  </li>
-                </a>
-                <% }  if (locals.detailsFilme) { %>
-                <!-- Se apenas detailsFilme está presente -->
-                <a href="/filme/<%= detailsFilme.id %>">
-                  <li>
-                    <img src="/img/icone-lista-anime2.png" alt="">
-                    <h4>Lista de Episódios</h4>
-                  </li>
-                </a>
-              <% } %>
+                <% if (locals.anime) { %>
+                  <!-- Se apenas anime está presente -->
+                  <a href="/anime/<%= anime.id %>">
+                    <li>
+                      <img src="/img/icone-lista-anime2.png" alt="">
+                      <h4>Lista de Episódios </h4>
+                    </li>
+                  </a>
+                <% } %>
+                
+                <% if (locals.detailsFilme) { %>
+                  <!-- Se apenas detailsFilme está presente -->
+                  <a href="/filme/<%= detailsFilme.id %>">
+                    <li>
+                      <img src="/img/icone-lista-anime2.png" alt="">
+                      <h4>Lista de Episódios </h4>
+                    </li>
+                  </a>
+                <% } %>
+                
+                <% if (locals.detailsDorama) { %>
+                  <!-- Se apenas detailsDorama está presente -->
+                  <a href="/dorama/<%= detailsDorama.id %>">
+                    <li>
+                      <img src="/img/icone-lista-anime2.png" alt="">
+                      <h4>Lista de Episódios </h4>
+                    </li>
+                  </a>
+                <% } %>
+
+
+                
                   
                 
   
@@ -254,6 +269,7 @@
     
       const formData = new FormData(e.target);
       const detailsFilmesId = window.location.pathname.split("/")[2]; // Obtém o ID do anime da URL
+      const detailsDoramasId = window.location.pathname.split("/")[2]; // Obtém o ID do anime da URL
     
       try {
         const response = await fetch(`/episodio/${episodio}/comment`, {
@@ -465,6 +481,7 @@
     </div>
 
 </section>
+<% } %>
 
 
 <%- include("./partials/footer") %> 

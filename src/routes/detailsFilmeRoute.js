@@ -6,6 +6,10 @@
     // Controllers
     const detailsFilmeController = require("../controllers/DetailsFilmeController");
 
+
+    router.post("/:id/adicionar-favorito", detailsFilmeController.adicionarFavorito);
+
+
         // Rota para salvar um novo comentário
     router.post("/:id/comment", detailsFilmeController.storeComment);
 

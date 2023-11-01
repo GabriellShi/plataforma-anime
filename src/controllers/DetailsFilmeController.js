@@ -9,6 +9,7 @@ const Filmes = require("../models/Filmes");
 const Episodios = require("../models/Episodios");
 const Animes = require("../models/Animes");
 const Comentariosfilmes = require("../models/Comentariosfilmes");
+const Favoritos = require("../models/Favoritos");
 
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize")
@@ -103,6 +104,75 @@ function calculatePercentage(filme) {
     });
   },
 
+  adicionarFavorito: async (req, res) => {
+    try {
+      const userId = req.cookies.user.id;
+      const { id } = req.params;
+      const detailsFilmeId = req.params.id;
+
+      // Verifique se o anime já está nos favoritos do usuário
+      const favorite = await Favoritos.findOne({
+        where: {
+          filmes_id: detailsFilmeId,
+          users_id: userId,
+        },
+      });
+
+      if (favorite) {
+        console.log("Filme já está nos favoritos do usuário");
+        res
+          .status(400)
+          .json({ message: "Filme já está nos favoritos do usuário" });
+      } else {
+        // O anime ainda não está nos favoritos do usuário, adicione-o
+        await Favoritos.create({
+          filmes_id: id,
+          users_id: userId,
+        });
+
+        console.log("Filme adicionado aos favoritos com sucesso");
+        res
+          .status(200)
+          .json({ message: "Filme adicionado aos favoritos com sucesso" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+
+  adicionarFavorito: async (req, res) => {
+
+    try {
+        const userId = req.cookies.user.id;
+        const detailsFilmeId = req.params.id; 
+
+        // Verifique se o anime já está nos favoritos do usuário
+        const favorite = await Favoritos.findOne({
+            where: {
+                filmes_id: detailsFilmeId,
+                users_id: userId,
+            },
+        });
+
+        if (favorite) {
+            console.log("Filme já está nos favoritos do usuário");
+            res.status(400).json({ message: "Filme já está nos favoritos do usuário" });
+        } else {
+            // O anime ainda não está nos favoritos do usuário, adicione-o
+            await Favoritos.create({
+                filmes_id: detailsFilmeId,
+                users_id: userId,
+            });
+
+            console.log("Filme adicionado aos favoritos com sucesso");
+            res.status(200).json({ message: "Filme adicionado aos favoritos com sucesso" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+},
 
   like: async (req, res) => {
     const { id } = req.params;
@@ -110,7 +180,7 @@ function calculatePercentage(filme) {
     try {
         const detailsFilme = await Filmes.findByPk(id);
         if (!detailsFilme) {
-            return res.status(404).json({ error: "Anime não encontrado" });
+            return res.status(404).json({ error: "Filme não encontrado" });
         }
 
         detailsFilme.likes++; // Incrementa o contador de "gostei"
@@ -129,7 +199,7 @@ dislike: async (req, res) => {
     try {
         const detailsFilme = await Filmes.findByPk(id);
         if (!detailsFilme) {
-            return res.status(404).json({ error: "Anime não encontrado" });
+            return res.status(404).json({ error: "Filme não encontrado" });
         }
 
         detailsFilme.dislikes++; // Incrementa o contador de "não gostei"
@@ -146,7 +216,7 @@ dislike: async (req, res) => {
     return res.render("filme-create", { title: "Cadastrar Filme" });
   },
   store: async (req, res) => {
-    const { nome, tipo, genero, autor, estudio, sinopse, capa } = req.body;
+    const { nome, tipo, genero, autor, estudio, sinopse, capa, likes, dislikes, } = req.body;
 
     try {
 
@@ -158,6 +228,8 @@ dislike: async (req, res) => {
       estudio,
       sinopse,
       capa: capa,
+      likes,
+      dislikes,
     });
 
 

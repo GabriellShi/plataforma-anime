@@ -181,14 +181,12 @@
                                         <!-- Aqui aparece quando estou logado ADM -->
                                         <a href="/indexAdmin">Administrador</a>
 
-                                        
                                         <!-- Aqui aparece quando estou logado User -->
                                         <% }%> <% if(locals.user){%> 
                                         <form action="/logout" method="post">
-                                          <button type="submit" class="btn-logout">Logout</button>
+                                         <li> <a href=""><button type="submit" class="btn-logout">Logout</button></a></li>
                                         </form>
-                                        <a href="/areaCliente">Meu Perfil</a>
-
+                                        <li><a href="/areaCliente">Perfil</a></li>
 
                                         <!-- Aqui aparece quando estou Deslogado -->
                                         <% }else {%> 

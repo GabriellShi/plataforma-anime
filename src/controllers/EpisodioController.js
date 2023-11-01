@@ -7,6 +7,7 @@ const db = require("../config/sequelize");
 const Animes = require("../models/Animes");
 const Episodios = require("../models/Episodios");
 const Filmes = require("../models/Filmes");
+const Doramas = require("../models/Doramas");
 const Comentariosepisodios = require("../models/Comentariosepisodios");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize"); 
@@ -62,16 +63,22 @@ const episodioController = {
 
       const filmeId = episodio.filmes_id;
 
+      const doramaId = episodio.doramas_id;
+
       // Agora, busque o anime com base no animeId
       const anime = await Animes.findByPk(animeId);
 
       const detailsFilme = await Filmes.findByPk(filmeId);
 
+      const detailsDorama = await Doramas.findByPk(doramaId);
+
+
       // Em seguida, busque todos os episódios relacionados a esse anime
       const episodios = await Episodios.findAll({
         where: {
           animes_id: animeId,
-          filmes_id: filmeId
+          filmes_id: filmeId,
+          doramas_id: doramaId
         },
         order: [['numero_episodio', 'ASC']],
       });
@@ -114,6 +121,7 @@ const episodioController = {
         episodio,
         anime,
         detailsFilme,
+        detailsDorama,
         episodios,
         previousEpisode,
         nextEpisode,
@@ -144,7 +152,7 @@ const episodioController = {
   },
   
   store: async (req, res) => {
-    const { nome, data, image, animes_id, filmes_id, numero_episodio, video_url } = req.body;
+    const { nome, data, image, animes_id, filmes_id, doramas_id, numero_episodio, video_url } = req.body;
 
     try {
         const novosEpisodios = await Episodios.create({
@@ -153,6 +161,7 @@ const episodioController = {
             image,
             animes_id,
             filmes_id,
+            doramas_id,
             numero_episodio,
             video_url,
         });
@@ -230,6 +239,9 @@ try {
 
       const detailsFilme = await Filmes.findByPk(id);
 
+      const detailsDorama = await Doramas.findByPk(id);
+
+
     if (!episodio) {
       return res.render("error", {
         title: "Ops!",
@@ -242,6 +254,7 @@ try {
       episodio,
       episodios: episodio,
       detailsFilme,
+      detailsDorama,
 
     });
   } catch (error) {
@@ -257,7 +270,7 @@ try {
    // Executa a atualização
    update: async (req, res) => {
     const { id } = req.params;
-    const { nome, data, image, animes_id, filmes_id, numero_episodio, video_url} = req.body;
+    const { nome, data, image, animes_id, filmes_id, doramas_id, numero_episodio, video_url} = req.body;
 
 
     try {
@@ -269,6 +282,7 @@ try {
         image,
         animes_id,
         filmes_id,
+        doramas_id,
         numero_episodio,
         video_url,
       });

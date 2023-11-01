@@ -6,6 +6,8 @@ const upload = require("../helpers/multer");
 const db = require("../config/sequelize");
 const Users = require("../models/Users");
 const Animes = require("../models/Animes");
+const Filmes = require("../models/Filmes");
+const Doramas = require("../models/Doramas");
 const Favoritos = require("../models/Favoritos");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize");
@@ -137,7 +139,7 @@ const authController = {
         where: {
           users_id: userId,
         },
-        include: [Animes], // Isso trará os detalhes do anime associado aos favoritos
+        include: [Animes, Filmes, Doramas], // Isso trará os detalhes do anime associado aos favoritos
       });
 
       if (!user) {

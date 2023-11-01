@@ -7,6 +7,8 @@ const path = require("path");
 const db = require("../config/sequelize");
 const Users = require("../models/Users");
 const Animes = require("../models/Animes");
+const Filmes = require("../models/Filmes");
+const Doramas = require("../models/Doramas");
 const Favoritos = require("../models/Favoritos");
 const { Op } = require("sequelize");
 const { Sequelize } = require("../config/sequelize")
@@ -72,7 +74,7 @@ const userController = {
         where: {
           users_id: userId,
         },
-        include: [Animes], // Isso carregará os detalhes completos dos animes favoritos
+        include: [Animes, Filmes, Doramas], // Isso carregará os detalhes completos dos animes favoritos
       });
   
       return res.render("areaClienteFavoritos", {

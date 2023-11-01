@@ -17,6 +17,14 @@ const Favoritos = db.define(
       animes_id: {
         type: Sequelize.DataTypes.INTEGER.UNSIGNED,
       },
+
+      filmes_id: {
+        type: Sequelize.DataTypes.INTEGER.UNSIGNED,
+      },
+
+      doramas_id: {
+        type: Sequelize.DataTypes.INTEGER.UNSIGNED,
+      },
   
       users_id: {
         type: Sequelize.DataTypes.INTEGER.UNSIGNED,
