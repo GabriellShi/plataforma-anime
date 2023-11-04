@@ -1,61 +1,77 @@
-<%- include("./partials/head") %> <%- include("./partials/header")
-%>
+<%- include("./partials/head") %> <%- include("./partials/header") %>
 
 <div class="area-cliente">
-  <div class="perfil-cliente">
-    <img src="<%= user.image_filename ? '/uploads/' + user.image_filename : '/image/default-image.jpg' %>" alt="Imagem" />
+  <h2 class="titulo-area-cliente">Atualizar Usuario</h2>
 
+  <div class="area-cliente-filho">
+    <div class="perfil-cliente">
+      <img
+        src="<%= user.image_filename ? '/uploads/' + user.image_filename : '/image/default-image.jpg' %>"
+        alt="Imagem"
+      />
+      <form
+        action="/areaCliente/updateImage"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <input type="file" name="image_filename" />
+        <button type="submit">Trocar Imagem</button>
+      </form>
+    </div>
+
+    <div class="form-area-cliente">
+      <% if(locals.error){ %>
+      <h2><%= error.message%></h2>
+      <% } %>
+      <form
+        action="/user/edit/<%= user.id %>"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div>
+          <label for="nome">Nome:</label>
+          <input
+            value="<%= user.nome %>"
+            type="text"
+            name="nome"
+            placeholder="Nome"
+          />
+        </div>
+
+        <div>
+          <label for="nomedeuser">Nome de Usuario:</label>
+          <input
+            value="<%= user.nomedeuser %>"
+            type="text"
+            name="nomedeuser"
+            placeholder="Nome de Usuario"
+          />
+        </div>
+
+        <div>
+          <label for="email">Email:</label>
+          <input
+            value="<%= user.email %>"
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+        </div>
+
+        <div>
+          <label for="senha">Senha:</label>
+          <input
+            value="<%= user.senha %>"
+            type="number"
+            name="senha"
+            placeholder="Senha"
+          />
+        </div>
+
+        <button type="submit">Atualizar</button>
+      </form>
+    </div>
   </div>
-  
-<form action="/areaCliente/updateImage" method="post" enctype="multipart/form-data">
-  <input type="file" name="image_filename" />
-  <button type="submit">Trocar Imagem</button>
+</div>
 
-</form>
-
-<main>
-  <h2>Atualizar Usuario</h2>
-  <% if(locals.error){ %>
-  <h2><%= error.message%></h2>
-  <% } %>
-  <form
-    action="/user/edit/<%= user.id %>?_method=put"
-    method="post"
-    enctype="multipart/form-data"
-  >
-    <label for="nome">Nome</label>
-    <input
-      value="<%= user.nome %>"
-      type="text"
-      name="nome"
-      placeholder="Nome"
-    />
-
-    <label for="nomedeuser">Nome de Usuario</label>
-    <input
-      value="<%= user.nomedeuser %>"
-      type="text"
-      name="nomedeuser"
-      placeholder="Nome de Usuario"
-    />
-
-    <label for="email">Email</label>
-    <input
-      value="<%= user.email %>"
-      type="email"
-      name="email"
-      placeholder="Email"
-    />
-
-    <label for="senha">Senha</label>
-    <input
-      value="<%= user.senha %>"
-      type="number"
-      name="senha"
-      placeholder="Senha"
-    />
-
-
-    <button type="submit">Atualizar </button>
-  </form>
-</main>
+<%- include("./partials/footer") %>

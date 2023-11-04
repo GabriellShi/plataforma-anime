@@ -14,7 +14,11 @@ router.get("/:id", isAuth, animeController.show); // Protegido pelo middleware i
 router.post("/:id/adicionar-favorito", animeController.adicionarFavorito);
 
 
+    // Rota para os comentários antigos
+router.get('/:id/antigo', animeController.showAntigo);
 
+    // Rota para os comentários recentes
+router.get('/:id/recente', animeController.showRecente);
 
 
 

@@ -9,6 +9,11 @@
 
     router.post("/:id/adicionar-favorito", detailsFilmeController.adicionarFavorito);
 
+    // Rota para os comentários antigos
+    router.get('/:id/antigo', detailsFilmeController.showAntigo);
+
+    // Rota para os comentários recentes
+    router.get('/:id/recente', detailsFilmeController.showRecente);
 
         // Rota para salvar um novo comentário
     router.post("/:id/comment", detailsFilmeController.storeComment);

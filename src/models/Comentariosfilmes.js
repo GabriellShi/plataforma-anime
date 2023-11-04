@@ -23,6 +23,11 @@ const Comentariosfilmes = db.define(
       type: Sequelize.DataTypes.TEXT, // Correção aqui
       allowNull: false,
     },
+
+    filmes_id: {
+      type: Sequelize.DataTypes.TEXT, // Correção aqui
+      allowNull: false,
+    },
     created_at: {
       type: Sequelize.DataTypes.DATE,
       defaultValue: Sequelize.NOW,

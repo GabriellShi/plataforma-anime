@@ -100,66 +100,70 @@ const userController = {
   },
 
   // Mostra a tela
-  edit: async (req, res) => {
+    edit: async (req, res) => {
 
-    const { id } = req.params;
+      const { id } = req.params;
 
-    try {
-      // Busque os detalhes da notícia no banco de dados pelo ID
-      const user = await Users.findByPk(id);
-  
-      if (!user) {
-        return res.render("error", {
-          title: "Ops!",
-          message: "Detalhes da notícia não encontrados",
-        });
-      }
-
-    return res.render("user-edit", {
-      title: "Editar Usuário",
-      user,
-    });
+      try {
+        // Busque os detalhes da notícia no banco de dados pelo ID
+        const user = await Users.findByPk(id);
     
-  } catch (error) {
-    console.error(error);
-    return res.status(500).render("error", {
-      title: "Erro",
-      message:
-        "Ocorreu um erro ao carregar os detalhes do Usuario para edição",
-    });
-  }
-  },
+        if (!user) {
+          return res.render("error", {
+            title: "Ops!",
+            message: "Detalhes da notícia não encontrados",
+          });
+        }
 
-  // Executa a atualização
-  update: async (req, res) => {
-
-    const { id } = req.params;
-    const { nome, nomedeuser, senha, email } = req.body;
-
-  
-    try {
-      const usersToUpdate = await Users.findByPk(id);
-  
-      await usersToUpdate.update({
-        nome, 
-        nomedeuser, 
-        senha, 
-        email
+      return res.render("user-edit", {
+        title: "Editar Usuário",
+        user,
       });
+      
+    } catch (error) {
+      console.error(error);
+      return res.status(500).render("error", {
+        title: "Erro",
+        message:
+          "Ocorreu um erro ao carregar os detalhes do Usuario para edição",
+      });
+    }
+    },
 
-    return res.render("success", {
-      title: "Usuário Atualizado",
-      message: `Usuário ${usersToUpdate.nome} foi atualizado`,
+    // Executa a atualização
+// Controlador de atualização
+update: async (req, res) => {
+  const { id } = req.params;
+  const { nome, nomedeuser, senha, email } = req.body;
+
+  try {
+    const usersToUpdate = await Users.findByPk(id);
+
+    if (!usersToUpdate) {
+      return res.render("error", {
+        title: "Erro",
+        message: "Usuário não encontrado",
+      });
+    }
+
+    await usersToUpdate.update({
+      nome, 
+      nomedeuser, 
+      senha, 
+      email
     });
 
+    // Redireciona o usuário para a página areaCliente com o ID do usuário
+    return res.redirect(`/areaCliente/${id}`);
   } catch (error) {
     console.error(error);
     return res.render("error", {
       title: "Erro",
-      message: "Erro ao atualizar Usuario",
+      message: "Erro ao atualizar o usuário",
     });
   }
-  },
+},
+
 
   delete: async (req, res) => {
 

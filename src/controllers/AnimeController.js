@@ -268,6 +268,117 @@ const animeController = {
     }
   },
 
+  showAntigo: async (req, res) => {
+    const { id } = req.params;
+    const animeId = req.params.id;
+
+    const anime = await Animes.findByPk(id);
+
+    if (!anime) {
+        return res.render("error", {
+            title: "Ops!",
+            message: "Anime não encontrado",
+        });
+    }
+
+    const episodios = await Episodios.findAll({
+      where: { animes_id: anime.id }, // Filtrar por ID do anime
+      order: [["numero_episodio", "ASC"]], // Ordenar por número de episódio, se necessário
+    });
+
+    const animesPopulares = await Animes.findAll({
+      order: [
+        ["likes", "DESC"], // Ordenar por likes em ordem decrescente
+      ],
+      limit: 4, // Limitar a 4 resultados
+    });
+  
+    animesPopulares.sort((a, b) => b.likes - a.likes);
+  
+     // Função para calcular a porcentagem com base nos votos
+     function calculatePercentage(anime) {
+      const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+      const percentage = (anime.likes / totalLikes) * 100;
+      return percentage.toFixed(1); // Arredonde para uma casa decimal
+    }
+    const comentarios = await Comentariosanimes.findAll({
+        where: { animes_id: animeId },
+        order: [['created_at', 'ASC']], // Filtrar os comentários mais antigos primeiro
+    });
+
+    res.render("anime", { // Use res.render para renderizar a página "anime"
+      title: "Visualizar Anime (Antigos)",
+      anime,
+      comentarios,
+      episodios,
+      animesPopulares,
+      animesPopulares: animesPopulares.map((anime, index) => ({
+      ...anime.get({ plain: true }),
+      percentage: calculatePercentage(anime), // Adicione a porcentagem
+    })),
+    user: req.cookies.user,
+
+  });
+
+},
+
+showRecente: async (req, res) => {
+  const { id } = req.params;
+  const animeId = req.params.id;
+
+  const anime = await Animes.findByPk(id);
+
+  if (!anime) {
+      return res.render("error", {
+          title: "Ops!",
+          message: "anime não encontrado",
+      });
+  }
+
+  const animesPopulares = await Animes.findAll({
+    order: [
+      ["likes", "DESC"], // Ordenar por likes em ordem decrescente
+    ],
+    limit: 4, // Limitar a 4 resultados
+  });
+
+  animesPopulares.sort((a, b) => b.likes - a.likes);
+
+   // Função para calcular a porcentagem com base nos votos
+   function calculatePercentage(anime) {
+    const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+    const percentage = (anime.likes / totalLikes) * 100;
+    return percentage.toFixed(1); // Arredonde para uma casa decimal
+  }
+
+  const episodios = await Episodios.findAll({
+    where: { animes_id: anime.id }, // Filtrar por ID do anime
+    order: [["numero_episodio", "ASC"]], // Ordenar por número de episódio, se necessário
+  });
+  
+
+  const comentarios = await Comentariosanimes.findAll({
+      where: { animes_id: animeId },
+      order: [['created_at', 'DESC']], // Filtrar os comentários mais recentes primeiro
+  });
+
+  res.render("anime", { // Use res.render para renderizar a página "anime"
+      title: "Visualizar Anime (Antigos)",
+      anime,
+      comentarios,
+      animesPopulares,
+      animesPopulares: animesPopulares.map((anime, index) => ({
+        ...anime.get({ plain: true }),
+        percentage: calculatePercentage(anime), // Adicione a porcentagem
+      })),
+      user: req.cookies.user,
+
+
+  });
+},
+
+
+
   // Controlador para exclusão de comentários
   deleteComment: async (req, res) => {
     const commentId = req.params.commentId; // Obtém o ID do comentário a partir dos parâmetros da rota

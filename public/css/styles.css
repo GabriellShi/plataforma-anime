@@ -1549,25 +1549,46 @@ li.adicionar-a-lista1 {
 
 .area-cliente {
   background-color: rgb(29, 29, 31);
-  display: flex;
   justify-content: space-evenly;
-
   flex-direction: row;
   flex-flow: wrap;
   align-items: center;
   padding: 2rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+
+}
+
+.titulo-area-cliente{
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 .perfil-cliente img {
-  width: 10rem;
+  width: 12rem;
   padding-bottom: 0.5rem;
 }
 
 .perfil-cliente {
   text-align: center;
   padding-bottom: 1.5rem;
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+.perfil-cliente input {
+  border: 0;
+  border-radius: 5px;
+  margin: 0.5rem;
+  color: white;
+  font-size: 0.8rem;
+}
+
+.perfil-cliente button {
+  color: black;
+  padding: 0.3rem;
+  border: 0;
+  border-radius: 5px;
+  margin: 0.5rem;
 }
 
 .topicos-da-area-do-cliente ul {
@@ -1577,6 +1598,42 @@ li.adicionar-a-lista1 {
   flex-flow: wrap;
   padding: 0;
 }
+
+.form-area-cliente form{
+  color: white;
+}
+
+.form-area-cliente button{
+  text-align: center;
+  border: 0;
+  border-radius: 5px;
+  padding: 0.5rem;
+  display: flex;
+  margin-left: 9rem;
+}
+.form-area-cliente label{
+  font-size: 1rem;
+  padding-left: 0.4rem;
+}
+
+.form-area-cliente input{
+  margin: 0.5rem;
+  border: 0;
+  border-radius: 4px;
+  padding: 0.3rem;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.area-cliente-filho{
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: center;
+  align-items: center;
+}
+
+
 
 .topicos-da-area-do-cliente {
   justify-content: center;
@@ -2155,6 +2212,8 @@ img.seta-baixo {
   }
 }
 
+
+
 /* --------------------------------- ESTILIZAÇÃO USER CREATE ---------------------------------  */
 
 .informacoes-de-cadastro {
@@ -2178,21 +2237,29 @@ img.seta-baixo {
   text-align: center;
 }
 
+.bk-formulario-cadastro{
+  width: 47rem;
+  height: 33rem;
+}
+
+.formulario-cadastro {
+  left: 19rem;
+}
 
 @media (max-width: 1115px) {
   .formulario-cadastro {
     position: absolute;
     display: flex;
     justify-content: center;
-    left: 20rem;
+    left: 11rem;
     top: 4.5rem;
     color: white;
   }
 
   .bk-formulario-cadastro {
     background-color: rgb(29, 29, 31);
-    width: 32rem;
-    height: 31.5rem;
+    width: 47rem;
+    height: 33rem;
     border-radius: 15px;
   }
 
@@ -2219,14 +2286,15 @@ img.seta-baixo {
   }
 
   .bk-formulario-cadastro {
-    width: 34rem;
-    height: 32rem;
+    width: 46rem;
+    height: 33rem;
   }
 }
 
 @media (max-width: 506px) {
   .bk-formulario-cadastro {
-    height: 46rem;
+    height: 48rem;
+
   }
 
   .informacoes-de-cadastro {
@@ -2261,6 +2329,18 @@ img.seta-baixo {
     width: 80%;
   }
 }
+
+
+.input-recuperar-nome  {
+  width: 90%;
+}
+
+@media (max-width: 510px) {
+  .input-recuperar-nome input {
+    width: 20rem;
+  }
+}
+
 
 /* ------------------------------ ESTILIZAÇÃO INDEX --------------------------------------  */
 
@@ -2959,3 +3039,11 @@ h2 {
   color: #fff; /* Texto em branco */
   border: 1px solid #e20202; /* Borda da mesma cor do fundo */
 }
+.botao-enviar-recuperar {
+  margin-top: 1rem;
+}
+
+
+
+
+

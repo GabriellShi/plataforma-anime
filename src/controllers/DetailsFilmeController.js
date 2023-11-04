@@ -104,6 +104,118 @@ function calculatePercentage(filme) {
     });
   },
 
+  showAntigo: async (req, res) => {
+    const { id } = req.params;
+
+
+    const detailsFilme = await Filmes.findByPk(id,)
+
+    if (!detailsFilme) {
+      return res.render("error", {
+        title: "Ops!",
+        message: "Filme não encontrado",
+      });
+    }
+
+
+    const filmesPopulares = await Filmes.findAll({
+      order: [
+        ["likes", "DESC"], // Ordenar por likes em ordem decrescente
+      ],
+      limit: 4, // Limitar a 4 resultados
+    });
+
+    const episodios = await Episodios.findAll({
+      where: { filmes_id: detailsFilme.id }, // Filtrar por ID do anime
+      order: [['numero_episodio', 'ASC']], // Ordenar por número de episódio, se necessário
+  });
+  
+    filmesPopulares.sort((a, b) => b.likes - a.likes);
+  
+     // Função para calcular a porcentagem com base nos votos
+     function calculatePercentage(detailsFilme) {
+      const totalLikes = filmesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+      const percentage = (detailsFilme.likes / totalLikes) * 100;
+      return percentage.toFixed(1); // Arredonde para uma casa decimal
+    }
+
+    const comentarios = await Comentariosfilmes.findAll({
+        where: { filmes_id: detailsFilme.id },
+        order: [['created_at', 'ASC']], // Filtrar os comentários mais antigos primeiro
+    });
+
+
+    return res.render("detailsFilme", {
+        title: "Visualizar Filme (Antigos)",
+        detailsFilme,
+        comentarios,
+        filmesPopulares,
+        episodios,
+        filmesPopulares: filmesPopulares.map((detailsFilme, index) => ({
+        ...detailsFilme.get({ plain: true }),
+        percentage: calculatePercentage(detailsFilme), // Adicione a porcentagem
+      })),
+      user: req.cookies.user,
+        // Outros dados necessários
+    });
+},
+
+showRecente: async (req, res) => {
+    const { id } = req.params;
+
+
+    const detailsFilme = await Filmes.findByPk(id);
+
+    if (!detailsFilme) {
+        return res.render("error", {
+            title: "Ops!",
+            message: "Filme não encontrado",
+        });
+    }
+
+    const episodios = await Episodios.findAll({
+      where: { filmes_id: detailsFilme.id }, // Filtrar por ID do anime
+      order: [['numero_episodio', 'ASC']], // Ordenar por número de episódio, se necessário
+  });
+
+    const filmesPopulares = await Filmes.findAll({
+      order: [
+        ["likes", "DESC"], // Ordenar por likes em ordem decrescente
+      ],
+      limit: 4, // Limitar a 4 resultados
+    });
+  
+    filmesPopulares.sort((a, b) => b.likes - a.likes);
+  
+     // Função para calcular a porcentagem com base nos votos
+     function calculatePercentage(detailsFilme) {
+      const totalLikes = filmesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+      const percentage = (detailsFilme.likes / totalLikes) * 100;
+      return percentage.toFixed(1); // Arredonde para uma casa decimal
+    }
+
+    const comentarios = await Comentariosfilmes.findAll({
+        where: { filmes_id: detailsFilme.id },
+        order: [['created_at', 'DESC']], // Filtrar os comentários mais recentes primeiro
+    });
+
+
+    return res.render("detailsFilme", {
+        title: "Visualizar Filme (Recentes)",
+        detailsFilme,
+        comentarios,
+        episodios,
+        filmesPopulares,
+        
+        filmesPopulares: filmesPopulares.map((detailsFilme, index) => ({
+        ...detailsFilme.get({ plain: true }),
+        percentage: calculatePercentage(detailsFilme), // Adicione a porcentagem
+      })),
+      user: req.cookies.user,
+        // Outros dados necessários
+    });
+},
+
   adicionarFavorito: async (req, res) => {
     try {
       const userId = req.cookies.user.id;
@@ -266,7 +378,9 @@ dislike: async (req, res) => {
       // Lida com erros aqui, como enviar uma resposta de erro
     }
   },
-  
+
+
+
  // Controlador para exclusão de comentários
 deleteComment: async (req, res) => {
   const commentId = req.params.commentId; // Obtém o ID do comentário a partir dos parâmetros da rota
