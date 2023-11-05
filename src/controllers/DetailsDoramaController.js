@@ -74,6 +74,7 @@ const detailsDoramaController = {
     where: { doramas_id: detailsDorama.id },
   });
 
+  const quantidadeComentarios = comentarios.length;
 
   const doramasPopulares = await Doramas.findAll({
     order: [
@@ -96,6 +97,7 @@ function calculatePercentage(dorama) {
       episodios,
       comentarios,
       doramasPopulares,
+      quantidadeComentarios,
       doramasPopulares: doramasPopulares.map((dorama, index) => ({
         ...dorama.get({ plain: true }),
         percentage: calculatePercentage(dorama), // Adicione a porcentagem
@@ -104,6 +106,142 @@ function calculatePercentage(dorama) {
 
     });
   },
+
+  storeComment: async (req, res) => {
+    const { usuario, email, comentario } = req.body;
+    const detailsDoramaId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
+  
+    try {
+      await Comentariosdoramas.create({
+        usuario,
+        email,
+        comentario,
+        doramas_id: detailsDoramaId, // Associa o comentário ao anime
+      });
+  
+      const comentarios = await Comentariosdoramas.findAll({
+        where: { doramas_id: detailsDoramaId },
+      });
+  
+      // Envie os comentários atualizados como resposta JSON
+      res.redirect(`/dorama/${detailsDoramaId}`);
+    } catch (error) {
+      console.error(error);
+      // Lida com erros aqui, como enviar uma resposta de erro
+    }
+  },
+
+  showAntigo: async (req, res) => {
+    const { id } = req.params;
+
+
+    const detailsDorama = await Doramas.findByPk(id,)
+
+    if (!detailsDorama) {
+      return res.render("error", {
+        title: "Ops!",
+        message: "Dorama não encontrado",
+      });
+    }
+
+
+    const doramasPopulares = await Doramas.findAll({
+      order: [
+        ["likes", "DESC"], // Ordenar por likes em ordem decrescente
+      ],
+      limit: 4, // Limitar a 4 resultados
+    });
+
+    const episodios = await Episodios.findAll({
+      where: { doramas_id: detailsDorama.id }, // Filtrar por ID do anime
+      order: [['numero_episodio', 'ASC']], // Ordenar por número de episódio, se necessário
+  });
+  
+  doramasPopulares.sort((a, b) => b.likes - a.likes);
+  
+     // Função para calcular a porcentagem com base nos votos
+     function calculatePercentage(detailsDorama) {
+      const totalLikes = doramasPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+      const percentage = (detailsDorama.likes / totalLikes) * 100;
+      return percentage.toFixed(1); // Arredonde para uma casa decimal
+    }
+
+    const comentarios = await Comentariosdoramas.findAll({
+        where: { doramas_id: detailsDorama.id },
+        order: [['created_at', 'ASC']], // Filtrar os comentários mais antigos primeiro
+    });
+
+
+    return res.render("detailsDorama", {
+        title: "Visualizar Dorama (Antigos)",
+        detailsDorama,
+        comentarios,
+        doramasPopulares,
+        episodios,
+        doramasPopulares: doramasPopulares.map((detailsDorama, index) => ({
+        ...detailsDorama.get({ plain: true }),
+        percentage: calculatePercentage(detailsDorama), // Adicione a porcentagem
+      })),
+      user: req.cookies.user,
+        // Outros dados necessários
+    });
+},
+
+showRecente: async (req, res) => {
+    const { id } = req.params;
+
+
+    const detailsDorama = await Doramas.findByPk(id);
+
+    if (!detailsDorama) {
+        return res.render("error", {
+            title: "Ops!",
+            message: "doramas não encontrado",
+        });
+    }
+
+    const episodios = await Episodios.findAll({
+      where: { doramas_id: detailsDorama.id }, // Filtrar por ID do anime
+      order: [['numero_episodio', 'ASC']], // Ordenar por número de episódio, se necessário
+  });
+
+    const doramasPopulares = await Doramas.findAll({
+      order: [
+        ["likes", "DESC"], // Ordenar por likes em ordem decrescente
+      ],
+      limit: 4, // Limitar a 4 resultados
+    });
+  
+    doramasPopulares.sort((a, b) => b.likes - a.likes);
+  
+     // Função para calcular a porcentagem com base nos votos
+     function calculatePercentage(detailsDorama) {
+      const totalLikes = doramasPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+      const percentage = (detailsDorama.likes / totalLikes) * 100;
+      return percentage.toFixed(1); // Arredonde para uma casa decimal
+    }
+
+    const comentarios = await Comentariosdoramas.findAll({
+        where: { doramas_id: detailsDorama.id },
+        order: [['created_at', 'DESC']], // Filtrar os comentários mais recentes primeiro
+    });
+
+
+    return res.render("detailsDorama", {
+        title: "Visualizar Dorama (Recentes)",
+        detailsDorama,
+        comentarios,
+        episodios,
+        doramasPopulares,
+        
+        doramasPopulares: doramasPopulares.map((detailsDorama, index) => ({
+        ...detailsDorama.get({ plain: true }),
+        percentage: calculatePercentage(detailsDorama), // Adicione a porcentagem
+      })),
+      user: req.cookies.user,
+        // Outros dados necessários
+    });
+},
 
   adicionarFavorito: async (req, res) => {
     try {
@@ -243,29 +381,7 @@ dislike: async (req, res) => {
   }
   },
 
-  storeComment: async (req, res) => {
-    const { usuario, email, comentario } = req.body;
-    const detailsDoramaId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
-  
-    try {
-      await Comentariosdoramas.create({
-        usuario,
-        email,
-        comentario,
-        doramas_id: detailsDoramaId, // Associa o comentário ao anime
-      });
-  
-      const comentarios = await Comentariosdoramas.findAll({
-        where: { doramas_id: detailsDoramaId },
-      });
-  
-      // Envie os comentários atualizados como resposta JSON
-      res.redirect(`/dorama/${detailsDoramaId}`);
-    } catch (error) {
-      console.error(error);
-      // Lida com erros aqui, como enviar uma resposta de erro
-    }
-  },
+
   
  // Controlador para exclusão de comentários
 deleteComment: async (req, res) => {

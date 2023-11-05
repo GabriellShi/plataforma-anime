@@ -231,15 +231,15 @@
                 <li class="numero-da-tempora2-pagina-anime numero-da-tempora2-pagina-anime2">COMENTARIOS</li>
               </ul>
               <ul class="quantidade-comentarios">
-                <li> Quantidade de comentarios</li>
+                <li><%= quantidadeComentarios %> comentários </li>
 
                 <div class="filtros-internos">
                     <img src="/img/icone-organizar-cimaebaixo.png" alt="" />
                     <li id="filtroOrganizar">Organizar</li>
                     <img src="/img/icone-seta-baixo.png" class="seta-baixo" alt="" />
                     <div class="filtro-opcoes-container-organizar">
-                      <a href="#"><div id="antigo" class="filtro-opcao-organizar filtro-opcao" data-tipo="Antigo">Antigo</div></a>
-                      <a href="#"><div id="recentes" class="filtro-opcao-organizar filtro-opcao" data-tipo="Recentes">Recentes</div></a>
+                        <a href="/dorama/<%= detailsDorama.id %>/antigo"><div id="antigo" class="filtro-opcao-organizar filtro-opcao" data-tipo="Antigo">Antigo</div></a>
+                        <a href="/dorama/<%= detailsDorama.id %>/recente"><div id="recentes" class="filtro-opcao-organizar filtro-opcao" data-tipo="Recentes">Recentes</div></a>
                     </div>
                     <form id="filtroForm-organizar" action="/dorama/<%= detailsDorama.id %>" method="GET">
                       <input type="hidden" name="tipo" id="tipoSelecionado" value="">
@@ -268,6 +268,18 @@
                     $("#filtroForm-organizar").submit();
                   });
                 });
+
+                  // Clique no link "Antigo"
+                  $("#antigo").click(function () {
+                    $("#ordenacaoSelecionada").val("Antigo");
+                    $("#filtroForm-organizar").submit();
+                });
+
+                // Clique no link "Recente"
+                $("#recentes").click(function () {
+                    $("#ordenacaoSelecionada").val("Recentes");
+                    $("#filtroForm-organizar").submit();
+                });
               </script>
               
               <div class="linha-index"></div>
@@ -289,15 +301,15 @@
                 <% for (let comment of comentarios.slice(0, 18)) { %>
                     <div class="comentarios-usuarios">
                         <div class="img-usuario-inf">
-                            <img src="../img/icone-foto-perfil.jpg" alt="">
+                            <img src="/img/icone-foto-perfil.jpg" alt="">
                             <div>
                                 <h3> <%= comment.usuario %></h3>
                                 <h4> <%= comment.comentario %></h4>
                             </div>
                         </div>
                         <ul class="like-deslike-respond-comentarios">
-                            <li><img src="../img/icone-gostei.png" alt=""></li>
-                            <li><img src="../img/icone-desgostei.png" alt=""></li>
+                            <li><img src="/img/icone-gostei.png" alt=""></li>
+                            <li><img src="/img/icone-desgostei.png" alt=""></li>
                             <li><h4>Responder</h4></li>
                             <li><h4>Editar</h4></li>
                         </ul>
@@ -351,10 +363,11 @@ async function excluirComentario(commentId) {
 
 // Função para atualizar os comentários na página
 function atualizarComentarios(comentarios) {
-  const comentariosSection = document.getElementById("comentarios-section");
-  comentariosSection.innerHTML = ""; // Limpa os comentários existentes
 
-  for (const comentario of comentarios) {
+const comentariosSection = document.getElementById("comentarios-section");
+comentariosSection.innerHTML = ""; // Limpa os comentários existentes
+
+for (const comentario of comentarios) {
     const div = document.createElement("div");
     div.classList.add("capa-onepiece-index");
     div.innerHTML = `

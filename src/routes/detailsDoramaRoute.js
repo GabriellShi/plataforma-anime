@@ -10,6 +10,13 @@ const detailsDoramaController = require("../controllers/DetailsDoramaController"
 router.post("/:id/adicionar-favorito", detailsDoramaController.adicionarFavorito);
 
 
+    // Rota para os comentários antigos
+    router.get('/:id/antigo', detailsDoramaController.showAntigo);
+
+    // Rota para os comentários recentes
+    router.get('/:id/recente', detailsDoramaController.showRecente);
+
+
     // Rota para salvar um novo comentário
 router.post("/:id/comment", detailsDoramaController.storeComment);
 

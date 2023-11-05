@@ -9,6 +9,13 @@ router.post("/:id/comment", episodioController.storeComment);
 
 router.delete("/:id/comment/:commentId", episodioController.deleteComment);
 
+
+    // Rota para os comentários antigos
+    router.get('/:id/antigo', episodioController.showAntigo);
+
+    // Rota para os comentários recentes
+    router.get('/:id/recente', episodioController.showRecente);
+
 // Rota do controlador 'store' que ira criar um novo usuario
 router.get("/create", episodioController.create);
 

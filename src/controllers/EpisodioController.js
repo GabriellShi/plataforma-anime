@@ -100,6 +100,114 @@ const episodioController = {
             where: { episodios_id: episodio.id },
           });
 
+         const quantidadeComentarios = comentarios.length;
+
+
+          const animesPopulares = await Animes.findAll({
+            order: [
+                ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
+            ],
+            limit: 4, // Limitar a 4 resultados
+        });
+      
+        animesPopulares.sort((a, b) => b.likes - a.likes);
+
+              // Função para calcular a porcentagem com base nos votos
+      function calculatePercentage(anime) {
+        const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+        const percentage = (anime.likes / totalLikes) * 100;
+        return percentage.toFixed(1); // Arredonde para uma casa decimal
+      }
+  
+      return res.render("episodio", {
+        title: "Visualizar Episódio",
+        episodio,
+        anime,
+        detailsFilme,
+        detailsDorama,
+        episodios,
+        previousEpisode,
+        nextEpisode,
+        comentarios,
+        quantidadeComentarios,
+        animesPopulares: animesPopulares.map((anime, index) => ({
+          ...anime.get({ plain: true }),
+          percentage: calculatePercentage(anime), // Adicione a porcentagem
+        })),
+      user: req.cookies.user,
+
+
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).render("error", {
+        title: "Erro",
+        message: "Ocorreu um erro ao carregar os detalhes do episódio",
+      });
+    }
+  },
+  
+  showAntigo: async (req, res) => {
+   
+    try {
+      const { id } = req.params;
+  
+      // Primeiro, encontre o episódio pelo ID
+      const episodio = await Episodios.findByPk(
+        id,
+        );
+  
+      if (!episodio) {
+        return res.render("error", {
+          title: "Ops!",
+          message: "Episódio não encontrado",
+        });
+      }
+  
+      // Em seguida, obtenha o ID do anime relacionado a esse episódio
+      const animeId = episodio.animes_id;
+
+      const filmeId = episodio.filmes_id;
+
+      const doramaId = episodio.doramas_id;
+
+      // Agora, busque o anime com base no animeId
+      const anime = await Animes.findByPk(animeId);
+
+      const detailsFilme = await Filmes.findByPk(filmeId);
+
+      const detailsDorama = await Doramas.findByPk(doramaId);
+
+
+      // Em seguida, busque todos os episódios relacionados a esse anime
+      const episodios = await Episodios.findAll({
+        where: {
+          animes_id: animeId,
+          filmes_id: filmeId,
+          doramas_id: doramaId
+        },
+        order: [['numero_episodio', 'ASC']],
+      });
+  
+      // Obtenha o índice do episódio atual
+      const currentEpisodeIndex = episodios.findIndex(
+        (ep) => ep.numero_episodio === episodio.numero_episodio
+      );
+
+      // Obtenha os episódios anterior e próximo com base no índice atual
+      const previousEpisode =
+        currentEpisodeIndex > 0 ? episodios[currentEpisodeIndex - 1] : null;
+      const nextEpisode =
+        currentEpisodeIndex < episodios.length - 1
+          ? episodios[currentEpisodeIndex + 1]
+          : null;
+
+          const comentarios = await Comentariosepisodios.findAll({
+            where: { episodios_id: episodio.id },
+            order: [['created_at', 'ASC']], // Filtrar os comentários mais antigos primeiro
+          });
+
+      
           const animesPopulares = await Animes.findAll({
             order: [
                 ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
@@ -141,8 +249,136 @@ const episodioController = {
         message: "Ocorreu um erro ao carregar os detalhes do episódio",
       });
     }
-  },
-  
+
+},
+
+showRecente: async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Primeiro, encontre o episódio pelo ID
+    const episodio = await Episodios.findByPk(
+      id,
+      );
+
+    if (!episodio) {
+      return res.render("error", {
+        title: "Ops!",
+        message: "Episódio não encontrado",
+      });
+    }
+
+    // Em seguida, obtenha o ID do anime relacionado a esse episódio
+    const animeId = episodio.animes_id;
+
+    const filmeId = episodio.filmes_id;
+
+    const doramaId = episodio.doramas_id;
+
+    // Agora, busque o anime com base no animeId
+    const anime = await Animes.findByPk(animeId);
+
+    const detailsFilme = await Filmes.findByPk(filmeId);
+
+    const detailsDorama = await Doramas.findByPk(doramaId);
+
+
+    // Em seguida, busque todos os episódios relacionados a esse anime
+    const episodios = await Episodios.findAll({
+      where: {
+        animes_id: animeId,
+        filmes_id: filmeId,
+        doramas_id: doramaId
+      },
+      order: [['numero_episodio', 'ASC']],
+    });
+
+    // Obtenha o índice do episódio atual
+    const currentEpisodeIndex = episodios.findIndex(
+      (ep) => ep.numero_episodio === episodio.numero_episodio
+    );
+
+    // Obtenha os episódios anterior e próximo com base no índice atual
+    const previousEpisode =
+      currentEpisodeIndex > 0 ? episodios[currentEpisodeIndex - 1] : null;
+    const nextEpisode =
+      currentEpisodeIndex < episodios.length - 1
+        ? episodios[currentEpisodeIndex + 1]
+        : null;
+
+        const comentarios = await Comentariosepisodios.findAll({
+          where: { episodios_id: episodio.id },
+          order: [['created_at', 'DESC']], // Filtrar os comentários mais antigos primeiro
+        });
+
+    
+        const animesPopulares = await Animes.findAll({
+          order: [
+              ['likes', 'DESC'], // Ordenar por likes em ordem decrescente
+          ],
+          limit: 4, // Limitar a 4 resultados
+      });
+    
+      animesPopulares.sort((a, b) => b.likes - a.likes);
+
+            // Função para calcular a porcentagem com base nos votos
+    function calculatePercentage(anime) {
+      const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+      const percentage = (anime.likes / totalLikes) * 100;
+      return percentage.toFixed(1); // Arredonde para uma casa decimal
+    }
+
+    return res.render("episodio", {
+      title: "Visualizar Episódio",
+      episodio,
+      anime,
+      detailsFilme,
+      detailsDorama,
+      episodios,
+      previousEpisode,
+      nextEpisode,
+      comentarios,
+      animesPopulares: animesPopulares.map((anime, index) => ({
+        ...anime.get({ plain: true }),
+        percentage: calculatePercentage(anime), // Adicione a porcentagem
+      })),
+    user: req.cookies.user,
+
+
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).render("error", {
+      title: "Erro",
+      message: "Ocorreu um erro ao carregar os detalhes do episódio",
+    });
+  }
+
+},
+
+storeComment: async (req, res) => {
+  const { usuario, email, comentario } = req.body;
+  const episodioId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
+
+  try {
+    await Comentariosepisodios.create({
+      usuario,
+      email,
+      comentario,
+      episodios_id: episodioId, // Associa o comentário ao anime
+    });
+
+    const comentarios = await Comentariosepisodios.findAll({
+      where: { episodios_id: episodioId },
+    });
+
+    // Envie os comentários atualizados como resposta JSON
+    res.redirect(`/episodio/${episodioId}`);
+  } catch (error) {
+    console.error(error);
+    // Lida com erros aqui, como enviar uma resposta de erro
+  }
+},
 
   create: async (req, res) => {
 

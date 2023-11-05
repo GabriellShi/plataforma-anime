@@ -2014,7 +2014,19 @@ img.seta-baixo {
   top: 100%; /* Coloca as opções abaixo do botão */
   left: 0; /* Alinha as opções com o botão */
   z-index: 1; /* Garante que as opções fiquem acima de outros elementos */
+  background-color: blue;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 5px;
 }
+
+.filtro-opcoes-container-organizar a {
+  color: white;
+  text-align: center;
+}
+
+
 
 .filtro-opcao {
   display: block;

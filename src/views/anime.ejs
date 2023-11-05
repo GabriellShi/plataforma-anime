@@ -256,7 +256,7 @@
                 <li class="numero-da-tempora2-pagina-anime numero-da-tempora2-pagina-anime2">COMENTARIOS</li>
               </ul>
               <ul class="quantidade-comentarios">
-                <li> Quantidade de comentarios</li>
+                <li><%= quantidadeComentarios %> comentários </li>
 
                 <div class="filtros-internos">
                     <img src="/img/icone-organizar-cimaebaixo.png" alt="" />
@@ -276,9 +276,6 @@
 
               
 
-              
-              
-        
               <script>
                 $(document).ready(function () {
                   $("#filtroOrganizar").click(function () {
@@ -327,15 +324,15 @@
                 <% for (let comment of comentarios.slice(0, 18)) { %>
                     <div class="comentarios-usuarios">
                         <div class="img-usuario-inf">
-                            <img src="../img/icone-foto-perfil.jpg" alt="">
+                            <img src="/img/icone-foto-perfil.jpg" alt="">
                             <div>
                                 <h3> <%= comment.usuario %></h3>
                                 <h4> <%= comment.comentario %></h4>
                             </div>
                         </div>
                         <ul class="like-deslike-respond-comentarios">
-                            <li><img src="../img/icone-gostei.png" alt=""></li>
-                            <li><img src="../img/icone-desgostei.png" alt=""></li>
+                            <li><img src="/img/icone-gostei.png" alt=""></li>
+                            <li><img src="/img/icone-desgostei.png" alt=""></li>
                             <li><h4>Responder</h4></li>
                             <li><h4>Editar</h4></li>
                         </ul>

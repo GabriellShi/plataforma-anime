@@ -73,6 +73,7 @@ const detailsFilmeController = {
     where: { filmes_id: detailsFilme.id },
   });
 
+  const quantidadeComentarios = comentarios.length;
 
   const filmesPopulares = await Filmes.findAll({
     order: [
@@ -95,6 +96,7 @@ function calculatePercentage(filme) {
       episodios,
       comentarios,
       filmesPopulares,
+      quantidadeComentarios,
       filmesPopulares: filmesPopulares.map((filme, index) => ({
         ...filme.get({ plain: true }),
         percentage: calculatePercentage(filme), // Adicione a porcentagem
@@ -103,6 +105,32 @@ function calculatePercentage(filme) {
 
     });
   },
+
+  
+  storeComment: async (req, res) => {
+    const { usuario, email, comentario } = req.body;
+    const detailsFilmeId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
+  
+    try {
+      await Comentariosfilmes.create({
+        usuario,
+        email,
+        comentario,
+        filmes_id: detailsFilmeId, // Associa o comentário ao anime
+      });
+  
+      const comentarios = await Comentariosfilmes.findAll({
+        where: { filmes_id: detailsFilmeId },
+      });
+  
+      // Envie os comentários atualizados como resposta JSON
+      res.redirect(`/filme/${detailsFilmeId}`);
+    } catch (error) {
+      console.error(error);
+      // Lida com erros aqui, como enviar uma resposta de erro
+    }
+  },
+
 
   showAntigo: async (req, res) => {
     const { id } = req.params;
@@ -353,30 +381,6 @@ dislike: async (req, res) => {
       message: "Erro ao Cadastrar Filme!",
     });
   }
-  },
-
-  storeComment: async (req, res) => {
-    const { usuario, email, comentario } = req.body;
-    const detailsFilmeId = req.params.id; // Obtém o ID do anime a partir dos parâmetros da rota
-  
-    try {
-      await Comentariosfilmes.create({
-        usuario,
-        email,
-        comentario,
-        filmes_id: detailsFilmeId, // Associa o comentário ao anime
-      });
-  
-      const comentarios = await Comentariosfilmes.findAll({
-        where: { filmes_id: detailsFilmeId },
-      });
-  
-      // Envie os comentários atualizados como resposta JSON
-      res.redirect(`/filme/${detailsFilmeId}`);
-    } catch (error) {
-      console.error(error);
-      // Lida com erros aqui, como enviar uma resposta de erro
-    }
   },
 
 

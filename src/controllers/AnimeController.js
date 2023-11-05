@@ -64,6 +64,8 @@ const animeController = {
       where: { animes_id: anime.id },
     });
 
+    const quantidadeComentarios = comentarios.length;
+
     const animesPopulares = await Animes.findAll({
       order: [
         ["likes", "DESC"], // Ordenar por likes em ordem decrescente
@@ -87,7 +89,7 @@ const animeController = {
       animesPopulares,
       comentarios,
       user: req.cookies.user, // Passando o objeto user para a página
-
+      quantidadeComentarios,
       animesPopulares: animesPopulares.map((anime, index) => ({
         ...anime.get({ plain: true }),
         percentage: calculatePercentage(anime), // Adicione a porcentagem
@@ -367,6 +369,7 @@ showRecente: async (req, res) => {
       anime,
       comentarios,
       animesPopulares,
+      episodios,
       animesPopulares: animesPopulares.map((anime, index) => ({
         ...anime.get({ plain: true }),
         percentage: calculatePercentage(anime), // Adicione a porcentagem

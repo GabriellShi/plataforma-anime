@@ -1,9 +1,9 @@
-<!-- <header>
+ <header>
     <div class="wrapper-partials">
         <nav class="nav-partials">
 
             <input type="checkbox" name="" id="toggle-partials">
-            <label for="toggle-partials"> <img src="../img/barra-de-navegação.png" alt="Barra de Navegação Mobile"></label>
+            <label for="toggle-partials"> <img src="/img/barra-de-navegação.png" alt="Barra de Navegação Mobile"></label>
             
             <div class="icone-login-partials-mobile">
                 
@@ -23,12 +23,12 @@
 
 
             <div class="logo-partials">
-                <a href="/"><img src="../img/logo.jpg" alt="Logo"></a>
+                <a href="/"><img src="/img/logo.jpg" alt="Logo"></a>
             </div>
             <div class=" categoria-desktop-login icone-login-desk2" id="home">
                 <ul>
                         <li class="categoria-desktop categoria-desktop-login3">
-                            <a href="#"><img src="../img/icone-login.png" alt="icone login"></a>
+                            <a href="#"><img src="/img/icone-login.png" alt="icone login"></a>
                             <ul class="categorias-partials">
                                 <li><a href="/login">Login</a></li>
                                 <li><a href="/user/create">Cadastro</a></li>
@@ -95,17 +95,17 @@
 
                 <div class="barra-de-pesquisa-partials">
                     <div><input type="search" placeholder="Pesquisar..."></div>
-                    <div><button><img src="../img/lupa.png" alt="Lupa"></button></div>
+                    <div><button><img src="/img/lupa.png" alt="Lupa"></button></div>
                 </div>
 
                 <div class="barra-separadora-partials">
-                    <img src="../img/barra.png" alt="barra separadora">
+                    <img src="/img/barra.png" alt="barra separadora">
                 </div>
 
                 <div class=" categoria-desktop-login icone-login-desk" id="home">
                     <ul>
                             <li class="categoria-desktop categoria-desktop-login2">
-                                <a href="#"><img src="../img/icone-login.png" alt="icone login"></a>
+                                <a href="#"><img src="/img/icone-login.png" alt="icone login"></a>
                                 <ul class="categorias-partials">
                                     <li><a href="/login">Login</a></li>
                                     <li><a href="/user/create">Cadastro</a></li>
@@ -159,7 +159,7 @@
                         <input type="search" name="searchQuery" placeholder="Pesquisar...">
                         </div>
                         <div>
-                        <button type="submit"><img src="../img/lupa.png" alt="Lupa"></button>
+                        <button type="submit"><img src="/img/lupa.png" alt="Lupa"></button>
                         </div>
                     </div>
                 </form>
@@ -167,13 +167,13 @@
 
 
                 <div class="barra-separadora-partials">
-                    <img src="../img/barra.png" alt="barra separadora">
+                    <img src="/img/barra.png" alt="barra separadora">
                 </div>
 
                 <div class=" categoria-desktop-login" id="home">
                     <ul>
                             <li class="categoria-desktop categoria-desktop-login2">
-                                <a href="#"><img src="../img/icone-login.png" alt="icone login"></a>
+                                <a href="#"><img src="/img/icone-login.png" alt="icone login"></a>
                                 <ul class="categorias-partials">
                                     <% if(locals.user && locals.user.admin) {%> 
 
@@ -211,204 +211,8 @@
 
 
   
-</header>
+</header> 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
- <header>
-  <!-- Menu de navegação -->
-  <div class="wrapper-partials">
-      <nav class="nav-partials">
-          <input type="checkbox" name="" id="toggle-partials">
-          <label for="toggle-partials"> <img src="../img/barra-de-navegacao.png" alt="Barra de Navegacao Mobile"></label>
-
-          <div class="icone-login-partials-mobile">
-              <div class="categoria-desktop-login icone-login-mob" id="home">
-                  <ul>
-                      <li class="categoria-desktop">
-                          <ul class="categorias-partials">
-                              <li><a href="/login">Login</a></li>
-                              <li><a href="/user/create">Cadastro</a></li>
-                          </ul>
-                      </li>
-                  </ul>
-              </div>
-          </div>
-
-          <div class="logo-partials">
-              <a href="/"><img src="../img/logo.jpg" alt="Logo"></a>
-          </div>
-
-          <div class="categoria-desktop-login icone-login-desk2" id="home">
-              <ul>
-                  <li class="categoria-desktop categoria-desktop-login3">
-                      <a href="#"><img src="../img/icone-login.png" alt="icone login"></a>
-                      <ul class="categorias-partials">
-                          <li><a href="/login">Login</a></li>
-                          <li><a href="/user/create">Cadastro</a></li>
-                      </ul>
-                  </li>
-              </ul>
-          </div>
-
-          <div class="toggle-partials-2-pai">
-              <div class="toggle-partials-2-pai">
-                  <input type="checkbox" id="toggle-partials-2" />
-                  <label for="toggle-partials-2">
-                      <button class="lupa-button">
-                          <img src="/img/lupa.png" alt="Lupa" />
-                      </button>
-                  </label>
-                  <form action="/search" method="post">
-                      <section class="partials-mobile-search-button">
-                          <div class="search-input">
-                              <input type="search" name="searchQuery" placeholder="Pesquisar..." />
-                          </div>
-                          <div class="button-l">
-                              <button type="submit">
-                                  <img src="/img/lupa.png" alt="Lupa" />
-                              </button>
-                          </div>
-                      </section>
-                  </form>
-              </div>
-          </div>
-
-          <script>
-              $(document).ready(function () {
-                  $(".lupa-button").on("click", function () {
-                      // Mostra ou esconde o campo de pesquisa e o botão de lupa com base no estado atual
-                      $(".search-input").toggle();
-                      $(".button-l").toggle();
-                      $(this).toggle(); // Esconde o próprio botão de lupa
-                  });
-              });
-          </script>
-
-          <form action="/search" method="post">
-              <div class="login-pesquisa-partials-2">
-                  <div class="barra-de-pesquisa-partials">
-                      <div>
-                          <input type="search" name="searchQuery" placeholder="Pesquisar..." />
-                      </div>
-                      <div>
-                          <button type="submit">
-                              <img src="/img/lupa.png" alt="Lupa" />
-                          </button>
-                      </div>
-                  </div>
-              </div>
-          </form>
-
-          <div class="login-pesquisa-partials-2">
-              <div class="barra-de-pesquisa-partials">
-                  <div>
-                      <input type="search" placeholder="Pesquisar...">
-                  </div>
-                  <div>
-                      <button>
-                          <img src="../img/lupa.png" alt="Lupa">
-                      </button>
-                  </div>
-              </div>
-              <div class="barra-separadora-partials">
-                  <img src="../img/barra.png" alt="barra separadora">
-              </div>
-
-              <div class="categoria-desktop-login icone-login-desk" id="home">
-                  <ul>
-                      <li class="categoria-desktop categoria-desktop-login2">
-                          <a href="#"><img src="../img/icone-login.png" alt="icone login"></a>
-                          <ul class="categorias-partials">
-                              <li><a href="/login">Login</a></li>
-                              <li><a href="/user/create">Cadastro</a></li>
-                          </ul>
-                      </li>
-                  </ul>
-              </div>
-          </div>
-
-          <div class="menu-partials" id="home">
-              <ul>
-                  <a href="/indexAdmin"><li>ADM</li></a>
-                  <a href="/listaAnimeUsuario"><li>Animes</li></a>
-                  <a href="#"><li>MangasB</li></a>
-                  <a class="categoria-mobile" href="/genero"><li>Categorias</li></a>
-                  <li class="categoria-desktop">
-                      <a href="/genero">Categorias &nbsp⮟</a>
-                      <ul class="categorias-partials">
-                          <li><a href="genero">TODAS CATEGORIAS</a></li>
-                          <li><a href="/genero/Comédia">Comédia</a></li>
-                          <li><a href="/genero/Aventura">Aventura</a></li>
-                          <li><a href="/genero/Ficção Científica">Ficção Científica</a></li>
-                          <li><a href="/genero/Mistério">Mistério</a></li>
-                          <li><a href="/genero/Romance">Romance</a></li>
-                          <li><a href="/genero/Ação">Ação</a></li>
-                          <li><a href="/generoFantasia">Fantasia</a></li>
-                          <li><a href="/genero/Crime">Crime</a></li>
-                          <li><a href="/genero/Drama">Drama</a></li>
-                          <li><a href="/genero/Esporte">Esporte</a></li>
-                      </ul>
-                  </li>
-                  <a href="/doramasAdicionados"><li>Doramas</li></a>
-                  <a href="/calendario"><li>Calendario</li></a>
-                  <a href="/pedido/create"><li>Solicitação</li></a>
-              </ul>
-          </div>
-
-          <div class="login-pesquisa-partials">
-              <form action="/search" method="post">
-                  <div class="barra-de-pesquisa-partials">
-                      <div>
-                          <input type="search" name="searchQuery" placeholder="Pesquisar...">
-                      </div>
-                      <div>
-                          <button type="submit">
-                              <img src="../img/lupa.png" alt="Lupa">
-                          </button>
-                      </div>
-                  </div>
-              </form>
-              <div class="barra-separadora-partials">
-                  <img src="../img/barra.png" alt="barra separadora">
-              </div>
-
-              <div class="categoria-desktop-login" id="home">
-                  <ul>
-                      <li class="categoria-desktop categoria-desktop-login2">
-                          <a href="#"><img src="../img/icone-login.png" alt="icone login"></a>
-                          <ul class="categorias-partials">
-                              <% if(locals.user && locals.user.admin) {%>
-                                  <!-- Aqui aparece quando estou logado ADM -->
-                                  <a href="/indexAdmin">Administrador</a>
-                                  <!-- Aqui aparece quando estou logado User -->
-                              <% }%>
-                              <% if(locals.user){%>
-                                  <form action="/logout" method="post">
-                                      <li> <a href=""><button type="submit" class="btn-logout">Logout</button></a></li>
-                                  </form>
-                                  <li><a href="/areaCliente">Perfil</a></li>
-                                  <!-- Aqui aparece quando estou Deslogado -->
-                              <% }else {%>
-                                  <li><a href="/login">Login</a></li>
-                                  <li><a href="/user/create">Cadastro</a></li>
-                              <% }%>
-                          </ul>
-                      </li>
-                  </ul>
-              </div>
-          </div>
-      </nav>
-  </div>
-</header>
