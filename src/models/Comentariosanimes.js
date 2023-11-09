@@ -23,6 +23,15 @@ const Comentariosanimes = db.define(
       type: Sequelize.DataTypes.TEXT, // Correção aqui
       allowNull: false,
     },
+
+    likescomentarios: {
+      type: Sequelize.DataTypes.STRING(900),
+    },
+
+    dislikescomentarios: {
+      type: Sequelize.DataTypes.STRING(900),
+    },
+    
     created_at: {
       type: Sequelize.DataTypes.DATE,
       defaultValue: Sequelize.NOW,

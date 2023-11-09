@@ -147,6 +147,45 @@ const episodioController = {
     }
   },
   
+  likeComment: async (req, res) => {
+    const { id, commentId } = req.params;
+  
+    try {
+      const comentario = await Comentariosepisodios.findByPk(commentId);
+      if (!comentario) {
+        return res.status(404).json({ error: "Comentário não encontrado" });
+      }
+  
+      comentario.likescomentarios++; // Incrementa o contador de "gostei" no comentário
+      await comentario.save();
+  
+      res.json({ likes: comentario.likescomentarios });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+  
+  dislikeComment: async (req, res) => {
+    const { id, commentId } = req.params;
+  
+    try {
+      const comentario = await Comentariosepisodios.findByPk(commentId);
+      if (!comentario) {
+        return res.status(404).json({ error: "Comentário não encontrado" });
+      }
+  
+      comentario.dislikescomentarios++; // Incrementa o contador de "não gostei" no comentário
+      await comentario.save();
+  
+      res.json({ dislikes: comentario.dislikescomentarios });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+
+  
   showAntigo: async (req, res) => {
    
     try {

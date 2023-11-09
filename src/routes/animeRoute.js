@@ -35,6 +35,12 @@ router.post("/vote/:id/like", animeController.like);
 // Rota para votar "não gostei"
 router.post("/vote/:id/dislike", animeController.dislike);
 
+
+router.post("/:id/comment/:commentId/like", animeController.likeComment);
+router.post("/:id/comment/:commentId/dislike", animeController.dislikeComment);
+
+
+
 // Rota do controlador 'store' que ira criar um novo usuario
 router.get("/create", animeController.create);
 

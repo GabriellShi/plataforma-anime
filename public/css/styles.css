@@ -750,6 +750,10 @@ a {
   margin-right: 0.5rem;
 }
 
+.icone-gostei-pagina-anime-coment img {
+  cursor: pointer;
+}
+
 .icone-desgostei-pagina-anime img {
   margin-right: 0.5rem;
 }

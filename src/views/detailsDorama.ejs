@@ -308,8 +308,14 @@
                             </div>
                         </div>
                         <ul class="like-deslike-respond-comentarios">
-                            <li><img src="/img/icone-gostei.png" alt=""></li>
-                            <li><img src="/img/icone-desgostei.png" alt=""></li>
+                            <li class="icone-gostei-pagina-anime-coment">
+                                <img src="/img/icone-gostei.png" alt="Gostei" class="like-button" data-comment-id="<%= comment.id %>">
+                                <p><span id="likesCountComent<%= comment.id %>"><%= comment.likescomentarios %></span></p>
+                              </li>
+                              <li class="icone-gostei-pagina-anime-coment">
+                                <img src="/img/icone-desgostei.png" alt="Não Gostei" class="dislike-button" data-comment-id="<%= comment.id %>">
+                                <p><span id="dislikesCountComent<%= comment.id %>"><%= comment.dislikescomentarios %></span></p>
+                              </li>
                             <li><h4>Responder</h4></li>
                             <li><h4>Editar</h4></li>
                         </ul>
@@ -326,7 +332,40 @@
             </div>
           </section>
           
-        
+          <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              // Adicione um event listener para todas as imagens "Gostei" e "Não Gostei"
+              const likeImages = document.querySelectorAll(".like-button");
+              const dislikeImages = document.querySelectorAll(".dislike-button");
+            
+              likeImages.forEach(image => {
+                image.addEventListener("click", async () => {
+                  const commentId = image.getAttribute("data-comment-id");
+                  const response = await fetch(`/dorama/<%= detailsDorama.id %>/comment/${commentId}/like`, { method: "POST" });
+            
+                  if (response.ok) {
+                    const data = await response.json();
+                    const likesCountComent = document.getElementById(`likesCountComent${commentId}`);
+                    likesCountComent.textContent = data.likes;
+                  }
+                });
+              });
+            
+              dislikeImages.forEach(image => {
+                image.addEventListener("click", async () => {
+                  const commentId = image.getAttribute("data-comment-id");
+                  const response = await fetch(`/dorama/<%= detailsDorama.id %>/comment/${commentId}/dislike`, { method: "POST" });
+            
+                  if (response.ok) {
+                    const data = await response.json();
+                    const dislikesCountComent = document.getElementById(`dislikesCountComent${commentId}`);
+                    dislikesCountComent.textContent = data.dislikes;
+                  }
+                });
+              });
+            });
+            </script>
+            
 
           
         <script>

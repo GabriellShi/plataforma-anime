@@ -75,8 +75,8 @@ const animeController = {
 
     animesPopulares.sort((a, b) => b.likes - a.likes);
 
-     // Função para calcular a porcentagem com base nos votos
-     function calculatePercentage(anime) {
+    // Função para calcular a porcentagem com base nos votos
+    function calculatePercentage(anime) {
       const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
       const percentage = (anime.likes / totalLikes) * 100;
       return percentage.toFixed(1); // Arredonde para uma casa decimal
@@ -135,37 +135,40 @@ const animeController = {
   },
 
   adicionarFavorito: async (req, res) => {
-
     try {
-        const userId = req.cookies.user.id;
-        const animeId = req.params.id; 
+      const userId = req.cookies.user.id;
+      const animeId = req.params.id;
 
-        // Verifique se o anime já está nos favoritos do usuário
-        const favorite = await Favoritos.findOne({
-            where: {
-                animes_id: animeId,
-                users_id: userId,
-            },
+      // Verifique se o anime já está nos favoritos do usuário
+      const favorite = await Favoritos.findOne({
+        where: {
+          animes_id: animeId,
+          users_id: userId,
+        },
+      });
+
+      if (favorite) {
+        console.log("Anime já está nos favoritos do usuário");
+        res
+          .status(400)
+          .json({ message: "Anime já está nos favoritos do usuário" });
+      } else {
+        // O anime ainda não está nos favoritos do usuário, adicione-o
+        await Favoritos.create({
+          animes_id: animeId,
+          users_id: userId,
         });
 
-        if (favorite) {
-            console.log("Anime já está nos favoritos do usuário");
-            res.status(400).json({ message: "Anime já está nos favoritos do usuário" });
-        } else {
-            // O anime ainda não está nos favoritos do usuário, adicione-o
-            await Favoritos.create({
-                animes_id: animeId,
-                users_id: userId,
-            });
-
-            console.log("Anime adicionado aos favoritos com sucesso");
-            res.status(200).json({ message: "Anime adicionado aos favoritos com sucesso" });
-        }
+        console.log("Anime adicionado aos favoritos com sucesso");
+        res
+          .status(200)
+          .json({ message: "Anime adicionado aos favoritos com sucesso" });
+      }
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Erro interno do servidor" });
+      console.error(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
     }
-},
+  },
 
   like: async (req, res) => {
     const { id } = req.params;
@@ -205,6 +208,47 @@ const animeController = {
     }
   },
 
+  likeComment: async (req, res) => {
+    const { id, commentId } = req.params;
+  
+    try {
+      const comentario = await Comentariosanimes.findByPk(commentId);
+      if (!comentario) {
+        return res.status(404).json({ error: "Comentário não encontrado" });
+      }
+  
+      comentario.likescomentarios++; // Incrementa o contador de "gostei" no comentário
+      await comentario.save();
+  
+      res.json({ likes: comentario.likescomentarios });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+  
+  dislikeComment: async (req, res) => {
+    const { id, commentId } = req.params;
+  
+    try {
+      const comentario = await Comentariosanimes.findByPk(commentId);
+      if (!comentario) {
+        return res.status(404).json({ error: "Comentário não encontrado" });
+      }
+  
+      comentario.dislikescomentarios++; // Incrementa o contador de "não gostei" no comentário
+      await comentario.save();
+  
+      res.json({ dislikes: comentario.dislikescomentarios });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+  
+  
+  
+
   create: async (req, res) => {
     return res.render("anime-create", { title: "Cadastrar Anime" });
   },
@@ -220,6 +264,8 @@ const animeController = {
       likes,
       dislikes,
       capa,
+      likescomentarios,
+      dislikescomentarios,
     } = req.body;
 
     try {
@@ -234,6 +280,8 @@ const animeController = {
         likes,
         dislikes,
         capa: capa,
+        likescomentarios,
+        dislikescomentarios,
       });
 
       res.redirect("/anime");
@@ -277,10 +325,10 @@ const animeController = {
     const anime = await Animes.findByPk(id);
 
     if (!anime) {
-        return res.render("error", {
-            title: "Ops!",
-            message: "Anime não encontrado",
-        });
+      return res.render("error", {
+        title: "Ops!",
+        message: "Anime não encontrado",
+      });
     }
 
     const episodios = await Episodios.findAll({
@@ -294,77 +342,76 @@ const animeController = {
       ],
       limit: 4, // Limitar a 4 resultados
     });
-  
+
     animesPopulares.sort((a, b) => b.likes - a.likes);
-  
-     // Função para calcular a porcentagem com base nos votos
-     function calculatePercentage(anime) {
+
+    // Função para calcular a porcentagem com base nos votos
+    function calculatePercentage(anime) {
       const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
       const percentage = (anime.likes / totalLikes) * 100;
       return percentage.toFixed(1); // Arredonde para uma casa decimal
     }
     const comentarios = await Comentariosanimes.findAll({
-        where: { animes_id: animeId },
-        order: [['created_at', 'ASC']], // Filtrar os comentários mais antigos primeiro
+      where: { animes_id: animeId },
+      order: [["created_at", "ASC"]], // Filtrar os comentários mais antigos primeiro
     });
 
-    res.render("anime", { // Use res.render para renderizar a página "anime"
+    res.render("anime", {
+      // Use res.render para renderizar a página "anime"
       title: "Visualizar Anime (Antigos)",
       anime,
       comentarios,
       episodios,
       animesPopulares,
       animesPopulares: animesPopulares.map((anime, index) => ({
-      ...anime.get({ plain: true }),
-      percentage: calculatePercentage(anime), // Adicione a porcentagem
-    })),
-    user: req.cookies.user,
+        ...anime.get({ plain: true }),
+        percentage: calculatePercentage(anime), // Adicione a porcentagem
+      })),
+      user: req.cookies.user,
+    });
+  },
 
-  });
+  showRecente: async (req, res) => {
+    const { id } = req.params;
+    const animeId = req.params.id;
 
-},
+    const anime = await Animes.findByPk(id);
 
-showRecente: async (req, res) => {
-  const { id } = req.params;
-  const animeId = req.params.id;
-
-  const anime = await Animes.findByPk(id);
-
-  if (!anime) {
+    if (!anime) {
       return res.render("error", {
-          title: "Ops!",
-          message: "anime não encontrado",
+        title: "Ops!",
+        message: "anime não encontrado",
       });
-  }
+    }
 
-  const animesPopulares = await Animes.findAll({
-    order: [
-      ["likes", "DESC"], // Ordenar por likes em ordem decrescente
-    ],
-    limit: 4, // Limitar a 4 resultados
-  });
+    const animesPopulares = await Animes.findAll({
+      order: [
+        ["likes", "DESC"], // Ordenar por likes em ordem decrescente
+      ],
+      limit: 4, // Limitar a 4 resultados
+    });
 
-  animesPopulares.sort((a, b) => b.likes - a.likes);
+    animesPopulares.sort((a, b) => b.likes - a.likes);
 
-   // Função para calcular a porcentagem com base nos votos
-   function calculatePercentage(anime) {
-    const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
-    const percentage = (anime.likes / totalLikes) * 100;
-    return percentage.toFixed(1); // Arredonde para uma casa decimal
-  }
+    // Função para calcular a porcentagem com base nos votos
+    function calculatePercentage(anime) {
+      const totalLikes = animesPopulares[0].likes; // Suponha que o anime mais votado esteja no topo
+      const percentage = (anime.likes / totalLikes) * 100;
+      return percentage.toFixed(1); // Arredonde para uma casa decimal
+    }
 
-  const episodios = await Episodios.findAll({
-    where: { animes_id: anime.id }, // Filtrar por ID do anime
-    order: [["numero_episodio", "ASC"]], // Ordenar por número de episódio, se necessário
-  });
-  
+    const episodios = await Episodios.findAll({
+      where: { animes_id: anime.id }, // Filtrar por ID do anime
+      order: [["numero_episodio", "ASC"]], // Ordenar por número de episódio, se necessário
+    });
 
-  const comentarios = await Comentariosanimes.findAll({
+    const comentarios = await Comentariosanimes.findAll({
       where: { animes_id: animeId },
-      order: [['created_at', 'DESC']], // Filtrar os comentários mais recentes primeiro
-  });
+      order: [["created_at", "DESC"]], // Filtrar os comentários mais recentes primeiro
+    });
 
-  res.render("anime", { // Use res.render para renderizar a página "anime"
+    res.render("anime", {
+      // Use res.render para renderizar a página "anime"
       title: "Visualizar Anime (Antigos)",
       anime,
       comentarios,
@@ -375,12 +422,8 @@ showRecente: async (req, res) => {
         percentage: calculatePercentage(anime), // Adicione a porcentagem
       })),
       user: req.cookies.user,
-
-
-  });
-},
-
-
+    });
+  },
 
   // Controlador para exclusão de comentários
   deleteComment: async (req, res) => {

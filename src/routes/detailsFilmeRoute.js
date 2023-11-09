@@ -26,6 +26,10 @@
     // Rota para votar "não gostei"
     router.post("/vote/:id/dislike", detailsFilmeController.dislike);
 
+    
+router.post("/:id/comment/:commentId/like", detailsFilmeController.likeComment);
+router.post("/:id/comment/:commentId/dislike", detailsFilmeController.dislikeComment);
+
     // Rota do controlador 'store' que ira criar um novo usuario
     router.get("/create", detailsFilmeController.create);
 

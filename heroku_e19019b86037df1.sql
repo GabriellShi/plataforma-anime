@@ -239,9 +239,13 @@ CREATE TABLE comentariosanimes (
     FOREIGN KEY (animes_id) REFERENCES animes(id),
     filmes_id INT UNSIGNED,
     FOREIGN KEY (filmes_id) REFERENCES filmes(id),
+    likescomentarios VARCHAR(900) NOT NULL,
+    dislikescomentarios VARCHAR(900) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+ -- ALTER TABLE comentariosanimes ADD dislikescomentarios VARCHAR(900) NOT NULL;
+ -- ALTER TABLE comentariosanimes DROP COLUMN dislikes;
 -- Lista todos os usuários
 SELECT * FROM comentariosanimes;
 
@@ -258,9 +262,13 @@ CREATE TABLE comentariosfilmes (
     comentario VARCHAR(500),
     filmes_id INT UNSIGNED,
     FOREIGN KEY (filmes_id) REFERENCES filmes(id),
+	likescomentarios VARCHAR(900) NOT NULL,
+    dislikescomentarios VARCHAR(900) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+ -- ALTER TABLE comentariosfilmes ADD dislikescomentarios VARCHAR(900) NOT NULL;
+ 
 -- Lista todos os usuários
 SELECT * FROM comentariosfilmes;
 
@@ -277,9 +285,13 @@ CREATE TABLE comentariosdoramas (
     comentario VARCHAR(500),
     doramas_id INT UNSIGNED,
     FOREIGN KEY (doramas_id) REFERENCES doramas(id),
+    likescomentarios VARCHAR(900) NOT NULL,
+    dislikescomentarios VARCHAR(900) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+ -- ALTER TABLE comentariosdoramas ADD dislikescomentarios VARCHAR(900) NOT NULL;
+ 
 -- Lista todos os usuários
 SELECT * FROM comentariosdoramas;
 
@@ -296,9 +308,13 @@ CREATE TABLE comentariosepisodios (
     comentario VARCHAR(500),
     episodios_id INT UNSIGNED,
     FOREIGN KEY (episodios_id) REFERENCES episodios(id),
+    likescomentarios VARCHAR(900) NOT NULL,
+    dislikescomentarios VARCHAR(900) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+ -- ALTER TABLE comentariosepisodios ADD dislikescomentarios VARCHAR(900) NOT NULL;
+ 
 -- Lista todos os usuários
 SELECT * FROM comentariosepisodios;
 

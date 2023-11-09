@@ -19,6 +19,9 @@ router.delete("/:id/comment/:commentId", episodioController.deleteComment);
 // Rota do controlador 'store' que ira criar um novo usuario
 router.get("/create", episodioController.create);
 
+router.post("/:id/comment/:commentId/like", episodioController.likeComment);
+router.post("/:id/comment/:commentId/dislike", episodioController.dislikeComment);
+
 // Essa rota faz conecção com a create de cima, ela ira ser a responsavel pelo envio do formulario
 // com o metodo 'post '
 router.post("/create", upload.single("image"), episodioController.store);
