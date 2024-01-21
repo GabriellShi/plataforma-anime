@@ -26,7 +26,6 @@
     "node": "^19.8.1",
     "node-jsonld": "^1.0.0",
     "nodemailer": "^6.9.6",
-    "nodemon": "^2.0.22",
     "op": "^0.0.6",
     "parser": "^0.1.4",
     "Parser": "^0.0.1",
@@ -41,7 +40,8 @@
     "trumbowyg": "^2.27.3",
     "useragent": "^2.3.0",
     "uuid": "^9.0.0",
-    "xmlbuilder": "^15.1.1"
+    "xmlbuilder": "^15.1.1",
+    "yarn": "^1.22.21"
   },
   "name": "site-imagem-center",
   "description": "Plataforma com conteudo de animes",
@@ -53,7 +53,7 @@
   "author": "Gabriel Oliveira",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.22"
   },
   "repository": {
     "type": "git",
