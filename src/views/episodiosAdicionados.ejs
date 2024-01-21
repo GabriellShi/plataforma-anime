@@ -25,6 +25,8 @@
             <div class="animes-adicionados">
 
                 <% for(let episodio of episodios.slice(0, 30)) {%>
+                <% if (categoriaSelecionada === "recentes" && episodio.categoria === "recentes") { %>
+
                 <div class="capa-onepiece-index capa-onepiece-index-ep">
                     <a href="/episodio/<%= episodio.id %>">
                        
@@ -39,6 +41,7 @@
                     </div>
                     </a>
                 </div>
+                <% } %>
                 <% } %>
             </div>
             

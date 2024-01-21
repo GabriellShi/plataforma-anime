@@ -32,6 +32,11 @@ const Episodios = db.define(
       allowNull: false,
     },
 
+    categoria: {
+      type: Sequelize.DataTypes.TEXT(100),
+      allowNull: false,
+    },
+
     nome: {
       type: Sequelize.DataTypes.STRING(100),
       allowNull: false,

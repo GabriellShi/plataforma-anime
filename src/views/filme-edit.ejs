@@ -72,6 +72,13 @@
                 <p>
                     <input value="<%= detailsFilme.sinopse %>" type="text" name="sinopse" placeholder="Resenha sobre o Anime" />
                 </p>
+
+                <label for="categoria">Categorias</label>
+                <select name="categoria" aria-required="true" aria-invalid="false">
+                   <option value="-"><%= detailsFilme.categoria %></option>
+                   <option value="all">All</option>
+                   <option value="recentes">Recentes</option>
+                </select>
                 
             </div>
         </section>

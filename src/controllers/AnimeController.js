@@ -266,6 +266,7 @@ const animeController = {
       capa,
       likescomentarios,
       dislikescomentarios,
+      categoria,
     } = req.body;
 
     try {
@@ -282,6 +283,7 @@ const animeController = {
         capa: capa,
         likescomentarios,
         dislikescomentarios,
+        categoria,
       });
 
       res.redirect("/anime");
@@ -331,6 +333,8 @@ const animeController = {
       });
     }
 
+    
+
     const episodios = await Episodios.findAll({
       where: { animes_id: anime.id }, // Filtrar por ID do anime
       order: [["numero_episodio", "ASC"]], // Ordenar por número de episódio, se necessário
@@ -356,6 +360,8 @@ const animeController = {
       order: [["created_at", "ASC"]], // Filtrar os comentários mais antigos primeiro
     });
 
+    const quantidadeComentarios = comentarios.length;
+
     res.render("anime", {
       // Use res.render para renderizar a página "anime"
       title: "Visualizar Anime (Antigos)",
@@ -363,6 +369,7 @@ const animeController = {
       comentarios,
       episodios,
       animesPopulares,
+      quantidadeComentarios,
       animesPopulares: animesPopulares.map((anime, index) => ({
         ...anime.get({ plain: true }),
         percentage: calculatePercentage(anime), // Adicione a porcentagem
@@ -391,6 +398,8 @@ const animeController = {
       limit: 4, // Limitar a 4 resultados
     });
 
+    
+
     animesPopulares.sort((a, b) => b.likes - a.likes);
 
     // Função para calcular a porcentagem com base nos votos
@@ -410,6 +419,8 @@ const animeController = {
       order: [["created_at", "DESC"]], // Filtrar os comentários mais recentes primeiro
     });
 
+    const quantidadeComentarios = comentarios.length;
+
     res.render("anime", {
       // Use res.render para renderizar a página "anime"
       title: "Visualizar Anime (Antigos)",
@@ -417,6 +428,7 @@ const animeController = {
       comentarios,
       animesPopulares,
       episodios,
+      quantidadeComentarios,
       animesPopulares: animesPopulares.map((anime, index) => ({
         ...anime.get({ plain: true }),
         percentage: calculatePercentage(anime), // Adicione a porcentagem
@@ -490,7 +502,7 @@ const animeController = {
   // Executa a atualização
   update: async (req, res) => {
     const { id } = req.params;
-    const { nome, tipo, genero, autor, estudio, status, sinopse, capa } =
+    const { nome, tipo, genero, autor, estudio, status, sinopse, categoria, capa } =
       req.body;
 
     try {
@@ -504,6 +516,7 @@ const animeController = {
         estudio,
         status,
         sinopse,
+        categoria,
         capa: capa,
       });
 

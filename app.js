@@ -56,7 +56,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.use(express.static("uploads")); 
 
-// Configura o template engine, troca do padrão (jade) para ejs
+// Cowfigura o template engine, troca do padrão (jade) para ejs
 app.set("view engine", "ejs");
 // Configura o caminho para os views, troca o padrão que é no raiz para o src
 app.set("views", path.join(__dirname, "src", "views"));

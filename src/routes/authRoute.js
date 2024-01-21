@@ -22,6 +22,9 @@ router.post("/areaCliente/updateImage", isAuth, upload.single("image_filename"),
 
 router.get("/areaCliente", isAuth, authController.areaCliente);
 
+router.post("/cliente/remover-favorito/:id", isAuth, authController.removerFavorito);
+ 
+
 router.get("/favoritos", isAuth, authController.areaCliente);
 
 // Rota para exibir a página de recuperação de senha (GET)

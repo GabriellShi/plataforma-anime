@@ -6,6 +6,7 @@ const upload = require("../helpers/multer");
 // Controllers
 const animeController = require("../controllers/AnimeController");
 const isAuth = require("../middlewares/auth"); // Middleware de autenticação
+router.get("/create", animeController.create);
 
 router.get("/:id", isAuth, animeController.show); // Protegido pelo middleware isAuth
 

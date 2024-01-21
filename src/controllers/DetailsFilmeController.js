@@ -172,6 +172,8 @@ function calculatePercentage(filme) {
         order: [['created_at', 'ASC']], // Filtrar os comentários mais antigos primeiro
     });
 
+    const quantidadeComentarios = comentarios.length;
+
 
     return res.render("detailsFilme", {
         title: "Visualizar Filme (Antigos)",
@@ -179,6 +181,7 @@ function calculatePercentage(filme) {
         comentarios,
         filmesPopulares,
         episodios,
+        quantidadeComentarios,
         filmesPopulares: filmesPopulares.map((detailsFilme, index) => ({
         ...detailsFilme.get({ plain: true }),
         percentage: calculatePercentage(detailsFilme), // Adicione a porcentagem
@@ -227,6 +230,7 @@ showRecente: async (req, res) => {
         order: [['created_at', 'DESC']], // Filtrar os comentários mais recentes primeiro
     });
 
+    const quantidadeComentarios = comentarios.length;
 
     return res.render("detailsFilme", {
         title: "Visualizar Filme (Recentes)",
@@ -234,7 +238,7 @@ showRecente: async (req, res) => {
         comentarios,
         episodios,
         filmesPopulares,
-        
+        quantidadeComentarios,
         filmesPopulares: filmesPopulares.map((detailsFilme, index) => ({
         ...detailsFilme.get({ plain: true }),
         percentage: calculatePercentage(detailsFilme), // Adicione a porcentagem
@@ -394,7 +398,7 @@ dislikeComment: async (req, res) => {
     return res.render("filme-create", { title: "Cadastrar Filme" });
   },
   store: async (req, res) => {
-    const { nome, tipo, genero, autor, estudio, sinopse, capa, likes, dislikes, } = req.body;
+    const { nome, tipo, genero, autor, estudio, sinopse, capa, likes, dislikes, categoria } = req.body;
 
     try {
 
@@ -407,6 +411,7 @@ dislikeComment: async (req, res) => {
       sinopse,
       capa: capa,
       likes,
+      categoria,
       dislikes,
     });
 
@@ -490,7 +495,7 @@ deleteComment: async (req, res) => {
   // Executa a atualização
   update: async (req, res) => {
     const { id } = req.params;
-    const { nome, tipo, genero, autor, estudio, sinopse, capa } = req.body;
+    const { nome, tipo, genero, autor, estudio, sinopse, capa, categoria } = req.body;
 
     try {
       const filmeToUpdate = await Filmes.findByPk(id);
@@ -502,6 +507,7 @@ deleteComment: async (req, res) => {
         autor,
         estudio,
         sinopse,
+        categoria,
         capa: capa,
       });
 

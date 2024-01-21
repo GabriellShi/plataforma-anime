@@ -24,43 +24,40 @@
                 
             </div>
 
-            <div class="animes-lancados"> 
-            <div class="carrossel">
-                <div id="animeCarousel" class="carousel slide" data-ride="carousel">
-
-                    
-                  <!-- Slides do Carrossel -->
-                  <div class="carousel-inner animes-lancados-index">
-                    <% 
-                    const gruposAnimes = chunkArray(listaAnimeAdmin, 5); // Dividir a lista em grupos de 5
-                    gruposAnimes.forEach((grupo, grupoIndex) => { %>
-                      <div class="carousel-item <%= grupoIndex === 0 ? 'active' : '' %>">
-                        <div class=" row">
-                          <% grupo.forEach((anime, index) => { %>
-                            <div class="col-md-2">
-                              <div class="capa-onepiece-index capa-onepiece-index2">
-                                <a href="/anime/<%= anime.id %>">
-                                <div class="zoomable-image-container">
-                                  <img class="zoomable-image" src="<%= anime.capa %>" alt="capa"/>
-                                  <div class="zoomable-image-overlay"></div>
+            <div class="animes-lancados">
+                <div class="carrossel">
+                    <div id="animeCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Slides do Carrossel para Animes Recentes -->
+                        <div class="carousel-inner animes-lancados-index">
+                            <% gruposAnimes.forEach((grupo, grupoIndex) => { %>
+                                <div class="carousel-item <%= grupoIndex === 0 ? 'active' : '' %>">
+                                    <div class="row">
+                                        <% grupo.forEach((anime, index) => { %>
+                                            <% if (categoriaSelecionada === "recentes" && anime.categoria === "recentes") { %>
+                                                <!-- Seção para renderizar animes recentes -->
+                                                <div class="col-md-2 col-sm-4 col-6">
+                                                    <div class="capa-onepiece-index capa-onepiece-index2">
+                                                        <a href="/anime/<%= anime.id %>">
+                                                            <div class="zoomable-image-container">
+                                                                <img class="zoomable-image" src="<%= anime.capa %>" alt="capa" />
+                                                                <div class="zoomable-image-overlay"></div>
+                                                            </div>
+                                                            <h4><%= anime.nome %></h4>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            <% } %>
+                                        <% }); %>
+                                    </div>
                                 </div>
-
-
-                                <h4><%= anime.nome %></h4>
-                                </a>
-
-                              </div>
-                            </div>
-                          <% }); %>
+                            <% }); %>
                         </div>
-                      </div>
-                    <% }); %>
-                  </div>
-              
-
+                    </div>
                 </div>
-              </div>
+            
+                <!-- Adicione o segundo carrossel para outras categorias aqui -->
             </div>
+            
         </section>
     
         <div class="linha-index"></div>
@@ -77,11 +74,13 @@
                 </div>
 
             </div>
-    
+
+  
             <div class="animes-adicionados">
                 <% if (episodios.length > 0) { %>
 
                 <% for(let episodio of episodios.slice(0, 18)) {%>
+                    <% if (categoriaSelecionada === "recentes" && episodio.categoria === "recentes") { %>
                 <div class="capa-onepiece-index capa-onepiece-index-ep">
                     <a class="ddds" href="/episodio/<%= episodio.id%>" target="">
 
@@ -97,6 +96,8 @@
                     </a>
                 </div>
                 <% } %>
+                <% } %>
+
                 <% } %>
             </div>
         </section>
@@ -114,25 +115,38 @@
                     <a href="/filmesAdicionados"><button>VER MAIS</button></a>    
                 </div>
             </div>
+
+         
+
+
     
             <div class="animes-lancados">
-               
-                <% for (let detailsFilme of filmes.slice(0, 5)) { %>
-                <div class="capa-onepiece-index capa-onepiece-index-film">
-                    <a href="/filme/<%= detailsFilme.id %>">
-                        <div class="zoomable-image-container">
-                                  <img class="zoomable-image" src="<%= detailsFilme.capa %>" alt="capa"/>
-                                  <div class="zoomable-image-overlay"></div>
-                                </div>
-                    </a>
+  <% for (let detailsFilme of filmes.slice(0, 5)) { %>
+    <% if (categoriaSelecionada === "recentes" && detailsFilme.categoria === "recentes") { %>
+      <div class="capa-onepiece-index capa-onepiece-index-film">
+        <a href="/filme/<%= detailsFilme.id %>">
+          <div class="zoomable-image-container">
+            <img class="zoomable-image" src="<%= detailsFilme.capa %>" alt="capa"/>
+            <div class="zoomable-image-overlay"></div>
+          </div>
+        </a>
+        <h4><%= detailsFilme.nome %></h4>
+      </div>
+    <% } else if (categoriaSelecionada !== "recentes") { %>
+     
+      <div class="capa-onepiece-index capa-onepiece-index-film">
+        <a href="/filme/<%= detailsFilme.id %>">
+          <div class="zoomable-image-container">
+            <img class="zoomable-image" src="<%= detailsFilme.capa %>" alt="capa"/>
+            <div class="zoomable-image-overlay"></div>
+          </div>
+        </a>
+        <h4><%= detailsFilme.nome %></h4>
+      </div>
+    <% } %>
+  <% } %>
+</div>
 
-
-                    <h4><%= detailsFilme.nome %></h4>
-                </div>
-                <% } %>
- 
-                
-            </div>
         </section>
     </div>
 

@@ -76,6 +76,13 @@
                 <p>
                     <input value="<%= anime.sinopse %>" type="text" name="sinopse" placeholder="Resenha sobre o Anime" />
                 </p>
+
+                <label for="categoria">Categorias</label>
+                <select name="categoria" aria-required="true" aria-invalid="false">
+                   <option value="-"><%= anime.categoria %></option>
+                   <option value="all">All</option>
+                   <option value="recentes">Recentes</option>
+                </select>
                 
             </div>
         </section>
@@ -105,6 +112,13 @@
                         <input type="number" name="animes_id" placeholder="ID do Anime" value="<%= animeId %>" readonly />
                         <input type="number" name="numero_episodio" placeholder="Número do Episódio" />
                         <input type="text" name="video_url" placeholder="URL do Vídeo" />
+
+                        <label for="categoria">Categorias</label>
+                        <select name="categoria" aria-required="true" aria-invalid="false">
+                           <option value="-"></option>
+                           <option value="all">All</option>
+                           <option value="recentes">Recentes</option>
+                        </select>
                 
                         <button type="submit">Adicionar</button>
                     </form>

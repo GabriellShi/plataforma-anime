@@ -13,6 +13,13 @@
         <input type="number" name="animes_id" placeholder="ID do Anime" value=" <%= episodio.animes_id %>" />
         <input type="number" name="numero_episodio" placeholder="Número do Episódio" value=" <%= episodio.numero_episodio %>"/>
         <input type="text" name="video_url" placeholder="URL do Vídeo" <%= episodio.video_url %>/>
+        
+        <label for="categoria">Categorias</label>
+        <select name="categoria" aria-required="true" aria-invalid="false">
+           <option value="-"><%= episodio.categoria %></option>
+           <option value="all">All</option>
+           <option value="recentes">Recentes</option>
+        </select>
         <button type="submit"> Atualizar Episodio </button>
 
     </form>

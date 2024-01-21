@@ -54,41 +54,52 @@
       
 
   <% if(locals.favoritos){ %>
-    <!-- Favoritos de Animes -->
-    <div id="favoritos-anime" class="categoria animes-lancados lista-dos-animes-capas lista-anime-favorito" style="display: none;">
-      <% favoritos.filter(favorito => favorito.Anime).forEach(favorito => { %>
-        <div class="capa-onepiece-index capa-onepiece-listadosanimes ">
-          <a href="/anime/<%= favorito.Anime.id %>" data-anime-id="<%= favorito.Anime.id %>" class="anime-favorito">
-            <img src="<%= favorito.Anime.capa %>" alt="<%= favorito.Anime.nome %>">
-            <h4><%= favorito.Anime.nome %></h4>
-          </a>
-        </div>
-      <% }); %>
+<!-- Favoritos de Animes -->
+<div id="favoritos-anime" class="categoria animes-lancados lista-dos-animes-capas lista-anime-favorito" style="display: none;">
+  <% favoritos.filter(favorito => favorito.Anime).forEach(favorito => { %>
+    <div class="capa-onepiece-index capa-onepiece-listadosanimes">
+      <a href="/anime/<%= favorito.Anime.id %>" data-anime-id="<%= favorito.Anime.id %>" class="anime-favorito">
+        <img src="<%= favorito.Anime.capa %>" alt="<%= favorito.Anime.nome %>">
+        <h4><%= favorito.Anime.nome %></h4>
+      </a>
+      <button class="remover-favorito" onclick="removerFavorito(<%= favorito.Anime.id %>)" data-anime-id="<%= favorito.Anime.id %>">
+        Remover dos Favoritos
+      </button>
     </div>
+  <% }); %>
+</div>
 
-    <!-- Favoritos de Filmes -->
-    <div id="favoritos-filme" class="categoria animes-lancados lista-dos-animes-capas" style="display: none;">
-      <% favoritos.filter(favorito => favorito.Filme).forEach(favorito => { %>
-        <div class="capa-onepiece-index capa-onepiece-listadosanimes">
-          <a href="/filme/<%= favorito.Filme.id %>" data-anime-id="<%= favorito.Filme.id %>" class="anime-favorito">
-            <img src="<%= favorito.Filme.capa %>" alt="<%= favorito.Filme.nome %>">
-            <h4><%= favorito.Filme.nome %></h4>
-          </a>
-        </div>
-      <% }); %>
-    </div>
 
-    <!-- Favoritos de Doramas -->
-    <div id="favoritos-dorama" class="categoria animes-lancados lista-dos-animes-capas" style="display: none;">
-      <% favoritos.filter(favorito => favorito.Dorama).forEach(favorito => { %>
-        <div class="capa-onepiece-index capa-onepiece-listadosanimes">
-          <a href="/dorama/<%= favorito.Dorama.id %>" data-anime-id="<%= favorito.Dorama.id %>" class="anime-favorito">
-            <img src="<%= favorito.Dorama.capa %>" alt="<%= favorito.Dorama.nome %>">
-            <h4><%= favorito.Dorama.nome %></h4>
-          </a>
-        </div>
-      <% }); %>
+<!-- Para Favoritos de Filmes -->
+<div id="favoritos-filme" class="categoria animes-lancados lista-dos-animes-capas" style="display: none;">
+  <% favoritos.filter(favorito => favorito.Filme).forEach(favorito => { %>
+    <div class="capa-onepiece-index capa-onepiece-listadosanimes">
+      <a href="/filme/<%= favorito.Filme.id %>" data-anime-id="<%= favorito.Filme.id %>" class="anime-favorito">
+        <img src="<%= favorito.Filme.capa %>" alt="<%= favorito.Filme.nome %>">
+        <h4><%= favorito.Filme.nome %></h4>
+      </a>
+      <button class="remover-filme" onclick="removerFavorito('filme', <%= favorito.Filme.id %>)" data-anime-id="<%= favorito.Filme.id %>">
+        Remover dos Favoritos
+    </button>
     </div>
+  <% }); %>
+</div>
+
+<!-- Para Favoritos de Doramas -->
+<div id="favoritos-dorama" class="categoria animes-lancados lista-dos-animes-capas" style="display: none;">
+  <% favoritos.filter(favorito => favorito.Dorama).forEach(favorito => { %>
+    <div class="capa-onepiece-index capa-onepiece-listadosanimes">
+      <a href="/dorama/<%= favorito.Dorama.id %>" data-anime-id="<%= favorito.Dorama.id %>" class="anime-favorito">
+        <img src="<%= favorito.Dorama.capa %>" alt="<%= favorito.Dorama.nome %>">
+        <h4><%= favorito.Dorama.nome %></h4>
+      </a>
+      <button class="remover-dorama" onclick="removerFavorito('dorama', <%= favorito.Dorama.id %>)" data-anime-id="<%= favorito.Dorama.id %>">
+        Remover dos Favoritos
+    </button> 
+    </div>
+  <% }); %>
+</div>
+
     <% } %>
     
   </div>
@@ -96,7 +107,48 @@
 </section>
 <div class="espaco-area-cliente"></div>
 
+
+
 <%- include("./partials/footer") %>
+
+
+<script>
+const removerFavoritoButtons = document.querySelectorAll('.remover-favorito, .remover-filme, .remover-dorama');
+
+removerFavoritoButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const contentType = button.classList.contains('remover-filme') ? 'filme' : (button.classList.contains('remover-dorama') ? 'dorama' : 'anime');
+        const contentId = button.getAttribute('data-anime-id');
+        removerFavorito(contentType, contentId);
+    });
+});
+
+function removerFavorito(contentType, contentId) {
+    fetch(`/cliente/remover-favorito/${contentType}/${contentId}`, {
+        method: 'POST'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro ao remover dos favoritos (${contentType}): ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Atualizar a interface do usuário conforme necessário
+
+        // Recarregar a página
+        window.location.reload();
+    })
+    .catch(error => {
+        console.error(`Erro ao remover dos favoritos (${contentType})`, error);
+    });
+}
+
+
+
+</script>
+
+
 
 <script>
   const btnAnime = document.getElementById("btn-anime");

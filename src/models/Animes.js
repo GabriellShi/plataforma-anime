@@ -44,6 +44,11 @@ const Animes = db.define(
       allowNull: false,
     },
 
+    categoria: {
+      type: Sequelize.DataTypes.TEXT(100),
+      allowNull: false,
+    },
+
     likes: {
       type: Sequelize.DataTypes.STRING(900),
     },

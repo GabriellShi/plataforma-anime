@@ -171,6 +171,43 @@ const authController = {
       });
     }
   },
+  removerFavorito: async (req, res) => {
+    try {
+        const userId = req.cookies.user.id;
+        const { id, contentType } = req.params;
+        const contentId = req.params.id;
+
+        console.log(`Removendo ${contentType} com ID ${contentId} para o usuário ${userId}`);
+
+        // Verifique se o conteúdo está nos favoritos do usuário
+        const favorite = await Favoritos.findOne({
+            where: {
+                [`${contentType}s_id`]: contentId,
+                users_id: userId,
+            },
+        });
+        if (favorite) {
+            // O conteúdo está nos favoritos, então remova
+            await Favoritos.destroy({
+                where: {
+                    [`${contentType}s_id`]: contentId,
+                    users_id: userId,
+                },
+            });
+
+            console.log(`${contentType} removido dos favoritos com sucesso`);
+              res.status(200).json({ message: `${contentType} removido dos favoritos com sucesso` });
+          } else {
+              console.log(`${contentType} não está nos favoritos do usuário`);
+              res.status(400).json({ message: `${contentType} não está nos favoritos do usuário` });
+          }
+      } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: "Erro interno do servidor" });
+      }
+  },
+
+
   
 
 // ...

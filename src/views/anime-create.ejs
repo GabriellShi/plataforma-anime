@@ -1,5 +1,4 @@
-<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")
-%>
+<%- include("./partials/head-admin") %> <%- include("./partials/header-admin")%>
 
 <main>
   <h2>Adicionar Usuario</h2>
@@ -31,6 +30,13 @@
 
     <input type="text" name="genero" placeholder="Generos" required />
 
+    <label for="categoria">Categorias</label>
+    <select name="categoria" aria-required="true" aria-invalid="false">
+       <option value="-"></option>
+       <option value="all">All</option>
+       <option value="recentes">Recentes</option>
+    </select>
+    
     <input type="text" name="capa" placeholder="Imagem" />
     <button type="submit">Adicionar</button>
   </form>

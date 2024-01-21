@@ -171,6 +171,7 @@ function calculatePercentage(dorama) {
         order: [['created_at', 'ASC']], // Filtrar os comentários mais antigos primeiro
     });
 
+    const quantidadeComentarios = comentarios.length;
 
     return res.render("detailsDorama", {
         title: "Visualizar Dorama (Antigos)",
@@ -178,6 +179,7 @@ function calculatePercentage(dorama) {
         comentarios,
         doramasPopulares,
         episodios,
+        quantidadeComentarios,
         doramasPopulares: doramasPopulares.map((detailsDorama, index) => ({
         ...detailsDorama.get({ plain: true }),
         percentage: calculatePercentage(detailsDorama), // Adicione a porcentagem
@@ -226,6 +228,8 @@ showRecente: async (req, res) => {
         order: [['created_at', 'DESC']], // Filtrar os comentários mais recentes primeiro
     });
 
+    const quantidadeComentarios = comentarios.length;
+
 
     return res.render("detailsDorama", {
         title: "Visualizar Dorama (Recentes)",
@@ -233,7 +237,7 @@ showRecente: async (req, res) => {
         comentarios,
         episodios,
         doramasPopulares,
-        
+        quantidadeComentarios,
         doramasPopulares: doramasPopulares.map((detailsDorama, index) => ({
         ...detailsDorama.get({ plain: true }),
         percentage: calculatePercentage(detailsDorama), // Adicione a porcentagem

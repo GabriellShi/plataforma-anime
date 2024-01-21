@@ -746,6 +746,7 @@ a {
   border: 1px solid rgb(255, 255, 255);
 }
 
+
 .icone-gostei-pagina-anime img {
   margin-right: 0.5rem;
 }
@@ -849,6 +850,12 @@ li.status-lista-anime {
   padding-bottom: 1rem;
 }
 
+.section-comentarios-ep {
+ 
+  margin-left: 0rem;
+  margin-right: 0rem;
+ 
+}
 .form-comentarios  {
   padding: 1rem;
 }
@@ -1077,6 +1084,16 @@ select {
     margin-right: 0.5rem;
     padding: 1rem;
   }
+
+   .section-comentarios {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+ 
+
+
+  
 }
 
 @media (max-width: 420px) {
@@ -1523,6 +1540,77 @@ li.adicionar-a-lista1 {
   margin: 2rem;
   cursor: pointer;
 }
+
+.comentarios-pedido-anime {
+  background-color: rgb(19, 19, 19);
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding: 1rem;
+}
+
+.ssas-ss {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.titulo-coment-pedidos {
+  text-align: center;
+  margin: 1rem;
+  margin-top: 0;
+  color: yellow;
+}
+
+.dados-coment-pedidos {
+  display: flex;
+}
+
+.dados-coment-pedidos2 {
+
+}
+
+.dados-coment-pedidos img {
+  height: 4rem;
+}
+
+.dados-coment-pedidos-filho {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.dados-coment-pedidos h3 {
+  color: blue;
+  margin-right: 1rem;
+}
+
+.dados-coment-pedidos h4 {
+  margin-left: 1rem;
+}
+
+.botao-deletar-pedido h2 {
+  font-size: 1rem;
+}
+
+.botao-deletar-pedido div {
+  display: flex;
+  justify-content: center;
+}
+
+.botao-deletar-pedido a {
+  margin-right: 0.5rem;
+}
+
+.botao-deletar-pedido button {
+  border: 0;
+  padding: 0.2rem;
+}
+
+.botao-deletar-pedido button:hover {
+  background-color: #007bff;
+}
+
+
 
 @media (max-width: 812px) {
   .dados-pedidosanimes {
@@ -2454,9 +2542,12 @@ img.seta-baixo {
 }
 
 .animes-lancados img {
-  width: 15rem;
+  width: 12rem;
 }
 
+.col-md-2 {
+  margin : 0.8rem;
+}
 .animes-lancados h4 {
   color: white;
   text-align: center;
@@ -3063,3 +3154,71 @@ h2 {
 
 
 
+/* Ocultar a terceira imagem em telas pequenas */
+@media (max-width: 1116px) {
+  .carousel-item .col-6:nth-child(3) {
+    display: none;
+  }
+
+  .col-6 {
+    margin : 1.5rem;
+  }
+
+  .animes-lancados img {
+    width: 10rem;
+  }
+}
+
+/* Ocultar a quarta e quinta imagem em telas menores que médias */
+@media (max-width: 991px) {
+  .carousel-item .col-6:nth-child(4),
+  .carousel-item .col-6:nth-child(5) {
+    display: none;
+  }
+
+  .col-6 {
+    margin : 3rem;
+  }
+}
+
+/* Ocultar a quarta e quinta imagem em telas menores que médias */
+@media (max-width: 766px) {
+ 
+
+  .col-6 {
+    margin : 0.5rem;
+  }
+
+  .animes-lancados img {
+    width: 9rem;
+  }
+}
+
+@media (max-width: 576px) {
+ 
+
+  .col-6 {
+    margin : 0rem;
+  }
+
+  .animes-lancados img {
+    width: 10rem;
+  }
+
+  .textodelacamento-e-iconedecarrosel {
+    padding-bottom: 1rem;
+  }
+  
+  .section-comentario-ep {
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
+
+  .formulario-envio-de-pedido-pedidosanimes {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+   
+}
+
+  

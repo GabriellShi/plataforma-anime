@@ -74,25 +74,42 @@
     <div id="pedidos-exibidos">
         <!-- Aqui serão exibidos os pedidos de novos animes preenchidos pelos clientes -->
     </div>
-    <div class="animes-adicionados">
+
+
         <% if (pedidos.length > 0) { %>
-
+    <h2 class="titulo-coment-pedidos">Pedidos Feitos</h2>
+    <div class="comentarios-pedido-anime">
         <% for(let pedido of pedidos.slice(0, 18)) {%>
-        <div class="capa-onepiece-index">
-            <h4> <%= pedido.usuario %></h4>
-            <h4> <%= pedido.anime %></h4>
-            <h4> <%= pedido.comentario %></h4>
+        <div class="ssas-ss">
+            <div class="dados-coment-pedidos">
+                <img src="/img/icone-foto-perfil.jpg" alt="">
+                <div>
+                    <div class="dados-coment-pedidos-filho">
+                        <h3> <%= pedido.usuario%></h3><h5> -  ANIME: <%= pedido.anime %></h5>
+                        
+                    </div>
+                    <div>
+                        <h4> <%= pedido.comentario %></h4>
+                    </div>
+                </div>
+    
+            </div>
+    
+    
+            <div class="botao-deletar-pedido">
+                <form action="/pedido/delete/ <%= pedido.id %>?_method=delete" method="post">
+                    <h2>Deseja Deletar esse Pedido?</h2>
+                    <div>
+                        <a href="/pedido/create"><button type="button">Não</button></a>
+                        <button type="submit">Sim</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+        <% } %>
+        <% } %>
 
-        </div>
-        <div>
-            <form action="/pedido/delete/ <%= pedido.id %>?_method=delete" method="post">
-                <h2>Deseja Deletar esse Pedido?</h2>
-                <a href="/pedido/create"><button type="button">Não</button></a>
-                <button type="submit">Sim</button>
-              </form>
-        </div>
-        <% } %>
-        <% } %>
+       
 
     </div>
 

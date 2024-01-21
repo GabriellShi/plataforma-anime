@@ -246,6 +246,8 @@ const episodioController = {
             order: [['created_at', 'ASC']], // Filtrar os comentários mais antigos primeiro
           });
 
+          const quantidadeComentarios = comentarios.length;
+
       
           const animesPopulares = await Animes.findAll({
             order: [
@@ -273,6 +275,7 @@ const episodioController = {
         previousEpisode,
         nextEpisode,
         comentarios,
+        quantidadeComentarios,
         animesPopulares: animesPopulares.map((anime, index) => ({
           ...anime.get({ plain: true }),
           percentage: calculatePercentage(anime), // Adicione a porcentagem
@@ -350,6 +353,7 @@ showRecente: async (req, res) => {
           order: [['created_at', 'DESC']], // Filtrar os comentários mais antigos primeiro
         });
 
+        const quantidadeComentarios = comentarios.length;
     
         const animesPopulares = await Animes.findAll({
           order: [
@@ -377,6 +381,7 @@ showRecente: async (req, res) => {
       previousEpisode,
       nextEpisode,
       comentarios,
+      quantidadeComentarios,
       animesPopulares: animesPopulares.map((anime, index) => ({
         ...anime.get({ plain: true }),
         percentage: calculatePercentage(anime), // Adicione a porcentagem
@@ -427,7 +432,7 @@ storeComment: async (req, res) => {
   },
   
   store: async (req, res) => {
-    const { nome, data, image, animes_id, filmes_id, doramas_id, numero_episodio, video_url } = req.body;
+    const { nome, data, image, animes_id, filmes_id, doramas_id, numero_episodio, video_url, categoria } = req.body;
 
     try {
         const novosEpisodios = await Episodios.create({
@@ -439,6 +444,7 @@ storeComment: async (req, res) => {
             doramas_id,
             numero_episodio,
             video_url,
+            categoria,
         });
 
         res.redirect("/episodio");
@@ -545,7 +551,7 @@ try {
    // Executa a atualização
    update: async (req, res) => {
     const { id } = req.params;
-    const { nome, data, image, animes_id, filmes_id, doramas_id, numero_episodio, video_url} = req.body;
+    const { nome, data, image, animes_id, filmes_id, doramas_id, numero_episodio, video_url, categoria} = req.body;
 
 
     try {
@@ -560,6 +566,7 @@ try {
         doramas_id,
         numero_episodio,
         video_url,
+        categoria,
       });
 
     return res.render("success", {

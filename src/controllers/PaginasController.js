@@ -108,6 +108,29 @@ const paginasController = {
 
     try {
 
+      const categoriaSelecionada = req.query.categoria || "recentes";
+
+
+      let episodios;
+  
+      if (categoriaSelecionada === "all") {
+
+
+        episodios = await Episodios.findAll({
+          order: [['created_at', 'DESC']]
+        });
+      } else if (categoriaSelecionada === "recentes") {
+
+        episodios = await Episodios.findAll({
+          where: {
+            created_at: {
+              [Op.gte]: new Date(new Date().getFullYear(), 0, 1),
+            },
+          },
+          order: [['created_at', 'DESC']]
+        });
+      }
+  
       const page = req.query.page || 1; // Página atual, padrão é 1
       const perPage = 20; // Número de filmes por página
   
@@ -115,10 +138,10 @@ const paginasController = {
       const startIndex = (page - 1) * perPage;
       const endIndex = startIndex + perPage;
   
-      // Busque todas as notícias do banco de dados
-      const episodios = await Episodios.findAll({
-        order: [['created_at', 'DESC']]
-      });
+      // // Busque todas as notícias do banco de dados
+      // const episodios = await Episodios.findAll({
+      //   order: [['created_at', 'DESC']]
+      // });
 
       const animesPopulares = await Animes.findAll({
         order: [
@@ -145,6 +168,7 @@ const paginasController = {
       return res.render("episodiosAdicionados", {
         title: "Lista de Episodios",
         episodios,
+        categoriaSelecionada,
         episodios: episodiosPaginaAtual,
         page, // Página atual
         totalPages, // Número total de páginas
