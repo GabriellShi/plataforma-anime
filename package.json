@@ -27,7 +27,7 @@
     "node-jsonld": "^1.0.0",
     "nodemailer": "^6.9.6",
     "op": "^0.0.6",
-    "parser": "^0.1.4",
+    "parser": "npm:Parser@^0.0.1",
     "Parser": "^0.0.1",
     "path": "^0.12.7",
     "quill": "^1.3.7",
